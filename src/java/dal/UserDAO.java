@@ -95,14 +95,5 @@ public class UserDAO extends MyDAO {
         return user;
             
     }
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        User user = dao.getAccount("abc@gmail.com", "ditmemay");
-        if(user == null){
-            System.out.println("null");
-        }else{
-            System.out.println("ok");
-        }
-                
-    }
+    
 }
