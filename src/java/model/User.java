@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +22,23 @@ public class User {
     private Date createDate;
     private String avatar;
     private int rollId;
+    ArrayList<String> url = new ArrayList<>();
 
+    public ArrayList<String> getUrl() {
+        return url;
+    }
+
+    public void setUrl(ArrayList<String> url) {
+        this.url = url;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    
+    
     public User() {
     }
 

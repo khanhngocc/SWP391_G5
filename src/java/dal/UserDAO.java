@@ -6,44 +6,49 @@
 package dal;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 
 /**
  *
  * @author Admin
  */
-public class UserDAO extends MyDAO{
-    
+public class UserDAO extends MyDAO {
+
     public User getUser(String email) {
         User x = null;
-        xSql = "SELECT * FROM [User] WHERE [email] = ? "; 
+        xSql = "SELECT * FROM [User] WHERE [email] = ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, email);
             rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 x = new User(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getDate(7), rs.getString(8), rs.getInt(9));
             }
             rs.close();
             ps.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return(x);
+        return (x);
     }
-    
-    public void addUser(User x){
-        xSql = "INSERT INTO [User]\n" +
-"           ([fullname]\n" +
-"           ,[gender]\n" +
-"           ,[email]\n" +
-"           ,[phone]\n" +
-"           ,[password]\n" +
-"           ,[avatar]\n" +
-"           ,[createDate]\n" +
-"           ,[roll_id])\n" +
-"     VALUES (?,?,?,?,?,?,?,?)";
+
+    public void addUser(User x) {
+        xSql = "INSERT INTO [User]\n"
+                + "           ([fullname]\n"
+                + "           ,[gender]\n"
+                + "           ,[email]\n"
+                + "           ,[phone]\n"
+                + "           ,[password]\n"
+                + "           ,[avatar]\n"
+                + "           ,[createDate]\n"
+                + "           ,[roll_id])\n"
+                + "     VALUES (?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getFullname());
@@ -54,16 +59,50 @@ public class UserDAO extends MyDAO{
             ps.setString(6, x.getAvatar());
             ps.setDate(7, x.getCreateDate());
             ps.setInt(8, x.getRollId());
-            ps.executeUpdate();           
+            ps.executeUpdate();
             ps.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+    public User getAccount(String email, String password) {
+        User user = null ;
+        try {
+        String sql = "Select url from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
+                + "and Roll.id = Roll_Feature.roll_id \n"
+                + "and[User].email = ?\n"
+                + "and [User].password = ?";
+        PreparedStatement statement;
+        
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                if(user == null)
+                    user = new User();
+                user.setEmail(email);
+                user.setPassword(password);
+                user.getUrl().add(rs.getString("url"));
+            }
+            return user;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+            
+    }
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        dao.addUser(new User("ducanh2", true, "abc@gmail.com", "113", "ditmemay", Date.valueOf(java.time.LocalDate.now()), "1", 1));
+        User user = dao.getAccount("abc@gmail.com", "ditmemay");
+        if(user == null){
+            System.out.println("null");
+        }else{
+            System.out.println("ok");
+        }
+                
     }
-    
 }
