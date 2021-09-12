@@ -20,110 +20,77 @@ import model.User;
  */
 public abstract class BaseRequiredLoginController extends HttpServlet {
 
-    private boolean isLoggedIn(HttpServletRequest request)
-    {
-        User user =  (User)request.getSession().getAttribute("user");
-        if(user!=null)
+    private boolean isLoggedIn(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
             return true;
-        else
-        {
+        } else {
             Cookie[] cookies = request.getCookies();
-            if(cookies !=null)
-            {
+            if (cookies != null) {
                 String username = null;
                 String password = null;
                 for (Cookie cooky : cookies) {
-                    if(cooky.getName().equals("username"))
+                    if (cooky.getName().equals("username")) {
                         username = cooky.getValue();
-                    else if(cooky.getName().equals("password"))
+                    } else if (cooky.getName().equals("password")) {
                         password = cooky.getValue();
-                    if(username != null && password !=null)
+                    }
+                    if (username != null && password != null) {
                         break;
+                    }
                 }
-                if(username != null && password !=null)
-                {
+                if (username != null && password != null) {
                     UserDAO db = new UserDAO();
                     user = db.getAccount(username, password);
-                    if(user == null)
+                    if (user == null) {
                         return false;
-                    else
-                    {
+                    } else {
                         request.getSession().setAttribute("user", user);
                         return true;
                     }
-                }
-                else
+                } else {
                     return false;
-            }
-            else
+                }
+            } else {
                 return false;
+            }
         }
     }
-    
-    private boolean isAuthenticated(HttpServletRequest request)
-    {
-       User user =  (User)request.getSession().getAttribute("user");
+
+    private boolean isAuthenticated(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         String url = request.getServletPath();
         if (user.getUrl().stream().anyMatch((u) -> (u.equals(url)))) {
             return true;
         }
         return false;
     }
-    
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(isLoggedIn(request) && isAuthenticated(request))
-        {
+        if (isLoggedIn(request) && isAuthenticated(request)) {
             processGet(request, response);
+        } else {
+           response.sendRedirect("Error.jsp");
         }
-        else
-            response.getWriter().println("access denied!");
-        
+
     }
-    
+
     protected abstract void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(isLoggedIn(request) && isAuthenticated(request))
-        {
+        if (isLoggedIn(request) && isAuthenticated(request)) {
             processPost(request, response);
+        } else {
+            response.sendRedirect("Error.jsp");
         }
-        else
-            response.getWriter().println("access denied!");
     }
+
     protected abstract void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
-

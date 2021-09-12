@@ -20,7 +20,7 @@ public class HomeController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().print("home");
+       request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     @Override
