@@ -28,7 +28,7 @@ public class UserDAO extends MyDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 x = new User(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getDate(7), rs.getString(8), rs.getInt(9));
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getInt(9));
             }
             rs.close();
             ps.close();
@@ -67,22 +67,22 @@ public class UserDAO extends MyDAO {
     }
 
     public User getAccount(String email, String password) {
-        User user = null ;
+        User user = null;
         try {
-        String sql = "Select url from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
-                + "and Roll.id = Roll_Feature.roll_id \n"
-                + "and[User].email = ?\n"
-                + "and [User].password = ?";
-        PreparedStatement statement;
-        
+            String sql = "Select url from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
+                    + "and Roll.id = Roll_Feature.roll_id \n"
+                    + "and[User].email = ?\n"
+                    + "and [User].password = ?";
+            PreparedStatement statement;
+
             statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-            while(rs.next())
-            {
-                if(user == null)
+            while (rs.next()) {
+                if (user == null) {
                     user = new User();
+                }
                 user.setEmail(email);
                 user.setPassword(password);
                 user.getUrl().add(rs.getString("url"));
@@ -93,7 +93,38 @@ public class UserDAO extends MyDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
-            
+
     }
-    
+
+    public int UpdateUser(String email, String fullname, String phone, boolean gender) {
+        int n=0;
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [fullname] = ?\n"
+                + "      ,[gender] = ?\n"
+                + "      ,[phone] = ?\n"
+                + "     \n"
+                + " WHERE email = ?";
+         PreparedStatement statement;
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, fullname);
+            statement.setBoolean(2,gender );
+            statement.setString(3, phone);
+            statement.setString(4, email);
+           n =  statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        int n=  dao.UpdateUser("abc@gmail.com", "asdasd", "1231231231", true);
+        if(n>0){
+            System.out.println("Update Susssfully!!!!!!");
+        }else{
+            System.out.println("ngu");
+        }
+    }
 }

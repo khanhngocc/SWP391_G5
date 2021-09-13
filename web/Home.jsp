@@ -50,7 +50,7 @@
                                     <li><a href="">Take test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
-                                    <li><a href="">Account</a></li>
+                                    <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
                             </div>
