@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -54,7 +54,7 @@
                                     <li><a href="">Take test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
-                                    <li><a href="">Account</a></li>
+                                    <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
                             </div>
@@ -72,7 +72,7 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>New User Signup!</h2>
-                         <p class="text-danger">${mess}</p>
+                        <p class="text-success">${mess}</p>
                         <form action="Personal" method="post">
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  

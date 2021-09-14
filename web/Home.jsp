@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -76,39 +76,39 @@
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free E-Commerce Template</h2>
+                                        <h1><span>Mega</span>-Deal</h1>
+                                        <h2>Self-learning</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
-                                        <img src="images/home/pricing.png"  class="pricing" alt="" />
+                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
+                                      
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>100% Responsive Design</h2>
+                                        <h1><span>Mega</span>-Deal</h1>
+                                        <h2>Discussion</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                       
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                        <img src="images/home/pricing.png"  class="pricing" alt="" />
+                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
+                                       
                                     </div>
                                 </div>
 
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free Ecommerce Template</h2>
+                                        <h1><span>Mega</span>-Deal</h1>
+                                        <h2>Work together</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                       
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-                                        <img src="images/home/pricing.png" class="pricing" alt="" />
+                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
+                                       
                                     </div>
                                 </div>
 
@@ -132,74 +132,14 @@
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-6">
                             <div class="companyinfo">
-                                <h2><span>Quiz</span>-Practicing</h2>
+                                <h2><span>Mega</span>-Deal</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                             </div>
                         </div>
-                        <div class="col-sm-7">
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="images/home/iframe1.png" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="images/home/iframe2.png" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="images/home/iframe3.png" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="images/home/iframe4.png" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
+                        
+                        <div class="col-sm-6">
                             <div class="address">
                                 <img src="images/home/map.png" alt="" />
                                 <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
@@ -212,8 +152,8 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
+                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
                     </div>
                 </div>
             </div>
