@@ -89,7 +89,7 @@
                                 <div class="item">
                                     <div class="col-sm-6">
                                         <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Discussion</h2>
+                                        <h2>Creative Discussion</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                        
                                     </div>

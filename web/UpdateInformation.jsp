@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Landing page</title>
+        <title>Account</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -67,12 +67,12 @@
         </header>
         <section id="form">
             <div>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
+                
+                <div class="container">
                     <div class="signup-form">
                         <!--sign up form-->
-                        <h2>New User Signup!</h2>
-                        <p class="text-success">${mess}</p>
+                        <h2>Personal Information</h2>
+                        <p class="text-primary">${mess}</p>
                         <form action="Personal" method="post">
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
@@ -87,8 +87,25 @@
                             <button type="submit" class="btn btn-default">Update</button>
                         </form>
                     </div>
-                    <!--/sign up form-->
+                            <br>
+                    <div class="signup-form">
+                        <!--sign up form-->
+                        <h2>Change password</h2>
+                        <p class="text-primary">${mess1}</p>
+                        <form action="ChangePassword" method="post">
+                            <input name="email" type="text" placeholder="Email" value="${user.email}" readonly/>
+                            <input name="oldpass"type="password" placeholder="Old Password" required="true" />
+                            <input name="newpass"type="password" placeholder="New Password" required="true" />
+                            <input name="repass"type="password" placeholder="Re-Password" required="true" />  
+                            <button type="submit" class="btn btn-default">Change</button>
+                        </form>
+                    </div>
                 </div>
+               
+                
+                   
+                    
+                
             </div>
         </div>
     </section>

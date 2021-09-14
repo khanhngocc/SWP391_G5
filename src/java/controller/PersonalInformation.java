@@ -43,9 +43,9 @@ public class PersonalInformation extends BaseRequiredLoginController {
          String mess;
         int n=  dao.UpdateUser(email, fullname, phone, gen);
         if(n>0){
-            mess = "Update Susssfully!!!!!!";
+            mess = "Update Susssfully!";
         }else{
-            mess = "co cai l";
+            mess = "Fail to update information";
         }
         request.setAttribute("mess", mess);
          User user = dao.getUser(email);

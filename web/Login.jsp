@@ -43,7 +43,7 @@
                         <div class="login-form">
                             <!--login form-->
                             <h2>Login to your account</h2>
-                            <p class="text-danger">${mess1}</p>
+                            <p class="text-primary">${mess1}</p>
                             <form action="Login" method = "post">
                                 <input name="Email" type="text" placeholder="Email" required="true" />
                                 <input name ="Password" type="password" placeholder="Password"  required="true"/>
@@ -63,7 +63,7 @@
                         <div class="signup-form">
                             <!--sign up form-->
                             <h2>New User Signup!</h2>
-                            <p class="text-danger">${mess}</p>
+                            <p class="text-primary">${mess}</p>
                             <form action="register" method="post">
                                 <input name="email" type="text" placeholder="Email" required="true" />
                                 <input name="name"type="text" placeholder="Full Name" required="true" />

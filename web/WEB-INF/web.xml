@@ -20,6 +20,10 @@
         <servlet-name>PersonalInformation</servlet-name>
         <servlet-class>controller.PersonalInformation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>PersonalInformation</servlet-name>
         <url-pattern>/Personal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

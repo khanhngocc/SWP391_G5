@@ -118,13 +118,23 @@ public class UserDAO extends MyDAO {
         }
         return n;
     }
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        int n=  dao.UpdateUser("abc@gmail.com", "asdasd", "1231231231", true);
-        if(n>0){
-            System.out.println("Update Susssfully!!!!!!");
-        }else{
-            System.out.println("ngu");
+  
+    public int changePassword(String email,String password){
+            int n=0;
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [password] = ?\n"
+                + " WHERE email = ?";
+         PreparedStatement statement;
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, password);
+            statement.setString(2,email);
+           
+           n =  statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return n;
     }
 }
