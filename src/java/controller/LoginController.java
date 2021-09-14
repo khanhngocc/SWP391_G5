@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet {
 
         UserDAO db = new UserDAO();
         User user = db.getAccount(username, password);
+        String user_roll = db.getRollName(username);
         String mess = "";
         if (user == null) {
             mess = "Username/ Password is invalid!";
@@ -58,8 +59,10 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
             }
 
-            request.getSession().setAttribute("user", user);
-            response.sendRedirect("Home");
+            if (user_roll.equals("Student")) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("Home");
+            }
 
         }
     }

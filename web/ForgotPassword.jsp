@@ -42,47 +42,20 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form">
                             <!--login form-->
-                            <h2>Login to your account</h2>
-                            <p class="text-primary">${mess1}</p>
-                            <form action="Login" method = "post">
-                                <input name="Email" type="text" placeholder="Email" required="true" />
-                                <input name ="Password" type="password" placeholder="Password"  required="true"/>
-                                <div><a href="ForgotPassword">Forgot password?</a></div>
-                                <span>
-                                    <input name="remember" type="checkbox" class="checkbox">
-                                    Remember me
-                                </span>
-                                <button type="submit" class="btn btn-default">Login</button>
+                            <h2>Recover your password</h2>
+                            <p>Type here your email signed up to get new password</p>
+                            <p class="text-primary">${mess}</p>
+                            <form action="ForgotPassword" method = "post">
+                                <input name="email" type="text" placeholder="Email" required="true" />
+                                
+                                <button type="submit" class="btn btn-default">Recover</button>
                             </form>
 
                         </div>
                         <!--/login form-->
                     </div>
-                    <div class="col-sm-1">
-                        <h2 class="or">OR</h2>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="signup-form">
-                            <!--sign up form-->
-                            <h2>New User Signup!</h2>
-                            <p class="text-primary">${mess}</p>
-                            <form action="register" method="post">
-                                <input name="email" type="text" placeholder="Email" required="true" />
-                                <input name="name"type="text" placeholder="Full Name" required="true" />
-                                <p>                           
-                                    <select name="gender" id="gender">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </p>
-                                <input name="phone"type="text" placeholder="Phone Number" />							
-                                <input name="pass"type="password" placeholder="Password" required="true" />
-                                <input name="repass"type="password" placeholder="Re-Password" required="true" />
-                                <button type="submit" class="btn btn-default">Signup</button>
-                            </form>
-                        </div>
-                        <!--/sign up form-->
-                    </div>
+                   
+                   
                 </div>
             </div>
         </section>

@@ -97,44 +97,71 @@ public class UserDAO extends MyDAO {
     }
 
     public int UpdateUser(String email, String fullname, String phone, boolean gender) {
-        int n=0;
+        int n = 0;
         String sql = "UPDATE [dbo].[User]\n"
                 + "   SET [fullname] = ?\n"
                 + "      ,[gender] = ?\n"
                 + "      ,[phone] = ?\n"
                 + "     \n"
                 + " WHERE email = ?";
-         PreparedStatement statement;
+        PreparedStatement statement;
 
         try {
             statement = connection.prepareStatement(sql);
             statement.setString(1, fullname);
-            statement.setBoolean(2,gender );
+            statement.setBoolean(2, gender);
             statement.setString(3, phone);
             statement.setString(4, email);
-           n =  statement.executeUpdate();
+            n = statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
     }
-  
-    public int changePassword(String email,String password){
-            int n=0;
+
+    public int changePassword(String email, String password) {
+        int n = 0;
         String sql = "UPDATE [dbo].[User]\n"
                 + "   SET [password] = ?\n"
                 + " WHERE email = ?";
-         PreparedStatement statement;
+        PreparedStatement statement;
 
         try {
             statement = connection.prepareStatement(sql);
             statement.setString(1, password);
-            statement.setString(2,email);
-           
-           n =  statement.executeUpdate();
+            statement.setString(2, email);
+
+            n = statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
     }
+
+    public String getRollName(String email) {
+        String roll_name = "";
+        try {
+            String sql = "Select Roll.name from [User],Roll\n"
+                    + "where\n"
+                    + "[User].roll_id = Roll.id\n"
+                    + "and\n"
+                    + "email = ?";
+            PreparedStatement statement;
+
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+           
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                roll_name = rs.getString(1);
+            }
+            return roll_name;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return roll_name;
+    }
+    
+    
 }
