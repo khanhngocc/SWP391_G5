@@ -28,6 +28,18 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Blog</servlet-name>
+        <servlet-class>controller.Blog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailed</servlet-name>
+        <servlet-class>controller.BlogDetailed</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBlog</servlet-name>
+        <servlet-class>controller.AddBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Blog</servlet-name>
+        <url-pattern>/Blog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailed</servlet-name>
+        <url-pattern>/BlogDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBlog</servlet-name>
+        <url-pattern>/AddBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

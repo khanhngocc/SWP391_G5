@@ -62,71 +62,50 @@
 
         </header><!--/header-->
 
-        <section id="slider"><!--slider-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section><!--/slider-->
-
+       	<section>
+		<div class="container">
+                   
+				<div class="col-sm-9">
+                                     <a  class="btn btn-primary" href="AddBlog">Create blog</a>
+					<div class="blog-post-area">
+						<h2 class="title text-center">Latest From our Blog</h2>
+						<div class="single-blog-post">
+							<h3>Girls Pink T Shirt arrived in store</h3>
+							<div class="post-meta">
+								<ul>
+									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+								</ul>
+								<span>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+								</span>
+							</div>
+							<a href="">
+								<img src="images/blog/blog-one.jpg" alt="">
+							</a>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+							<a  class="btn btn-primary" href="">Read More</a>
+						</div>
+					
+					
+						<div class="pagination-area">
+							<ul class="pagination">
+								<li><a href="" class="active">1</a></li>
+								<li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+	</section>
 
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
