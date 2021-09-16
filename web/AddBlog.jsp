@@ -75,9 +75,10 @@
                         <h2>Create a new blog</h2>
                         <p class="text-primary">${messCreateBlog}</p>
                         <form action="AddBlog" method="post">
-                            <input name="title" type="text" placeholder="Title" required="true" />
-                            <input type="file" name="filename">
-                            <textarea name="desc" rows="4" cols="50">
+                            Title
+                            <input name="title" type="text" required="true" />
+                            Description
+                            <textarea name="desc" rows="10" cols="50" >
                             </textarea>
                             <br>
                             <br>
