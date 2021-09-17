@@ -7,10 +7,6 @@ package controller;
 
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +34,6 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         String username = request.getParameter("Email");
         String password = request.getParameter("Password");
-
         UserDAO db = new UserDAO();
         User user = db.getAccount(username, password);
         String user_roll = db.getRollName(username);
@@ -58,12 +53,13 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_pass);
                 response.addCookie(c_user);
             }
-
             if (user_roll.equals("Student")) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Home");
+            }else if (user_roll.equals("Admin")) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect(request.getContextPath()+"/admin/list");
             }
-
         }
     }
 

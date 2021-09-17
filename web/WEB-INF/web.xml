@@ -28,6 +28,30 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListController</servlet-name>
+        <servlet-class>controller.admin.ListUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterController</servlet-name>
+        <servlet-class>controller.admin.FilterUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUserController</servlet-name>
+        <servlet-class>controller.admin.EditUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchUserController</servlet-name>
+        <servlet-class>controller.admin.SearchUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserController</servlet-name>
+        <servlet-class>controller.admin.AddUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletUserController</servlet-name>
+        <servlet-class>controller.admin.DeletUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +79,30 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListController</servlet-name>
+        <url-pattern>/admin/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterController</servlet-name>
+        <url-pattern>/admin/filter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserController</servlet-name>
+        <url-pattern>/admin/editUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserController</servlet-name>
+        <url-pattern>/admin/searchUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserController</servlet-name>
+        <url-pattern>/admin/addUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletUserController</servlet-name>
+        <url-pattern>/admin/deleteUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,6 +22,8 @@ public class User {
     private Date createDate;
     private String avatar;
     private int rollId;
+    private Roll roll;
+
     ArrayList<String> url = new ArrayList<>();
 
     public ArrayList<String> getUrl() {
@@ -135,6 +137,13 @@ public class User {
 
     public void setRollId(int rollId) {
         this.rollId = rollId;
+    }
+    public Roll getRoll() {
+        return roll;
+    }
+
+    public void setRoll(Roll roll) {
+        this.roll = roll;
     }
     
 }
