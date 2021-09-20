@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +55,11 @@ public class AddBlog extends BaseRequiredLoginController {
         blog.setTitle(title);
         blog.setDescription(desc);
         blog.setDate(Date.valueOf(java.time.LocalDate.now()));
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+        blog.setTime(sdf.format(cal.getTime()));
         User session_user = (User) request.getSession(false).getAttribute("user");
         UserDAO userDAO = new UserDAO();
         User current_user = userDAO.getUser(session_user.getEmail());

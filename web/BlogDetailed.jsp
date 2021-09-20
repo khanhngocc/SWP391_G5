@@ -75,7 +75,7 @@
                             <div class="post-meta">
                                 <ul>
                                     <li><i class="fa fa-user"></i>${blog.author}</li>
-
+                                    <li><i class="fa fa-clock-o"></i>${blog.time}</li>
                                     <li><i class="fa fa-calendar"></i>${blog.date}</li>
                                 </ul>
                                 <c:if test="${sessionScope.user.id eq blog.author_id}">

@@ -10,6 +10,8 @@ import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,12 +58,16 @@ public class UpdateBlog extends BaseRequiredLoginController {
         blog.setTitle(title);
         blog.setDescription(desc);
         blog.setDate(Date.valueOf(java.time.LocalDate.now()));
-       
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+        blog.setTime(sdf.format(cal.getTime()));
+
         BlogDAO dao = new BlogDAO();
-        
+
         dao.updateBlog(blog);
 
-       
         response.sendRedirect("Blog");
     }
 

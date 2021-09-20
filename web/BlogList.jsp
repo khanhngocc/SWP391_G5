@@ -84,13 +84,13 @@
                                 <div class="post-meta">
                                     <ul>
                                         <li><i class="fa fa-user"></i>${list.author}</li>
-
+                                        <li><i class="fa fa-clock-o"></i>${list.time}</li>
                                         <li><i class="fa fa-calendar"></i>${list.date}</li>
                                     </ul>
-                                   
+
                                 </div>
 
-                                        <p class="block-ellipsis">${list.description}</p>
+                                <p class="block-ellipsis">${list.description}</p>
                                 <a  class="btn btn-primary" href="BlogDetailed?id=${list.id}">Read More</a>
                             </div>
                         </c:forEach>
@@ -154,7 +154,7 @@
             </div>
 
         </footer><!--/Footer-->
-       
+
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

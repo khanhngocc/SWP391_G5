@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -19,6 +20,15 @@ public class Blog {
     private Date date;
     private int author_id;
     private String author;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public int getAuthor_id() {
         return author_id;

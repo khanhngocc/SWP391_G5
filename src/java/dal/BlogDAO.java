@@ -26,9 +26,10 @@ public class BlogDAO extends MyDAO {
                 + "           ,[description]\n"
                 + "           ,[image_Url]\n"
                 + "           ,[created_Date]\n"
-                + "           ,[user_id])\n"
+                + "           ,[user_id]\n"
+                + "           ,[timeCreated])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?)";
+                + "           (?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, blog.getTitle());
@@ -36,7 +37,7 @@ public class BlogDAO extends MyDAO {
             ps.setString(3, "");
             ps.setDate(4, blog.getDate());
             ps.setInt(5, user.getId());
-
+            ps.setString(6, blog.getTime());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -49,13 +50,15 @@ public class BlogDAO extends MyDAO {
                 + "   SET [title] = ? \n"
                 + "      ,[description] = ? \n"
                 + "      ,[created_Date] = ? \n"
+                  + "      ,[timeCreated] = ? \n"
                 + " WHERE Blog.id = ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, blog.getTitle());
             ps.setString(2, blog.getDescription());
             ps.setDate(3, blog.getDate());
-            ps.setInt(4, blog.getId());
+            ps.setString(4, blog.getTime());
+            ps.setInt(5, blog.getId());
 
             ps.executeUpdate();
             ps.close();
@@ -97,7 +100,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id) {
         Blog b = new Blog();
-        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id from Blog,[User]\n"
+        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -113,6 +116,7 @@ public class BlogDAO extends MyDAO {
                 b.setDate(rs.getDate(4));
                 b.setAuthor(rs.getString(5));
                 b.setAuthor_id(rs.getInt(6));
+                b.setTime(rs.getString(7));
             }
             rs.close();
             ps.close();
@@ -146,7 +150,7 @@ public class BlogDAO extends MyDAO {
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,title,description,created_Date,[User].fullname from Blog,[User]\n"
+            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
                     + "and title like ?\n"
@@ -169,6 +173,7 @@ public class BlogDAO extends MyDAO {
                 b.setDescription(rs.getString(3));
                 b.setDate(rs.getDate(4));
                 b.setAuthor(rs.getString(5));
+                b.setTime(rs.getString(6));
                 list.add(b);
             }
 
@@ -180,4 +185,5 @@ public class BlogDAO extends MyDAO {
 
     }
 
+   
 }
