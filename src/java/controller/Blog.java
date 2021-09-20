@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Blog extends BaseRequiredLoginController {
 
+    private String searchName = "";
+
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -39,8 +41,18 @@ public class Blog extends BaseRequiredLoginController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        
+        int rowCount = 0;
+        
+        String name_search = request.getParameter("searchName");
 
-        int rowCount = dao.getRowCount();
+        if (name_search == null) {
+            searchName = "";
+            rowCount = dao.getRowCount();
+        } else {
+            searchName = name_search;
+            rowCount = dao.getRowCountForSearch(searchName);
+        }
 
         int pageCount;
 
@@ -52,11 +64,13 @@ public class Blog extends BaseRequiredLoginController {
 
         int gap = 1;
 
-        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize);
+        System.out.println("page : " + pageIndex + "   search: " + name_search);
+        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName);
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);
         request.setAttribute("gap", gap);
+        request.setAttribute("name_search", searchName);
         request.getRequestDispatcher("BlogList.jsp").forward(request, response);
     }
 

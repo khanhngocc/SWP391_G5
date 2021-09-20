@@ -63,8 +63,24 @@ public class BlogDAO extends MyDAO {
         return no;
     }
     
-    
-    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize) {
+     public int getRowCountForSearch(String searchName) {
+       int no = 0;
+        xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%"+searchName+"%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName) {
         
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Blog> list = new ArrayList<>();
@@ -73,14 +89,16 @@ public class BlogDAO extends MyDAO {
             String sql = "select title,description,created_Date,[User].fullname from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
+                    + "and title like ?\n"
                     + "order by created_Date desc\n"
                     + "OFFSET ? ROWS\n"
                     + "FETCH NEXT ? ROWS ONLY";
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, numberOfRecord);
-            statement.setInt(2, pageSize);
+            statement.setString(1, "%"+searchName+"%");
+            statement.setInt(2, numberOfRecord);
+            statement.setInt(3, pageSize);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {

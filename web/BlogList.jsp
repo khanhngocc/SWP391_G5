@@ -13,6 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Homepage</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -67,11 +68,19 @@
 
                 <div class="col-sm-9">
                     <a href="AddBlog"><i class="fa fa-book"></i> Create blog</a>
+                    <br>
+                    <br>
+                    <form action="Blog" class="searchform">
+                        <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </form>
+                    <br>
+                    <br>
                     <div class="blog-post-area">
                         <h2 class="title text-center">Latest From our Blog</h2>
                         <c:forEach items="${list_all_blogs}" var="list">
                             <div class="single-blog-post">
-                                <h3>${list.title} ${pageindex} ${gap} ${pagecount}</h3>
+                                <h3>${list.title}</h3>
                                 <div class="post-meta">
                                     <ul>
                                         <li><i class="fa fa-user"></i>${list.author}</li>
@@ -84,29 +93,29 @@
                                     </span>
                                 </div>
 
-                                <p>${list.description}</p>
+                                        <p class="block-ellipsis">${list.description}</p>
                                 <a  class="btn btn-primary" href="">Read More</a>
                             </div>
                         </c:forEach>
 
                         <div class="pagination-area">
                             <ul class="pagination">
-                               
-                                    <c:if test="${pageindex gt gap}">
-                                    <li class="page-item"><a class="page-link" href="Blog?page=1">First</a></li>
+
+                                <c:if test="${pageindex gt gap}">
+                                    <li class="page-item"><a class="page-link" href="Blog?page=1&searchName=${name_search}">First</a></li>
                                     </c:if>
                                     <c:forEach var = "i" begin = "${gap}" end = "1">
                                         <c:if test="${pageindex - gap gt 0}">
-                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex -i}">${pageindex - i}</a></li>
+                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex -i}&searchName=${name_search}">${pageindex - i}</a></li>
                                         </c:if>
                                     </c:forEach>
                                     <c:forEach var = "i" begin = "1" end = "${gap}">
                                         <c:if test="${pageindex + gap le pagecount}">
-                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex + i}">${pageindex + i}</a></li> 
+                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex + i}&searchName=${name_search}">${pageindex + i}</a></li> 
                                         </c:if>
                                     </c:forEach>
                                     <c:if test="${pageindex + gap lt pagecount}">
-                                    <li class="page-item"><a class="page-link" href="Blog?page=${pagecount}">Last</a></li> 
+                                    <li class="page-item"><a class="page-link" href="Blog?page=${pagecount}&searchName=${name_search}">Last</a></li> 
                                     </c:if>
                             </ul>
 
@@ -148,8 +157,7 @@
             </div>
 
         </footer><!--/Footer-->
-
-
+       
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
