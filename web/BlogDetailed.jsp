@@ -3,7 +3,7 @@
     Created on : Sep 12, 2021, 8:32:26 PM
     Author     : dell
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Homepage</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -62,71 +63,41 @@
 
         </header><!--/header-->
 
-        <section id="slider"><!--slider-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
+       	<section>
+            <div class="container" >
 
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
+                <div class="col-sm-9" style="height: 400px">
+                    <div class="blog-post-area">
 
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
+
+                        <div class="single-blog-post">
+                            <h3>${blog.title}</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i>${blog.author}</li>
+                                    <li><i class="fa fa-clock-o"></i>${blog.time}</li>
+                                    <li><i class="fa fa-calendar"></i>${blog.date}</li>
+                                </ul>
+                                <c:if test="${sessionScope.user.id eq blog.author_id}">
+                                    <span>
+                                        <a href="UpdateBlog?id=${blog.id}"><i class="fa fa-pencil"></i> Edit</a>
+                                        <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
+                                    </span>
+                                </c:if>
 
                             </div>
 
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                            <p>${blog.description}</p>
+
                         </div>
+
+
 
                     </div>
                 </div>
             </div>
-        </section><!--/slider-->
 
+        </section>
 
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
@@ -138,7 +109,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="address">
                                 <img src="images/home/map.png" alt="" />
@@ -159,8 +130,7 @@
             </div>
 
         </footer><!--/Footer-->
-
-
+        <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

@@ -69,35 +69,20 @@
             <div class="container">
 
                 <div class="col-sm-9">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Personal Information</h2>
-                        <p class="text-primary">${mess}</p>
-                        <form action="Personal" method="post">
-                            <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
-                            <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
-                            <p>                           
-                                <select name="gender" id="gender">
-                                    <option value="male" ${user.gender==true?"selected":""}>Male</option>
-                                    <option value="female" ${user.gender==false?"selected":""}>Female</option>
-                                </select>
-                            </p>
-                            <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
 
-                            <button type="submit" class="btn btn-default">Update</button>
-                        </form>
-                    </div>
-                    <br>
                     <div class="signup-form">
                         <!--sign up form-->
-                        <h2>Change password</h2>
-                        <p class="text-primary">${mess1}</p>
-                        <form action="ChangePassword" method="post">
-                            <input name="email" type="text" placeholder="Email" value="${user.email}" readonly/>
-                            <input name="oldpass"type="password" placeholder="Old Password" required="true" />
-                            <input name="newpass"type="password" placeholder="New Password" required="true" />
-                            <input name="repass"type="password" placeholder="Re-Password" required="true" />  
-                            <button type="submit" class="btn btn-default">Change</button>
+                        <h2>Create a new blog</h2>
+                        <p class="text-primary">${messCreateBlog}</p>
+                        <form action="AddBlog" method="post">
+                            Title
+                            <input name="title" type="text" required="true" />
+                            Description
+                            <textarea name="desc" rows="10" cols="50" required="true">
+                            </textarea>
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-default">Post</button>
                         </form>
                     </div>
                     <br>
