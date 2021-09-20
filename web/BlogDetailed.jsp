@@ -78,10 +78,13 @@
 
                                     <li><i class="fa fa-calendar"></i>${blog.date}</li>
                                 </ul>
-                                <span>
-                                    <a href=""><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
-                                </span>
+                                <c:if test="${sessionScope.user.id eq blog.author_id}">
+                                    <span>
+                                        <a href="UpdateBlog?id=${blog.id}"><i class="fa fa-pencil"></i> Edit</a>
+                                        <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
+                                    </span>
+                                </c:if>
+
                             </div>
 
                             <p>${blog.description}</p>
@@ -93,7 +96,7 @@
                     </div>
                 </div>
             </div>
-                           
+
         </section>
 
         <footer id="footer"><!--Footer-->

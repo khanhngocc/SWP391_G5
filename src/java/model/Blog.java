@@ -17,7 +17,16 @@ public class Blog {
     private String title;
     private String description;
     private Date date;
+    private int author_id;
     private String author;
+
+    public int getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
+    }
 
     public int getId() {
         return id;

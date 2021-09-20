@@ -44,12 +44,31 @@ public class BlogDAO extends MyDAO {
         }
     }
 
+    public void updateBlog(Blog blog) {
+        xSql = "UPDATE [dbo].[Blog]\n"
+                + "   SET [title] = ? \n"
+                + "      ,[description] = ? \n"
+                + "      ,[created_Date] = ? \n"
+                + " WHERE Blog.id = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, blog.getTitle());
+            ps.setString(2, blog.getDescription());
+            ps.setDate(3, blog.getDate());
+            ps.setInt(4, blog.getId());
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteBlog(int id) {
         xSql = "Delete from Blog where id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
-           
 
             ps.executeUpdate();
             ps.close();
@@ -78,7 +97,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id) {
         Blog b = new Blog();
-        xSql = "select Blog.id,title,description,created_Date,fullname from Blog,[User]\n"
+        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -93,6 +112,7 @@ public class BlogDAO extends MyDAO {
                 b.setDescription(rs.getString(3));
                 b.setDate(rs.getDate(4));
                 b.setAuthor(rs.getString(5));
+                b.setAuthor_id(rs.getInt(6));
             }
             rs.close();
             ps.close();

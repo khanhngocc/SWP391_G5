@@ -72,17 +72,20 @@
 
                     <div class="signup-form">
                         <!--sign up form-->
-                        <h2>Create a new blog</h2>
-                        <p class="text-primary">${messCreateBlog}</p>
-                        <form action="AddBlog" method="post">
+                        <h2>Edit this blog</h2>
+                        <p class="text-primary">${messUpdateBlog}</p>
+                        <form action="UpdateBlog" method="post">
+                            Id
+                            <input name="id" type="text" value="${blog.id}" readonly="true"/>
                             Title
-                            <input name="title" type="text" required="true" />
+                            <input name="title" type="text" required="true" value="${blog.title}"/>
                             Description
                             <textarea name="desc" rows="10" cols="50" required="true">
+                              ${blog.description}
                             </textarea>
                             <br>
                             <br>
-                            <button type="submit" class="btn btn-default">Post</button>
+                            <button type="submit" class="btn btn-default">Edit</button>
                         </form>
                     </div>
                     <br>
