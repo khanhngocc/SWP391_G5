@@ -17,20 +17,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class BlogDetailed extends BaseRequiredLoginController {
-    
+public class DeleteBlog extends BaseRequiredLoginController{
+
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id));
-        request.setAttribute("blog", b);
-        request.getRequestDispatcher("BlogDetailed.jsp").forward(request, response);
+        blogDAO.deleteBlog(Integer.valueOf(id));
+        request.getRequestDispatcher("Blog").forward(request, response);
     }
-    
+
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+       
     }
-    
+
+   
+
 }

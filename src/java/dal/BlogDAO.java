@@ -44,13 +44,26 @@ public class BlogDAO extends MyDAO {
         }
     }
 
-    
+    public void deleteBlog(int id) {
+        xSql = "Delete from Blog where id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+           
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getRowCount() {
-       int no = 0;
+        int no = 0;
         xSql = "SELECT COUNT(*) FROM Blog";
         try {
             ps = con.prepareStatement(xSql);
-           
+
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -62,13 +75,39 @@ public class BlogDAO extends MyDAO {
         }
         return no;
     }
-    
-     public int getRowCountForSearch(String searchName) {
-       int no = 0;
+
+    public Blog getBlog(int id) {
+        Blog b = new Blog();
+        xSql = "select Blog.id,title,description,created_Date,fullname from Blog,[User]\n"
+                + "where\n"
+                + "Blog.user_id = [User].id\n"
+                + "and\n"
+                + "Blog.id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                b.setId(rs.getInt(1));
+                b.setTitle(rs.getString(2));
+                b.setDescription(rs.getString(3));
+                b.setDate(rs.getDate(4));
+                b.setAuthor(rs.getString(5));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
+
+    public int getRowCountForSearch(String searchName) {
+        int no = 0;
         xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, "%"+searchName+"%");
+            ps.setString(1, "%" + searchName + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -80,13 +119,14 @@ public class BlogDAO extends MyDAO {
         }
         return no;
     }
+
     public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName) {
-        
+
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select title,description,created_Date,[User].fullname from Blog,[User]\n"
+            String sql = "select Blog.id,title,description,created_Date,[User].fullname from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
                     + "and title like ?\n"
@@ -96,7 +136,7 @@ public class BlogDAO extends MyDAO {
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+searchName+"%");
+            statement.setString(1, "%" + searchName + "%");
             statement.setInt(2, numberOfRecord);
             statement.setInt(3, pageSize);
             ResultSet rs = statement.executeQuery();
@@ -104,10 +144,11 @@ public class BlogDAO extends MyDAO {
             while (rs.next()) {
 
                 Blog b = new Blog();
-                b.setTitle(rs.getString(1));
-                b.setDescription(rs.getString(2));
-                b.setDate(rs.getDate(3));
-                b.setAuthor(rs.getString(4));
+                b.setId(rs.getInt(1));
+                b.setTitle(rs.getString(2));
+                b.setDescription(rs.getString(3));
+                b.setDate(rs.getDate(4));
+                b.setAuthor(rs.getString(5));
                 list.add(b);
             }
 
@@ -118,6 +159,5 @@ public class BlogDAO extends MyDAO {
         return list;
 
     }
-    
-   
+
 }

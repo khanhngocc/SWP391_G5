@@ -12,10 +12,20 @@ import java.sql.Date;
  * @author dell
  */
 public class Blog {
+
+    private int id;
     private String title;
     private String description;
     private Date date;
     private String author;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;
@@ -24,6 +34,7 @@ public class Blog {
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public String getTitle() {
         return title;
     }
@@ -47,7 +58,5 @@ public class Blog {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
-            
+
 }

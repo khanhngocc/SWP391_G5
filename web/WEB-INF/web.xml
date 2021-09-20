@@ -40,6 +40,10 @@
         <servlet-name>AddBlog</servlet-name>
         <servlet-class>controller.AddBlog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBlog</servlet-name>
+        <servlet-class>controller.DeleteBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>AddBlog</servlet-name>
         <url-pattern>/AddBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlog</servlet-name>
+        <url-pattern>/DeleteBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

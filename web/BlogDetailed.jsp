@@ -64,63 +64,36 @@
         </header><!--/header-->
 
        	<section>
-            <div class="container">
+            <div class="container" >
 
-                <div class="col-sm-9">
-                    <a href="AddBlog"><i class="fa fa-book"></i> Create blog</a>
-                    <br>
-                    <br>
-                    <form action="Blog" class="searchform">
-                        <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </form>
-                    <br>
-                    <br>
+                <div class="col-sm-9" style="height: 400px">
                     <div class="blog-post-area">
-                        <h2 class="title text-center">Latest From our Blog</h2>
-                        <c:forEach items="${list_all_blogs}" var="list">
-                            <div class="single-blog-post">
-                                <h3>${list.title}</h3>
-                                <div class="post-meta">
-                                    <ul>
-                                        <li><i class="fa fa-user"></i>${list.author}</li>
 
-                                        <li><i class="fa fa-calendar"></i>${list.date}</li>
-                                    </ul>
-                                   
-                                </div>
 
-                                        <p class="block-ellipsis">${list.description}</p>
-                                <a  class="btn btn-primary" href="BlogDetailed?id=${list.id}">Read More</a>
+                        <div class="single-blog-post">
+                            <h3>${blog.title}</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i>${blog.author}</li>
+
+                                    <li><i class="fa fa-calendar"></i>${blog.date}</li>
+                                </ul>
+                                <span>
+                                    <a href=""><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
+                                </span>
                             </div>
-                        </c:forEach>
 
-                        <div class="pagination-area">
-                            <ul class="pagination">
-
-                                <c:if test="${pageindex gt gap}">
-                                    <li class="page-item"><a class="page-link" href="Blog?page=1&searchName=${name_search}">First</a></li>
-                                    </c:if>
-                                    <c:forEach var = "i" begin = "${gap}" end = "1">
-                                        <c:if test="${pageindex - gap gt 0}">
-                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex -i}&searchName=${name_search}">${pageindex - i}</a></li>
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:forEach var = "i" begin = "1" end = "${gap}">
-                                        <c:if test="${pageindex + gap le pagecount}">
-                                        <li class="page-item"><a class="page-link" href="Blog?page=${pageindex + i}&searchName=${name_search}">${pageindex + i}</a></li> 
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:if test="${pageindex + gap lt pagecount}">
-                                    <li class="page-item"><a class="page-link" href="Blog?page=${pagecount}&searchName=${name_search}">Last</a></li> 
-                                    </c:if>
-                            </ul>
+                            <p>${blog.description}</p>
 
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
-
+                           
         </section>
 
         <footer id="footer"><!--Footer-->
@@ -154,7 +127,7 @@
             </div>
 
         </footer><!--/Footer-->
-       
+        <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
