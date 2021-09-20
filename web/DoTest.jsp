@@ -4,6 +4,7 @@
     Author     : dell
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +48,8 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 
-                                <ul class="nav navbar-nav">     
-                                    <li><form action="searchTest" method="post">
-                                            <input type="text" id="search" name="title" style="width: 70%">
-                                            <input type="submit" value="Search">
-                                    </form></li>
-                                    <li><a href="linkTest">Take Test</a></li>
+                                <ul class="nav navbar-nav">                                   
+                                    <li><a href="">Take Test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
@@ -66,73 +63,35 @@
             
         </header><!--/header-->
 
-        
-    
-        <section id="slider"><!--slider-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
-                    </div>
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <button id="durationx" hidden="">${test.duration}</button>
+                    <form id="resultTest" action="DoTest" method="post">
+                        <input type="text" name="test_id" value="${test.id}" hidden="">
+                        <p>${test.title}
+                            <div><span id="display" style="color:#FF0000;font-size:15px"></span></div>
+                            <div><span id="submitted" style="color:#FF0000;font-size:15px"></span></div>                            
+                            <%int j =1;%>
+                            <c:forEach items="${quiz}" var="i">
+                            <p><%="Question "+j+": "%>${i.question}</p>
+                            <p><input type="radio" name="${i.id}" id="a1" value="1">
+                            <label for="a1">${i.answer1}</label>
+                            <p><input type="radio" name="${i.id}" id="a2" value="2">
+                            <label for="a2">${i.answer2}</label>
+                            <p><input type="radio" name="${i.id}" id="a3" value="3">
+                            <label for="a3">${i.answer3}</label>
+                            <p><input type="radio" name="${i.id}" id="a4" value="4">
+                            <label for="a4">${i.answer4}</label>
+                            <%j++;%>
+                            </c:forEach>  
+                        <p><input type="submit" value="Submit your Answer">
+                    </form>
                 </div>
             </div>
-        </section><!--/slider-->
-    
+        </div>
+        
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">
@@ -171,6 +130,39 @@
         <script src="js/jquery.scrollUp.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>        
+        <script src="js/main.js"></script>
+        <script>
+            var div = document.getElementById('display');
+            var submitted = document.getElementById('submitted');
+            var durationx = parseInt(document.getElementById('durationx').innerHTML)*60;
+              function CountDown(duration, display) {
+
+                        var timer = duration, minutes, seconds;
+
+                      var interVal=  setInterval(function () {
+                            minutes = parseInt(timer / 60, 10);
+                            seconds = parseInt(timer % 60, 10);
+
+                            minutes = minutes < 10 ? "0" + minutes : minutes;
+                            seconds = seconds < 10 ? "0" + seconds : seconds;
+                    display.innerHTML ="<b>" + minutes + "m : " + seconds + "s" + "</b>";
+                            if (timer > 0) {
+                               --timer;
+                            }else{
+                       clearInterval(interVal)
+                                SubmitFunction();
+                             }
+
+                       },1000);
+
+                }
+
+              function SubmitFunction(){
+                submitted.innerHTML="Time is up!";
+                document.getElementById('resultTest').submit();
+
+               }
+               CountDown(durationx,div);
+        </script>
     </body>
 </html>

@@ -2520,4 +2520,13 @@ h2.title {
   color: #FE980F;
 }
 
+#create-test input {
+    width: 100%;
+    background-color: #F1F1E7;
+    color: #9A9A90;
+    border: none;
+}
 
+body{
+    overflow-x: auto;
+}

@@ -4,6 +4,9 @@
     Author     : dell
 --%>
 
+<%@page import="model.Quiz"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +50,8 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 
-                                <ul class="nav navbar-nav">     
-                                    <li><form action="searchTest" method="post">
-                                            <input type="text" id="search" name="title" style="width: 70%">
-                                            <input type="submit" value="Search">
-                                    </form></li>
-                                    <li><a href="linkTest">Take Test</a></li>
+                                <ul class="nav navbar-nav">                                   
+                                    <li><a href="DoTest?testId=1">Take Test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
@@ -66,73 +65,36 @@
             
         </header><!--/header-->
 
-        
-    
-        <section id="slider"><!--slider-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
-                    </div>
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <form action="DoTest" method="post">
+                        <input type="text" name="test_id" value="${test.id}" hidden="">
+                        <p>${test.title}      
+                        <p>${mark}/10.00
+                        <%int j =1;%>
+                        <%ArrayList<Quiz> quiz = (ArrayList<Quiz>) request.getAttribute("quiz");%>
+                        <%String[] answer = (String[]) request.getAttribute("anwser");%>
+                        
+                        <c:forEach items="${quiz}" var="i">
+                            <p><%="Question "+j+": "%>${i.question}</p>
+                            <p> ${anwser[j-1]}</p>
+                            <p><input type="radio" name="${i.id}" id="a1" value="1" <%=quiz.get(j-1).getAnswer1().equals(answer[j-1])?"checked":""%>>
+                            <label for="a1" ${i.answer1.equals(i.correct)?"style=\"color: green\"":""} <%=quiz.get(j-1).getAnswer1().equals(answer[j-1])?"style=\"color: red\"":""%> >${i.answer1}</label>
+                            <p><input type="radio" name="${i.id}" id="a2" value="2" <%=quiz.get(j-1).getAnswer2().equals(answer[j-1])?"checked":""%>>
+                            <label for="a2" ${i.answer2.equals(i.correct)?"style=\"color: green\"":""} <%=quiz.get(j-1).getAnswer2().equals(answer[j-1])?"style=\"color: red\"":""%> >${i.answer2}</label>
+                            <p><input type="radio" name="${i.id}" id="a3" value="3" <%=quiz.get(j-1).getAnswer3().equals(answer[j-1])?"checked":""%>>
+                            <label for="a3" ${i.answer3.equals(i.correct)?"style=\"color: green\"":""} <%=quiz.get(j-1).getAnswer3().equals(answer[j-1])?"style=\"color: red\"":""%> >${i.answer3}</label>
+                            <p><input type="radio" name="${i.id}" id="a4" value="4" <%=quiz.get(j-1).getAnswer4().equals(answer[j-1])?"checked":""%>>
+                            <label for="a4" ${i.answer4.equals(i.correct)?"style=\"color: green\"":""} <%=quiz.get(j-1).getAnswer4().equals(answer[j-1])?"style=\"color: red\"":""%> >${i.answer4}</label>
+                            <%j++;%>
+                        </c:forEach>                          
+                    </form>
                 </div>
             </div>
-        </section><!--/slider-->
-    
+        </div>
+        
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">
@@ -171,6 +133,6 @@
         <script src="js/jquery.scrollUp.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>        
+        <script src="js/main.js"></script>
     </body>
 </html>

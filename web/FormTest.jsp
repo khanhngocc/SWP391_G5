@@ -47,11 +47,7 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 
-                                <ul class="nav navbar-nav">     
-                                    <li><form action="searchTest" method="post">
-                                            <input type="text" id="search" name="title" style="width: 70%">
-                                            <input type="submit" value="Search">
-                                    </form></li>
+                                <ul class="nav navbar-nav">                                        
                                     <li><a href="linkTest">Take Test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
@@ -66,73 +62,19 @@
             
         </header><!--/header-->
 
-        
-    
-        <section id="slider"><!--slider-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
-                    </div>
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <form action="linkTest" method="post">
+                        <p class="text-danger">${mess}</p>
+                        <p><input type="text" name="testId" placeholder="Enter Test ID:">
+                        <p><input type="submit" value="Take Test">
+                    </form>
                 </div>
             </div>
-        </section><!--/slider-->
-    
+        </div>
+
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">

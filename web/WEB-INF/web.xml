@@ -28,6 +28,26 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeacherHomeControl</servlet-name>
+        <servlet-class>controller.TeacherHomeControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateTestControl</servlet-name>
+        <servlet-class>controller.CreateTestControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoTestController</servlet-name>
+        <servlet-class>controller.DoTestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LinkToTest</servlet-name>
+        <servlet-class>controller.LinkToTest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchTestControl</servlet-name>
+        <servlet-class>controller.SearchTestControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +75,26 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherHomeControl</servlet-name>
+        <url-pattern>/TeacherHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateTestControl</servlet-name>
+        <url-pattern>/createTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoTestController</servlet-name>
+        <url-pattern>/DoTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkToTest</servlet-name>
+        <url-pattern>/linkTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchTestControl</servlet-name>
+        <url-pattern>/searchTest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -49,6 +49,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("Login");
 
         } else {
+            
             String remember = request.getParameter("remember");
             if (remember != null) {
                 Cookie c_user = new Cookie("username", username);
@@ -63,6 +64,12 @@ public class LoginController extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Home");
             }
+            
+            if (user_roll.equals("Teacher")) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("TeacherHome");
+            }
+            
 
         }
     }

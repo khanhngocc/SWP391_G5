@@ -47,13 +47,9 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 
-                                <ul class="nav navbar-nav">     
-                                    <li><form action="searchTest" method="post">
-                                            <input type="text" id="search" name="title" style="width: 70%">
-                                            <input type="submit" value="Search">
-                                    </form></li>
-                                    <li><a href="linkTest">Take Test</a></li>
-                                    <li><a href="">Review Test</a></li>
+                                <ul class="nav navbar-nav">
+                                    <li><a href="createTest">Create Test</a></li>
+<!--                                    <li><a href="">Edit Test</a></li>-->
                                     <li><a href="">Blog</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
@@ -63,11 +59,10 @@
                     </div>
                 </div>
             </div><!--/header-middle-->
-            
+
+
         </header><!--/header-->
 
-        
-    
         <section id="slider"><!--slider-->
             <div class="container">
                 <div class="row">
@@ -132,7 +127,8 @@
                 </div>
             </div>
         </section><!--/slider-->
-    
+
+
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">
@@ -171,6 +167,6 @@
         <script src="js/jquery.scrollUp.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>        
+        <script src="js/main.js"></script>
     </body>
 </html>

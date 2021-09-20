@@ -1,9 +1,7 @@
-<%-- 
-    Document   : Home
-    Created on : Sep 12, 2021, 8:32:26 PM
-    Author     : dell
---%>
-
+<%@page import="java.util.List"%>
+<%@page import="model.Test"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,12 +44,12 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
-                                
+
                                 <ul class="nav navbar-nav">     
-                                    <li><form action="searchTest" method="post">
+                                    <li><form action="" method="post">
                                             <input type="text" id="search" name="title" style="width: 70%">
                                             <input type="submit" value="Search">
-                                    </form></li>
+                                        </form></li>
                                     <li><a href="linkTest">Take Test</a></li>
                                     <li><a href="">Review Test</a></li>
                                     <li><a href="">Blog</a></li>
@@ -63,76 +61,60 @@
                     </div>
                 </div>
             </div><!--/header-middle-->
-            
+
         </header><!--/header-->
 
-        
-    
-        <section id="slider"><!--slider-->
+        <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                            </ol>
+                    <div class="col-sm-3">
 
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Self-learning</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
+                    </div>
+
+                    <div class="col-sm-9 padding-right">
+                        <div class="features_items"><!--features_items-->
+                            <h2 class="title text-center">Result</h2>
+                            <%!int count=0;%>
+                            <%List<Test> test = (List<Test>)request.getAttribute("test");                
+                            for (Test elem : test) {%>
+                                <div class="col-sm-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <!--                                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcahub.in%2Fquiz%2Fauditing-standard-530-quiz-4&psig=AOvVaw2qs3PC2zL7B9NnkjZChuCu&ust=1632148732580000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCID04IGii_MCFQAAAAAdAAAAABAJ" alt="" />-->                                                
+                                                <h2><%=elem.getDuration() %> mins</h2>
+                                                <p><%=elem.getTitle()%></p>
+                                                <a href="DoTest?testId=<%=elem.getId()%>" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take this Test</a>
+                                            </div>                                    
+                                        </div>                                
                                     </div>
                                 </div>
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Creative Discussion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
+                            <% count++;%>
+                                <%if(count==3){%> <div class="col-md-12"></div> <%count=0;}%>
+                                <% } %>
+                                <%count=0;%>
+                            <div class="store-filter clearfix">
+                                
+                                <ul class="store-pagination" style="display: inline-block">
+                                    <c:forEach begin="1" end="${pagesize}" var="i">
+                                        <c:choose>
+                                            <c:when test="${page==i}">
+                                                <li class="active">${i}</li>
+                                            </c:when>
 
-                                <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1><span>Mega</span>-Deal</h1>
-                                        <h2>Work together</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
-                                    </div>
-                                </div>
-
+                                            <c:otherwise>
+                                                <li><a href="searchTest?title=${title}&page=${i}">${i}</a></li> 
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </ul>
                             </div>
-
-                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
+                        </div><!--features_items-->
                     </div>
                 </div>
             </div>
-        </section><!--/slider-->
-    
+        </section>
+
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">
@@ -143,7 +125,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="address">
                                 <img src="images/home/map.png" alt="" />
@@ -165,12 +147,11 @@
 
         </footer><!--/Footer-->
 
-
         <script src="js/jquery.js"></script>
-        <script src="js/price-range.js"></script>
-        <script src="js/jquery.scrollUp.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/price-range.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>        
+        <script src="js/main.js"></script>
     </body>
 </html>
