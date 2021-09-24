@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Homepage</title>
+        <title>Landing Page</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="Home"><img src="images/home/partner1.png" alt=""  /></a>
+                                <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
                             </div>
 
                         </div>
@@ -50,7 +50,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="">Test</a></li>
-                                    <li><a href="">Blog</a></li>
+                                    <li><a href="DocumentList">Blog</a></li>
                                     <li></li>
                                     <a href="Login" class="btn btn-default">Log in</a>
                                 </ul>

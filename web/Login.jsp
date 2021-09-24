@@ -47,10 +47,10 @@
 
                     </div>
                     
-                    <p class="text-primary">${mess1}</p>
+                    <p class="text-primary">${messLogin}</p>
                     <form action="Login" method="post">
-                        <input name="Email" type="text" placeholder="Email" required="true" />
-                        <input name="Password" type="password" placeholder="Password" required="true" />
+                        <input name="Email" type="text" placeholder="Email" required="true" value="${usernameLogin}"/>
+                        <input name="Password" type="password" placeholder="Password" required="true" value="${passwordLogin}"/>
                         <span>
                             <input name="remember" type="checkbox" class="checkbox">
                             Remember me

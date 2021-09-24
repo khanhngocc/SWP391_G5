@@ -28,6 +28,18 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DocumentList</servlet-name>
+        <servlet-class>controller.free.DocumentList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LandingPage</servlet-name>
+        <servlet-class>controller.free.LandingPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DocumentDetailed</servlet-name>
+        <servlet-class>controller.free.DocumentDetailed</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentList</servlet-name>
+        <url-pattern>/DocumentList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LandingPage</servlet-name>
+        <url-pattern>/LandingPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentDetailed</servlet-name>
+        <url-pattern>/DocumentDetailed</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

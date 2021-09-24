@@ -45,7 +45,9 @@ public class LoginController extends HttpServlet {
         String mess = "";
         if (user == null) {
             mess = "Username/ Password is invalid!";
-            session.setAttribute("mess1", mess);
+            session.setAttribute("messLogin", mess);
+            session.setAttribute("usernameLogin", username);
+            session.setAttribute("passwordLogin", password);
             response.sendRedirect("Login");
 
         } else {
@@ -58,6 +60,10 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_pass);
                 response.addCookie(c_user);
             }
+
+            request.getSession().removeAttribute("messLogin");
+            request.getSession().removeAttribute("usernameLogin");
+            request.getSession().removeAttribute("passwordLogin");
 
             if (user_roll.equals("Student")) {
                 request.getSession().setAttribute("user", user);

@@ -29,7 +29,7 @@ public class LogoutController extends HttpServlet {
         c_pass.setMaxAge(-1);
         response.addCookie(c_pass);
         response.addCookie(c_user);
-        response.sendRedirect("Login");
+        response.sendRedirect("Landing.jsp");
     }
 
 }

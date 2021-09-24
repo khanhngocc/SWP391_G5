@@ -1,25 +1,47 @@
 .centerImgLanding {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .centerText {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 68%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 68%;
 }
 
 .centerDiv {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
 }
 
 .alginBodyLanding{
     margin-top: 50px;
     margin-bottom: 100px;
+}
+
+.block-ellipsis {
+    text-align: justify;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 43px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.desc-blog{
+       text-align: justify;
+       margin-top: 50px; 
+       margin-bottom: 100px; 
+       line-height: 1.8;
 }
