@@ -1,0 +1,25 @@
+.centerImgLanding {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.centerText {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 68%;
+}
+
+.centerDiv {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+
+.alginBodyLanding{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}

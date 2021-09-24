@@ -1,11 +1,10 @@
 <%-- 
-    Document   : Login
-    Created on : Sep 11, 2021, 3:38:44 PM
-    Author     : Admin
+    Document   : Registration
+    Created on : Sep 24, 2021, 8:57:25 AM
+    Author     : dell
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Login page</title>
+    <title>Landing page</title>
     <link href="css/customize.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -40,28 +39,28 @@
         <!--form-->
         <div class="container">
             <div class="row">
-                <div class="login-form centerDiv">
-                    <!--login form-->
-                    <div class="centerImgLanding">
-                        <img src="images/home/partner1.png" alt="">
-
-                    </div>
-                    
-                    <p class="text-primary">${mess1}</p>
-                    <form action="Login" method="post">
-                        <input name="Email" type="text" placeholder="Email" required="true" />
-                        <input name="Password" type="password" placeholder="Password" required="true" />
-                        <span>
-                            <input name="remember" type="checkbox" class="checkbox">
-                            Remember me
-                        </span>
-                        <button type="submit" class="btn btn-default centerImgLanding">Login</button>
+                <div class="signup-form centerDiv">
+                    <!--sign up form-->
+                    <h2 class="centerImgLanding">New registration</h2>
+                    <p class="text-primary">${mess}</p>
+                    <form action="register" method="post">
+                        <input name="email" type="text" placeholder="Email" required="true" />
+                        <input name="name" type="text" placeholder="Full Name" required="true" />
+                        <p>
+                            <select name="gender" id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </p>
+                        <input name="phone" type="text" placeholder="Phone Number" />
+                        <input name="pass" type="password" placeholder="Password" required="true" />
+                        <input name="repass" type="password" placeholder="Re-Password" required="true" />
                         <br>
-                        <div class="centerText">Don't have an account? <a href="register">Sign up</a></div>
-                        <div class="centerImgLanding"><a href="ForgotPassword">Forgot your password?</a></div>
-                    </form>
+                        <button type="submit" class="btn btn-default centerImgLanding">Signup</button>
 
+                    </form>
                 </div>
+
             </div>
         </div>
     </section>
