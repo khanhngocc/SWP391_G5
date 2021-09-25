@@ -33,8 +33,8 @@
     </head><!--/head-->
 
     <body>
-     <header id="header"><!--header-->
-  <c:if test="${sessionScope.user eq null}">
+        <header id="header"><!--header-->
+            <c:if test="${sessionScope.user eq null}">
                 <div class="header-middle"><!--header-middle-->
                     <div class="container">
                         <div class="row">
@@ -61,29 +61,29 @@
             </c:if>
 
             <c:if test="${sessionScope.user ne null}">
-                 <div class="header-middle"><!--header-middle-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="logo pull-left">
-                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                            </div>
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
+                                </div>
 
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="shop-menu pull-right">
-                                <ul class="nav navbar-nav">
-                                    <li><a href="">Take test</a></li>
-                                    <li><a href="">Review Test</a></li>
-                                    <li><a href="">Blog</a></li>
-                                    <li><a href="Personal?email=${user.email}">Account</a></li>
-                                    <li><a href="Logout">Log out</a></li>
-                                </ul>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="">Take test</a></li>
+                                        <li><a href="">Review Test</a></li>
+                                        <li><a href="">Blog</a></li>
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!--/header-middle-->
+                </div><!--/header-middle-->
 
             </c:if>
 
@@ -93,14 +93,24 @@
         <section><!--slider-->
             <div class="container" style="height: 400px ; margin-bottom: 200px">
                 <form action="DocumentList" class="searchform">
+                    <input type="text" placeholder="Search" name="categories" value="${categories}" hidden=""/>
                     <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </form>
-                    <br>
-                    <br>
+                <form action="DocumentList" >
+                    
+                    <input type="text" placeholder="Search" name="searchName" value="${name_search}" hidden=""/>
+                    <select style="width: 10%;margin-top: 10px" name="categories" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listCategories}" var="list">
+                            <option value="${list}" ${list == category ? 'selected':''}>${list}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+
                 <ul class="media-list">
                     <c:forEach items="${list_all_blogs}" var="list">
-                        <li class="media">
+                        <li class="media" style="margin-top: 20px">
 
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="${list.img_url}" style="width: 130px;height: 130px" alt="">
@@ -108,12 +118,13 @@
                             <div class="media-body">
                                 <h4>${list.title} </h4>
                                 <ul class="sinlge-post-meta">
+                                    <li><i class="fa fa-key"></i>${list.category}</li>
                                     <li><i class="fa fa-user"></i>${list.author}</li>
                                     <li><i class="fa fa-clock-o"></i>${list.time}</li>
                                     <li><i class="fa fa-calendar"></i>${list.date}</li>
                                 </ul>
                                 <p class="block-ellipsis">${list.description}</p>
-                                 
+
                                 <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
                             </div>
                         </li>
@@ -123,20 +134,20 @@
                     <ul class="pagination">
 
                         <c:if test="${pageindex gt gap}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=1&searchName=${name_search}">First</a></li>
+                            <li class="page-item"><a class="page-link" href="DocumentList?page=1&searchName=${name_search}&categories=${category}">First</a></li>
                             </c:if>
                             <c:forEach var = "i" begin = "${gap}" end = "1">
                                 <c:if test="${pageindex - gap gt 0}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex -i}&searchName=${name_search}">${pageindex - i}</a></li>
+                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex -i}&searchName=${name_search}&categories=${category}">${pageindex - i}</a></li>
                                 </c:if>
                             </c:forEach>
                             <c:forEach var = "i" begin = "1" end = "${gap}">
                                 <c:if test="${pageindex + gap le pagecount}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex + i}&searchName=${name_search}">${pageindex + i}</a></li> 
+                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex + i}&searchName=${name_search}&categories=${category}">${pageindex + i}</a></li> 
                                 </c:if>
                             </c:forEach>
                             <c:if test="${pageindex + gap lt pagecount}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=${pagecount}&searchName=${name_search}">Last</a></li> 
+                            <li class="page-item"><a class="page-link" href="DocumentList?page=${pagecount}&searchName=${name_search}&categories=${category}">Last</a></li> 
                             </c:if>
                     </ul>
 

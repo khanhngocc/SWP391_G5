@@ -40,7 +40,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id) {
         Blog b = new Blog();
-        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url from Blog,[User]\n"
+        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -58,6 +58,7 @@ public class BlogDAO extends MyDAO {
                 b.setAuthor_id(rs.getInt(6));
                 b.setTime(rs.getString(7));
                 b.setImg_url(rs.getString(8));
+                b.setCategory(rs.getString(9));
             }
             rs.close();
             ps.close();
@@ -67,12 +68,13 @@ public class BlogDAO extends MyDAO {
         return b;
     }
 
-    public int getRowCountForSearch(String searchName) {
+    public int getRowCountForSearch(String searchName,String category) {
         int no = 0;
-        xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ?";
+        xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%"+ category + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -85,16 +87,17 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName) {
+    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName,String category) {
 
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated,image_Url from Blog,[User]\n"
+            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated,image_Url,Category from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
                     + "and title like ?\n"
+                    + "and Category like ?\n"
                     + "order by created_Date desc\n"
                     + "OFFSET ? ROWS\n"
                     + "FETCH NEXT ? ROWS ONLY";
@@ -102,8 +105,9 @@ public class BlogDAO extends MyDAO {
 
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + searchName + "%");
-            statement.setInt(2, numberOfRecord);
-            statement.setInt(3, pageSize);
+            statement.setString(2, "%"+category+"%");
+            statement.setInt(3, numberOfRecord);
+            statement.setInt(4, pageSize);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -116,6 +120,7 @@ public class BlogDAO extends MyDAO {
                 b.setAuthor(rs.getString(5));
                 b.setTime(rs.getString(6));
                 b.setImg_url(rs.getString(7));
+                b.setCategory(rs.getString(8));
                 list.add(b);
             }
 
@@ -126,4 +131,30 @@ public class BlogDAO extends MyDAO {
         return list;
 
     }
+    
+    public ArrayList<String> listCategories() {
+        
+        ArrayList<String> list = new ArrayList<>();
+        
+         try {
+            String sql = "Select distinct Category from Blog";
+            PreparedStatement statement;
+
+            statement = connection.prepareStatement(sql);
+           
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+
+               list.add(rs.getString(1));
+            }
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+  
 }

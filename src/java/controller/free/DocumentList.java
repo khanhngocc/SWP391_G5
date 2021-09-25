@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DocumentList extends HttpServlet {
 
-    private String searchName;
-   
+    private static String searchName;
+    private static String local_category;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,15 +46,23 @@ public class DocumentList extends HttpServlet {
         int rowCount = 0;
 
         String name_search = request.getParameter("searchName");
-
-        if (name_search == null) {
+        String category = request.getParameter("categories");
+       
+        System.out.println("search :"+name_search);
+        System.out.println("cate: "+category);
+        
+        if (name_search == null && category == null) {
             searchName = "";
+            local_category = "";
             rowCount = dao.getRowCount();
         } else {
             searchName = name_search;
-            rowCount = dao.getRowCountForSearch(searchName);
+            local_category = category;
+            rowCount = dao.getRowCountForSearch(searchName,local_category);
+           
         }
 
+      
         int pageCount;
 
         if (rowCount % pageSize == 0) {
@@ -65,14 +73,16 @@ public class DocumentList extends HttpServlet {
 
         int gap = 1;
 
-        System.out.println("page : " + pageIndex + "   search: " + name_search);
-        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName);
+        
+        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category);
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);
         request.setAttribute("gap", gap);
         request.setAttribute("name_search", searchName);
-
+        ArrayList<String> listCategories = dao.listCategories();
+        request.setAttribute("listCategories", listCategories);
+        request.setAttribute("category", local_category);
         request.getRequestDispatcher("DocumentList.jsp").forward(request, response);
     }
 
