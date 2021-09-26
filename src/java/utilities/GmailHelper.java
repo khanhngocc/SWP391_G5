@@ -23,19 +23,45 @@ import javax.mail.internet.MimeMessage;
  */
 public class GmailHelper {
     
-    private static String USER_NAME = "khanhkuro98";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "nwxrztxrkskmlfog"; // GMail password
-    private static String RECIPIENT = "";
+    private String USER_NAME = "aeroaircraft1604";  // GMail user name (just the part before "@gmail.com")
+    private String PASSWORD = "!dwtLafU"; // GMail password
+    private String RECIPIENT;
+
+    public String getUSER_NAME() {
+        return USER_NAME;
+    }
+
+    public void setUSER_NAME(String USER_NAME) {
+        this.USER_NAME = USER_NAME;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
+    }
+
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
+    }
+
+    public String getRECIPIENT() {
+        return RECIPIENT;
+    }
+
+    public void setRECIPIENT(String RECIPIENT) {
+        this.RECIPIENT = RECIPIENT;
+    }
+
     
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
+    
+    public final Pattern VALID_EMAIL_ADDRESS_REGEX
             = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    public static boolean validate(String emailStr) {
+    public boolean validate(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }
     
-    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NoSuchProviderException, MessagingException {
+    public void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NoSuchProviderException, MessagingException {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");

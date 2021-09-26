@@ -2520,4 +2520,10 @@ h2.title {
   color: #FE980F;
 }
 
-
+#profile-ava {
+    height: 200px;
+    width: 200px;   
+    border: 1px black solid;
+    border-radius: 50%;
+    vertical-align: middle;
+}

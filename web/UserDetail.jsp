@@ -74,7 +74,7 @@
                         <h2>Personal Information</h2>
                         <p class="text-primary">${mess}</p>
                         <form action="Personal" method="post">
-                            <img src="${user.avatar}"><br>
+                            <img id="profile-ava" src="${user.avatar.substring(0,13).concat("/").concat(user.avatar.substring(13))}"><br>
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                             <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
@@ -85,9 +85,7 @@
                         </form>
                             <button type="text" class="btn btn-default">Update</button>
                             <button type="text" class="btn btn-default">Delete</button>
-                    </div>
-                            <br>
-                            <a href="AddUserAdmin">Add new User</a>
+                    </div>                       
                 </div>
                
                 

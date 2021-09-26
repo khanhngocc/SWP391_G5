@@ -75,7 +75,7 @@
                         <p class="text-primary">${mess}</p>
                         <form action="AddUserAdmin" method="post" enctype="multipart/form-data">
                             <input type="file" name="fname"/>Avatar
-                            <img src="${user.avatar}"><br>
+                            <img src="${user.getAvatar()}"><br>
                             <input name="email" type="text" placeholder="Email" required="true" />
                             <input name="password" type="password" placeholder="Password" required="true" />
                             <input name="name"type="text" placeholder="Full Name" required="true" />  

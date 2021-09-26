@@ -30,7 +30,7 @@ public class UserListControl extends BaseRequiredLoginController {
         } catch (Exception e) {
             currentPage = 1;
         }
-        request.setAttribute("list", userlist.subList(6 * (currentPage - 1), 6 * currentPage > userlist.size() ? userlist.size() : 6 * currentPage));
+        request.setAttribute("list", userlist.subList(10 * (currentPage - 1), 10 * currentPage > userlist.size() ? userlist.size() : 10 * currentPage));
         request.setAttribute("pagesize", pageSize);
         request.setAttribute("page", currentPage);
         request.getRequestDispatcher("UserList.jsp").forward(request, response);

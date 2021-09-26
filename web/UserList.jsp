@@ -69,24 +69,24 @@
                 <div class="col-sm-9">
                     <div class="searchform">
                         <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for name"/>
-                        <input type="text" id="myInput" onkeyup="searchForm(5)" placeholder="Search for role"/>
-                        <input type="text" id="myInput" onkeyup="searchForm(6)" placeholder="Search for status"/>
+                        <input type="text" id="myInput1" onkeyup="searchForm(5)" placeholder="Search for role"/>
+                        <input type="text" id="myInput2" onkeyup="searchForm(6)" placeholder="Search for status"/>
+                        <a href="AddUserAdmin">Add new User</a>
                     </div>
                     
                     <br>
                     <div>
-                        <table border="1" id="myTable">
+                        <table class="table" id="myTable">
                             <tr>
-                                <th><strong><button type="text" onclick="sort(0)">ID</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(1)">Full Name</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(2)">Title</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(3)">Email</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(4)">Phone</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(5)">Role</button></strong></th>
-                                <th><strong><button type="text" onclick="sort(6)">Status</button></strong></th>
-                                <th><strong>Delete</strong></th>
-                                <th><strong>Edit</strong></th>
-                                <th><strong>View</strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(1)">Full Name</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(2)">Title</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(3)">Email</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(4)">Phone</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(5)">Role</a></strong></th>
+                                <th><strong><a href="javascript:void(0);" onclick="sort(6)">Status</a></strong></th>                                
+                                <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                                
                             </tr>
 
                             <c:forEach items="${list}" var="i">
@@ -167,7 +167,12 @@
                                     function searchForm(number) {
                                         var input, filter, table, tr, td, i, txtValue, in_num;
                                         in_num = parseInt(number);
+                                        if(in_num===1)
                                         input = document.getElementById("myInput");
+                                        if(in_num===5)
+                                        input = document.getElementById("myInput1");
+                                        if(in_num===6)
+                                        input = document.getElementById("myInput2");
                                         filter = input.value.toUpperCase();
                                         table = document.getElementById("myTable");
                                         tr = table.getElementsByTagName("tr");
