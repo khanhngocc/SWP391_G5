@@ -56,6 +56,14 @@
         <servlet-name>ChangeBlogStatus</servlet-name>
         <servlet-class>controller.marketing.ChangeBlogStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogDetailed</servlet-name>
+        <servlet-class>controller.marketing.BlogDetailed</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBlog</servlet-name>
+        <servlet-class>controller.marketing.AddBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>ChangeBlogStatus</servlet-name>
         <url-pattern>/ChangeBlogStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailed</servlet-name>
+        <url-pattern>/BlogDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBlog</servlet-name>
+        <url-pattern>/AddBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -49,7 +49,7 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
 
-                                    <li><a href="">Blog</a></li>
+                                    <li><a href="BlogList">Blog</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -80,7 +80,7 @@
                     </select>   
                 </form>
                 <div style="margin-top: 30px; margin-bottom: 20px">
-                    <a href="#"><i class="fa fa-book"></i> Create a blog</a> 
+                    <a href="AddBlog"><i class="fa fa-book"></i> Create a blog</a> 
                 </div>
 
                 <table class="table">
@@ -91,10 +91,10 @@
                             <th scope="col">Thumbnail</th>
                             <th scope="col">Category</th>
                             <th scope="col">Author</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" style="width: 105px">Status</th>
                             <th scope="col">TimeCreated</th>
                             <th scope="col">DateCreated</th>
-                            <th scope="col" style="width: 250px">Action</th>
+                            <th scope="col" style="width: 290px;text-align: center" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,15 +106,15 @@
                                 <td>${list.category}</td>
                                 <td>${list.author}</td>
                                 <c:if test="${list.status eq 1}">
-                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=0">deactivated</a></td>
-                                    </c:if>
-                                    <c:if test="${list.status eq 0}">
-                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=1">activated</a></td>
+                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=0"><i class="fa fa-unlock"></i> deactivated</a></td>
+                                </c:if>
+                                <c:if test="${list.status eq 0}">
+                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=1"><i class="fa fa-lock"></i> activated</a></td>
                                 </c:if>
                                 <td>${list.time}</td>
                                 <td>${list.date}</td>
 
-                                <td><a href="#"><i class="fa fa-eye"></i> View</a> 
+                                <td><a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="#"><i class="fa fa-pencil"></i> Update</a> 
                                     <a href="#" onclick="deleteBlog(${list.id})"><i class="fa fa-trash-o"></i> Delete</a> 
                                 </td> 

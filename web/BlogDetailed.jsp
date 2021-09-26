@@ -1,9 +1,8 @@
 <%-- 
-    Document   : DocumentDetailed
-    Created on : Sep 24, 2021, 9:53:09 PM
+    Document   : Home
+    Created on : Sep 12, 2021, 8:32:26 PM
     Author     : dell
 --%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,64 +33,36 @@
     </head><!--/head-->
 
     <body>
-
         <header id="header"><!--header-->
-            <c:if test="${sessionScope.user eq null}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
-                                </div>
 
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
 
-                                        <li><a href="">Test</a></li>
-                                        <li><a href="DocumentList">Blog</a></li>
-                                        <li></li>
-                                        <a href="Login" class="btn btn-default">Log in</a>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+
+                                    <li><a href="BlogList">Blog</a></li>
+                                    <li><a href="Personal?email=${user.email}">Account</a></li>
+                                    <li><a href="Logout">Log out</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </c:if>
-
-            <c:if test="${sessionScope.user ne null}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="">Take test</a></li>
-                                        <li><a href="">Review Test</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--/header-middle-->
-
-            </c:if>
+            </div><!--/header-middle-->
 
 
-        </header>
-       	<section>
+        </header><!--/header-->
+
+        <section ><!--slider-->
             <div class="container centerImgLanding" >
 
                 <div class="col-sm-9">
@@ -108,9 +79,18 @@
                                     <li><i class="fa fa-clock-o"></i>${blog.time}</li>
                                     <li><i class="fa fa-calendar"></i>${blog.date}</li>
                                 </ul>
-
+                                <span>
+                                    <c:if test="${blog.status eq 1}">
+                                        <a href="ChangeBlogStatus?id=${blog.id}&status=0"><i class="fa fa-unlock"></i> deactivated</a>
+                                    </c:if>
+                                    <c:if test="${blog.status eq 0}">
+                                        <a href="ChangeBlogStatus?id=${blog.id}&status=1"><i class="fa fa-lock"></i> activated</a>
+                                    </c:if>
+                                    <a href="UpdateBlog?id=${blog.id}"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
+                                </span>
                             </div>
-                            <img src="${blog.img_url}" alt="" width="100%" />
+                                    <img src="${blog.img_url}" alt="" style="width: 100%" />
 
                             <p class="desc-blog">${blog.description}</p>
 
@@ -122,7 +102,9 @@
                 </div>
             </div>
 
-        </section>
+
+        </section><!--/slider-->
+
 
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
@@ -155,6 +137,7 @@
             </div>
 
         </footer><!--/Footer-->
+
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

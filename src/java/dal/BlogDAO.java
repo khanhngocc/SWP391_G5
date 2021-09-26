@@ -40,7 +40,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id) {
         Blog b = new Blog();
-        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category from Blog,[User]\n"
+        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,status from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -59,6 +59,7 @@ public class BlogDAO extends MyDAO {
                 b.setTime(rs.getString(7));
                 b.setImg_url(rs.getString(8));
                 b.setCategory(rs.getString(9));
+                b.setStatus(rs.getString(10));
             }
             rs.close();
             ps.close();
@@ -68,13 +69,13 @@ public class BlogDAO extends MyDAO {
         return b;
     }
 
-    public int getRowCountForSearch(String searchName,String category) {
+    public int getRowCountForSearch(String searchName, String category) {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
-            ps.setString(2, "%"+ category + "%");
+            ps.setString(2, "%" + category + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -87,7 +88,7 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName,String category) {
+    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName, String category) {
 
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Blog> list = new ArrayList<>();
@@ -105,7 +106,7 @@ public class BlogDAO extends MyDAO {
 
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + searchName + "%");
-            statement.setString(2, "%"+category+"%");
+            statement.setString(2, "%" + category + "%");
             statement.setInt(3, numberOfRecord);
             statement.setInt(4, pageSize);
             ResultSet rs = statement.executeQuery();
@@ -132,22 +133,22 @@ public class BlogDAO extends MyDAO {
         return list;
 
     }
-    
+
     public ArrayList<String> listCategories() {
-        
+
         ArrayList<String> list = new ArrayList<>();
-        
-         try {
+
+        try {
             String sql = "Select distinct Category from Blog";
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-           
+
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
 
-               list.add(rs.getString(1));
+                list.add(rs.getString(1));
             }
 
             return list;
@@ -169,18 +170,73 @@ public class BlogDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
-  
-    public void changeBlogStatus(int id,String status){
-      xSql = "Update Blog set status = ? where id= ? ";
+
+    public void changeBlogStatus(int id, String status) {
+        xSql = "Update Blog set status = ? where id= ? ";
         try {
             ps = con.prepareStatement(xSql);
-            
-            
+
             ps.setString(1, status);
-            
-            
+
             ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createBlog(Blog blog, User user) {
+        xSql = "INSERT INTO [Blog]\n"
+                + "           ([title]\n"
+                + "           ,[description]\n"
+                + "           ,[image_Url]\n"
+                + "           ,[created_Date]\n"
+                + "           ,[user_id]\n"
+                + "           ,[timeCreated]\n"
+                + "           ,[Category]\n"
+                + "           ,[status])\n"
+                + "     VALUES\n"
+                + "           (? \n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, blog.getTitle());
+            ps.setString(2, blog.getDescription());
+            ps.setString(3, blog.getImg_url());
+            ps.setDate(4, blog.getDate());
+            ps.setInt(5, user.getId());
+            ps.setString(6, blog.getTime());
+            ps.setString(7, blog.getCategory());
+            ps.setString(8, blog.getStatus());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBlog(Blog blog) {
+        xSql = "UPDATE [Blog]\n"
+                + "   SET [title] = ? \n"
+                + "      ,[description] = ? \n"
+                + "      ,[created_Date] = ? \n"
+                + "      ,[timeCreated] = ? \n"
+                + " WHERE Blog.id = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, blog.getTitle());
+            ps.setString(2, blog.getDescription());
+            ps.setDate(3, blog.getDate());
+            ps.setString(4, blog.getTime());
+            ps.setInt(5, blog.getId());
 
             ps.executeUpdate();
             ps.close();

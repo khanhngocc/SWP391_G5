@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
             request.getSession().removeAttribute("usernameLogin");
             request.getSession().removeAttribute("passwordLogin");
 
-            if (user_roll.equals("Student")) {
+            if (user_roll.equals("Customer")) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Home");
             }else if(user_roll.equals("Marketing"))
