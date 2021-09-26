@@ -74,30 +74,20 @@
                         <h2>Personal Information</h2>
                         <p class="text-primary">${mess}</p>
                         <form action="Personal" method="post">
+                            <img src="${user.avatar}"><br>
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                             <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
                             <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
                             <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
-                            <input name="role"type="text" placeholder="Role" value="${user.roll}" />							
-                            <input name="status"type="text" placeholder="Status" value="${user.status}" />							
-
-                            <button type="submit" class="btn btn-default">Update</button>
+                            <input name="role"type="text" placeholder="Role" value="${user.rollId}" />							
+                            <input name="status"type="text" placeholder="Status" value="${user.status}" />							                            
                         </form>
+                            <button type="text" class="btn btn-default">Update</button>
+                            <button type="text" class="btn btn-default">Delete</button>
                     </div>
                             <br>
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Change password</h2>
-                        <p class="text-primary">${mess1}</p>
-                        <form action="ChangePassword" method="post">
-                            <input name="email" type="text" placeholder="Email" value="${user.email}" readonly/>
-                            <input name="oldpass"type="password" placeholder="Old Password" required="true" />
-                            <input name="newpass"type="password" placeholder="New Password" required="true" />
-                            <input name="repass"type="password" placeholder="Re-Password" required="true" />  
-                            <button type="submit" class="btn btn-default">Change</button>
-                        </form>
-                    </div>
+                            <a href="AddUserAdmin">Add new User</a>
                 </div>
                
                 
@@ -105,7 +95,7 @@
                     
                 
             </div>
-        </div>
+        
     </section>
     <!--/form-->
 

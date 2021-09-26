@@ -63,6 +63,11 @@ public class LoginController extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Home");
             }
+            
+            if (user_roll.equals("Admin")) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("AdminHome.jsp");
+            }
 
         }
     }

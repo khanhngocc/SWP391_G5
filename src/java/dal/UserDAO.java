@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -27,8 +28,8 @@ public class UserDAO extends MyDAO {
             ps.setString(1, email);
             rs = ps.executeQuery();
             if (rs.next()) {
-                x = new User(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getInt(9));
+                x = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10));
             }
             rs.close();
             ps.close();
@@ -38,27 +39,47 @@ public class UserDAO extends MyDAO {
         return (x);
     }
 
+    public ArrayList<User> getAllUser(){
+        ArrayList<User> x = new ArrayList<>();
+        xSql = "SELECT * FROM [User]";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
+    
     public void addUser(User x) {
         xSql = "INSERT INTO [User]\n"
                 + "           ([fullname]\n"
-                + "           ,[gender]\n"
+                + "           ,[title]\n"
                 + "           ,[email]\n"
                 + "           ,[phone]\n"
                 + "           ,[password]\n"
                 + "           ,[avatar]\n"
                 + "           ,[createDate]\n"
+                + "           ,[status]\n"
                 + "           ,[roll_id])\n"
-                + "     VALUES (?,?,?,?,?,?,?,?)";
+                + "     VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getFullname());
-            ps.setBoolean(2, x.isGender());
+            ps.setString(2, x.getTitle());
             ps.setString(3, x.getEmail());
             ps.setString(4, x.getPhone());
             ps.setString(5, x.getPassword());
             ps.setString(6, x.getAvatar());
             ps.setDate(7, x.getCreateDate());
-            ps.setInt(8, x.getRollId());
+            ps.setString(8, x.getStatus());
+            ps.setInt(9, x.getRollId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -96,11 +117,11 @@ public class UserDAO extends MyDAO {
 
     }
 
-    public int UpdateUser(String email, String fullname, String phone, boolean gender) {
+    public int UpdateUser(String email, String fullname, String phone, String title) {
         int n = 0;
         String sql = "UPDATE [dbo].[User]\n"
                 + "   SET [fullname] = ?\n"
-                + "      ,[gender] = ?\n"
+                + "      ,[title] = ?\n"
                 + "      ,[phone] = ?\n"
                 + "     \n"
                 + " WHERE email = ?";
@@ -109,7 +130,7 @@ public class UserDAO extends MyDAO {
         try {
             statement = connection.prepareStatement(sql);
             statement.setString(1, fullname);
-            statement.setBoolean(2, gender);
+            statement.setString(2, title);
             statement.setString(3, phone);
             statement.setString(4, email);
             n = statement.executeUpdate();

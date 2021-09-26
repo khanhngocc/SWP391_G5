@@ -28,6 +28,18 @@
         <servlet-name>ForgotPassword</servlet-name>
         <servlet-class>controller.ForgotPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserListControl</servlet-name>
+        <servlet-class>controller.UserListControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailControl</servlet-name>
+        <servlet-class>controller.UserDetailControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserAdminControl</servlet-name>
+        <servlet-class>controller.AddUserAdminControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>ForgotPassword</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListControl</servlet-name>
+        <url-pattern>/UserList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailControl</servlet-name>
+        <url-pattern>/UserDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserAdminControl</servlet-name>
+        <url-pattern>/AddUserAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
