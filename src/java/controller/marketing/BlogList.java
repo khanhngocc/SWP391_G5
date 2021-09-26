@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.free;
+package controller.marketing;
 
+import controller.BaseRequiredLoginController;
 import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,14 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class DocumentList extends HttpServlet {
+public class BlogList extends BaseRequiredLoginController {
 
     private static String searchName;
     private static String local_category;
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BlogDAO dao = new BlogDAO();
 
         int pageSize = 4;
@@ -47,10 +47,10 @@ public class DocumentList extends HttpServlet {
 
         String name_search = request.getParameter("searchName");
         String category = request.getParameter("categories");
-       
-        System.out.println("search :"+name_search);
-        System.out.println("cate: "+category);
-        
+
+        System.out.println("search :" + name_search);
+        System.out.println("cate: " + category);
+
         if (name_search == null && category == null) {
             searchName = "";
             local_category = "";
@@ -58,11 +58,10 @@ public class DocumentList extends HttpServlet {
         } else {
             searchName = name_search;
             local_category = category;
-            rowCount = dao.getRowCountForSearch(searchName,local_category);
-           
+            rowCount = dao.getRowCountForSearch(searchName, local_category);
+
         }
 
-      
         int pageCount;
 
         if (rowCount % pageSize == 0) {
@@ -73,7 +72,6 @@ public class DocumentList extends HttpServlet {
 
         int gap = 1;
 
-        
         ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category);
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);
@@ -83,15 +81,12 @@ public class DocumentList extends HttpServlet {
         ArrayList<String> listCategories = dao.listCategories();
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("category", local_category);
-        request.getRequestDispatcher("DocumentList.jsp").forward(request, response);
+        request.getRequestDispatcher("BlogList.jsp").forward(request, response);
     }
 
-   
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    
+    }
 
 }

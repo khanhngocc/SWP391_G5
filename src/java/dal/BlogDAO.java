@@ -93,7 +93,7 @@ public class BlogDAO extends MyDAO {
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated,image_Url,Category from Blog,[User]\n"
+            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated,image_Url,Category,status from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
                     + "and title like ?\n"
@@ -121,6 +121,7 @@ public class BlogDAO extends MyDAO {
                 b.setTime(rs.getString(6));
                 b.setImg_url(rs.getString(7));
                 b.setCategory(rs.getString(8));
+                b.setStatus(rs.getString(9));
                 list.add(b);
             }
 
@@ -155,6 +156,36 @@ public class BlogDAO extends MyDAO {
         }
         return list;
     }
+
+    public void deleteBlog(int id) {
+        xSql = "Delete from Blog where id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
   
+    public void changeBlogStatus(int id,String status){
+      xSql = "Update Blog set status = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            
+            
+            ps.setString(1, status);
+            
+            
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

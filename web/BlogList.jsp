@@ -34,71 +34,43 @@
 
     <body>
         <header id="header"><!--header-->
-            <c:if test="${sessionScope.user eq null}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
-                                </div>
 
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
 
-                                        <li><a href="">Test</a></li>
-                                        <li><a href="DocumentList">Blog</a></li>
-                                        <li></li>
-                                        <a href="Login" class="btn btn-default">Log in</a>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+
+                                    <li><a href="">Blog</a></li>
+                                    <li><a href="Personal?email=${user.email}">Account</a></li>
+                                    <li><a href="Logout">Log out</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </c:if>
-
-            <c:if test="${sessionScope.user ne null}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="">Take test</a></li>
-                                        <li><a href="">Review Test</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--/header-middle-->
-
-            </c:if>
+            </div><!--/header-middle-->
 
 
-        </header>
+        </header><!--/header-->
 
-        <section><!--slider-->
-            <div class="container" style="height: auto; margin-bottom: 40px">
-                <form action="DocumentList" class="searchform">
+        <section id="slider"><!--slider-->
+            <div class="container">
+                <form action="BlogList" class="searchform">
                     <input type="text" placeholder="Search" name="categories" value="${categories}" hidden=""/>
                     <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </form>
-                <form action="DocumentList" >
-                    
+                <form action="BlogList" >
+
                     <input type="text" placeholder="Search" name="searchName" value="${name_search}" hidden=""/>
                     <select style="width: 10%;margin-top: 10px" name="categories" onchange="this.form.submit()" >
                         <option value="">All</option>
@@ -107,47 +79,68 @@
                         </c:forEach>
                     </select>   
                 </form>
+                <div style="margin-top: 30px; margin-bottom: 20px">
+                    <a href="#"><i class="fa fa-book"></i> Create a blog</a> 
+                </div>
 
-                <ul class="media-list">
-                    <c:forEach items="${list_all_blogs}" var="list">
-                        <li class="media" style="margin-top: 20px">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Thumbnail</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">TimeCreated</th>
+                            <th scope="col">DateCreated</th>
+                            <th scope="col" style="width: 250px">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${list_all_blogs}" var="list">
+                            <tr>
+                                <th scope="row">${list.id}</th>
+                                <td>${list.title}</td>
+                                <td> <img class="media-object" src="${list.img_url}" style="width: 95px;height: 95px" alt=""></td>
+                                <td>${list.category}</td>
+                                <td>${list.author}</td>
+                                <c:if test="${list.status eq 1}">
+                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=0">deactivated</a></td>
+                                    </c:if>
+                                    <c:if test="${list.status eq 0}">
+                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=1">activated</a></td>
+                                </c:if>
+                                <td>${list.time}</td>
+                                <td>${list.date}</td>
 
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="${list.img_url}" style="width: 130px;height: 130px" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4>${list.title} </h4>
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-key"></i>${list.category}</li>
-                                    <li><i class="fa fa-user"></i>${list.author}</li>
-                                    <li><i class="fa fa-clock-o"></i>${list.time}</li>
-                                    <li><i class="fa fa-calendar"></i>${list.date}</li>
-                                </ul>
-                                <p class="block-ellipsis">${list.description}</p>
+                                <td><a href="#"><i class="fa fa-eye"></i> View</a> 
+                                    <a href="#"><i class="fa fa-pencil"></i> Update</a> 
+                                    <a href="#" onclick="deleteBlog(${list.id})"><i class="fa fa-trash-o"></i> Delete</a> 
+                                </td> 
 
-                                <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
-                            </div>
-                        </li>
-                    </c:forEach>
-                </ul>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
                 <div class="pagination-area">
                     <ul class="pagination">
 
                         <c:if test="${pageindex gt gap}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=1&searchName=${name_search}&categories=${category}">First</a></li>
+                            <li class="page-item"><a class="page-link" href="BlogList?page=1&searchName=${name_search}&categories=${category}">First</a></li>
                             </c:if>
                             <c:forEach var = "i" begin = "${gap}" end = "1">
                                 <c:if test="${pageindex - gap gt 0}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex -i}&searchName=${name_search}&categories=${category}">${pageindex - i}</a></li>
+                                <li class="page-item"><a class="page-link" href="BlogList?page=${pageindex -i}&searchName=${name_search}&categories=${category}">${pageindex - i}</a></li>
                                 </c:if>
                             </c:forEach>
                             <c:forEach var = "i" begin = "1" end = "${gap}">
                                 <c:if test="${pageindex + gap le pagecount}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex + i}&searchName=${name_search}&categories=${category}">${pageindex + i}</a></li> 
+                                <li class="page-item"><a class="page-link" href="BlogList?page=${pageindex + i}&searchName=${name_search}&categories=${category}">${pageindex + i}</a></li> 
                                 </c:if>
                             </c:forEach>
                             <c:if test="${pageindex + gap lt pagecount}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=${pagecount}&searchName=${name_search}&categories=${category}">Last</a></li> 
+                            <li class="page-item"><a class="page-link" href="BlogList?page=${pagecount}&searchName=${name_search}&categories=${category}">Last</a></li> 
                             </c:if>
                     </ul>
 
@@ -188,7 +181,7 @@
 
         </footer><!--/Footer-->
 
-
+        <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

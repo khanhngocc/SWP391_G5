@@ -69,7 +69,7 @@ public class UserDAO extends MyDAO {
     public User getAccount(String email, String password) {
         User user = null;
         try {
-            String sql = "Select url from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
+            String sql = "Select url,Roll.id from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
                     + "and Roll.id = Roll_Feature.roll_id \n"
                     + "and[User].email = ?\n"
                     + "and [User].password = ?";
@@ -86,6 +86,7 @@ public class UserDAO extends MyDAO {
                 user.setEmail(email);
                 user.setPassword(password);
                 user.getUrl().add(rs.getString("url"));
+                user.setRollId(rs.getInt(2));
             }
             return user;
 

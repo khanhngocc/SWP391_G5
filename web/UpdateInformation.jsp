@@ -51,9 +51,15 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="">Take test</a></li>
-                                    <li><a href="">Review Test</a></li>
-                                    <li><a href="">Blog</a></li>
+                                    <c:if test="${sessionScope.user.rollId eq 1}">
+                                        <li><a href="">Take test</a></li>
+                                        <li><a href="">Review Test</a></li>
+                                        <li><a href="DocumentList">Blog</a></li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.rollId eq 2}">
+                                        
+                                        <li><a href="BlogList">Blog</a></li>
+                                        </c:if>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -67,7 +73,7 @@
         </header>
         <section id="form">
             <div>
-                
+
                 <div class="container">
                     <div class="signup-form">
                         <!--sign up form-->
@@ -87,7 +93,7 @@
                             <button type="submit" class="btn btn-default">Update</button>
                         </form>
                     </div>
-                            <br>
+                    <br>
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Change password</h2>
@@ -101,11 +107,11 @@
                         </form>
                     </div>
                 </div>
-               
-                
-                   
-                    
-                
+
+
+
+
+
             </div>
         </div>
     </section>

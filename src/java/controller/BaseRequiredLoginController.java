@@ -72,7 +72,7 @@ public abstract class BaseRequiredLoginController extends HttpServlet {
         if (isLoggedIn(request) && isAuthenticated(request)) {
             processGet(request, response);
         } else {
-           response.sendRedirect("Login");
+           response.sendRedirect("Error.jsp");
         }
 
     }
@@ -86,7 +86,7 @@ public abstract class BaseRequiredLoginController extends HttpServlet {
         if (isLoggedIn(request) && isAuthenticated(request)) {
             processPost(request, response);
         } else {
-            response.sendRedirect("Login");
+            response.sendRedirect("Error.jsp");
         }
     }
 

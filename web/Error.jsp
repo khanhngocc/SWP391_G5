@@ -35,7 +35,6 @@
 	<div class="container text-center">
 	
 		<div class="content-404">
-			<img src="images/404/404.png" class="img-responsive" alt="" />
 			<h1><b>OPPS!</b> Access denied</h1>
 			<p>Uh... You don't have permission to access this page</p>
 			

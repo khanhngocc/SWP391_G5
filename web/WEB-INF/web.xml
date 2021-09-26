@@ -40,6 +40,22 @@
         <servlet-name>DocumentDetailed</servlet-name>
         <servlet-class>controller.free.DocumentDetailed</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeMarketing</servlet-name>
+        <servlet-class>controller.marketing.HomeMarketing</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogList</servlet-name>
+        <servlet-class>controller.marketing.BlogList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlog</servlet-name>
+        <servlet-class>controller.marketing.DeleteBlog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeBlogStatus</servlet-name>
+        <servlet-class>controller.marketing.ChangeBlogStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -79,6 +95,22 @@
     <servlet-mapping>
         <servlet-name>DocumentDetailed</servlet-name>
         <url-pattern>/DocumentDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeMarketing</servlet-name>
+        <url-pattern>/HomeMarketing</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogList</servlet-name>
+        <url-pattern>/BlogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlog</servlet-name>
+        <url-pattern>/DeleteBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeBlogStatus</servlet-name>
+        <url-pattern>/ChangeBlogStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

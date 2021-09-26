@@ -22,6 +22,17 @@ public class Blog {
     private int author_id;
     private String author;
     private String time;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 
     public String getImg_url() {
         return img_url;
