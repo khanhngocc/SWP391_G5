@@ -23,7 +23,7 @@ public class BlogDetailed extends BaseRequiredLoginController {
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          String id = request.getParameter("id");
         BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id));
+        model.Blog b = blogDAO.getBlog(Integer.valueOf(id),"");
         request.setAttribute("blog", b);
         request.getRequestDispatcher("BlogDetailed.jsp").forward(request, response);
     }

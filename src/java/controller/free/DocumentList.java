@@ -54,11 +54,11 @@ public class DocumentList extends HttpServlet {
         if (name_search == null && category == null) {
             searchName = "";
             local_category = "";
-            rowCount = dao.getRowCount();
+            rowCount = dao.getRowCount("1");
         } else {
             searchName = name_search;
             local_category = category;
-            rowCount = dao.getRowCountForSearch(searchName,local_category);
+            rowCount = dao.getRowCountForSearch(searchName,local_category,"1");
            
         }
 
@@ -74,7 +74,7 @@ public class DocumentList extends HttpServlet {
         int gap = 1;
 
         
-        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category);
+        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category,"1");
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);

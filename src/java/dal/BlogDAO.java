@@ -20,12 +20,12 @@ import model.User;
  */
 public class BlogDAO extends MyDAO {
 
-    public int getRowCount() {
+    public int getRowCount(String statusRestricted) {
         int no = 0;
-        xSql = "SELECT COUNT(*) FROM Blog";
+        xSql = "SELECT COUNT(*) FROM Blog where status like ?";
         try {
             ps = con.prepareStatement(xSql);
-
+            ps.setString(1, "%"+statusRestricted+"%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -38,16 +38,18 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public Blog getBlog(int id) {
+    public Blog getBlog(int id,String statusRestricted) {
         Blog b = new Blog();
         xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,status from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
+                + "Blog.status like ? and\n"
                 + "Blog.id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, id);
+            ps.setString(1,"%"+statusRestricted+"%" );
+            ps.setInt(2, id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 b.setId(rs.getInt(1));
@@ -69,13 +71,14 @@ public class BlogDAO extends MyDAO {
         return b;
     }
 
-    public int getRowCountForSearch(String searchName, String category) {
+    public int getRowCountForSearch(String searchName, String category, String statusRestricted) {
         int no = 0;
-        xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? ";
+        xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? and status LIKE ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
             ps.setString(2, "%" + category + "%");
+            ps.setString(3, "%" + statusRestricted + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -88,7 +91,7 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName, String category) {
+    public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName, String category, String statusRestricted) {
 
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Blog> list = new ArrayList<>();
@@ -99,6 +102,7 @@ public class BlogDAO extends MyDAO {
                     + "Blog.user_id = [User].id\n"
                     + "and title like ?\n"
                     + "and Category like ?\n"
+                    + "and Blog.status like ? \n"
                     + "order by created_Date desc\n"
                     + "OFFSET ? ROWS\n"
                     + "FETCH NEXT ? ROWS ONLY";
@@ -107,8 +111,9 @@ public class BlogDAO extends MyDAO {
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + searchName + "%");
             statement.setString(2, "%" + category + "%");
-            statement.setInt(3, numberOfRecord);
-            statement.setInt(4, pageSize);
+            statement.setString(3, "%" + statusRestricted + "%");
+            statement.setInt(4, numberOfRecord);
+            statement.setInt(5, pageSize);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {

@@ -33,7 +33,7 @@ public class DocumentDetailed extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id));
+        model.Blog b = blogDAO.getBlog(Integer.valueOf(id),"1");
         request.setAttribute("blog", b);
         request.getRequestDispatcher("DocumentDetailed.jsp").forward(request, response);
     }

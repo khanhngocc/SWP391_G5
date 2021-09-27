@@ -54,11 +54,11 @@ public class BlogList extends BaseRequiredLoginController {
         if (name_search == null && category == null) {
             searchName = "";
             local_category = "";
-            rowCount = dao.getRowCount();
+            rowCount = dao.getRowCount("");
         } else {
             searchName = name_search;
             local_category = category;
-            rowCount = dao.getRowCountForSearch(searchName, local_category);
+            rowCount = dao.getRowCountForSearch(searchName, local_category,"");
 
         }
 
@@ -72,7 +72,7 @@ public class BlogList extends BaseRequiredLoginController {
 
         int gap = 1;
 
-        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category);
+        ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category,"");
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);
