@@ -194,5 +194,31 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+
+    public void UpdateUser(int id, String name, String title, String phone, int role, String status, String ava) {
+        xSql = "UPDATE [dbo].[User]\n"
+                + "   SET [fullname] = ?\n"
+                + "      ,[title] = ?\n"
+                + "      ,[phone] = ?\n"
+                + "      ,[avatar] = ?\n"
+                + "      ,[roll_id] = ?\n"
+                + "      ,[status] = ?\n"
+                + "     \n"
+                + " WHERE [id] = ?";
+        
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setString(1, name);
+            ps.setString(2, title);
+            ps.setString(3, phone);
+            ps.setString(4, ava);
+            ps.setInt(5, role);
+            ps.setString(6, status);
+            ps.setInt(7, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

@@ -73,18 +73,28 @@
                         <!--sign up form-->
                         <h2>Personal Information</h2>
                         <p class="text-primary">${mess}</p>
-                        <form action="Personal" method="post">
-                            <img id="profile-ava" src="${user.avatar.substring(0,13).concat("/").concat(user.avatar.substring(13))}"><br>
+                        <form enctype="multipart/form-data" id="myForm" action="EditUser?id=${user.id}" method="post">
+                            <img id="profile-ava" src="${user.avatar}"><br>
+                            <input type="file" name="fname">
+                            <input type="hidden" value="${user.avatar}" name="imageurl">
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                             <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
                             <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
                             <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
-                            <input name="role"type="text" placeholder="Role" value="${user.rollId}" />							
-                            <input name="status"type="text" placeholder="Status" value="${user.status}" />							                            
+                            <select name="role">
+                                <option value="1">Expert</option>
+                                <option value="2">Customer</option>
+                                <option value="3">Admin</option>
+                                <option value="4">Marketing</option>
+                                <option value="5">Manager</option>
+                            </select>						
+                            <select name="status">
+                                <option value="Active">Active</option>
+                                <option value="Deactive">Deactive</option>                                
+                            </select>								                            
                         </form>
-                            <button type="text" class="btn btn-default">Update</button>
-                            <button type="text" class="btn btn-default">Delete</button>
+                        <button type="text" class="btn btn-default" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
                
@@ -104,6 +114,13 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        function Submit(){
+            var form;
+            form = document.getElementById("myForm");
+            form.submit();
+        }
+    </script>
 </body>
 
 </html>

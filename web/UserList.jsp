@@ -99,7 +99,7 @@
                                     <td>${i.rollId}</td>
                                     <td>${i.status}</td>
                                     <td><a href="Delete?id=${i.id}">Delete</a></td>
-                                    <td><a href="">Edit</a></td>
+                                    <td><a href="EditUser?id=${i.id}">Edit</a></td>
                                     <td><a href="UserDetail?email=${i.email}">View</a></td>
                                 </tr>     
                             </c:forEach>

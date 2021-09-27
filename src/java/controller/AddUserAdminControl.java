@@ -47,7 +47,7 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
-        sb.append("images/avatar/");
+        sb.append("images/avatar");
 
         // get file name of img uploaded
         MultipartRequest m = new MultipartRequest(request, sb.toString());
@@ -84,7 +84,7 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
         }
         if (checkuser) {
             mess = "Sign-up success!!";
-            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar"+fileNameImg, status, role));
+            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/"+fileNameImg, status, role));
             //send mail//
             GmailHelper gm = new GmailHelper();
             String[] rep = {email};
