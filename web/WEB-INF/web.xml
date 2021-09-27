@@ -64,6 +64,10 @@
         <servlet-name>AddBlog</servlet-name>
         <servlet-class>controller.marketing.AddBlog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBlog</servlet-name>
+        <servlet-class>controller.marketing.UpdateBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>AddBlog</servlet-name>
         <url-pattern>/AddBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlog</servlet-name>
+        <url-pattern>/UpdateBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

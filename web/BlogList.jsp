@@ -115,7 +115,7 @@
                                 <td>${list.date}</td>
 
                                 <td><a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
-                                    <a href="#"><i class="fa fa-pencil"></i> Update</a> 
+                                    <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
                                     <a href="#" onclick="deleteBlog(${list.id})"><i class="fa fa-trash-o"></i> Delete</a> 
                                 </td> 
 

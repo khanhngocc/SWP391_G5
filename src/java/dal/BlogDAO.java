@@ -5,10 +5,13 @@
  */
 package dal;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
@@ -25,7 +28,7 @@ public class BlogDAO extends MyDAO {
         xSql = "SELECT COUNT(*) FROM Blog where status like ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, "%"+statusRestricted+"%");
+            ps.setString(1, "%" + statusRestricted + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -38,7 +41,7 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public Blog getBlog(int id,String statusRestricted) {
+    public Blog getBlog(int id, String statusRestricted) {
         Blog b = new Blog();
         xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,status from Blog,[User]\n"
                 + "where\n"
@@ -48,7 +51,7 @@ public class BlogDAO extends MyDAO {
                 + "Blog.id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1,"%"+statusRestricted+"%" );
+            ps.setString(1, "%" + statusRestricted + "%");
             ps.setInt(2, id);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -230,23 +233,28 @@ public class BlogDAO extends MyDAO {
 
     public void updateBlog(Blog blog) {
         xSql = "UPDATE [Blog]\n"
-                + "   SET [title] = ? \n"
-                + "      ,[description] = ? \n"
-                + "      ,[created_Date] = ? \n"
-                + "      ,[timeCreated] = ? \n"
-                + " WHERE Blog.id = ? ";
+                + "   SET [title] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[image_Url] = ?\n"
+                + "      ,[created_Date] = ?\n"
+                + "    ,[timeCreated] = ?\n"
+                + "      ,[Category] = ?\n"
+                + " WHERE [Blog].id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, blog.getTitle());
             ps.setString(2, blog.getDescription());
-            ps.setDate(3, blog.getDate());
-            ps.setString(4, blog.getTime());
-            ps.setInt(5, blog.getId());
-
+            ps.setString(3, blog.getImg_url());
+            ps.setDate(4, blog.getDate());
+            ps.setString(5, blog.getTime());
+            ps.setString(6, blog.getCategory());
+            ps.setInt(7, blog.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    
 }
