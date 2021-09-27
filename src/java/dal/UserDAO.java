@@ -183,6 +183,16 @@ public class UserDAO extends MyDAO {
         }
         return roll_name;
     }
-    
+
+    public void deleteUser(String id) {
+        xSql = "delete from [User] where id = ?";
+        try{
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     
 }

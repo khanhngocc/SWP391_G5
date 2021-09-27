@@ -65,7 +65,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-3"></div>
+<!--                <div class="col-sm-3"></div>-->
                 <div class="col-sm-9">
                     <div class="searchform">
                         <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for name"/>
@@ -98,7 +98,7 @@
                                     <td>${i.phone}</td>
                                     <td>${i.rollId}</td>
                                     <td>${i.status}</td>
-                                    <td><a href="">Delete</a></td>
+                                    <td><a href="Delete?id=${i.id}">Delete</a></td>
                                     <td><a href="">Edit</a></td>
                                     <td><a href="UserDetail?email=${i.email}">View</a></td>
                                 </tr>     
