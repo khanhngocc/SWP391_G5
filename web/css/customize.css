@@ -46,3 +46,7 @@
        line-height: 1.8;
 }
 
+textarea {
+   font-family: inherit;
+   font-size: inherit;
+}
