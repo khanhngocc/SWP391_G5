@@ -35,7 +35,7 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("AddUserAdmin.jsp");
+        request.getRequestDispatcher("AddUserAdmin.jsp").forward(request, response);
     }
 
     @Override

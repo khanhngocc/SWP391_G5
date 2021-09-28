@@ -15,7 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Account</title>
+        <title>User Detailed</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -51,7 +52,7 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                   
+
                                     <li><a href="UserList">User</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
@@ -64,62 +65,102 @@
 
 
         </header>
-        <section id="form">
+        <section>
             <div>
-                
+
                 <div class="container">
                     <div class="signup-form">
                         <!--sign up form-->
-                        <h2>Personal Information</h2>
+                        <h2>User Detailed</h2>
                         <p class="text-primary">${mess}</p>
                         <form enctype="multipart/form-data" id="myForm" action="EditUser?id=${user.id}" method="post">
-                            <img id="profile-ava" src="${user.avatar}"><br>
+                            <img id="profile-ava" class="imageAvatar" src="${user.avatar}">
+                            <br>
+                            Choose a avatar
                             <input type="file" name="fname">
+                            
                             <input type="hidden" value="${user.avatar}" name="imageurl">
+                            Email
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
+                            Full Name
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
+                            Title
                             <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
+                            Phone
                             <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
+                            Created Date
                             <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
-                            <select name="role">
+                            Roll
+                            <select name="role" style="margin-bottom:10px">
                                 <option value="1">Expert</option>
                                 <option value="2">Customer</option>
                                 <option value="3">Admin</option>
                                 <option value="4">Marketing</option>
                                 <option value="5">Manager</option>
-                            </select>						
-                            <select name="status">
+                            </select>
+                            Status
+                            <select name="status" style="margin-bottom: 10px">
                                 <option value="Active">Active</option>
                                 <option value="Deactive">Deactive</option>                                
                             </select>								                            
                         </form>
-                        <button type="text" class="btn btn-default" onclick="Submit()">Update</button>
+                            <button type="text" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
-               
-                
-                   
-                    
-                
+
+
+
+
+
             </div>
-        
-    </section>
-    <!--/form-->
 
+        </section>
+        <!--/form-->
+        <footer id="footer"><!--Footer-->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="companyinfo">
+                                <h2><span>Mega</span>-Deal</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="address">
+                                <img src="images/home/map.png" alt="" />
+                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        function Submit(){
-            var form;
-            form = document.getElementById("myForm");
-            form.submit();
-        }
-    </script>
-</body>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
+                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/price-range.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+                            function Submit() {
+                                var form;
+                                form = document.getElementById("myForm");
+                                form.submit();
+                            }
+        </script>
+    </body>
 
 </html>

@@ -115,49 +115,81 @@
                 </div>
             </c:if>
         </header>
-        <section id="form">
-            <div>
+        <section>
 
-                <div class="container">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Personal Information</h2>
-                        <p class="text-primary">${mess}</p>
-                        <form action="Personal" method="post">
-                            <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
-                            <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
-                            <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
-                            <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
-                            <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
-                            <input name="role"type="text" placeholder="Role" value="${user.roll}" />							
-                            <input name="status"type="text" placeholder="Status" value="${user.status}" />							
 
-                            <button type="submit" class="btn btn-default">Update</button>
-                        </form>
-                    </div>
-                    <br>
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Change password</h2>
-                        <p class="text-primary">${mess1}</p>
-                        <form action="ChangePassword" method="post">
-                            <input name="email" type="text" placeholder="Email" value="${user.email}" readonly/>
-                            <input name="oldpass"type="password" placeholder="Old Password" required="true" />
-                            <input name="newpass"type="password" placeholder="New Password" required="true" />
-                            <input name="repass"type="password" placeholder="Re-Password" required="true" />  
-                            <button type="submit" class="btn btn-default">Change</button>
-                        </form>
-                    </div>
+            <div class="container" style="margin-bottom: 30px">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>Personal Information</h2>
+                    <p class="text-primary">${mess}</p>
+                    <form action="Personal" method="post">
+                        <input name="email" type="hidden" placeholder="Email" required="true" value="${user.email}" />
+                        <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
+                        <p>                           
+                            <select name="gender" id="gender">
+                                <option value="male" ${user.gender==true?"selected":""}>Male</option>
+                                <option value="female" ${user.gender==false?"selected":""}>Female</option>
+                            </select>
+                        </p>
+                        <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
+
+                        <button type="submit" class="btn btn-default">Update</button>
+                    </form>
                 </div>
-
-
-
-
-
+                <br>
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>Change password</h2>
+                    <p class="text-primary">${mess1}</p>
+                    <form action="ChangePassword" method="post">
+                        <input name="email" type="hidden" placeholder="Email" value="${user.email}" />
+                        <input name="oldpass"type="password" placeholder="Old Password" required="true" />
+                        <input name="newpass"type="password" placeholder="New Password" required="true" />
+                        <input name="repass"type="password" placeholder="Re-Password" required="true" />  
+                        <button type="submit" class="btn btn-default">Change</button>
+                    </form>
+                </div>
             </div>
+
+
+
+
+
+
         </div>
     </section>
-    <!--/form-->
+    <footer id="footer"><!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="companyinfo">
+                            <h2><span>Mega</span>-Deal</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="address">
+                            <img src="images/home/map.png" alt="" />
+                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
 
 
     <script src="js/jquery.js"></script>

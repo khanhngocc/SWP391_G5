@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Homepage</title>
+        <title>Users List</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="UserListControl">User</a></li>
+                                    <li><a href="UserList">User</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -62,64 +62,64 @@
         </header><!--/header-->
 
         <div class="container">
-            <div class="row">
-                <!--                <div class="col-sm-3"></div>-->
-                <div class="col-sm-9">
-                    <div class="searchform">
-                        <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for name"/>
-                        <input type="text" id="myInput1" onkeyup="searchForm(5)" placeholder="Search for role"/>
-                        <input type="text" id="myInput2" onkeyup="searchForm(6)" placeholder="Search for status"/>
-                        <a href="AddUserAdmin">Add new User</a>
-                    </div>
 
-                    <br>
-                    <div>
-                        <table class="table" id="myTable">
-                            <tr>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(1)">Full Name</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(2)">Title</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(3)">Email</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(4)">Phone</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(5)">Role</a></strong></th>
-                                <th><strong><a href="javascript:void(0);" onclick="sort(6)">Status</a></strong></th>                                
-                                <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+            <!--                <div class="col-sm-3"></div>-->
+            <a href="AddUserAdmin"><i class="fa fa-book"></i> Add new User</a>
+            <div class="searchform" style="margin-top: 20px;">
+                <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for name"/>
+                <input type="text" id="myInput1" onkeyup="searchForm(5)" placeholder="Search for role"/>
+                <input type="text" id="myInput2" onkeyup="searchForm(6)" placeholder="Search for status"/>
 
-                            </tr>
+            </div>
 
-                            <c:forEach items="${list}" var="i">
-                                <tr>
-                                    <td>${i.id}</td>
-                                    <td>${i.fullname}</td>
-                                    <td>${i.title}</td>
-                                    <td>${i.email}</td>
-                                    <td>${i.phone}</td>
-                                    <td>${i.rollId}</td>
-                                    <td>${i.status}</td>
-                                    <td><a href="Delete?id=${i.id}">Delete</a></td>
-                                    <td><a href="EditUser?id=${i.id}">Edit</a></td>
-                                    <td><a href="UserDetail?email=${i.email}">View</a></td>
-                                </tr>     
+            <br>
+            <div>
+                <table class="table" id="myTable">
+                    <tr>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(1)">Full Name</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(2)">Title</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(3)">Email</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(4)">Phone</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(5)">Role</a></strong></th>
+                        <th><strong><a href="javascript:void(0);" onclick="sort(6)">Status</a></strong></th>                                
+                        <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+
+                    </tr>
+
+                    <c:forEach items="${list}" var="i">
+                        <tr>
+                            <td>${i.id}</td>
+                            <td>${i.fullname}</td>
+                            <td>${i.title}</td>
+                            <td>${i.email}</td>
+                            <td>${i.phone}</td>
+                            <td>${i.rollId}</td>
+                            <td>${i.status}</td>
+                            <td><a href="#" onclick="deleteUser(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
+                            <td><a href="EditUser?id=${i.id}"><i class="fa fa-pencil"></i> Edit</a></td>
+                            <td><a href="UserDetail?email=${i.email}"><i class="fa fa-eye"></i> View</a></td>
+                        </tr>     
+                    </c:forEach>
+                </table>
+
+                <div class="pagination-area">
+                    <ul class="pagination"> 
+                        <c:forEach begin="1" end="${pagesize}" var="i">
+                            <c:choose>
+                                <c:when test="${page==i}">
+                                    <li><a href="" class="active">${i}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li><a href="UserList?page=${i}">${i}</a></li> 
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
-                        </table>
-
-                        <div class="pagination-area">
-                            <ul class="pagination"> 
-                                <c:forEach begin="1" end="${pagesize}" var="i">
-                                    <c:choose>
-                                        <c:when test="${page==i}">
-                                            <li><a href="" class="active">${i}</a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                            <li><a href="UserList?page=${i}">${i}</a></li> 
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
             </div>
+
+
         </div>
 
         <footer id="footer"><!--Footer-->
@@ -162,30 +162,40 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                    function searchForm(number) {
-                                        var input, filter, table, tr, td, i, txtValue, in_num;
-                                        in_num = parseInt(number);
-                                        if (in_num === 1)
-                                            input = document.getElementById("myInput");
-                                        if (in_num === 5)
-                                            input = document.getElementById("myInput1");
-                                        if (in_num === 6)
-                                            input = document.getElementById("myInput2");
-                                        filter = input.value.toUpperCase();
-                                        table = document.getElementById("myTable");
-                                        tr = table.getElementsByTagName("tr");
-                                        for (i = 0; i < tr.length; i++) {
-                                            td = tr[i].getElementsByTagName("td")[in_num];
-                                            if (td) {
-                                                txtValue = td.textContent || td.innerText;
-                                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                    tr[i].style.display = "";
-                                                } else {
-                                                    tr[i].style.display = "none";
-                                                }
-                                            }
+
+                            function deleteUser(id) {
+                                var result = confirm("Do you want to delete this user?");
+                                if (result) {
+                                    window.location.href = "Delete?id=" + id;
+                                }
+
+                            }
+
+
+                            function searchForm(number) {
+                                var input, filter, table, tr, td, i, txtValue, in_num;
+                                in_num = parseInt(number);
+                                if (in_num === 1)
+                                    input = document.getElementById("myInput");
+                                if (in_num === 5)
+                                    input = document.getElementById("myInput1");
+                                if (in_num === 6)
+                                    input = document.getElementById("myInput2");
+                                filter = input.value.toUpperCase();
+                                table = document.getElementById("myTable");
+                                tr = table.getElementsByTagName("tr");
+                                for (i = 0; i < tr.length; i++) {
+                                    td = tr[i].getElementsByTagName("td")[in_num];
+                                    if (td) {
+                                        txtValue = td.textContent || td.innerText;
+                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                            tr[i].style.display = "";
+                                        } else {
+                                            tr[i].style.display = "none";
                                         }
                                     }
+                                }
+                            }
         </script>
         <script>
             function sort(number) {

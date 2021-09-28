@@ -22,7 +22,7 @@ public class EditUserControll extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+          request.getRequestDispatcher("").forward(request, response);
     }
 
     @Override

@@ -40,13 +40,26 @@
 }
 
 .desc-blog{
-       text-align: justify;
-       margin-top: 50px; 
-       margin-bottom: 100px; 
-       line-height: 1.8;
+    text-align: justify;
+    margin-top: 50px; 
+    margin-bottom: 100px; 
+    line-height: 1.8;
 }
 
 textarea {
-   font-family: inherit;
-   font-size: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.imageAvatar{
+    width: 120px;
+    height: 120px;
+    border-radius:50%; 
+    border:2px solid #fff;
+    margin-bottom: 20px;
+    -moz-box-shadow: 0px 6px 5px #ccc;
+    -webkit-box-shadow: 0px 6px 5px #ccc;
+    box-shadow: 0px 6px 5px #ccc;
+    -moz-border-radius:190px;
+    -webkit-border-radius:190px;
 }
