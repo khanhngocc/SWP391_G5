@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.marketing;
+package controller.admin;
+
 import controller.base.BaseRequiredLoginController;
-import dal.BlogDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,23 +16,22 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-public class BlogDetailed extends BaseRequiredLoginController {
+public class DeleteController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         String id = request.getParameter("id");
-        BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id),"");
-        request.setAttribute("blog", b);
-        request.getRequestDispatcher("BlogDetailed.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        UserDAO dao = new UserDAO();
+        dao.deleteUser(id);
+        response.sendRedirect("UserList");
+        
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
+        
     }
 
-    
 }

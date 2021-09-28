@@ -6,7 +6,7 @@
 package controller.marketing;
 
 import com.oreilly.servlet.MultipartRequest;
-import controller.BaseRequiredLoginController;
+import controller.base.BaseRequiredLoginController;
 import dal.BlogDAO;
 import dal.UserDAO;
 import java.io.IOException;

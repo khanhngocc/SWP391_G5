@@ -5,7 +5,7 @@
  */
 package controller.marketing;
 
-import controller.BaseRequiredLoginController;
+import controller.base.BaseRequiredLoginController;
 import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;

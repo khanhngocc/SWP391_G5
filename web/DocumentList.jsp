@@ -34,6 +34,7 @@
 
     <body>
         <header id="header"><!--header-->
+            
             <c:if test="${sessionScope.user eq null}">
                 <div class="header-middle"><!--header-middle-->
                     <div class="container">
@@ -60,7 +61,7 @@
                 </div>
             </c:if>
 
-            <c:if test="${sessionScope.user ne null}">
+            <c:if test="${sessionScope.user.rollId eq 1}">
                 <div class="header-middle"><!--header-middle-->
                     <div class="container">
                         <div class="row">
@@ -75,7 +76,7 @@
                                     <ul class="nav navbar-nav">
                                         <li><a href="">Take test</a></li>
                                         <li><a href="">Review Test</a></li>
-                                        <li><a href="">Blog</a></li>
+                                        <li><a href="DocumentList">Blog</a></li>
                                         <li><a href="Personal?email=${user.email}">Account</a></li>
                                         <li><a href="Logout">Log out</a></li>
                                     </ul>
@@ -86,6 +87,8 @@
                 </div><!--/header-middle-->
 
             </c:if>
+
+      
 
 
         </header>
@@ -98,7 +101,7 @@
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </form>
                 <form action="DocumentList" >
-                    
+
                     <input type="text" placeholder="Search" name="searchName" value="${name_search}" hidden=""/>
                     <select style="width: 10%;margin-top: 10px" name="categories" onchange="this.form.submit()" >
                         <option value="">All</option>

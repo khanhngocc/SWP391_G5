@@ -2,31 +2,31 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>RegisterServ</servlet-name>
-        <servlet-class>controller.RegisterServ</servlet-class>
+        <servlet-class>controller.common.RegisterServ</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
+        <servlet-class>controller.common.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeController</servlet-name>
-        <servlet-class>controller.HomeController</servlet-class>
+        <servlet-class>controller.customer.HomeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>controller.LogoutController</servlet-class>
+        <servlet-class>controller.common.LogoutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PersonalInformation</servlet-name>
-        <servlet-class>controller.PersonalInformation</servlet-class>
+        <servlet-class>controller.common.PersonalInformation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
-        <servlet-class>controller.ChangePassword</servlet-class>
+        <servlet-class>controller.common.ChangePassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgotPassword</servlet-name>
-        <servlet-class>controller.ForgotPassword</servlet-class>
+        <servlet-class>controller.common.ForgotPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DocumentList</servlet-name>
@@ -70,27 +70,27 @@
     </servlet>
     <servlet>
         <servlet-name>AddUserAdminControl</servlet-name>
-        <servlet-class>controller.AddUserAdminControl</servlet-class>
+        <servlet-class>controller.admin.AddUserAdminControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteController</servlet-name>
-        <servlet-class>controller.DeleteController</servlet-class>
+        <servlet-class>controller.admin.DeleteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditUserControll</servlet-name>
-        <servlet-class>controller.EditUserControll</servlet-class>
+        <servlet-class>controller.admin.EditUserControll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserDetailControl</servlet-name>
-        <servlet-class>controller.UserDetailControl</servlet-class>
+        <servlet-class>controller.admin.UserDetailControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserListControl</servlet-name>
-        <servlet-class>controller.UserListControl</servlet-class>
+        <servlet-class>controller.admin.UserListControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeAdmin</servlet-name>
-        <servlet-class>controller.HomeAdmin</servlet-class>
+        <servlet-class>controller.admin.HomeAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>

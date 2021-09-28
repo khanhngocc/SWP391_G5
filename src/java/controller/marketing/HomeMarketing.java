@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controller.marketing;
-import controller.BaseRequiredLoginController;
+import controller.base.BaseRequiredLoginController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

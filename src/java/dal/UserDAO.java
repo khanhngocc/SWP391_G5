@@ -62,8 +62,9 @@ public class UserDAO extends MyDAO {
         try {
             String sql = "Select url,Roll.id from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
                     + "and Roll.id = Roll_Feature.roll_id \n"
-                    + "and[User].email = ?\n"
-                    + "and [User].password = ?";
+                    + "and [User].email = ?\n"
+                    + "and [User].password = ?"
+                    + "and [User].status = 'Active'";
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);

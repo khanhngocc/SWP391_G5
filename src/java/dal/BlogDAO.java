@@ -43,7 +43,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id, String statusRestricted) {
         Blog b = new Blog();
-        xSql = "select Blog.id,title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,status from Blog,[User]\n"
+        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -100,10 +100,10 @@ public class BlogDAO extends MyDAO {
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,title,description,created_Date,[User].fullname,timeCreated,image_Url,Category,status from Blog,[User]\n"
+            String sql = "select Blog.id,Blog.title,description,created_Date,[User].fullname,timeCreated,image_Url,Category,Blog.status from Blog,[User]\n"
                     + "where\n"
                     + "Blog.user_id = [User].id\n"
-                    + "and title like ?\n"
+                    + "and Blog.title like ?\n"
                     + "and Category like ?\n"
                     + "and Blog.status like ? \n"
                     + "order by created_Date desc\n"

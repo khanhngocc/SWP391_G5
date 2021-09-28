@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.marketing;
+package controller.customer;
+
 import controller.base.BaseRequiredLoginController;
-import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,23 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dell
+ * @author LEGION
  */
-public class BlogDetailed extends BaseRequiredLoginController {
+public class HomeController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         String id = request.getParameter("id");
-        BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id),"");
-        request.setAttribute("blog", b);
-        request.getRequestDispatcher("BlogDetailed.jsp").forward(request, response);
+       request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
+       
     }
 
-    
+
 }
