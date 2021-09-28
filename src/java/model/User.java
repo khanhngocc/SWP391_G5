@@ -22,8 +22,57 @@ public class User {
     private Date createDate;
     private String avatar;
     private int rollId;
+    private String title;
+    private String status;
+    
     ArrayList<String> url = new ArrayList<>();
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+     public User() {
+    }
+
+    public User(int id, String fullname, String title, String email, String phone, String password, Date createDate, String avatar, String status, int rollId) {
+        this.id = id;
+        this.fullname = fullname;
+        this.title = title;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.createDate = createDate;
+        this.avatar = avatar;
+        this.status = status;
+        this.rollId = rollId;
+    }
+
+    
+    public User( String fullname, String title, String email, String phone, String password, Date createDate, String avatar, String status, int rollId) {
+        this.fullname = fullname;
+        this.title = title;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.createDate = createDate;
+        this.avatar = avatar;
+        this.status = status;
+        this.rollId = rollId;
+    }
+    
+    
     public ArrayList<String> getUrl() {
         return url;
     }
@@ -38,10 +87,6 @@ public class User {
     }
 
     
-    
-    public User() {
-    }
-
     public User(int id, String fullname, boolean gender, String email, String phone, String password, Date createDate, String avatar, int rollId) {
         this.id = id;
         this.fullname = fullname;

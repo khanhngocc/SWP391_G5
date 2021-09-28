@@ -68,6 +68,30 @@
         <servlet-name>UpdateBlog</servlet-name>
         <servlet-class>controller.marketing.UpdateBlog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddUserAdminControl</servlet-name>
+        <servlet-class>controller.AddUserAdminControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteController</servlet-name>
+        <servlet-class>controller.DeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUserControll</servlet-name>
+        <servlet-class>controller.EditUserControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailControl</servlet-name>
+        <servlet-class>controller.UserDetailControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserListControl</servlet-name>
+        <servlet-class>controller.UserListControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeAdmin</servlet-name>
+        <servlet-class>controller.HomeAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -135,6 +159,30 @@
     <servlet-mapping>
         <servlet-name>UpdateBlog</servlet-name>
         <url-pattern>/UpdateBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserAdminControl</servlet-name>
+        <url-pattern>/AddUserAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteController</servlet-name>
+        <url-pattern>/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserControll</servlet-name>
+        <url-pattern>/EditUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailControl</servlet-name>
+        <url-pattern>/UserDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListControl</servlet-name>
+        <url-pattern>/UserList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeAdmin</servlet-name>
+        <url-pattern>/HomeAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

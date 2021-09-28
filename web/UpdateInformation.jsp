@@ -38,48 +38,87 @@
     <body>
         <header id="header"><!--header-->
 
-
-            <div class="header-middle"><!--header-middle-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="logo pull-left">
-                                <c:if test="${sessionScope.user.rollId eq 1}">
+            <c:if test="${sessionScope.user.rollId eq 1}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
                                     <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                                </c:if>
-                                 <c:if test="${sessionScope.user.rollId eq 2}">
-                                    <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
-                                </c:if>
-                            </div>
+                                </div>
 
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="shop-menu pull-right">
-                                <ul class="nav navbar-nav">
-                                    <c:if test="${sessionScope.user.rollId eq 1}">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
                                         <li><a href="">Take test</a></li>
                                         <li><a href="">Review Test</a></li>
-                                        <li><a href="DocumentList">Blog</a></li>
-                                        </c:if>
-                                        <c:if test="${sessionScope.user.rollId eq 2}">
-                                        
-                                        <li><a href="BlogList">Blog</a></li>
-                                        </c:if>
-                                    <li><a href="Personal?email=${user.email}">Account</a></li>
-                                    <li><a href="Logout">Log out</a></li>
-                                </ul>
+                                        <li><a href="">Blog</a></li>
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><!--/header-middle-->
+            </c:if>
+
+            <c:if test="${sessionScope.user.rollId eq 2}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+
+                                        <li><a href="BlogList">Blog</a></li>
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
 
 
+            <c:if test="${sessionScope.user.rollId eq 3}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="UserList">User</a></li>
+
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
         </header>
-        <section>
-            
+        <section id="form">
+            <div>
 
-            <div class="container" style="margin-bottom: 30px">
+                <div class="container">
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Personal Information</h2>
@@ -87,13 +126,11 @@
                         <form action="Personal" method="post">
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
-                            <p>                           
-                                <select name="gender" id="gender">
-                                    <option value="male" ${user.gender==true?"selected":""}>Male</option>
-                                    <option value="female" ${user.gender==false?"selected":""}>Female</option>
-                                </select>
-                            </p>
+                            <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
                             <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
+                            <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
+                            <input name="role"type="text" placeholder="Role" value="${user.roll}" />							
+                            <input name="status"type="text" placeholder="Status" value="${user.status}" />							
 
                             <button type="submit" class="btn btn-default">Update</button>
                         </form>
@@ -117,41 +154,10 @@
 
 
 
-           
+            </div>
         </div>
     </section>
-    <footer id="footer"><!--Footer-->
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="companyinfo">
-                                <h2><span>Mega</span>-Deal</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <div class="address">
-                                <img src="images/home/map.png" alt="" />
-                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
-                    </div>
-                </div>
-            </div>
-
-        </footer><!--/Footer-->
-
+    <!--/form-->
 
 
     <script src="js/jquery.js"></script>
