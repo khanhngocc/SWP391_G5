@@ -92,16 +92,16 @@
                             <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
                             Roll
                             <select name="role" style="margin-bottom:10px">
-                                <option value="1">Expert</option>
-                                <option value="2">Customer</option>
-                                <option value="3">Admin</option>
-                                <option value="4">Marketing</option>
-                                <option value="5">Manager</option>
+                                <option value="1" ${user.rollId==1?"selected":""}>Customer</option>
+                                <option value="2" ${user.rollId==2?"selected":""}>Marketing</option>
+                                <option value="3" ${user.rollId==3?"selected":""}>Admin</option>
+                                <option value="4" ${user.rollId==4?"selected":""}>Expert</option>
+                                <option value="5" ${user.rollId==5?"selected":""}>Manager</option>
                             </select>
                             Status
                             <select name="status" style="margin-bottom: 10px">
-                                <option value="Active">Active</option>
-                                <option value="Deactive">Deactive</option>                                
+                                <option value="Active" ${user.status.equals("Active")?"selected":""}>Active</option>
+                                <option value="Deactive" ${user.status.equals("Deactive")?"selected":""}>Deactive</option>                                
                             </select>								                            
                         </form>
                             <button type="text" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>

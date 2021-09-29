@@ -83,24 +83,24 @@
                     <a href="AddBlog"><i class="fa fa-book"></i> Create a blog</a> 
                 </div>
 
-                <table class="table">
+                <table class="table" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Thumbnail</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Author</th>
-                            <th scope="col" style="width: 105px">Status</th>
-                            <th scope="col">TimeCreated</th>
-                            <th scope="col">DateCreated</th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(0)">ID</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(1)">Title</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Thumbnail</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Category</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Author</a></th>
+                            <th scope="col" style="width: 105px"><a href="javascript:void(0);" onclick="sort(5)">Status</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(6)">TimeCreated</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(7)">DateCreated</a></th>
                             <th scope="col" style="width: 290px;text-align: center" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${list_all_blogs}" var="list">
                             <tr>
-                                <th scope="row">${list.id}</th>
+                                <td scope="row">${list.id}</td>
                                 <td>${list.title}</td>
                                 <td> <img class="media-object" src="${list.img_url}" style="width: 95px;height: 95px" alt=""></td>
                                 <td>${list.category}</td>
@@ -188,5 +188,30 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            function sort(number) {
+                var in_num, table, rows, switching, i, x, y, shouldSwitch;
+                in_num = parseInt(number);
+                table = document.getElementById("myTable");
+                switching = true;
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+                    for (i = 1; i < rows.length - 1; i++) {
+                        shouldSwitch = false;
+                        x = rows[i].getElementsByTagName("td")[in_num];
+                        y = rows[i + 1].getElementsByTagName("td")[in_num];
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
