@@ -47,8 +47,9 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                  
+
                                     <li><a href="BlogList">Blog</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -78,11 +79,11 @@
                                         <h1><span>Mega</span>-Deal</h1>
                                         <h2>Self-learning</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        
+
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
-                                      
+
                                     </div>
                                 </div>
                                 <div class="item">
@@ -90,11 +91,11 @@
                                         <h1><span>Mega</span>-Deal</h1>
                                         <h2>Creative Discussion</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
+
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-                                       
+
                                     </div>
                                 </div>
 
@@ -103,11 +104,11 @@
                                         <h1><span>Mega</span>-Deal</h1>
                                         <h2>Work together</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                       
+
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-                                       
+
                                     </div>
                                 </div>
 
@@ -137,7 +138,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="address">
                                 <img src="images/home/map.png" alt="" />

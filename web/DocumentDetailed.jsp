@@ -51,7 +51,7 @@
                                     <ul class="nav navbar-nav">
 
                                         <li><a href="">Test</a></li>
-                                        <li><a href="DocumentList">Blog</a></li>
+                                        <li><a href="DocumentList">Document</a></li>
                                         <li></li>
                                         <a href="Login" class="btn btn-default">Log in</a>
                                     </ul>
@@ -61,31 +61,7 @@
                     </div>
                 </div>
             </c:if>
-            <c:if test="${sessionScope.user.rollId ne 1}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
-                                </div>
 
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-
-                                        <li><a href="">Test</a></li>
-                                        <li><a href="DocumentList">Blog</a></li>
-                                        <li></li>
-                                        <a href="Login" class="btn btn-default">Log in</a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
             <c:if test="${sessionScope.user.rollId eq 1}">
                 <div class="header-middle"><!--header-middle-->
                     <div class="container">
@@ -101,7 +77,7 @@
                                     <ul class="nav navbar-nav">
                                         <li><a href="">Take test</a></li>
                                         <li><a href="">Review Test</a></li>
-                                        <li><a href="">Blog</a></li>
+                                        <li><a href="DocumentList">Document</a></li>
                                         <li><a href="Personal?email=${user.email}">Account</a></li>
                                         <li><a href="Logout">Log out</a></li>
                                     </ul>
@@ -111,6 +87,59 @@
                     </div>
                 </div><!--/header-middle-->
 
+            </c:if>
+
+
+            <c:if test="${sessionScope.user.rollId eq 2}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+
+                                        <li><a href="BlogList">Blog</a></li>
+                                        <li><a href="DocumentList">Document</a></li>
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+
+
+            <c:if test="${sessionScope.user.rollId eq 3}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="UserList">User</a></li>
+                                        <li><a href="DocumentList">Document</a></li>
+                                        <li><a href="Personal?email=${user.email}">Account</a></li>
+                                        <li><a href="Logout">Log out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </c:if>
 
 
@@ -137,7 +166,18 @@
                             <img src="${blog.img_url}" alt="" width="100%" />
 
                             <p class="desc-blog">${blog.description}</p>
-
+                            <c:if test="${sessionScope.user ne null}">
+                                <a href="${blog.attach_url}" download>
+                                    <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
+                                </a>
+                            </c:if>
+                            <c:if test="${sessionScope.user eq null}">
+                                <a href="#" class="isDisabled">
+                                    <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
+                                </a>
+                                <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
+                            </c:if>
+                              
                         </div>
 
 

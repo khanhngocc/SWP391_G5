@@ -50,7 +50,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="">Test</a></li>
-                                    <li><a href="DocumentList">Blog</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li></li>
                                     <a href="Login" class="btn btn-default">Log in</a>
                                 </ul>

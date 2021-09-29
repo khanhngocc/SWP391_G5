@@ -50,6 +50,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="BlogList">Blog</a></li>
+                                     <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -91,11 +92,11 @@
                                 </span>
                             </div>
                             <img src="${blog.img_url}" alt="" style="width: 100%"/>
-                             <p class="desc-blog">${blog.description}</p>
+                            <p class="desc-blog">${blog.description}</p>
                             <a href="${blog.attach_url}" download>
-                                <p><i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}</p>
+                                <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
                             </a>
-                           
+
 
 
 
@@ -142,7 +143,7 @@
             </div>
 
         </footer><!--/Footer-->
-      
+
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
