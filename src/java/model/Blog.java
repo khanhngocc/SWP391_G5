@@ -23,6 +23,26 @@ public class Blog {
     private String author;
     private String time;
     private String status;
+    private String attach_url;
+    private String attachName;
+
+    public String getAttachName() {
+        return attachName;
+    }
+
+    public void setAttachName(String attachName) {
+        this.attachName = attachName;
+    }
+
+    
+    
+    public String getAttach_url() {
+        return attach_url;
+    }
+
+    public void setAttach_url(String attach_url) {
+        this.attach_url = attach_url;
+    }
 
     public String getStatus() {
         return status;
@@ -31,8 +51,6 @@ public class Blog {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
 
     public String getImg_url() {
         return img_url;

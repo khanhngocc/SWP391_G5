@@ -90,9 +90,14 @@
                                     <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
                                 </span>
                             </div>
-                                    <img src="${blog.img_url}" alt="" style="width: 100%" />
+                            <img src="${blog.img_url}" alt="" style="width: 100%"/>
+                             <p class="desc-blog">${blog.description}</p>
+                            <a href="${blog.attach_url}" download>
+                                <p><i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}</p>
+                            </a>
+                           
 
-                            <p class="desc-blog">${blog.description}</p>
+
 
                         </div>
 
@@ -137,7 +142,7 @@
             </div>
 
         </footer><!--/Footer-->
-
+      
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

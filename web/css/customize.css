@@ -41,10 +41,11 @@
 
 .desc-blog{
     text-align: justify;
-    margin-top: 50px; 
-    margin-bottom: 100px; 
+    margin-top: 50px;
+  
     line-height: 1.8;
 }
+
 
 textarea {
     font-family: inherit;

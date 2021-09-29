@@ -37,14 +37,22 @@ public class AddBlog extends BaseRequiredLoginController {
         // get path to save img
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
-        sb.append("images/blog");
+        sb.append("blog");
 
-        // get file name of img uploaded
+        // upload file to folder
         MultipartRequest m = new MultipartRequest(request, sb.toString());
+        
+        // get file name of img uploaded
         String fileNameImgPath = m.getFile("fname").toString();
         int indexOflast = fileNameImgPath.lastIndexOf("\\");
         String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
 
+        
+        // get file name of attach file uploaded
+        String fileNameAttachPath = m.getFile("attach").toString();
+        int indexOflastAttach = fileNameAttachPath.lastIndexOf("\\");
+        String fileNameAttach = fileNameAttachPath.substring(indexOflastAttach + 1, fileNameAttachPath.length());
+        
         String message = "";
 
         String title = m.getParameter("title");
@@ -78,7 +86,8 @@ public class AddBlog extends BaseRequiredLoginController {
         blog.setTitle(title);
         blog.setCategory(category);
         blog.setStatus("1");
-        blog.setImg_url("images/blog/" + fileNameImg);
+        blog.setImg_url("blog/" + fileNameImg);
+        blog.setAttach_url("blog/"+fileNameAttach);
         blog.setDescription(desc);
         blog.setDate(Date.valueOf(java.time.LocalDate.now()));
 

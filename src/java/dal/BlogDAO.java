@@ -43,7 +43,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id, String statusRestricted) {
         Blog b = new Blog();
-        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status from Blog,[User]\n"
+        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status,attachFile_Url from Blog,[User]\n"
                 + "where\n"
                 + "Blog.user_id = [User].id\n"
                 + "and\n"
@@ -65,6 +65,8 @@ public class BlogDAO extends MyDAO {
                 b.setImg_url(rs.getString(8));
                 b.setCategory(rs.getString(9));
                 b.setStatus(rs.getString(10));
+                b.setAttach_url(rs.getString(11));
+                b.setAttachName(getNameAttachFile(rs.getString(11)));
             }
             rs.close();
             ps.close();
@@ -74,6 +76,12 @@ public class BlogDAO extends MyDAO {
         return b;
     }
 
+    public String getNameAttachFile(String str){
+        int indexStartName = str.lastIndexOf("/");
+        String nameFile = str.substring(indexStartName+1,str.length());
+        return nameFile;
+    }
+    
     public int getRowCountForSearch(String searchName, String category, String statusRestricted) {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? and status LIKE ?";
@@ -204,9 +212,11 @@ public class BlogDAO extends MyDAO {
                 + "           ,[user_id]\n"
                 + "           ,[timeCreated]\n"
                 + "           ,[Category]\n"
-                + "           ,[status])\n"
+                + "           ,[status]\n"
+                + "           ,[attachFile_Url])\n"
                 + "     VALUES\n"
                 + "           (? \n"
+                + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
@@ -224,6 +234,7 @@ public class BlogDAO extends MyDAO {
             ps.setString(6, blog.getTime());
             ps.setString(7, blog.getCategory());
             ps.setString(8, blog.getStatus());
+            ps.setString(9, blog.getAttach_url());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -256,5 +267,4 @@ public class BlogDAO extends MyDAO {
         }
     }
 
-    
 }

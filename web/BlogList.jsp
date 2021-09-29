@@ -94,7 +94,7 @@
                             <th scope="col" style="width: 105px">Status</th>
                             <th scope="col">TimeCreated</th>
                             <th scope="col">DateCreated</th>
-                            <th scope="col" style="width: 290px;text-align: center" colspan="3">Action</th>
+                            <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>

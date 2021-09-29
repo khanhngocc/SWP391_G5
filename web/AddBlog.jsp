@@ -63,7 +63,7 @@
         </header><!--/header-->
 
         <section id="slider"><!--slider-->
-           <div class="container">
+            <div class="container">
 
                 <div class="col-sm-9">
 
@@ -81,13 +81,15 @@
                             Description
                             <textarea name="desc" rows="25" cols="70" required="true" value="${desc}">
                             </textarea>
-                          <button type="submit" class="btn btn-default" style="margin-top: 10px">Upload</button>
+                            Attach File
+                            <input name="attach" type="file"/>
+                            <button type="submit" class="btn btn-default" style="margin-top: 10px">Upload</button>
                         </form>
                     </div>
                     <br>
                 </div>
             </div>
-        
+
         </section><!--/slider-->
 
 

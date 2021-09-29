@@ -61,8 +61,32 @@
                     </div>
                 </div>
             </c:if>
+            <c:if test="${sessionScope.user.rollId ne 1}">
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
+                                </div>
 
-            <c:if test="${sessionScope.user ne null}">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul class="nav navbar-nav">
+
+                                        <li><a href="">Test</a></li>
+                                        <li><a href="DocumentList">Blog</a></li>
+                                        <li></li>
+                                        <a href="Login" class="btn btn-default">Log in</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${sessionScope.user.rollId eq 1}">
                 <div class="header-middle"><!--header-middle-->
                     <div class="container">
                         <div class="row">
