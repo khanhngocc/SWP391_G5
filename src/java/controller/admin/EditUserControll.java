@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -23,7 +24,11 @@ public class EditUserControll extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-          processPost(request, response);
+        String email = request.getParameter("email");
+        UserDAO udao = new UserDAO();
+        User x = udao.getUser(email);
+        request.setAttribute("user", x);
+        request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
     }
 
     @Override

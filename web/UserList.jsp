@@ -97,7 +97,7 @@
                             <td>${i.rollId}</td>
                             <td>${i.status}</td>
                             <td><a href="#" onclick="deleteUser(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                            <td><a href="EditUser?id=${i.id}"><i class="fa fa-pencil"></i> Edit</a></td>
+                            <td><a href="EditUser?email=${i.email}"><i class="fa fa-pencil"></i> Edit</a></td>
                             <td><a href="UserDetail?email=${i.email}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>     
                     </c:forEach>

@@ -46,13 +46,8 @@
                         <form action="register" method="post">
                             <input name="email" type="text" placeholder="Email" required="true" />
                             <input name="name" type="text" placeholder="Full Name" required="true" />
-                            <p>
-                                <select name="gender" id="gender">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </p>
-                            <input name="phone" type="text" placeholder="Phone Number" />
+                            <input name="title" type="text" placeholder="Your Title" required="true"/>
+                            <input name="phone" type="text" placeholder="Phone Number" required="true"/>
                             <input name="pass" type="password" placeholder="Password" required="true" />
                             <input name="repass" type="password" placeholder="Re-Password" required="true" />
                             <br>

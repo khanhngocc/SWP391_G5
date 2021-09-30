@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class User {
     private int id;
     private String fullname;
-    private boolean gender;
     private String email;
     private String phone;
     private String password;
@@ -86,30 +85,6 @@ public class User {
         this.password = password;
     }
 
-    
-    public User(int id, String fullname, boolean gender, String email, String phone, String password, Date createDate, String avatar, int rollId) {
-        this.id = id;
-        this.fullname = fullname;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.createDate = createDate;
-        this.avatar = avatar;
-        this.rollId = rollId;
-    }
-
-    public User( String fullname, boolean gender, String email, String phone, String password, Date createDate, String avatar, int rollId) {
-        this.fullname = fullname;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.createDate = createDate;
-        this.avatar = avatar;
-        this.rollId = rollId;
-    }
-    
     public int getId() {
         return id;
     }
@@ -124,14 +99,6 @@ public class User {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
     }
 
     public String getEmail() {

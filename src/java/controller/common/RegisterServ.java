@@ -68,10 +68,7 @@ public class RegisterServ extends HttpServlet {
      
         String email = request.getParameter("email");
         String name = request.getParameter("name");
-        boolean gender;
-        String gender1 = request.getParameter("gender");
-        if(gender1.equals("male")) gender = true; 
-        else gender = false;
+        String title = request.getParameter("title");
         String phone = request.getParameter("phone");
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
@@ -91,17 +88,17 @@ public class RegisterServ extends HttpServlet {
                     checkuser = false;
                 }
                 if(!pass.equals(repass)){
-                    mess = "PassQord and Re-PassWord doesnot match, Click Sign-up again!";
+                    mess = "PassWord and Re-PassWord doesnot match, Click Sign-up again!";
                     checkuser = false;
                 }
                 if(checkuser){
                     mess = "Sign-up success, login now!!";
-                    udao.addUser(new User(name, gender, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fdefault-avatar-profile-icon-vector-social-media-user-portrait-image176256935&psig=AOvVaw2gAeDc-Kuapu122Fr5DERD&ust=1631438027091000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPjl57PK9vICFQAAAAAdAAAAABAD", 1));
+                    udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/default.jpg", "Active", 1));
                     request.setAttribute("mess", mess);
-                    dispath(request, response, "/Login.jsp");
+                    dispath(request, response, "Login");
                 }else{
                     request.setAttribute("mess", mess);
-                    dispath(request, response, "/Login.jsp");
+                    dispath(request, response, "Registration.jsp");
                 }
                 
     }
