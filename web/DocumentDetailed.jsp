@@ -166,18 +166,19 @@
                             <img src="${blog.img_url}" alt="" width="100%" />
 
                             <p class="desc-blog">${blog.description}</p>
-                            <c:if test="${sessionScope.user ne null}">
-                                <a href="${blog.attach_url}" download>
-                                    <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
-                                </a>
+                            <c:if test="${blog.attach_url ne ''}">
+                                <c:if test="${sessionScope.user ne null}">
+                                    <a href="${blog.attach_url}" download>
+                                        <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
+                                    </a>
+                                </c:if>
+                                <c:if test="${sessionScope.user eq null}">
+                                    <a href="#" class="isDisabled">
+                                        <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
+                                    </a>
+                                    <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
+                                </c:if>
                             </c:if>
-                            <c:if test="${sessionScope.user eq null}">
-                                <a href="#" class="isDisabled">
-                                    <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
-                                </a>
-                                <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
-                            </c:if>
-                              
                         </div>
 
 

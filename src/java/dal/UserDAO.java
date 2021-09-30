@@ -91,7 +91,7 @@ public class UserDAO extends MyDAO {
 
     public int UpdateUser(String email, String fullname, String phone, boolean gender) {
         int n = 0;
-        String sql = "UPDATE [dbo].[User]\n"
+        String sql = "UPDATE [User]\n"
                 + "   SET [fullname] = ?\n"
                 + "      ,[gender] = ?\n"
                 + "      ,[phone] = ?\n"
@@ -114,7 +114,7 @@ public class UserDAO extends MyDAO {
 
     public int changePassword(String email, String password) {
         int n = 0;
-        String sql = "UPDATE [dbo].[User]\n"
+        String sql = "UPDATE [User]\n"
                 + "   SET [password] = ?\n"
                 + " WHERE email = ?";
         PreparedStatement statement;
@@ -198,7 +198,7 @@ public class UserDAO extends MyDAO {
     }
 
     public void UpdateUser(int id, String name, String title, String phone, int role, String status, String ava) {
-        xSql = "UPDATE [dbo].[User]\n"
+        xSql = "UPDATE [User]\n"
                 + "   SET [fullname] = ?\n"
                 + "      ,[title] = ?\n"
                 + "      ,[phone] = ?\n"

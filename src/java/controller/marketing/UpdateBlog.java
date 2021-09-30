@@ -39,10 +39,10 @@ public class UpdateBlog extends BaseRequiredLoginController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    // get path to save img
+        // get path to save img
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
-        sb.append("images/blog");
+        sb.append("blog");
 
         String fileNameImg = "";
 
@@ -55,18 +55,27 @@ public class UpdateBlog extends BaseRequiredLoginController {
             fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
 
+        // get file name of attach file uploaded
+        String fileNameAttach = "";
+        if (m.getFile("attach") != null) {
+            String fileNameAttachPath = m.getFile("attach").toString();
+            int indexOflastAttach = fileNameAttachPath.lastIndexOf("\\");
+            fileNameAttach = fileNameAttachPath.substring(indexOflastAttach + 1, fileNameAttachPath.length());
+        }
+
         String message = "";
         String id = request.getParameter("id");
         String title = m.getParameter("title");
         String desc = m.getParameter("desc");
         String category = m.getParameter("category");
-     
+
         Blog temp = new Blog();
         temp.setId(Integer.valueOf(id));
         temp.setTitle(title);
         temp.setDescription(desc);
         temp.setCategory(category);
         temp.setImg_url(m.getParameter("imgURL"));
+        temp.setAttach_url(m.getParameter("attachURL"));
         request.setAttribute("blog", temp);
 
         if (category.length() > 50) {
@@ -88,7 +97,11 @@ public class UpdateBlog extends BaseRequiredLoginController {
         }
 
         if (m.getFile("fname") != null) {
-            temp.setImg_url("images/blog/" + fileNameImg);
+            temp.setImg_url("blog/" + fileNameImg);
+        }
+        
+        if (m.getFile("attach") != null) {
+            temp.setAttach_url("blog/" + fileNameAttach);
         }
 
         temp.setDate(Date.valueOf(java.time.LocalDate.now()));
@@ -103,7 +116,7 @@ public class UpdateBlog extends BaseRequiredLoginController {
 
        
         request.removeAttribute("blog");
-        
+
         response.sendRedirect("BlogList");
     }
 

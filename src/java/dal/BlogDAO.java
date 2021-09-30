@@ -76,12 +76,12 @@ public class BlogDAO extends MyDAO {
         return b;
     }
 
-    public String getNameAttachFile(String str){
+    public String getNameAttachFile(String str) {
         int indexStartName = str.lastIndexOf("/");
-        String nameFile = str.substring(indexStartName+1,str.length());
+        String nameFile = str.substring(indexStartName + 1, str.length());
         return nameFile;
     }
-    
+
     public int getRowCountForSearch(String searchName, String category, String statusRestricted) {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM Blog WHERE title LIKE ? and Category LIKE ? and status LIKE ?";
@@ -250,6 +250,7 @@ public class BlogDAO extends MyDAO {
                 + "      ,[created_Date] = ?\n"
                 + "    ,[timeCreated] = ?\n"
                 + "      ,[Category] = ?\n"
+                + "      ,[attachFile_Url] = ?\n"
                 + " WHERE [Blog].id = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -259,7 +260,8 @@ public class BlogDAO extends MyDAO {
             ps.setDate(4, blog.getDate());
             ps.setString(5, blog.getTime());
             ps.setString(6, blog.getCategory());
-            ps.setInt(7, blog.getId());
+            ps.setString(7, blog.getAttach_url());
+            ps.setInt(8, blog.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

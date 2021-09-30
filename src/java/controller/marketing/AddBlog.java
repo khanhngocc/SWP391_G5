@@ -34,14 +34,14 @@ public class AddBlog extends BaseRequiredLoginController {
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // get path to save img
+        // get path to save file
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
         sb.append("blog");
 
         // upload file to folder
         MultipartRequest m = new MultipartRequest(request, sb.toString());
-        
+
         // get file name of img uploaded
         String fileNameImgPath = m.getFile("fname").toString();
         int indexOflast = fileNameImgPath.lastIndexOf("\\");
@@ -49,10 +49,13 @@ public class AddBlog extends BaseRequiredLoginController {
 
         
         // get file name of attach file uploaded
-        String fileNameAttachPath = m.getFile("attach").toString();
-        int indexOflastAttach = fileNameAttachPath.lastIndexOf("\\");
-        String fileNameAttach = fileNameAttachPath.substring(indexOflastAttach + 1, fileNameAttachPath.length());
-        
+        String fileNameAttach = "";
+        if (m.getFile("attach") != null) {
+            String fileNameAttachPath = m.getFile("attach").toString();
+            int indexOflastAttach = fileNameAttachPath.lastIndexOf("\\");
+            fileNameAttach = fileNameAttachPath.substring(indexOflastAttach + 1, fileNameAttachPath.length());
+        }
+
         String message = "";
 
         String title = m.getParameter("title");
@@ -82,12 +85,19 @@ public class AddBlog extends BaseRequiredLoginController {
             request.getRequestDispatcher("AddBlog.jsp").forward(request, response);
         }
 
+        // create new blog
         Blog blog = new Blog();
         blog.setTitle(title);
         blog.setCategory(category);
         blog.setStatus("1");
         blog.setImg_url("blog/" + fileNameImg);
-        blog.setAttach_url("blog/"+fileNameAttach);
+
+        if (m.getFile("attach") != null) {
+            blog.setAttach_url("blog/" + fileNameAttach);
+        } else {
+            blog.setAttach_url("");
+        }
+
         blog.setDescription(desc);
         blog.setDate(Date.valueOf(java.time.LocalDate.now()));
 
@@ -98,7 +108,10 @@ public class AddBlog extends BaseRequiredLoginController {
         User session_user = (User) request.getSession(false).getAttribute("user");
         UserDAO userDAO = new UserDAO();
         User current_user = userDAO.getUser(session_user.getEmail());
+
         BlogDAO dao = new BlogDAO();
+
+        // save to db
         dao.createBlog(blog, current_user);
 
    

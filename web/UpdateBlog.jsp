@@ -72,7 +72,7 @@
                         <h2>Update blog</h2>
                         <p class="text-primary">${messUpdateBlog}</p>
                         <form action="UpdateBlog?id=${blog.id}" enctype="multipart/form-data" method="post">
-                         
+
                             Title
                             <input name="title" type="text" required="true" value="${blog.title}"/>
                             Category
@@ -85,6 +85,9 @@
                             <textarea name="desc" rows="25" cols="70" required="true" >
                                 ${blog.description}
                             </textarea>
+                            Attach File
+                            <input name="attach" type="file"/>
+                            <input name="attachURL" type="hidden" value="${blog.attach_url}"  />
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Save</button>
                         </form>
                     </div>

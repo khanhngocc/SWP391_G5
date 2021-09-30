@@ -50,7 +50,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="BlogList">Blog</a></li>
-                                     <li><a href="DocumentList">Document</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -93,9 +93,12 @@
                             </div>
                             <img src="${blog.img_url}" alt="" style="width: 100%"/>
                             <p class="desc-blog">${blog.description}</p>
-                            <a href="${blog.attach_url}" download>
-                                <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
-                            </a>
+                            <c:if test="${blog.attach_url ne ''}">
+                                <a href="${blog.attach_url}" download>
+                                    <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
+                                </a>
+                            </c:if>
+
 
 
 
