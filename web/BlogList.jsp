@@ -50,7 +50,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="BlogList">Blog</a></li>
-                                     <li><a href="DocumentList">Document</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -84,17 +84,18 @@
                     <a href="AddBlog"><i class="fa fa-book"></i> Create a blog</a> 
                 </div>
 
-                <table class="table">
+                <table class="table" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Thumbnail</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Author</th>
-                            <th scope="col" style="width: 105px">Status</th>
-                            <th scope="col">TimeCreated</th>
-                            <th scope="col">DateCreated</th>
+
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(0)">ID</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(1)">Title</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Thumbnail</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Category</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Author</a></th>
+                            <th scope="col" style="width: 105px"><a href="javascript:void(0);" onclick="sort(5)">Status</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(6)">TimeCreated</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(7)">DateCreated</a></th>
                             <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
                         </tr>
                     </thead>
@@ -181,7 +182,7 @@
             </div>
 
         </footer><!--/Footer-->
-
+        <script src="js/sortHelper.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

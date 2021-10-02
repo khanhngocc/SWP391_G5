@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -23,7 +24,11 @@ public class EditUserControll extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-          request.getRequestDispatcher("").forward(request, response);
+        String email = request.getParameter("email");
+        UserDAO udao = new UserDAO();
+        User x = udao.getUser(email);
+        request.setAttribute("user", x);
+        request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
     }
 
     @Override
@@ -33,9 +38,8 @@ public class EditUserControll extends BaseRequiredLoginController {
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
         sb.append("images/avatar");
-        
+
         // get file name of img uploaded
-        
         MultipartRequest m = new MultipartRequest(request, sb.toString());
 
         if (m.getFile("fname") != null) {
@@ -49,7 +53,7 @@ public class EditUserControll extends BaseRequiredLoginController {
         int role = Integer.parseInt(m.getParameter("role"));
         String status = m.getParameter("status");
         UserDAO dao = new UserDAO();
-        dao.UpdateUser(Integer.parseInt(id), name, title, phone, role, status, "images/avatar/"+fileNameImg);
+        dao.UpdateUser(Integer.parseInt(id), name, title, phone, role, status, "images/avatar/" + fileNameImg);
         response.sendRedirect("UserList");
     }
 

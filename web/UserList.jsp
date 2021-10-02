@@ -49,7 +49,7 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="UserList">User</a></li>
-                                     <li><a href="DocumentList">Document</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -98,7 +98,7 @@
                             <td>${i.rollId}</td>
                             <td>${i.status}</td>
                             <td><a href="#" onclick="deleteUser(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                            <td><a href="EditUser?id=${i.id}"><i class="fa fa-pencil"></i> Edit</a></td>
+                            <td><a href="EditUser?email=${i.email}"><i class="fa fa-pencil"></i> Edit</a></td>
                             <td><a href="UserDetail?email=${i.email}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>     
                     </c:forEach>
@@ -164,39 +164,39 @@
         <script src="js/main.js"></script>
         <script>
 
-                            function deleteUser(id) {
-                                var result = confirm("Do you want to delete this user?");
-                                if (result) {
-                                    window.location.href = "Delete?id=" + id;
+                                function deleteUser(id) {
+                                    var result = confirm("Do you want to delete this user?");
+                                    if (result) {
+                                        window.location.href = "Delete?id=" + id;
+                                    }
+
                                 }
 
-                            }
 
-
-                            function searchForm(number) {
-                                var input, filter, table, tr, td, i, txtValue, in_num;
-                                in_num = parseInt(number);
-                                if (in_num === 1)
-                                    input = document.getElementById("myInput");
-                                if (in_num === 5)
-                                    input = document.getElementById("myInput1");
-                                if (in_num === 6)
-                                    input = document.getElementById("myInput2");
-                                filter = input.value.toUpperCase();
-                                table = document.getElementById("myTable");
-                                tr = table.getElementsByTagName("tr");
-                                for (i = 0; i < tr.length; i++) {
-                                    td = tr[i].getElementsByTagName("td")[in_num];
-                                    if (td) {
-                                        txtValue = td.textContent || td.innerText;
-                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                            tr[i].style.display = "";
-                                        } else {
-                                            tr[i].style.display = "none";
+                                function searchForm(number) {
+                                    var input, filter, table, tr, td, i, txtValue, in_num;
+                                    in_num = parseInt(number);
+                                    if (in_num === 1)
+                                        input = document.getElementById("myInput");
+                                    if (in_num === 5)
+                                        input = document.getElementById("myInput1");
+                                    if (in_num === 6)
+                                        input = document.getElementById("myInput2");
+                                    filter = input.value.toUpperCase();
+                                    table = document.getElementById("myTable");
+                                    tr = table.getElementsByTagName("tr");
+                                    for (i = 0; i < tr.length; i++) {
+                                        td = tr[i].getElementsByTagName("td")[in_num];
+                                        if (td) {
+                                            txtValue = td.textContent || td.innerText;
+                                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                tr[i].style.display = "";
+                                            } else {
+                                                tr[i].style.display = "none";
+                                            }
                                         }
                                     }
                                 }
-                            }
         </script>
         <script>
             function sort(number) {
