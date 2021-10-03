@@ -127,12 +127,7 @@
                     <form action="Personal" method="post">
                         <input name="email" type="hidden" placeholder="Email" required="true" value="${user.email}" />
                         <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
-                        <p>                           
-                            <select name="gender" id="gender">
-                                <option value="male" ${user.gender==true?"selected":""}>Male</option>
-                                <option value="female" ${user.gender==false?"selected":""}>Female</option>
-                            </select>
-                        </p>
+                      
                         <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
 
                         <button type="submit" class="btn btn-default">Update</button>
