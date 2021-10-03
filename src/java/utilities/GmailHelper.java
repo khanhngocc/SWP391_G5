@@ -23,8 +23,8 @@ import javax.mail.internet.MimeMessage;
  */
 public class GmailHelper {
 
-    private String USER_NAME = "aeroaircraft1604";  // GMail user name (just the part before "@gmail.com")
-    private String PASSWORD = "!dwtLafU"; // GMail password
+    private String USER_NAME = "khanhkuro98";  // GMail user name (just the part before "@gmail.com")
+    private String PASSWORD = "nwxrztxrkskmlfog"; // GMail password
     private String RECIPIENT;
 
     public String getUSER_NAME() {

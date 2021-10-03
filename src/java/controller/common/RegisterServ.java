@@ -15,12 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
+import utilities.GmailHelper;
 
 /**
  *
@@ -74,29 +76,51 @@ public class RegisterServ extends HttpServlet {
         String mess = "";
         boolean checkuser = true;
         if (udao.getUser(email) != null) {
-            mess = "This email has been used, Click Sign-up again!";
+            mess = "This email has been used";
             checkuser = false;
         }
         if (validate(email) == false) {
-            mess = "This email has wrong format!";
+            mess = "This email has wrong format";
+            checkuser = false;
+        }
+        if (phone.chars().allMatch(Character::isDigit) == false) {
+            mess = "Phone is not digit";
+            checkuser = false;
+        }
+        if (phone.length() > 12) {
+            mess = "Length of phone must be less than 12 characters";
             checkuser = false;
         }
         if (pass.length() < 8) {
-            mess = "PassWord must be more than 8 characters, Click Sign-up again!";
+            mess = "PassWord must be more than 8 characters";
             checkuser = false;
         }
         if (!pass.equals(repass)) {
-            mess = "PassWord and Re-PassWord doesnot match, Click Sign-up again!";
+            mess = "PassWord and Re-PassWord doesnot match";
             checkuser = false;
         }
         if (checkuser) {
-            mess = "Sign-up success, login now!!";
-           udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/default.jpg", "Active", 1));
-            request.setAttribute("mess", mess);
-            dispath(request, response, "Login");
+            mess = "Please check your email to verify your account!";
+            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/default.jpg", "Deactive", 1));
+            String maxId = udao.getMaxID();
+            GmailHelper gmailHelper = new GmailHelper();
+            String[] mailTo = {email};
+            try {
+                gmailHelper.sendFromGMail(gmailHelper.getUSER_NAME(), gmailHelper.getPASSWORD(),
+                        mailTo, "[Activate your account in Mega Deal]",
+                        "Hi you,\n\n" + "Click this link to activate your account, then you are able to access the system.\n"
+                        + "http://localhost:8080/SWP391_G5/ActivateAccount?id=" + maxId
+                        + "\n\n"
+                        + "Regard,\n"
+                        + "Mega Deal Support Team");
+            } catch (MessagingException ex) {
+                Logger.getLogger(RegisterServ.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("messLogin", mess);
+            dispath(request, response, "Login.jsp");
         } else {
             request.setAttribute("mess", mess);
-             dispath(request, response, "Registration.jsp");
+            dispath(request, response, "Registration.jsp");
         }
 
     }

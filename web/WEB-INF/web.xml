@@ -92,6 +92,10 @@
         <servlet-name>HomeAdmin</servlet-name>
         <servlet-class>controller.admin.HomeAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActivateAccount</servlet-name>
+        <servlet-class>controller.free.ActivateAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>HomeAdmin</servlet-name>
         <url-pattern>/HomeAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActivateAccount</servlet-name>
+        <url-pattern>/ActivateAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

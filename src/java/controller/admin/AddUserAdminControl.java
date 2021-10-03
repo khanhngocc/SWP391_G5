@@ -80,12 +80,17 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
         }
         if (checkuser) {
             mess = "Sign-up success!!";
-            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/"+fileNameImg, status, role));
+            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/" + fileNameImg, status, role));
             //send mail//
             GmailHelper gm = new GmailHelper();
             String[] rep = {email};
-            String subject = "Request to sign-in our web";
-            String body = "Your password to our web:\n" + pass;
+            String subject = "[Request to sign-in our web]";
+            String body = "Hi you,\n\n"
+                    + "You have been created a new account in Mega Deal. Your username is:" + email + " and "
+                    + "your password is:\n" + pass
+                    + "\n\n"
+                    + "Regard,\n"
+                    + "Mega Deal Support Team";
             try {
                 gm.sendFromGMail(gm.getUSER_NAME(), gm.getPASSWORD(), rep, subject, body);
                 request.setAttribute("mess", mess);

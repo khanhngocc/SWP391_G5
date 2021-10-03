@@ -44,11 +44,17 @@
                         <h2 class="centerImgLanding">New registration</h2>
                         <p class="text-primary">${mess}</p>
                         <form action="register" method="post">
+                            Email
                             <input name="email" type="text" placeholder="Email" required="true" />
+                            Name
                             <input name="name" type="text" placeholder="Full Name" required="true" />
-                             <input name="title" type="text" placeholder="Your Title" required="true"/>
+                            Title
+                            <input name="title" type="text" placeholder="Your Title" required="true"/>
+                            Phone
                             <input name="phone" type="text" placeholder="Phone Number" required="true"/>
+                            Password
                             <input name="pass" type="password" placeholder="Password" required="true" />
+                            Re-password
                             <input name="repass" type="password" placeholder="Re-Password" required="true" />
                             <br>
                             <button type="submit" class="btn btn-default centerImgLanding">Signup</button>

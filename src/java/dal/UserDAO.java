@@ -223,4 +223,40 @@ public class UserDAO extends MyDAO {
         }
     }
 
+    public String getMaxID() {
+        String id = "";
+        xSql = "Select max(id) from [User]";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public void activateAccount(String id) {
+        xSql = "UPDATE [User]\n"
+                + "   SET [status] = 'Active' \n"
+                + " WHERE [id] = ?";
+
+        try {
+            ps = connection.prepareStatement(xSql);
+            ps.setString(1, id);
+
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        String id = dao.getMaxID();
+        System.out.println(id);
+    }
 }

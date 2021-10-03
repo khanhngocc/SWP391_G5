@@ -88,8 +88,11 @@
                             <input name="phone"type="text" placeholder="Phone Number" />													
                             Roll
                             <select name="role" id="role" style="margin-bottom:10px">
-                                <option value="2">Customer</option>
+                                <option value="1">Customer</option>
+                                <option value="2">Marketing</option>
                                 <option value="3">Admin</option>
+                                <option value="4">Expert</option>
+                                <option value="5">Manager</option>
                             </select>
 
                             Status
