@@ -29,7 +29,7 @@ public class ActivateAccount extends HttpServlet {
 
         dao.activateAccount(id);
         
-        response.getWriter().print("Active successfully!!!");
+        request.getRequestDispatcher("ActivateAccount.jsp").forward(request, response);
     }
 
 }

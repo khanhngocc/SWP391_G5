@@ -35,9 +35,9 @@
         <div class="container text-center">
 
             <div class="content-404">
-                <img src="images/404/sleeping-person.jpg" style="height: 400px;width: 400px; margin-top: 30px"/>
-                <h1><b>OPPS!</b> Access denied</h1>
-                <p>Uh... You don't have permission to access this page</p>
+                <img src="images/home/maxresdefault.jpg" style="height: 280px;width: 400px; margin-top: 30px"/>
+                <h1><b>Congratulation!</b> You are a member of Mega Deal</h1>
+                <p><a href="Login">Login</a> to join with us </p>
 
             </div>
         </div>

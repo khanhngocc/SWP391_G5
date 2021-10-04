@@ -74,8 +74,8 @@
                         <form action="AddUserAdmin" method="post" enctype="multipart/form-data">
                             Choose a avatar
 
-                            <input type="file" name="fname"/>
-                            <img src="${user.getAvatar()}"><br>
+                            <input type="file" name="fname" required="true"/>
+
                             Email
                             <input name="email" type="text" placeholder="Email" required="true" />
                             Password
@@ -83,7 +83,12 @@
                             Full Name
                             <input name="name"type="text" placeholder="Full Name" required="true" />  
                             Title
-                            <input name="title"type="text" placeholder="Title" required="true" />  
+                            <select name="title" id="title" style="margin-bottom:10px">
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
+
+                            </select>  
                             Phone
                             <input name="phone"type="text" placeholder="Phone Number" />													
                             Roll

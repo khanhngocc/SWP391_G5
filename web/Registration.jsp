@@ -49,7 +49,12 @@
                             Name
                             <input name="name" type="text" placeholder="Full Name" required="true" />
                             Title
-                            <input name="title" type="text" placeholder="Your Title" required="true"/>
+                            <select name="title" id="title" style="margin-bottom:10px">
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
+
+                            </select> 
                             Phone
                             <input name="phone" type="text" placeholder="Phone Number" required="true"/>
                             Password

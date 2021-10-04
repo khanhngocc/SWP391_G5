@@ -54,7 +54,7 @@
                                 <ul class="nav navbar-nav">
 
                                     <li><a href="UserList">User</a></li>
-                                     <li><a href="DocumentList">Document</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
                                 </ul>
@@ -79,14 +79,21 @@
                             <br>
                             Choose a avatar
                             <input type="file" name="fname">
-                            
+
                             <input type="hidden" value="${user.avatar}" name="imageurl">
                             Email
                             <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                             Full Name
                             <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                             Title
-                            <input name="title"type="text" placeholder="Title" required="true" value="${user.title}"/>  
+
+                            <select name="title" id="title" style="margin-bottom:10px">
+                                <option value="Mr" ${user.title=='Mr'?"selected":""}>Mr</option>
+                                <option value="Mrs" ${user.title=='Mrs'?"selected":""}>Mrs</option>
+                                <option value="Ms" ${user.title=='Ms'?"selected":""}>Ms</option>
+
+                            </select>  
+
                             Phone
                             <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
                             Created Date
@@ -105,7 +112,7 @@
                                 <option value="Deactive" ${user.status.equals("Deactive")?"selected":""}>Deactive</option>                                       
                             </select>								                            
                         </form>
-                            <button type="text" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
+                        <button type="text" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
 
@@ -127,7 +134,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="address">
                                 <img src="images/home/map.png" alt="" />
@@ -156,11 +163,11 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                            function Submit() {
-                                var form;
-                                form = document.getElementById("myForm");
-                                form.submit();
-                            }
+                                function Submit() {
+                                    var form;
+                                    form = document.getElementById("myForm");
+                                    form.submit();
+                                }
         </script>
     </body>
 
