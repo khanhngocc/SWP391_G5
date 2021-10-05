@@ -101,7 +101,7 @@ public class RegisterServ extends HttpServlet {
         }
         if (checkuser) {
             mess = "Please check your email to verify your account!";
-            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/default.jpg", "Deactive", 1));
+            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/user_circle.png", "Deactive", 1));
             String maxId = udao.getMaxID();
             GmailHelper gmailHelper = new GmailHelper();
             String[] mailTo = {email};
