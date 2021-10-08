@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
 import model.Subject;
+import model.User;
 
 /**
  *
@@ -40,7 +41,7 @@ public class SubjectDAO extends MyDAO {
 
     public int getRowCountForSearch(String searchName, String statusRestricted) {
         int no = 0;
-        xSql = "SELECT COUNT(*) Subject Blog WHERE title LIKE ? and status LIKE ?";
+        xSql = "SELECT COUNT(*) from Subject WHERE title LIKE ? and status LIKE ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
@@ -154,6 +155,55 @@ public class SubjectDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
 
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createSubject(Subject subject, User user) {
+        xSql = "INSERT INTO [Subject]\n"
+                + "           ([title]\n"
+                + "           ,[user_id]\n"
+                + "           ,[status]\n"
+                + "           ,[price]\n"
+                + "           ,[salePrice])\n"
+                + "     VALUES\n"
+                + "           (\n"
+                + "		?  \n"
+                + "           , ? \n"
+                + "           , ? \n"
+                + "           ,? \n"
+                + "           , ?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subject.getTitle());
+            ps.setInt(2, user.getId());
+            ps.setString(3, "Published");
+            ps.setFloat(4, subject.getPrice());
+            ps.setFloat(5, subject.getSalePrice());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSubject(Subject subject) {
+        xSql = "UPDATE [Subject]\n"
+                + "   SET [title] = ? \n"
+                + "      ,[status] =? \n"
+                + "      ,[price] = ? \n"
+                + "      ,[salePrice] = ? \n"
+                + " WHERE [Subject].id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subject.getTitle());
+            ps.setString(2, subject.getStatus());
+            ps.setFloat(3, subject.getPrice());
+            ps.setFloat(4, subject.getSalePrice());
+            ps.setInt(5, subject.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
