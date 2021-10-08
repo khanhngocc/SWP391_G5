@@ -96,6 +96,26 @@
         <servlet-name>ActivateAccount</servlet-name>
         <servlet-class>controller.free.ActivateAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubjectList</servlet-name>
+        <servlet-class>controller.manager.SubjectList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeManager</servlet-name>
+        <servlet-class>controller.manager.HomeManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeSubjectStatus</servlet-name>
+        <servlet-class>controller.manager.ChangeSubjectStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectDetailed</servlet-name>
+        <servlet-class>controller.manager.SubjectDetailed</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSubject</servlet-name>
+        <servlet-class>controller.manager.DeleteSubject</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -191,6 +211,26 @@
     <servlet-mapping>
         <servlet-name>ActivateAccount</servlet-name>
         <url-pattern>/ActivateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectList</servlet-name>
+        <url-pattern>/SubjectList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeManager</servlet-name>
+        <url-pattern>/HomeManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSubjectStatus</servlet-name>
+        <url-pattern>/ChangeSubjectStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectDetailed</servlet-name>
+        <url-pattern>/SubjectDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSubject</servlet-name>
+        <url-pattern>/DeleteSubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

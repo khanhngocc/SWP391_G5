@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.marketing;
+package controller.manager;
 import controller.base.BaseRequiredLoginController;
 import dal.BlogDAO;
+import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,15 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class BlogDetailed extends BaseRequiredLoginController {
+public class DeleteSubject extends BaseRequiredLoginController{
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id), "");
-        request.setAttribute("blog", b);
-        request.getRequestDispatcher("BlogDetailed.jsp").forward(request, response);
+        SubjectDAO dao = new SubjectDAO();
+        dao.deleteSubject(Integer.valueOf(id));
+        request.getRequestDispatcher("SubjectList").forward(request, response);
     }
 
     @Override
@@ -33,5 +33,5 @@ public class BlogDetailed extends BaseRequiredLoginController {
       
     }
 
-    
+  
 }
