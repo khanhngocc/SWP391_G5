@@ -74,7 +74,7 @@ public class UserDAO extends MyDAO {
             while (rs.next()) {
                 if (user == null) {
                     user = new User();
-                }
+                }                
                 user.setEmail(email);
                 user.setPassword(password);
                 user.getUrl().add(rs.getString("url"));
@@ -256,7 +256,6 @@ public class UserDAO extends MyDAO {
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        String id = dao.getMaxID();
-        System.out.println(id);
+        System.out.println(dao.getUser("fghjlk@gmail.com").getId());
     }
 }

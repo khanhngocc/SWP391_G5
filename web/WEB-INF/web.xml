@@ -96,6 +96,26 @@
         <servlet-name>ActivateAccount</servlet-name>
         <servlet-class>controller.free.ActivateAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizListController</servlet-name>
+        <servlet-class>controller.expert.QuizListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeExpertController</servlet-name>
+        <servlet-class>controller.expert.HomeExpertController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteQuizController</servlet-name>
+        <servlet-class>controller.expert.DeleteQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuizController</servlet-name>
+        <servlet-class>controller.expert.AddQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionController</servlet-name>
+        <servlet-class>controller.expert.AddQuestionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -191,6 +211,26 @@
     <servlet-mapping>
         <servlet-name>ActivateAccount</servlet-name>
         <url-pattern>/ActivateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizListController</servlet-name>
+        <url-pattern>/QuizList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeExpertController</servlet-name>
+        <url-pattern>/HomeExpert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuizController</servlet-name>
+        <url-pattern>/DeleteQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuizController</servlet-name>
+        <url-pattern>/AddQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionController</servlet-name>
+        <url-pattern>/AddQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
