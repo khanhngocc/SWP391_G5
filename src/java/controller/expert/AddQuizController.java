@@ -54,7 +54,7 @@ public class AddQuizController extends BaseRequiredLoginController {
         QuizDAO qdao = new QuizDAO();
         qdao.addQuiz(new Quizzes(title, description, subject_id, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
         request.setAttribute(title, "title");
-        request.getRequestDispatcher("AddQuestion").forward(request, response);
+        request.getRequestDispatcher("AddQuestion.jsp").forward(request, response);
         }
         catch(Exception e){
             String mess="Cannot convert string to integer!";
