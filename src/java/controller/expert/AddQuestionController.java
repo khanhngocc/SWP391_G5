@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Question;
+import model.Quizzes;
 
 /**
  *
@@ -62,6 +63,9 @@ public class AddQuestionController extends BaseRequiredLoginController {
                 qd.insertQuestion(new Question(question[i], cate[i], "Show", Integer.parseInt(lev[i]), quizId, answer1[i],answer2[i],answer3[i],answer4[i],correctAns));
             }
         }
+        Quizzes x = qizd.getQuiz().get(qizd.getQuiz().size()-1);
+        x.setNumber_of_question(x.getNumber_of_question()+question.length);
+        qizd.UpdateQuizzes(x);
         response.sendRedirect("QuizList");
     }
 

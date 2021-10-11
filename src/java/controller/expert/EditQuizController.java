@@ -7,14 +7,17 @@ package controller.expert;
 
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
+import dal.QuestionDAO;
 import dal.QuizDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Question;
 import model.Quizzes;
 
 /**
@@ -27,7 +30,10 @@ public class EditQuizController extends BaseRequiredLoginController {
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         QuizDAO quizd = new QuizDAO();
+        QuestionDAO qdao = new QuestionDAO();
+        ArrayList<Question> question = qdao.getQuestionByQuizId(id);
         Quizzes quiz = quizd.getQuizByID(id);
+        request.setAttribute("question", question);
         request.setAttribute("quiz", quiz);
         request.getRequestDispatcher("EditQuiz.jsp").forward(request, response);
         
@@ -61,11 +67,9 @@ public class EditQuizController extends BaseRequiredLoginController {
         Quizzes quizess = qud.getQuizByID(id);
         Quizzes newq = new Quizzes( Integer.parseInt(id),title, des, Integer.parseInt(subject) , Integer.parseInt(level), type , quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), "images/thumbnail/" + fileNameImg);
         qud.UpdateQuizzes(newq);
-     
- 
         
-        response.sendRedirect("QuizList");
+                  response.sendRedirect("QuizList");
     }
-    }
+}
 
  

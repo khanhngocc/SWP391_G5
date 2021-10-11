@@ -53,7 +53,7 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
 
-                                   
+
                                     <li><a href="QuizList">Quiz</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
@@ -81,11 +81,11 @@
                             <input type="file" name="fname">
 
                             <input type="hidden" value="${quiz.getThumbnail()}" name="imageurl">
-                           Title
+                            Title
                             <input name="title" type="text" placeholder="Tittle" required="true" value="${quiz.getTitle()}" />
                             Description
                             <textarea name="description"type="text" required="true">${quiz.getDescription()}</textarea>
-                       
+
                             Subject
                             <select name="subject" id="title" style="margin-bottom:10px">
                                 <option value="1" >1</option>
@@ -94,22 +94,59 @@
 
                             </select>  
 
-                           Level
+                            Level
                             <input name="level"type="number" placeholder="Level" value="${quiz.getLevel()}" />							
                             User ID:
                             <input readonly placeholder="${quiz.getUser_id()}"/>							
-                           Type
+                            Type
                             <select name="type" style="margin-bottom:10px">
                                 <option value="Free Test" ${quiz.getType() eq 'Free Test'?"selected":""}>Free Test</option>
                                 <option value="Simulation Test" ${quiz.getType()eq"Simulation Test"?"selected":""}>Simulation Test</option>
-                               
+
                             </select>
-                                Number of Questions: 
+                            Number of Questions: 
                             <input readonly placeholder="${quiz.getNumber_of_question()}"/>
                             Duration
                             <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" />	
                             Rate
                             <input name="rate"type="text" placeholder="rate" value="${quiz.getRate()}" />
+                             
+                            <a href="javascript:void(0)" onclick="Show('myTable')"><h2>List of Question</h2></a>
+               
+                            <table  class="table" id="myTable" style="display: none">
+                                <tr>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(1)">Content</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(2)">Category</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(3)">Status</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(4)">Level</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);">Option 1</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);">Option 2</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);">Option 3</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);">Option 4</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);">Correct Option</a></strong></th>
+                                    <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                                </tr>
+
+                                <c:forEach items="${question}" var="i">
+                                    <tr>
+                                        <td>${i.id}</td>
+                                        <td>${i.content}</td>
+                                        <td>${i.category}</td>
+                                        <td>${i.status}</td>
+                                        <td>${i.level}</td>
+                                        <td>${i.option1}</td>
+                                        <td>${i.option2}</td>
+                                        <td>${i.option3}</td>
+                                        <td>${i.option4}</td>
+                                        <td>${i.option_correct}</td>
+                                        <td><a href="#" onclick="deleteQuestion(${i.id},${quiz.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
+                                        <td><a href="EditQuestion?id=${i.id}&quiz=${quiz.id}"><i class="fa fa-pencil"></i>Edit</a></td>
+                                        <td><a href="#"><i class="fa fa-eye"></i> View</a></td>
+                                    </tr>     
+                                </c:forEach>
+                            </table>
+                            
                         </form>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
@@ -162,10 +199,18 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                function Submit() {
-                                    var form;
-                                    form = document.getElementById("myForm");
-                                    form.submit();
+                            function Submit() {
+                                var form;
+                                form = document.getElementById("myForm");
+                                form.submit();
+                            }
+                            
+                            function deleteQuestion(id,quiz) {
+                                    var result = confirm("Do you want to delete this quiz?");
+                                    if (result) {
+                                        window.location.href = "DeleteQuestion?id=" + id +"&quiz=" + quiz;
+                                    }
+
                                 }
         </script>
     </body>

@@ -38,6 +38,20 @@ public class Question {
         this.option_correct = option_correct;
     }
 
+    public Question(int id, String content, String category, String status, int level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
+        this.id = id;
+        this.content = content;
+        this.category = category;
+        this.status = status;
+        this.level = level;
+        this.quiz_id = quiz_id;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.option_correct = option_correct;
+    }
+
     public int getId() {
         return id;
     }
