@@ -24,6 +24,7 @@ public class DeleteQuizController extends BaseRequiredLoginController {
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         QuizDAO qdao = new QuizDAO();
+        
         qdao.deleteQuiz(Integer.parseInt(id));
         response.sendRedirect("QuizList");
     }

@@ -69,10 +69,10 @@
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                    <a href="ImportQuestion?id=${quiz.id}">Import Question List</a>
-                    <form id="create-test" action="AddQuestion" method="post">
+<!--                    <a href="ImportQuestion?id=${quiz.id}">Import Question List</a>-->
+                    <form id="create-test" action="AddQuestionInList" method="post">
                         <p><input type="submit" value="Add to Quiz" style="background-color: orange; color: white; border-radius: 12px; height: 200%;font-weight: bold">
-                       
+                        <p><input type="text" name="id" value="${id}" hidden>
                         <h4> Question:</h4>
                         <label for="cat">CATEGORY: </label> 
                         <p><input type ="text"  name="category" placeholder="Category" id="cat" required></p>

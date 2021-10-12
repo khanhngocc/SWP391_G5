@@ -128,6 +128,14 @@
         <servlet-name>EditQuestionController</servlet-name>
         <servlet-class>controller.expert.EditQuestionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImportQuestionController</servlet-name>
+        <servlet-class>controller.expert.ImportQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionInListController</servlet-name>
+        <servlet-class>controller.expert.AddQuestionInListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -255,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>EditQuestionController</servlet-name>
         <url-pattern>/EditQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportQuestionController</servlet-name>
+        <url-pattern>/ImportQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionInListController</servlet-name>
+        <url-pattern>/AddQuestionInList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

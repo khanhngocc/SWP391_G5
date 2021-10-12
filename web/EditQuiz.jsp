@@ -110,7 +110,8 @@
                             <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" />	
                             Rate
                             <input name="rate"type="text" placeholder="rate" value="${quiz.getRate()}" />
-                             
+                            
+                            
                             <a href="javascript:void(0)" onclick="Show('myTable')"><h2>List of Question</h2></a>
                
                             <table  class="table" id="myTable" style="display: none">
@@ -148,6 +149,7 @@
                             </table>
                             
                         </form>
+                            <a href="AddQuestionInList?id=${quiz.id}">Add new Question</a><br>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>

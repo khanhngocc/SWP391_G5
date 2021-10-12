@@ -37,10 +37,12 @@ public class QuizDAO extends MyDAO {
     }
 
     public void deleteQuiz(int id) {
-        xSql = "delete from [Quizzes] where id =?";
+        xSql = "delete from [Question] where quiz_id = ?\n"
+                + "delete from [Quizzes] where id =?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
+            ps.setInt(2, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
