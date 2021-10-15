@@ -39,27 +39,9 @@ public class SubjectDAO extends MyDAO {
         return no;
     }
 
-    public int getRowCountForSearch(String searchName, String statusRestricted) {
-        int no = 0;
-        xSql = "SELECT COUNT(*) from Subject WHERE title LIKE ? and status LIKE ?";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setString(1, "%" + searchName + "%");
+    
 
-            ps.setString(2, "%" + statusRestricted + "%");
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                no = rs.getInt(1);
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return no;
-    }
-
-    public ArrayList<Subject> listAllSubject(int pageIndex, int pageSize, String searchName, String statusRestricted) {
+    public ArrayList<Subject> listAllSubject(int pageIndex, int pageSize, String statusRestricted) {
 
         int numberOfRecord = (pageIndex - 1) * pageSize;
         ArrayList<Subject> list = new ArrayList<>();
@@ -68,7 +50,6 @@ public class SubjectDAO extends MyDAO {
             String sql = "Select Subject.id,Subject.title,Subject.status,price,salePrice,[User].fullname from Subject,[User]\n"
                     + "where\n"
                     + "Subject.user_id = [User].id\n"
-                    + "and Subject.title like ?\n"
                     + "and Subject.status like ? \n"
                     + "order by Subject.id desc\n"
                     + "OFFSET ? ROWS\n"
@@ -76,10 +57,10 @@ public class SubjectDAO extends MyDAO {
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + searchName + "%");
-            statement.setString(2, "%" + statusRestricted + "%");
-            statement.setInt(3, numberOfRecord);
-            statement.setInt(4, pageSize);
+  
+            statement.setString(1, "%" + statusRestricted + "%");
+            statement.setInt(2, numberOfRecord);
+            statement.setInt(3, pageSize);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {

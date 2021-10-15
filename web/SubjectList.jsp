@@ -65,11 +65,7 @@
 
         <section><!--slider-->
             <div class="container" style="height: auto; margin-bottom: 40px">
-                <form action="SubjectList" class="searchform">
-                   
-                    <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </form>
+            
 
 
                 <div style="margin-top: 30px; margin-bottom: 20px">
@@ -117,20 +113,20 @@
                     <ul class="pagination">
 
                         <c:if test="${pageindex gt gap}">
-                            <li class="page-item"><a class="page-link" href="SubjectList?page=1&searchName=${name_search}">First</a></li>
+                            <li class="page-item"><a class="page-link" href="SubjectList?page=1">First</a></li>
                             </c:if>
                             <c:forEach var = "i" begin = "${gap}" end = "1">
                                 <c:if test="${pageindex - gap gt 0}">
-                                <li class="page-item"><a class="page-link" href="SubjectList?page=${pageindex -i}&searchName=${name_search}">${pageindex - i}</a></li>
+                                <li class="page-item"><a class="page-link" href="SubjectList?page=${pageindex -i}">${pageindex - i}</a></li>
                                 </c:if>
                             </c:forEach>
                             <c:forEach var = "i" begin = "1" end = "${gap}">
                                 <c:if test="${pageindex + gap le pagecount}">
-                                <li class="page-item"><a class="page-link" href="SubjectList?page=${pageindex + i}&searchName=${name_search}">${pageindex + i}</a></li> 
+                                <li class="page-item"><a class="page-link" href="SubjectList?page=${pageindex + i}">${pageindex + i}</a></li> 
                                 </c:if>
                             </c:forEach>
                             <c:if test="${pageindex + gap lt pagecount}">
-                            <li class="page-item"><a class="page-link" href="SubjectList?page=${pagecount}&searchName=${name_search}">Last</a></li> 
+                            <li class="page-item"><a class="page-link" href="SubjectList?page=${pagecount}">Last</a></li> 
                             </c:if>
                     </ul>
 

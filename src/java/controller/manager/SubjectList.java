@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SubjectList extends BaseRequiredLoginController {
 
-    private String searchName ="";
+
     
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,20 +45,8 @@ public class SubjectList extends BaseRequiredLoginController {
 
         int rowCount = 0;
 
-        String name_search = request.getParameter("searchName");
+        rowCount = dao.getRowCount("");
        
-
-
-        if (name_search == null) {
-            searchName = "";
-           
-            rowCount = dao.getRowCount("");
-        } else {
-            searchName = name_search;
-           
-            rowCount = dao.getRowCountForSearch(searchName,"");
-
-        }
 
         int pageCount;
 
@@ -70,12 +58,12 @@ public class SubjectList extends BaseRequiredLoginController {
 
         int gap = 1;
 
-        ArrayList<model.Subject> listAllSubject = dao.listAllSubject(pageIndex, pageSize, searchName,"");
+        ArrayList<model.Subject> listAllSubject = dao.listAllSubject(pageIndex, pageSize,"");
         request.setAttribute("list_all_subjects", listAllSubject);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);
         request.setAttribute("gap", gap);
-        request.setAttribute("name_search", searchName);
+     
         request.getRequestDispatcher("SubjectList.jsp").forward(request, response);
     }
 
