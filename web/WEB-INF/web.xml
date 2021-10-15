@@ -136,6 +136,10 @@
         <servlet-name>AddQuestionInListController</servlet-name>
         <servlet-class>controller.expert.AddQuestionInListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizDetailController</servlet-name>
+        <servlet-class>controller.expert.QuizDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>AddQuestionInListController</servlet-name>
         <url-pattern>/AddQuestionInList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizDetailController</servlet-name>
+        <url-pattern>/QuizDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
