@@ -32,7 +32,7 @@ public class ExcelHelper {
         String content = "";
         String category = "";
         String status = "";
-        int level = 0;
+        String level = "";
         String option1 = "";
         String option2 = "";
         String option3 = "";
@@ -66,7 +66,7 @@ public class ExcelHelper {
                         status = (String) getCellValue(cell);
                         break;
                     case 3:
-                        level = new BigDecimal((double) cellValue).intValue();
+                        level = (String) getCellValue(cell);
                         break;
                     case 4:
                         option1 = (String) getCellValue(cell);

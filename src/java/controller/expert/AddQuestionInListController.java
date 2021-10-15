@@ -8,14 +8,17 @@ package controller.expert;
 import controller.base.BaseRequiredLoginController;
 import dal.QuestionDAO;
 import dal.QuizDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Question;
 import model.Quizzes;
+import model.Setting;
 
 /**
  *
@@ -27,6 +30,9 @@ public class AddQuestionInListController extends BaseRequiredLoginController {
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         request.setAttribute("id", id);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
+        request.setAttribute("listLevel", listLevel);
         request.getRequestDispatcher("AddQuestionInList.jsp").forward(request, response);
     }
 
@@ -41,9 +47,9 @@ public class AddQuestionInListController extends BaseRequiredLoginController {
         String[] answer3 = request.getParameterValues("answer3");
         String[] answer4 = request.getParameterValues("answer4");
         String[] correct = request.getParameterValues("correct");
-           QuestionDAO qd = new QuestionDAO();
-           QuizDAO qizd = new QuizDAO();    
-          int quizId = qizd.getQuiz().get(qizd.getQuiz().size()-1).getId();
+        QuestionDAO qd = new QuestionDAO();
+        QuizDAO qizd = new QuizDAO();
+        int quizId = qizd.getQuiz().get(qizd.getQuiz().size() - 1).getId();
         for (int i = 0; i < question.length; i++) {
             if (!question[i].isEmpty() && !answer1[i].isEmpty() && !answer2[i].isEmpty() && !answer3[i].isEmpty() && !answer4[i].isEmpty() && !correct[i].isEmpty()) {
                 String correctAns;
@@ -63,13 +69,13 @@ public class AddQuestionInListController extends BaseRequiredLoginController {
                     default:
                         correctAns = "";
                 }
-                qd.insertQuestion(new Question(question[i], cate[i], "Show", Integer.parseInt(lev[i]), quizId, answer1[i],answer2[i],answer3[i],answer4[i],correctAns));
+                qd.insertQuestion(new Question(question[i], cate[i], "Show", lev[i], quizId, answer1[i], answer2[i], answer3[i], answer4[i], correctAns));
             }
         }
-        Quizzes x = qizd.getQuiz().get(qizd.getQuiz().size()-1);
-        x.setNumber_of_question(x.getNumber_of_question()+question.length);
+        Quizzes x = qizd.getQuiz().get(qizd.getQuiz().size() - 1);
+        x.setNumber_of_question(x.getNumber_of_question() + question.length);
         qizd.UpdateQuizzes(x);
-        response.sendRedirect("EditQuiz?id="+id);
+        response.sendRedirect("EditQuiz?id=" + id);
     }
 
 }

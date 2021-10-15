@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="HomeExpert"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -82,18 +82,25 @@
                             <input name="description" type="text" placeholder="Description" required="true" />
                             Subject 
                             <select name="subject" id="subject" style="margin-bottom:10px">
-                                <option value="1">Math</option>
+                                <c:forEach items="${listSubject}" var="list">
+                                    <option value="${list.id}">${list.title}</option>
+                                </c:forEach>
                             </select>
                             Level
-                            <input name="level" type="text" placeholder="Level" required="true" />                            
+                            <select name="level" style="margin-bottom:10px">
+                                <c:forEach items="${listLevel}" var="list">
+                                    <option value="${list.value}">${list.value}</option>
+                                </c:forEach>
+                            </select>                              
                             Type
-                            <select name="type" id="type" style="margin-bottom:10px">
-                                <option value="Free Test">Free Test</option>
-                                <option value="Simulation Test">Simulation Test</option>
+                            <select name="type" style="margin-bottom:10px">
+                                <c:forEach items="${listType}" var="list">
+                                    <option value="${list.value}">${list.value}</option>
+                                </c:forEach>
                             </select>  
                             Duration (in seconds)
                             <input name="duration" type="text" placeholder="Duration" />													                           
-                            
+
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
                         </form>                            
                     </div>

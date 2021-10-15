@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="HomeExpert"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>

@@ -14,7 +14,7 @@ public class Question {
     private String content;
     private String category;
     private String status;
-    private int level;
+    private String level;
     private int quiz_id;
     private String option1;
     private String option2;
@@ -25,7 +25,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String content, String category, String status, int level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
+    public Question(String content, String category, String status, String level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
         this.content = content;
         this.category = category;
         this.status = status;
@@ -38,7 +38,7 @@ public class Question {
         this.option_correct = option_correct;
     }
 
-    public Question(int id, String content, String category, String status, int level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
+    public Question(int id, String content, String category, String status, String level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
         this.id = id;
         this.content = content;
         this.category = category;
@@ -84,13 +84,15 @@ public class Question {
         this.status = status;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
+
+   
 
     public int getQuiz_id() {
         return quiz_id;

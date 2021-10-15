@@ -14,7 +14,7 @@ public class Quizzes {
     private String title;
     private String description;
     private int subject_id;
-    private int level;
+    private String level;
     private String type;
     private int user_id;
     private int number_of_question;
@@ -25,7 +25,7 @@ public class Quizzes {
     public Quizzes() {
     }
 
-    public Quizzes(String title, String description, int subject_id, int level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
+    public Quizzes(String title, String description, int subject_id, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
         this.title = title;
         this.description = description;
         this.subject_id = subject_id;
@@ -38,7 +38,7 @@ public class Quizzes {
         this.thumbnail = thumbnail;
     }
 
-    public Quizzes(int id, String title, String description, int subject_id, int level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
+    public Quizzes(int id, String title, String description, int subject_id, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -84,13 +84,15 @@ public class Quizzes {
         this.subject_id = subject_id;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
+
+    
 
     public String getType() {
         return type;

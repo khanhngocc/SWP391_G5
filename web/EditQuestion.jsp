@@ -64,72 +64,77 @@
 
         </header>
         <section>
-                    <div class="shopper-informations">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-6">
-                    <form id="create-test" action="EditQuestion" method="post">
-                        <p><input type="text" name="id" value="${question.id}" hidden></p>                    
-                        <h4> Question Edit</h4>
-                        <label for="cat">CATEGORY: </label> 
-                        <p><input type ="text"  name="category" placeholder="Category" id="cat" value="${question.category}" required></p>
-                        <label for="cat">Level: </label> 
-                        <p><input type ="number"  name="level" placeholder="Level" id="lev" value="${question.level}" required></p>                            
-                        <p><textarea name="question" id="quest" >${question.content}</textarea>
-                        <p><input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
-                        <p><input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
-                        <p><input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
-                        <p><input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
-                            
-                        <p>Correct Answer:
-                        <p>                           
-                            <select name="correct" id="correct">
-                                <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
-                                <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
-                                <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
-                                <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
-                            </select>
-                        </p>       
-                        <p><input type="text" name="quiz" value="${quiz}" hidden></p>
-                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Update</button>
-                    </form>
-                    
+            <div class="shopper-informations">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <form id="create-test" action="EditQuestion" method="post">
+                            <p><input type="text" name="id" value="${question.id}" hidden></p>                    
+                            <h4> Question Edit</h4>
+                            <label for="cat">CATEGORY: </label> 
+                            <p><input type ="text"  name="category" placeholder="Category" id="cat" value="${question.category}" required></p>
+                            Level
+
+                            <select name="level" style="margin-bottom:10px">
+                                <c:forEach items="${listLevel}" var="list">
+                                    <option value="${list.value}" ${question.level eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
+                            </select>                    
+                            <p><textarea name="question" id="quest" >${question.content}</textarea>
+                            <p><input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
+                            <p><input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
+                            <p><input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
+                            <p><input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
+
+                            <p>Correct Answer:
+                            <p>                           
+                                <select name="correct" id="correct">
+                                    <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
+                                    <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
+                                    <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
+                                    <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
+                                </select>
+                            </p>       
+                            <p><input type="text" name="quiz" value="${quiz}" hidden></p>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Update</button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
-        </div>
         </section>
-    <!--/form-->
-    <footer id="footer"><!--Footer-->
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="companyinfo">
-                            <h2><span>Mega</span>-Deal</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+        <!--/form-->
+        <footer id="footer"><!--Footer-->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="companyinfo">
+                                <h2><span>Mega</span>-Deal</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-6">
-                        <div class="address">
-                            <img src="images/home/map.png" alt="" />
-                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                        <div class="col-sm-6">
+                            <div class="address">
+                                <img src="images/home/map.png" alt="" />
+                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
+                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </footer>
+        </footer>
 
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
@@ -137,6 +142,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
-</body>
+    </body>
 
 </html>

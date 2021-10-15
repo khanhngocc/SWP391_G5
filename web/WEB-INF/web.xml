@@ -136,6 +136,34 @@
         <servlet-name>AddQuestionInListController</servlet-name>
         <servlet-class>controller.expert.AddQuestionInListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddSubject</servlet-name>
+        <servlet-class>controller.manager.AddSubject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeSubjectStatus</servlet-name>
+        <servlet-class>controller.manager.ChangeSubjectStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSubject</servlet-name>
+        <servlet-class>controller.manager.DeleteSubject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeManager</servlet-name>
+        <servlet-class>controller.manager.HomeManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectDetailed</servlet-name>
+        <servlet-class>controller.manager.SubjectDetailed</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectList</servlet-name>
+        <servlet-class>controller.manager.SubjectList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSubject</servlet-name>
+        <servlet-class>controller.manager.UpdateSubject</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -271,6 +299,34 @@
     <servlet-mapping>
         <servlet-name>AddQuestionInListController</servlet-name>
         <url-pattern>/AddQuestionInList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSubject</servlet-name>
+        <url-pattern>/AddSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSubjectStatus</servlet-name>
+        <url-pattern>/ChangeSubjectStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSubject</servlet-name>
+        <url-pattern>/DeleteSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeManager</servlet-name>
+        <url-pattern>/HomeManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectDetailed</servlet-name>
+        <url-pattern>/SubjectDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectList</servlet-name>
+        <url-pattern>/SubjectList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSubject</servlet-name>
+        <url-pattern>/UpdateSubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

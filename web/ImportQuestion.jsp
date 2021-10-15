@@ -70,17 +70,20 @@
                     <div class="col-sm-6">
                         <p><center><h2 class="danger">Import Guideline!</h2></center>
                         <br><br>
-                        <p>1. You can only import .xsl or .xlsx file </p>
-                        <p>2. Please format Excel file like following example</p>
+                        <p>1. Using this template to fill data </p>
+                        <a href="sheet/import-quiz-template.xlsx" download>
+                            <i class="fa fa-download" style="color: #FE980F;margin-bottom: 3px"></i> Download Template
+                        </a>
+                        <p>2. Please format data file like following example</p>
                         <div class="container alginBodyLanding">
                             <img src="images/home/ExcelExample.png" alt="" class="centerImgLanding" style="height: 200px; width: auto">
                         </div>
                         <p>3. Ensure that option1, option2, option3, option4, optionCorrect are TEXT. 
                         <p>4. Browse your file and enjoy your day ^_^ 
-                            
+
                         <form enctype="multipart/form-data" id="myForm" action="ImportQuestion?id=${id}" method="post">
                             <input type="file" name="fname">
-                            
+
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Import</button>
                         </form>
                     </div>

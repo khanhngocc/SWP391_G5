@@ -25,7 +25,7 @@ public class QuizDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+                x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
                         rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getFloat(10), rs.getString(11)));
             }
             rs.close();
@@ -67,7 +67,7 @@ public class QuizDAO extends MyDAO {
             ps.setString(1, q.getTitle());
             ps.setString(2, q.getDescription());
             ps.setInt(3, q.getSubject_id());
-            ps.setInt(4, q.getLevel());
+            ps.setString(4, q.getLevel());
             ps.setString(5, q.getType());
             ps.setInt(6, q.getUser_id());
             ps.setInt(7, q.getNumber_of_question());
@@ -88,7 +88,7 @@ public class QuizDAO extends MyDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             if(rs.next()){
-                q =  new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getFloat(10), rs.getString(11));
+                q =  new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getFloat(10), rs.getString(11));
             }
             return q;
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class QuizDAO extends MyDAO {
             ps.setString(1, q.getTitle());
             ps.setString(2, q.getDescription());
             ps.setInt(3,q.getSubject_id());
-            ps.setInt(4, q.getLevel());
+            ps.setString(4, q.getLevel());
             ps.setString(5,q.getType());
             ps.setInt(6, q.getUser_id());
              ps.setInt(7, q.getNumber_of_question());

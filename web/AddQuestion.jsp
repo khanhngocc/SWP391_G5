@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="HomeExpert"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -84,7 +84,7 @@
                         <p><input type="text" name="answer3" placeholder="Answer 3">
                         <p><input type="text" name="answer4" placeholder="Answer 4">
                             
-                        <p>Correct Answer:
+                        Correct Answer:
                         <p>                           
                             <select name="correct" id="correct">
                                 <option value="1"> Answer 1</option>

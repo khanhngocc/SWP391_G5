@@ -77,6 +77,9 @@ public class LoginController extends HttpServlet {
             } else if (user_roll.equals("Expert")) {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("HomeExpert.jsp");
+            } else if (user_roll.equals("Manager")) {
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("HomeManager.jsp");
             }
 
         }

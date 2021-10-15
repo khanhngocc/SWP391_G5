@@ -7,13 +7,16 @@ package controller.expert;
 
 import controller.base.BaseRequiredLoginController;
 import dal.QuestionDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Question;
+import model.Setting;
 
 /**
  *
@@ -29,6 +32,9 @@ public class EditQuestionController extends BaseRequiredLoginController {
         Question question = qdao.getQuestionById(id);
         request.setAttribute("quiz", quiz);
         request.setAttribute("question", question);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
+        request.setAttribute("listLevel", listLevel);
         request.getRequestDispatcher("EditQuestion.jsp").forward(request, response);
     }
 
@@ -62,7 +68,7 @@ public class EditQuestionController extends BaseRequiredLoginController {
                         correctAns = "";
                 }
         QuestionDAO qdao = new QuestionDAO();
-        qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, "Show", Integer.parseInt(lev), 
+        qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, "Show", lev, 
                 Integer.parseInt(quiz), answer1, answer2, answer3, answer4, correctAns));
         response.sendRedirect("EditQuiz?id="+quiz);
     }

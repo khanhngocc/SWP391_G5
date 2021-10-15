@@ -9,6 +9,8 @@ import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
 import dal.QuestionDAO;
 import dal.QuizDAO;
+import dal.SettingDAO;
+import dal.SubjectDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Question;
 import model.Quizzes;
+import model.Setting;
+import model.Subject;
 
 /**
  *
@@ -35,8 +39,16 @@ public class EditQuizController extends BaseRequiredLoginController {
         Quizzes quiz = quizd.getQuizByID(id);
         request.setAttribute("question", question);
         request.setAttribute("quiz", quiz);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
+        ArrayList<Setting> listType = settingDAO.getListSettingByType("Exam type");
+        request.setAttribute("listLevel", listLevel);
+        request.setAttribute("listType", listType);
+        SubjectDAO subjectDAO = new SubjectDAO();
+        ArrayList<Subject> listSubject = subjectDAO.listAllSubject("Published");
+        request.setAttribute("listSubject", listSubject);
         request.getRequestDispatcher("EditQuiz.jsp").forward(request, response);
-        
+
     }
 
     @Override
@@ -55,7 +67,7 @@ public class EditQuizController extends BaseRequiredLoginController {
             int indexOflast = fileNameImgPath.lastIndexOf("\\");
             fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
-       
+
         String title = m.getParameter("title");
         String des = m.getParameter("description");
         String subject = m.getParameter("subject");
@@ -65,11 +77,9 @@ public class EditQuizController extends BaseRequiredLoginController {
         String rate = m.getParameter("rate");
         QuizDAO qud = new QuizDAO();
         Quizzes quizess = qud.getQuizByID(id);
-        Quizzes newq = new Quizzes( Integer.parseInt(id),title, des, Integer.parseInt(subject) , Integer.parseInt(level), type , quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), "images/thumbnail/" + fileNameImg);
+        Quizzes newq = new Quizzes(Integer.parseInt(id), title, des, Integer.parseInt(subject), level, type, quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), "images/thumbnail/" + fileNameImg);
         qud.UpdateQuizzes(newq);
-        
-                  response.sendRedirect("QuizList");
+
+        response.sendRedirect("QuizList");
     }
 }
-
- 

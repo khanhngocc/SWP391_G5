@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
+                                <a href="HomeExpert"><img src="images/home/partner1.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -87,33 +87,36 @@
                             <textarea name="description"type="text" required="true">${quiz.getDescription()}</textarea>
 
                             Subject
-                            <select name="subject" id="title" style="margin-bottom:10px">
-                                <option value="1" >1</option>
-                                <option value="2" >2</option>
-                                <option value="3" >3</option>
-
-                            </select>  
+                            <select name="subject" id="subject" style="margin-bottom:10px">
+                                <c:forEach items="${listSubject}" var="list">
+                                    <option value="${list.id}" ${quiz.subject_id eq list.id ? "selected" : "" }>${list.title}</option>
+                                </c:forEach>
+                            </select>
 
                             Level
-                            <input name="level"type="number" placeholder="Level" value="${quiz.getLevel()}" />							
-                            User ID:
-                            <input readonly placeholder="${quiz.getUser_id()}"/>							
+
+                            <select name="level" style="margin-bottom:10px">
+                                <c:forEach items="${listLevel}" var="list">
+                                    <option value="${list.value}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
+                            </select>
+
+                            <input type="hidden" placeholder="${quiz.getUser_id()}"/>							
                             Type
                             <select name="type" style="margin-bottom:10px">
-                                <option value="Free Test" ${quiz.getType() eq 'Free Test'?"selected":""}>Free Test</option>
-                                <option value="Simulation Test" ${quiz.getType()eq"Simulation Test"?"selected":""}>Simulation Test</option>
-
+                                <c:forEach items="${listType}" var="list">
+                                    <option value="${list.value}" ${quiz.getType() eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
                             </select>
-                            Number of Questions: 
-                            <input readonly placeholder="${quiz.getNumber_of_question()}"/>
+
                             Duration
                             <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" />	
                             Rate
                             <input name="rate"type="text" placeholder="rate" value="${quiz.getRate()}" />
-                            
-                            
-                            <a href="javascript:void(0)" onclick="Show('myTable')"><h2>List of Question</h2></a>
-               
+
+
+                            <a href="javascript:void(0)" onclick="Show('myTable')"><h2>List of Question (${quiz.getNumber_of_question()})</h2></a>
+
                             <table  class="table" id="myTable" style="display: none">
                                 <tr>
                                     <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
@@ -147,9 +150,9 @@
                                     </tr>     
                                 </c:forEach>
                             </table>
-                            
+
                         </form>
-                            <a href="AddQuestionInList?id=${quiz.id}">Add new Question</a><br>
+                        <a href="AddQuestionInList?id=${quiz.id}">Add new Question</a><br>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
@@ -206,14 +209,14 @@
                                 form = document.getElementById("myForm");
                                 form.submit();
                             }
-                            
-                            function deleteQuestion(id,quiz) {
-                                    var result = confirm("Do you want to delete this quiz?");
-                                    if (result) {
-                                        window.location.href = "DeleteQuestion?id=" + id +"&quiz=" + quiz;
-                                    }
 
+                            function deleteQuestion(id, quiz) {
+                                var result = confirm("Do you want to delete this quiz?");
+                                if (result) {
+                                    window.location.href = "DeleteQuestion?id=" + id + "&quiz=" + quiz;
                                 }
+
+                            }
         </script>
     </body>
 

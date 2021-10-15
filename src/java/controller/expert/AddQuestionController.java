@@ -60,7 +60,7 @@ public class AddQuestionController extends BaseRequiredLoginController {
                     default:
                         correctAns = "";
                 }
-                qd.insertQuestion(new Question(question[i], cate[i], "Show", Integer.parseInt(lev[i]), quizId, answer1[i],answer2[i],answer3[i],answer4[i],correctAns));
+                qd.insertQuestion(new Question(question[i], cate[i], "Show", lev[i], quizId, answer1[i],answer2[i],answer3[i],answer4[i],correctAns));
             }
         }
         Quizzes x = qizd.getQuiz().get(qizd.getQuiz().size()-1);
