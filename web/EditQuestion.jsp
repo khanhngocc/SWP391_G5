@@ -64,14 +64,14 @@
 
         </header>
         <section>
-            <div class="shopper-informations">
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-6">
+            <div class="container">
+                <div class="col-sm-9">
+                    
+                    <div class="signup-form">
                         <form id="create-test" action="EditQuestion" method="post">
-                            <p><input type="text" name="id" value="${question.id}" hidden></p>                    
+                            <p><input type="hidden" name="id" value="${question.id}" ></p>                    
                             <h4> Question Edit</h4>
-                            <label for="cat">CATEGORY: </label> 
+                            Category
                             <p><input type ="text"  name="category" placeholder="Category" id="cat" value="${question.category}" required></p>
                             Level
 
@@ -79,14 +79,19 @@
                                 <c:forEach items="${listLevel}" var="list">
                                     <option value="${list.value}" ${question.level eq list.value ? "selected" : "" }>${list.value}</option>
                                 </c:forEach>
-                            </select>                    
-                            <p><textarea name="question" id="quest" >${question.content}</textarea>
-                            <p><input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
-                            <p><input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
-                            <p><input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
-                            <p><input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
+                            </select>
+                            Content
+                            <textarea name="question" id="quest" >${question.content}</textarea>
+                            Option 1
+                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
+                            Option 2
+                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
+                            Option 3
+                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
+                            Option 4
+                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
 
-                            <p>Correct Answer:
+                            Correct Answer:
                             <p>                           
                                 <select name="correct" id="correct">
                                     <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
@@ -95,7 +100,7 @@
                                     <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
                                 </select>
                             </p>       
-                            <p><input type="text" name="quiz" value="${quiz}" hidden></p>
+                            <p><input type="hidden" name="quiz" value="${quiz}"></p>
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Update</button>
                         </form>
 
