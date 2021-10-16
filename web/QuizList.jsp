@@ -86,7 +86,7 @@
                         <tr>
                             <td>${i.id}</td>
                             <td>${i.title}</td>
-                            <td>${i.subject_id}</td>
+                            <td>${sdao.getSubject(i.subject_id,"Published").title}</td>
                             <td>${i.level}</td>
                             <td>${i.type}</td>
                             <td>${i.user_id}</td>

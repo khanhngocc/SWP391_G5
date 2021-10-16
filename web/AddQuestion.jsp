@@ -64,42 +64,51 @@
 
         </header>
         <section>
-            
-                    <div class="shopper-informations">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-6">
-                    <a href="ImportQuestion?id=${quiz.id}">Import Question List</a>
-                    <form id="create-test" action="AddQuestion" method="post">
-                        <p><input type="submit" value="Add to Quiz" style="background-color: orange; color: white; border-radius: 12px; height: 200%;font-weight: bold">
-                       
-                        <h4> Question:</h4>
-                        <label for="cat">CATEGORY: </label> 
-                        <p><input type ="text"  name="category" placeholder="Category" id="cat" required></p>
-                        <label for="cat">Level: </label> 
-                        <p><input type ="number"  name="level" placeholder="Level" id="lev" required></p>                            
-                        <p><textarea name="question" id="quest" >Question</textarea>
-                        <p><input type="text" name="answer1" placeholder="Answer 1">
-                        <p><input type="text" name="answer2" placeholder="Answer 2">
-                        <p><input type="text" name="answer3" placeholder="Answer 3">
-                        <p><input type="text" name="answer4" placeholder="Answer 4">
-                            
-                        Correct Answer:
-                        <p>                           
-                            <select name="correct" id="correct">
-                                <option value="1"> Answer 1</option>
-                                <option value="2"> Answer 2</option>
-                                <option value="3"> Answer 3</option>
-                                <option value="4"> Answer 4</option>                               
+
+            <div class="container">
+                <div class="col-sm-9">
+                 
+                    <div class="signup-form">
+                 <a href="ImportQuestion?id=${quiz.id}">Import Question List</a>
+                        <form id="create-test" action="AddQuestion" method="post">
+                            <p><input type="submit" value="Add to Quiz" style="background-color: orange; color: white; border-radius: 12px; width:100px;font-weight: bold">
+                            <p><input type="hidden" name="id" value="${id}" >
+                            <h4>Add Question</h4>
+                            Category
+                            <p><input type ="text"  name="category" placeholder="Category" id="cat" required></p>
+                            Level
+                            <select name="level" style="margin-bottom:10px">
+                                <c:forEach items="${listLevel}" var="list">
+                                    <option value="${list.value}">${list.value}</option>
+                                </c:forEach>
                             </select>
-                        </p>       
-                        
-                    </form>
-                    <center><button onclick="addQuiz()" style="background-color: orange;height: 200%;width: 50%;color: white; border: none;font-weight: bold">Add</button> 
-                    <button id="count" style="cursor: not-allowed; border-radius: 50%">1</button></center>
+                            Content
+                            <textarea name="question" id="quest" >Question</textarea>
+                            Option 1
+                            <input type="text" name="answer1" placeholder="Answer 1">
+                            Option 2
+                            <input type="text" name="answer2" placeholder="Answer 2">
+                            Option 3
+                            <input type="text" name="answer3" placeholder="Answer 3">
+                            Option 4
+                            <input type="text" name="answer4" placeholder="Answer 4">
+
+                            Correct Answer:
+                            <p>                           
+                                <select name="correct" id="correct">
+                                    <option value="1"> Answer 1</option>
+                                    <option value="2"> Answer 2</option>
+                                    <option value="3"> Answer 3</option>
+                                    <option value="4"> Answer 4</option>                               
+                                </select>
+                            </p>       
+
+                        </form>
+                        <center><button onclick="addQuiz()" style="background-color: orange;width: 100px;color: white; border: none;font-weight: bold; margin-bottom: 50px">Append</button> 
+                            <button id="count" style="cursor: not-allowed; border-radius: 50%">1</button></center>
+                    </div>
                 </div>
             </div>
-        </div>
         </section>
     <!--/form-->
     <footer id="footer"><!--Footer-->
@@ -141,14 +150,14 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-            function addQuiz(){                
-                var elem = document.getElementById("create-test");
-                elem.insertAdjacentHTML("beforeend",'<h4> Question:</h4><label for="cat">CATEGORY:</label><p><input type ="text"  name="category" placeholder="Category" id="cat" required></p><label for="cat">Level:</label> <p><input type ="number"  name="level" placeholder="Level" id="lev" required></p> <p><textarea name="question" id="quest" >Question</textarea><p><input type="text" name="answer1" placeholder="Answer 1"><p><input type="text" name="answer2" placeholder="Answer 2"><p><input type="text" name="answer3" placeholder="Answer 3"><p><input type="text" name="answer4" placeholder="Answer 4"><p>Correct Answer:<p><select name="correct" id="correct"><option value="1"> Answer 1</option><option value="2"> Answer 2</option><option value="3"> Answer 3</option><option value="4"> Answer 4</option></select></p>');                
-                var count = parseInt(document.getElementById("count").innerHTML);
-                count++;
-                var cout = document.getElementById("count");
-                cout.innerHTML=count;
-            }
+            function addQuiz() {
+                                var elem = document.getElementById("create-test");
+                                elem.insertAdjacentHTML("beforeend", '<h4>Add Question</h4>Category<p><input type ="text"  name="category" placeholder="Category" id="cat" required></p>Level<select name="level" style="margin-bottom:10px"><c:forEach items="${listLevel}" var="list"><option value="${list.value}">${list.value}</option></c:forEach></select> Content<textarea name="question" id="quest" >Question</textarea>Option 1<input type="text" name="answer1" placeholder="Answer 1">Option 2<input type="text" name="answer2" placeholder="Answer 2">Option 3<input type="text" name="answer3" placeholder="Answer 3">Option 4<input type="text" name="answer4" placeholder="Answer 4"><p>Correct Answer:<p><select name="correct" id="correct"><option value="1"> Answer 1</option><option value="2"> Answer 2</option><option value="3"> Answer 3</option><option value="4"> Answer 4</option></select></p>');
+                                var count = parseInt(document.getElementById("count").innerHTML);
+                                count++;
+                                var cout = document.getElementById("count");
+                                cout.innerHTML = count;
+                            }
         </script>
 </body>
 

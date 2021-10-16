@@ -6,37 +6,38 @@
 package controller.expert;
 
 import controller.base.BaseRequiredLoginController;
+import dal.QuestionDAO;
 import dal.QuizDAO;
 import dal.SubjectDAO;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Question;
 import model.Quizzes;
+import model.Subject;
 
 /**
  *
  * @author Admin
  */
-public class QuizListController extends BaseRequiredLoginController {
+public class QuizDetailController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QuizDAO qdao = new QuizDAO();
-        List<Quizzes> quizlist = qdao.getQuiz();
-        int pageSize = quizlist.size() % 10 == 0 ? quizlist.size() / 10 : quizlist.size() / 10 + 1;
-        int currentPage;
-        try {
-            currentPage = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception e) {
-            currentPage = 1;
-        }
-        request.setAttribute("list", quizlist.subList(10 * (currentPage - 1), 10 * currentPage > quizlist.size() ? quizlist.size() : 10 * currentPage));
-        request.setAttribute("pagesize", pageSize);
-        request.setAttribute("page", currentPage);
-        request.setAttribute("sdao",new SubjectDAO());
-        request.getRequestDispatcher("QuizList.jsp").forward(request, response);
+        SubjectDAO sdao = new SubjectDAO();
+        String id = request.getParameter("id");
+        
+        QuizDAO quizd = new QuizDAO();
+        QuestionDAO qdao = new QuestionDAO();
+        ArrayList<Question> question = qdao.getQuestionByQuizId(id);
+        Quizzes quiz = quizd.getQuizByID(id);
+        Subject sub = sdao.getSubject(quiz.getSubject_id(), "Published");
+        request.setAttribute("question", question);
+        request.setAttribute("quiz", quiz);
+        request.setAttribute("sub", sub);
+        request.getRequestDispatcher("QuizDetail.jsp").forward(request, response);
     }
 
     @Override

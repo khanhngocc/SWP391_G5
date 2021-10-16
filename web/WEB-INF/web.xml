@@ -164,6 +164,10 @@
         <servlet-name>UpdateSubject</servlet-name>
         <servlet-class>controller.manager.UpdateSubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizDetailController</servlet-name>
+        <servlet-class>controller.expert.QuizDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -327,6 +331,10 @@
     <servlet-mapping>
         <servlet-name>UpdateSubject</servlet-name>
         <url-pattern>/UpdateSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizDetailController</servlet-name>
+        <url-pattern>/QuizDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
