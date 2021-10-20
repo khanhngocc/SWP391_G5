@@ -42,9 +42,9 @@ public class SubjectDAO extends MyDAO{
         ArrayList<Subject> list = new ArrayList<>();
 
         try {
-            String sql = "Select Subject.id,Subject.title,Subject.status,price,salePrice,[User].fullname from Subject,[User]\n"
+            String sql = "Select Subject.id,Subject.title,Subject.status,price,salePrice,User.fullname from Subject,User\n"
                     + "where\n"
-                    + "Subject.user_id = [User].id\n"
+                    + "Subject.user_id = User.id\n"
                     + "and Subject.status like ? \n";
                     
             PreparedStatement statement;
@@ -81,13 +81,13 @@ public class SubjectDAO extends MyDAO{
         ArrayList<Subject> list = new ArrayList<>();
 
         try {
-            String sql = "Select Subject.id,Subject.title,Subject.status,price,salePrice,[User].fullname from Subject,[User]\n"
+            String sql = "Select Subject.id,Subject.title,Subject.status,price,salePrice,User.fullname from Subject,User\n"
                     + "where\n"
-                    + "Subject.user_id = [User].id\n"
+                    + "Subject.user_id = User.id\n"
                     + "and Subject.status like ? \n"
                     + "order by Subject.id desc\n"
-                    + "OFFSET ? ROWS\n"
-                    + "FETCH NEXT ? ROWS ONLY";
+                    + "LIMIT ?,?";
+                  
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
@@ -137,9 +137,9 @@ public class SubjectDAO extends MyDAO{
 
         Subject s = new Subject();
 
-        xSql = "select Subject.id,Subject.title,Subject.status,price,salePrice,[User].fullname from Subject,[User]\n"
+        xSql = "select Subject.id,Subject.title,Subject.status,price,salePrice,User.fullname from Subject,User\n"
                 + "where\n"
-                + "Subject.user_id = [User].id\n"
+                + "Subject.user_id = User.id\n"
                 + "and\n"
                 + "Subject.status like ? and\n"
                 + "Subject.id = ?";
@@ -178,12 +178,12 @@ public class SubjectDAO extends MyDAO{
     }
 
     public void createSubject(Subject subject, User user) {
-        xSql = "INSERT INTO [Subject]\n"
-                + "           ([title]\n"
-                + "           ,[user_id]\n"
-                + "           ,[status]\n"
-                + "           ,[price]\n"
-                + "           ,[salePrice])\n"
+        xSql = "INSERT INTO Subject\n"
+                + "           (title\n"
+                + "           ,user_id\n"
+                + "           ,status\n"
+                + "           ,price\n"
+                + "           ,salePrice)\n"
                 + "     VALUES\n"
                 + "           (\n"
                 + "		?  \n"
@@ -206,12 +206,12 @@ public class SubjectDAO extends MyDAO{
     }
 
     public void updateSubject(Subject subject) {
-        xSql = "UPDATE [Subject]\n"
-                + "   SET [title] = ? \n"
-                + "      ,[status] =? \n"
-                + "      ,[price] = ? \n"
-                + "      ,[salePrice] = ? \n"
-                + " WHERE [Subject].id = ?";
+        xSql = "UPDATE Subject\n"
+                + "   SET title = ? \n"
+                + "      ,status =? \n"
+                + "      ,price = ? \n"
+                + "      ,salePrice = ? \n"
+                + " WHERE Subject.id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, subject.getTitle());

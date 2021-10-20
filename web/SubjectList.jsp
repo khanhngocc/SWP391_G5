@@ -97,7 +97,7 @@
 
                                 <td><a href="SubjectDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="UpdateSubject?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
-                                    <a href="#" onclick="deleteSubject(${list.id})"><i class="fa fa-trash-o"></i> Delete</a> 
+                                    
                                 </td> 
 
                             </tr>

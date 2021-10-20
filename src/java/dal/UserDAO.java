@@ -22,7 +22,7 @@ public class UserDAO extends MyDAO {
 
     public User getUser(String email) {
         User x = null;
-        xSql = "SELECT * FROM [User] WHERE [email] = ? ";
+        xSql = "SELECT * FROM User WHERE email = ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, email);
@@ -41,7 +41,7 @@ public class UserDAO extends MyDAO {
 
     public ArrayList<User> getAllUser() {
         ArrayList<User> x = new ArrayList<>();
-        xSql = "SELECT * FROM [User]";
+        xSql = "SELECT * FROM User";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -60,11 +60,11 @@ public class UserDAO extends MyDAO {
     public User getAccount(String email, String password) {
         User user = null;
         try {
-            String sql = "Select url,Roll.id from [User],Roll,Roll_Feature where [User].roll_id = Roll.id \n"
+            String sql = "Select url,Roll.id from User,Roll,Roll_Feature where User.roll_id = Roll.id \n"
                     + "and Roll.id = Roll_Feature.roll_id \n"
-                    + "and [User].email = ?\n"
-                    + "and [User].password = ?\n"
-                    + "and [User].status = 'Active'";
+                    + "and User.email = ?\n"
+                    + "and User.password = ?\n"
+                    + "and User.status = 'Active'";
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
@@ -91,10 +91,10 @@ public class UserDAO extends MyDAO {
 
     public int UpdateUser(String email, String fullname, String phone, boolean gender) {
         int n = 0;
-        String sql = "UPDATE [User]\n"
-                + "   SET [fullname] = ?\n"
-                + "      ,[gender] = ?\n"
-                + "      ,[phone] = ?\n"
+        String sql = "UPDATE User\n"
+                + "   SET fullname = ?\n"
+                + "      ,gender = ?\n"
+                + "      ,phone = ?\n"
                 + "     \n"
                 + " WHERE email = ?";
         PreparedStatement statement;
@@ -114,8 +114,8 @@ public class UserDAO extends MyDAO {
 
     public int changePassword(String email, String password) {
         int n = 0;
-        String sql = "UPDATE [User]\n"
-                + "   SET [password] = ?\n"
+        String sql = "UPDATE User\n"
+                + "   SET password = ?\n"
                 + " WHERE email = ?";
         PreparedStatement statement;
 
@@ -134,9 +134,9 @@ public class UserDAO extends MyDAO {
     public String getRollName(String email) {
         String roll_name = "";
         try {
-            String sql = "Select Roll.name from [User],Roll\n"
+            String sql = "Select Roll.name from User,Roll\n"
                     + "where\n"
-                    + "[User].roll_id = Roll.id\n"
+                    + "User.roll_id = Roll.id\n"
                     + "and\n"
                     + "email = ?";
             PreparedStatement statement;
@@ -157,16 +157,16 @@ public class UserDAO extends MyDAO {
     }
 
     public void addUser(User x) {
-        xSql = "INSERT INTO [User]\n"
-                + "           ([fullname]\n"
-                + "           ,[title]\n"
-                + "           ,[email]\n"
-                + "           ,[phone]\n"
-                + "           ,[password]\n"
-                + "           ,[avatar]\n"
-                + "           ,[createDate]\n"
-                + "           ,[status]\n"
-                + "           ,[roll_id])\n"
+        xSql = "INSERT INTO User\n"
+                + "           (fullname\n"
+                + "           ,title\n"
+                + "           ,email\n"
+                + "           ,phone\n"
+                + "           ,password\n"
+                + "           ,avatar\n"
+                + "           ,createDate\n"
+                + "           ,status\n"
+                + "           ,roll_id)\n"
                 + "     VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
@@ -187,7 +187,7 @@ public class UserDAO extends MyDAO {
     }
 
     public void deleteUser(String id) {
-        xSql = "delete from [User] where id = ?";
+        xSql = "delete from User where id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, id);
@@ -198,13 +198,13 @@ public class UserDAO extends MyDAO {
     }
 
     public void UpdateUser(int id, String name, String title, String phone, int role, String status, String ava) {
-        xSql = "UPDATE [User]\n"
-                + "   SET [fullname] = ?\n"
-                + "      ,[title] = ?\n"
-                + "      ,[phone] = ?\n"
-                + "      ,[avatar] = ?\n"
-                + "      ,[roll_id] = ?\n"
-                + "      ,[status] = ?\n"
+        xSql = "UPDATE User\n"
+                + "   SET fullname = ?\n"
+                + "      ,title = ?\n"
+                + "      ,phone = ?\n"
+                + "      ,avatar = ?\n"
+                + "      ,roll_id = ?\n"
+                + "      ,status = ?\n"
                 + "     \n"
                 + " WHERE [id] = ?";
 
@@ -225,7 +225,7 @@ public class UserDAO extends MyDAO {
 
     public String getMaxID() {
         String id = "";
-        xSql = "Select max(id) from [User]";
+        xSql = "Select max(id) from User";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -240,9 +240,9 @@ public class UserDAO extends MyDAO {
     }
 
     public void activateAccount(String id) {
-        xSql = "UPDATE [User]\n"
-                + "   SET [status] = 'Active' \n"
-                + " WHERE [id] = ?";
+        xSql = "UPDATE User\n"
+                + "   SET status = 'Active' \n"
+                + " WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(xSql);
@@ -254,8 +254,5 @@ public class UserDAO extends MyDAO {
         }
     }
 
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        System.out.println(dao.getUser("fghjlk@gmail.com").getId());
-    }
+  
 }

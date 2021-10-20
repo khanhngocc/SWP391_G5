@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.User;
 
 /**
  *
@@ -18,16 +19,31 @@ import java.util.logging.Logger;
 public class DBContext {
     public Connection connection;
     
-    public DBContext(){
+    public DBContext() {
         try {
             //Change the username password and url to connect your own database
-            String username = "sa";
-            String password = "sa";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=QuizPractice";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String username = "root";
+            String password = "kakashi,./1";
+            String url = "jdbc:mysql://localhost:3306/quizpractice?useSSL=false";
+            try { 
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
             connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+    }
+    
+    public static void main(String[] args) {
+        UserDAO d = new UserDAO();
+        User a = d.getUser("ducanh@gmail.com");
     }
 }

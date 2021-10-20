@@ -43,9 +43,9 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id, String statusRestricted) {
         Blog b = new Blog();
-        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status,attachFile_Url from Blog,[User]\n"
+        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status,attachFile_Url from Blog,User\n"
                 + "where\n"
-                + "Blog.user_id = [User].id\n"
+                + "Blog.user_id = User.id\n"
                 + "and\n"
                 + "Blog.status like ? and\n"
                 + "Blog.id = ?";
@@ -108,15 +108,15 @@ public class BlogDAO extends MyDAO {
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,Blog.title,description,created_Date,[User].fullname,timeCreated,image_Url,Category,Blog.status from Blog,[User]\n"
+            String sql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
                     + "where\n"
-                    + "Blog.user_id = [User].id\n"
+                    + "Blog.user_id = User.id\n"
                     + "and Blog.title like ?\n"
                     + "and Category like ?\n"
                     + "and Blog.status like ? \n"
                     + "order by created_Date desc\n"
-                    + "OFFSET ? ROWS\n"
-                    + "FETCH NEXT ? ROWS ONLY";
+                    + "LIMIT ?,?";
+                 
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
@@ -204,16 +204,16 @@ public class BlogDAO extends MyDAO {
     }
 
     public void createBlog(Blog blog, User user) {
-        xSql = "INSERT INTO [Blog]\n"
-                + "           ([title]\n"
-                + "           ,[description]\n"
-                + "           ,[image_Url]\n"
-                + "           ,[created_Date]\n"
-                + "           ,[user_id]\n"
-                + "           ,[timeCreated]\n"
-                + "           ,[Category]\n"
-                + "           ,[status]\n"
-                + "           ,[attachFile_Url])\n"
+        xSql = "INSERT INTO Blog\n"
+                + "           (title\n"
+                + "           ,description\n"
+                + "           ,image_Url\n"
+                + "           ,created_Date\n"
+                + "           ,user_id\n"
+                + "           ,timeCreated\n"
+                + "           ,Category\n"
+                + "           ,status\n"
+                + "           ,attachFile_Url)\n"
                 + "     VALUES\n"
                 + "           (? \n"
                 + "           ,?\n"
@@ -243,15 +243,15 @@ public class BlogDAO extends MyDAO {
     }
 
     public void updateBlog(Blog blog) {
-        xSql = "UPDATE [Blog]\n"
-                + "   SET [title] = ?\n"
-                + "      ,[description] = ?\n"
-                + "      ,[image_Url] = ?\n"
-                + "      ,[created_Date] = ?\n"
-                + "    ,[timeCreated] = ?\n"
-                + "      ,[Category] = ?\n"
-                + "      ,[attachFile_Url] = ?\n"
-                + " WHERE [Blog].id = ?";
+        xSql = "UPDATE Blog\n"
+                + "   SET title = ?\n"
+                + "      ,description = ?\n"
+                + "      ,image_Url = ?\n"
+                + "      ,created_Date = ?\n"
+                + "    ,timeCreated = ?\n"
+                + "      ,Category = ?\n"
+                + "      ,attachFile_Url = ?\n"
+                + " WHERE Blog.id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, blog.getTitle());
