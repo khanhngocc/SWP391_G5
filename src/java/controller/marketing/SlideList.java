@@ -76,7 +76,7 @@ public class SlideList extends BaseRequiredLoginController {
         
         ArrayList<Slide> listAllSlide = dao.listAllSlides(pageIndex, pageSize, searchName, local_status);
         
-        System.out.println(listAllSlide.size());
+       
         
         request.setAttribute("list_all_slides", listAllSlide);
         request.setAttribute("pagecount", pageCount);

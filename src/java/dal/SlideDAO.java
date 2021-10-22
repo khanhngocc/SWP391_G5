@@ -52,12 +52,12 @@ public class SlideDAO extends MyDAO {
             statusRestricted = "%%";
         }
 
-        xSql = "SELECT COUNT(*) FROM slide WHERE title LIKE ? and status LIKE ?";
+        xSql = "SELECT COUNT(*) FROM slide WHERE ( title LIKE ? or backlink LIKE ? ) and status LIKE ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
-          
-            ps.setString(2, statusRestricted);
+            ps.setString(2, "%" + searchName + "%");
+            ps.setString(3, statusRestricted);
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -83,8 +83,8 @@ public class SlideDAO extends MyDAO {
             String sql = "select slide.id,slide.title,image,backlink,User.fullname,slide.status from slide,User\n"
                     + "where\n"
                     + "slide.user_id = User.id\n"
-                    + "and slide.title like ?\n"
-                  
+                    + "and ( slide.title like ?\n"
+                    + "or backlink LIKE ? )\n"
                     + "and slide.status like ? \n"
                     + "order by slide.id desc\n"
                     + "LIMIT ?,?";
@@ -93,10 +93,10 @@ public class SlideDAO extends MyDAO {
 
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + searchName + "%");
-           
-            statement.setString(2, statusRestricted);
-            statement.setInt(3, numberOfRecord);
-            statement.setInt(4, pageSize);
+            statement.setString(2, "%" + searchName + "%");
+            statement.setString(3, statusRestricted);
+            statement.setInt(4, numberOfRecord);
+            statement.setInt(5, pageSize);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
