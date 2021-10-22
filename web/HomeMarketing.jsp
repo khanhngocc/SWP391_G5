@@ -47,7 +47,7 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-
+                                    <li><a href="SlideList">Slide</a></li>
                                     <li><a href="BlogList">Blog</a></li>
                                     <li><a href="DocumentList">Document</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>

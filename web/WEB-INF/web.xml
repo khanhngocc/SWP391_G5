@@ -168,6 +168,10 @@
         <servlet-name>QuizDetailController</servlet-name>
         <servlet-class>controller.expert.QuizDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SlideList</servlet-name>
+        <servlet-class>controller.marketing.SlideList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -335,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>QuizDetailController</servlet-name>
         <url-pattern>/QuizDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SlideList</servlet-name>
+        <url-pattern>/SlideList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
