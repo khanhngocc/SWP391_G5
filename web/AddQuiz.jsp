@@ -2,6 +2,7 @@
     Document   : AddQuiz
     Created on : Sep 11, 2021, 3:38:44 PM
     Author     : Admin
+    Fix        : 22/10/2021
 --%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
@@ -86,10 +87,16 @@
                                     <option value="${list.id}">${list.title}</option>
                                 </c:forEach>
                             </select>
+                            Category 
+                            <select name="category" id="subject" style="margin-bottom:10px">
+                                <c:forEach items="${listCategory}" var="list">
+                                    <option value="${list.value}">${list.value}</option>
+                                </c:forEach>
+                            </select>
                             Level
                             <select name="level" style="margin-bottom:10px">
                                 <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.value}">${list.value}</option>
+                                    <option value="${list.id}">${list.value}</option>
                                 </c:forEach>
                             </select>                              
                             Type

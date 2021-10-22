@@ -35,14 +35,11 @@ public class ImportQuestionController extends BaseRequiredLoginController{
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        request.setAttribute("id", id);
         request.getRequestDispatcher("ImportQuestion.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
         String fileNameImg = "";
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
@@ -58,18 +55,9 @@ public class ImportQuestionController extends BaseRequiredLoginController{
         }
         
         ExcelHelper eh = new ExcelHelper();
-        QuestionDAO qdao = new QuestionDAO();
-        QuizDAO qzdao = new QuizDAO();
-        Quizzes q = qzdao.getQuizByID(id);
         try {
-            ArrayList<Question> quest = eh.importQuestion(sb.append("/"+fileNameImg).toString());
-            for (Question question : quest) {
-                question.setQuiz_id(Integer.parseInt(id));
-                qdao.insertQuestion(question);
-            }
-            q.setNumber_of_question(q.getNumber_of_question()+quest.size());
-            qzdao.UpdateQuizzes(q);
-            response.sendRedirect("QuizList");
+            eh.importQuestion(sb.append("/"+fileNameImg).toString());
+            response.sendRedirect("QuestionList");
         } catch (Exception ex) {
             Logger.getLogger(ImportQuestionController.class.getName()).log(Level.SEVERE, null, ex);
         }

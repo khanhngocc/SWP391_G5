@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +26,7 @@ import model.User;
 /**
  *
  * @author Admin
+ * fixed: 22/10/2021 Done
  */
 public class AddQuizController extends BaseRequiredLoginController {
 
@@ -35,11 +35,13 @@ public class AddQuizController extends BaseRequiredLoginController {
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
         ArrayList<Setting> listType = settingDAO.getListSettingByType("Exam type");
+        ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Question Level");
         request.setAttribute("listLevel", listLevel);
         request.setAttribute("listType", listType);
         SubjectDAO subjectDAO = new SubjectDAO();
         ArrayList<Subject> listSubject = subjectDAO.listAllSubject("Published");
         request.setAttribute("listSubject", listSubject);
+        request.setAttribute("listCategory", listCategory);
         request.getRequestDispatcher("AddQuiz.jsp").forward(request, response);
     }
 
@@ -58,6 +60,7 @@ public class AddQuizController extends BaseRequiredLoginController {
             String title = m.getParameter("title");
             String description = m.getParameter("description");
             int subject_id = Integer.parseInt(m.getParameter("subject"));
+            String category = m.getParameter("category");
             String level = m.getParameter("level");
             String type = m.getParameter("type");
             int duration = Integer.parseInt(m.getParameter("duration"));
@@ -65,10 +68,8 @@ public class AddQuizController extends BaseRequiredLoginController {
 
             UserDAO udao = new UserDAO();
             QuizDAO qdao = new QuizDAO();
-            qdao.addQuiz(new Quizzes(title, description, subject_id, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
-            request.setAttribute(title, "title");
-            request.setAttribute("quiz", qdao.getQuiz().get(qdao.getQuiz().size() - 1));
-            request.getRequestDispatcher("AddQuestion.jsp").forward(request, response);
+            qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
+            response.sendRedirect("QuizList");
         } catch (Exception e) {
             String mess = "Cannot convert string to integer!";
             request.setAttribute(mess, "mess");

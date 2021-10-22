@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * Fixed: 22/10/2021
  */
 package model;
 
@@ -15,7 +16,6 @@ public class Question {
     private String category;
     private String status;
     private String level;
-    private int quiz_id;
     private String option1;
     private String option2;
     private String option3;
@@ -25,12 +25,11 @@ public class Question {
     public Question() {
     }
 
-    public Question(String content, String category, String status, String level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
+    public Question(String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct) {
         this.content = content;
         this.category = category;
         this.status = status;
         this.level = level;
-        this.quiz_id = quiz_id;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
@@ -38,13 +37,12 @@ public class Question {
         this.option_correct = option_correct;
     }
 
-    public Question(int id, String content, String category, String status, String level, int quiz_id, String option1, String option2, String option3, String option4, String option_correct) {
+    public Question(int id, String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct) {
         this.id = id;
         this.content = content;
         this.category = category;
         this.status = status;
         this.level = level;
-        this.quiz_id = quiz_id;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
@@ -90,16 +88,6 @@ public class Question {
 
     public void setLevel(String level) {
         this.level = level;
-    }
-
-   
-
-    public int getQuiz_id() {
-        return quiz_id;
-    }
-
-    public void setQuiz_id(int quiz_id) {
-        this.quiz_id = quiz_id;
     }
 
     public String getOption1() {

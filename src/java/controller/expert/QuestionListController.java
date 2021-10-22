@@ -7,32 +7,42 @@ package controller.expert;
 
 import controller.base.BaseRequiredLoginController;
 import dal.QuestionDAO;
-import dal.QuizDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Quizzes;
+import model.Question;
 
 /**
  *
  * @author Admin
  */
-public class DeleteQuestionController extends BaseRequiredLoginController {
+public class QuestionListController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
         QuestionDAO qdao = new QuestionDAO();
-        qdao.deleteQuestion(Integer.parseInt(id));
-        response.sendRedirect("QuestionList");
+        ArrayList<Question> question = qdao.getQuestions();
+        int pageSize = question.size() % 10 == 0 ? question.size() / 10 : question.size() / 10 + 1;
+        int currentPage;
+        try {
+            currentPage = Integer.parseInt(request.getParameter("page"));
+        } catch (Exception e) {
+            currentPage = 1;
+        }
+        request.setAttribute("question", question.subList(10 * (currentPage - 1), 10 * currentPage > question.size() ? question.size() : 10 * currentPage));
+        request.setAttribute("pagesize", pageSize);
+        request.setAttribute("page", currentPage);
+        request.getRequestDispatcher("QuestionList.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     
+    
+    
 }

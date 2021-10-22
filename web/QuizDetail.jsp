@@ -2,6 +2,7 @@
     Document   : Login
     Created on : Sep 11, 2021, 3:38:44 PM
     Author     : Admin
+    Fix        : 22/10/2021
 --%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
@@ -86,6 +87,9 @@
                             Subject
                             
                             <input name="subject" type="text" placeholder="Tittle" readonly value="${sub.title}" />
+                            
+                            Category
+                            <input name="category" type="text" placeholder="Tittle" readonly value="${quiz.category}" />
 
                             Level
                             <input name="level"type="text" placeholder="Level" value="${quiz.getLevel()}" readonly />							
@@ -97,41 +101,24 @@
                             Number of Questions: 
                             <input readonly value="${quiz.getNumber_of_question()}"/>
                             Duration
-                            <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" />	
+                            <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" readonly="true"/>	
                             Rate
-                            <input name="rate"type="text" placeholder="rate" value="${quiz.getRate()}" />
+                            <input name="rate"type="text" placeholder="Rate" value="${quiz.getRate()}" readonly="true" />
                             
                             
-                            <a href="javascript:void(0)" onclick="Show('myTable')"><h2>List of Question</h2></a>
-               
+                            <a href="javascript:void(0)" onclick="Show('myTable')"><h2>Quiz Content</h2></a>
+                            
+                            
                             <table  class="table" id="myTable" style="display: none">
                                 <tr>
-                                    <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);" onclick="sort(1)">Content</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);" onclick="sort(2)">Category</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);" onclick="sort(3)">Status</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);" onclick="sort(4)">Level</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);">Option 1</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);">Option 2</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);">Option 3</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);">Option 4</a></strong></th>
-                                    <th><strong><a href="javascript:void(0);">Correct Option</a></strong></th>
-                                   
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(0)">Sub-Category</a></strong></th>
+                                    <th><strong><a href="javascript:void(0);" onclick="sort(1)"># Question</a></strong></th>                                   
                                 </tr>
 
-                                <c:forEach items="${question}" var="i">
+                                <c:forEach begin="0" end="${listCategory.size()-1}" var="i">
                                     <tr>
-                                        <td>${i.id}</td>
-                                        <td>${i.content}</td>
-                                        <td>${i.category}</td>
-                                        <td>${i.status}</td>
-                                        <td>${i.level}</td>
-                                        <td>${i.option1}</td>
-                                        <td>${i.option2}</td>
-                                        <td>${i.option3}</td>
-                                        <td>${i.option4}</td>
-                                        <td>${i.option_correct}</td>
-                                        
+                                        <td>${listCategory.get(i).value}</td>
+                                        <td>${array[i]}</td>                                        
                                     </tr>     
                                 </c:forEach>
                             </table>
