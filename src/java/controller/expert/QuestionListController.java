@@ -23,7 +23,7 @@ import model.Question;
 public class QuestionListController extends BaseRequiredLoginController {
 
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
         QuestionDAO qdao = new QuestionDAO();
         ArrayList<Question> question = qdao.getQuestions();
         int pageSize = question.size() % 10 == 0 ? question.size() / 10 : question.size() / 10 + 1;

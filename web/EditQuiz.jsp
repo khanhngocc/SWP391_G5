@@ -93,11 +93,18 @@
                                 </c:forEach>
                             </select>
 
+                            Category
+
+                            <select name="category" style="margin-bottom:10px">
+                                <c:forEach items="${listCategory}" var="list">
+                                    <option value="${list.value}" ${quiz.category eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
+                            </select>
                             Level
 
                             <select name="level" style="margin-bottom:10px">
                                 <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.value}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
+                                    <option value="${list.id}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
                                 </c:forEach>
                             </select>
 
@@ -129,7 +136,7 @@
                                     <th><strong><a href="javascript:void(0);">Option 3</a></strong></th>
                                     <th><strong><a href="javascript:void(0);">Option 4</a></strong></th>
                                     <th><strong><a href="javascript:void(0);">Correct Option</a></strong></th>
-                                    <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                                    <th><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
                                 </tr>
 
                                 <c:forEach items="${question}" var="i">
@@ -145,14 +152,12 @@
                                         <td>${i.option4}</td>
                                         <td>${i.option_correct}</td>
                                         <td><a href="#" onclick="deleteQuestion(${i.id},${quiz.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                                        <td><a href="EditQuestion?id=${i.id}&quiz=${quiz.id}"><i class="fa fa-pencil"></i>Edit</a></td>
-                                        <td><a href="#"><i class="fa fa-eye"></i> View</a></td>
                                     </tr>     
                                 </c:forEach>
                             </table>
 
                         </form>
-                        <a href="AddQuestionInList?id=${quiz.id}">Add new Question</a><br>
+                        <a href="AddQuestionToQuiz?id=${quiz.id}">Add new Question</a><br>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
@@ -213,7 +218,7 @@
                             function deleteQuestion(id, quiz) {
                                 var result = confirm("Do you want to delete this quiz?");
                                 if (result) {
-                                    window.location.href = "DeleteQuestion?id=" + id + "&quiz=" + quiz;
+                                    window.location.href = "DeleteQuestionFromQuiz?id=" + id + "&quiz=" + quiz;
                                 }
 
                             }

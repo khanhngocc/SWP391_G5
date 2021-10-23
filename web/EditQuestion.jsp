@@ -51,6 +51,7 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
+                                    <li><a href="QuestionList">Question</a></li>
                                     <li><a href="QuizList">Quiz</a></li>
                                     <li><a href="Personal?email=${user.email}">Account</a></li>
                                     <li><a href="Logout">Log out</a></li>
@@ -66,14 +67,17 @@
         <section>
             <div class="container">
                 <div class="col-sm-9">
-                    
+
                     <div class="signup-form">
                         <form id="create-test" action="EditQuestion" method="post">
                             <p><input type="hidden" name="id" value="${question.id}" ></p>                    
                             <h4> Question Edit</h4>
                             Category
-                            <p><input type ="text"  name="category" placeholder="Category" id="cat" value="${question.category}" required></p>
-                            Level
+                            <select name="category" style="margin-bottom:10px">
+                                <c:forEach items="${listCategory}" var="list">
+                                    <option value="${list.value}" ${question.category eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
+                            </select>                            Level
 
                             <select name="level" style="margin-bottom:10px">
                                 <c:forEach items="${listLevel}" var="list">

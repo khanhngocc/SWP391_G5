@@ -35,7 +35,7 @@ public class AddQuizController extends BaseRequiredLoginController {
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
         ArrayList<Setting> listType = settingDAO.getListSettingByType("Exam type");
-        ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Question Level");
+        ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Quiz Category");
         request.setAttribute("listLevel", listLevel);
         request.setAttribute("listType", listType);
         SubjectDAO subjectDAO = new SubjectDAO();

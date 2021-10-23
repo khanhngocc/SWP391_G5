@@ -34,7 +34,7 @@ public class QuizDetailController extends BaseRequiredLoginController {
         QuizDAO quizd = new QuizDAO();
         QuestionDAO qdao = new QuestionDAO();
         ArrayList<Question> question = qdao.getQuestionInQuiz(Integer.parseInt(id));
-        ArrayList<Setting> listCategory = stdao.getListSettingByType("Question Level");
+        ArrayList<Setting> listCategory = stdao.getListSettingByType("Quiz Category");
         int[] array = new int[listCategory.size()];
         for (int i : array) {
             i = 0;
