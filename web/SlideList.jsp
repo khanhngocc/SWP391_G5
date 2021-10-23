@@ -74,13 +74,14 @@
 
                     <input type="text" placeholder="Search" name="searchName" value="${name_search}" hidden=""/>
                     <select style="width: 10%;margin-top: 10px" name="status" onchange="this.form.submit()" >
-                        <option value="">All</option>
-                        <option value="Published" ${status == 'Published' ? 'selected':''}>Published</option>
-                        <option value="Unpublished" ${status == 'Unpublished' ? 'selected':''}>Unpublished</option>
+                         <option value="">All</option>
+                        <c:forEach items="${listStatus}" var="list">
+                            <option value="${list}" ${list == status ? 'selected':''}>${list}</option>
+                        </c:forEach>
                     </select>   
                 </form>
                 <div style="margin-top: 30px; margin-bottom: 20px">
-                    <a href="AddBlog"><i class="fa fa-book"></i> Create a slide</a> 
+                    <a href="AddSlide"><i class="fa fa-book"></i> Create a slide</a> 
                 </div>
 
                 <table class="table" id="myTable">
@@ -93,7 +94,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">BackLink</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(5)">Author</a></th>
-                            <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
+                            <th scope="col" style="width: auto;text-align: center" colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,7 +107,12 @@
                                 <td>${list.status}</td>
                                 <td>${list.author_name}</td>
                                 <td>
-                                    <a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
+                                    <c:if test="${list.status eq 'Published'}">
+                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id},'Unpublished')"><i class="fa fa-chain"></i> Unpublished</a> 
+                                    </c:if>
+                                    <c:if test="${list.status eq 'Unpublished'}">
+                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id},'Published')"><i class="fa fa-chain"></i> Published</a> 
+                                    </c:if>
                                     <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
 
                                 </td> 

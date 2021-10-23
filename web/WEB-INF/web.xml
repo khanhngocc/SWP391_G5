@@ -172,6 +172,14 @@
         <servlet-name>SlideList</servlet-name>
         <servlet-class>controller.marketing.SlideList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeSlideStatus</servlet-name>
+        <servlet-class>controller.marketing.ChangeSlideStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSlide</servlet-name>
+        <servlet-class>controller.marketing.AddSlide</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -343,6 +351,14 @@
     <servlet-mapping>
         <servlet-name>SlideList</servlet-name>
         <url-pattern>/SlideList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSlideStatus</servlet-name>
+        <url-pattern>/ChangeSlideStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSlide</servlet-name>
+        <url-pattern>/AddSlide</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

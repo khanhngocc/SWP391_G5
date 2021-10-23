@@ -119,4 +119,44 @@ public class SlideDAO extends MyDAO {
         return list;
 
     }
+    
+    public void changeSlideStatus(int id, String status) {
+        xSql = "Update slide set status = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, status);
+
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+     public ArrayList<String> listStatus() {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        try {
+            String sql = "Select distinct status from slide";
+            PreparedStatement statement;
+
+            statement = connection.prepareStatement(sql);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+
+                list.add(rs.getString(1));
+            }
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }
