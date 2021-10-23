@@ -180,6 +180,10 @@
         <servlet-name>AddSlide</servlet-name>
         <servlet-class>controller.marketing.AddSlide</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateSlide</servlet-name>
+        <servlet-class>controller.marketing.UpdateSlide</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -359,6 +363,10 @@
     <servlet-mapping>
         <servlet-name>AddSlide</servlet-name>
         <url-pattern>/AddSlide</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSlide</servlet-name>
+        <url-pattern>/UpdateSlide</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

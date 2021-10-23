@@ -17,7 +17,16 @@ public class Slide {
     private String status;
     private int user_id;
     private String author_name;
+    private String note;
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
     public int getId() {
         return id;
     }

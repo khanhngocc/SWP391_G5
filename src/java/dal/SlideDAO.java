@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
 import model.Slide;
+import model.Subject;
+import model.User;
 
 /**
  *
@@ -119,7 +121,7 @@ public class SlideDAO extends MyDAO {
         return list;
 
     }
-    
+
     public void changeSlideStatus(int id, String status) {
         xSql = "Update slide set status = ? where id= ? ";
         try {
@@ -135,8 +137,8 @@ public class SlideDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
-     public ArrayList<String> listStatus() {
+
+    public ArrayList<String> listStatus() {
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -158,5 +160,92 @@ public class SlideDAO extends MyDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public void createSlide(Slide slide, User user) {
+        xSql = "INSERT INTO `slide`\n"
+                + "(\n"
+                + "`title`,\n"
+                + "`image`,\n"
+                + "`backlink`,\n"
+                + "`status`,\n"
+                + "`user_id`,\n"
+                + "`notes`)\n"
+                + "VALUES\n"
+                + "(?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ");";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, slide.getTitle());
+            ps.setString(2, slide.getImage_Url());
+            ps.setString(3, slide.getBacklink());
+            ps.setString(4, "Published");
+            ps.setInt(5, user.getId());
+            ps.setString(6, slide.getNote());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Slide getSlide(int id, String statusRestricted) {
+
+        if (statusRestricted.equals("")) {
+            statusRestricted = "%%";
+        }
+
+        Slide s = new Slide();
+
+        xSql = "select id,title,backlink,image,notes from slide\n"
+                + "where\n"
+                + "status like ? and\n"
+                + "id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, statusRestricted);
+            ps.setInt(2, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                s.setId(rs.getInt(1));
+                s.setTitle(rs.getString(2));
+                s.setBacklink(rs.getString(3));
+                s.setImage_Url(rs.getString(4));
+                s.setNote(rs.getString(5));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    public void updateSlide(Slide slide) {
+        xSql = "UPDATE `slide`\n"
+                + "SET\n"
+                + "`title` = ?,\n"
+                + "`image` = ?,\n"
+                + "`backlink` = ?,\n"
+                + "`notes` = ?\n"
+                + "WHERE `id` = ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, slide.getTitle());
+            ps.setString(2, slide.getImage_Url());
+            ps.setString(3, slide.getBacklink());
+            ps.setString(4, slide.getNote());
+            ps.setInt(5, slide.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

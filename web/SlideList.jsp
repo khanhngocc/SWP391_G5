@@ -94,7 +94,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">BackLink</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(5)">Author</a></th>
-                            <th scope="col" style="width: auto;text-align: center" colspan="2">Action</th>
+                            <th scope="col" style="width: auto;text-align: center" colspan="2"><a href="javascript:void(0);">Action</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,7 +113,7 @@
                                     <c:if test="${list.status eq 'Unpublished'}">
                                         <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id},'Published')"><i class="fa fa-chain"></i> Published</a> 
                                     </c:if>
-                                    <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
+                                    <a href="UpdateSlide?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
 
                                 </td> 
 
