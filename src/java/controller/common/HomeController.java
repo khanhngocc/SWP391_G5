@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.customer;
+package controller.common;
 
 import controller.base.BaseRequiredLoginController;
 import java.io.IOException;

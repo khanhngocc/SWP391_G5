@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
 
         UserDAO db = new UserDAO();
         User user = db.getAccount(username, password);
-        String user_roll = db.getRollName(username);
+       
         String mess = "";
         if (user == null) {
             mess = "Username/ Password is invalid!";
@@ -64,23 +64,10 @@ public class LoginController extends HttpServlet {
             request.getSession().removeAttribute("messLogin");
             request.getSession().removeAttribute("usernameLogin");
             request.getSession().removeAttribute("passwordLogin");
-
-            if (user_roll.equals("Customer")) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("Home");
-            } else if (user_roll.equals("Marketing")) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("HomeMarketing");
-            } else if (user_roll.equals("Admin")) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("AdminHome.jsp");
-            } else if (user_roll.equals("Expert")) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("HomeExpert.jsp");
-            } else if (user_roll.equals("Manager")) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("HomeManager.jsp");
-            }
+ 
+            request.getSession().setAttribute("user", user);
+            
+            response.sendRedirect("Home");
 
         }
     }

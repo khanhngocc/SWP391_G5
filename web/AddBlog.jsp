@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Homepage</title>
+        <title>Add Blog</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -33,34 +33,10 @@
     </head><!--/head-->
 
     <body>
-        <header id="header"><!--header-->
 
 
-            <div class="header-middle"><!--header-middle-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="logo pull-left">
-                                <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
-                            </div>
+        <jsp:include page="HeaderMarketing.jsp" />  
 
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="shop-menu pull-right">
-                                <ul class="nav navbar-nav">
-
-                                    <li><a href="BlogList">Blog</a></li>
-                                    <li><a href="Personal?email=${user.email}">Account</a></li>
-                                    <li><a href="Logout">Log out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/header-middle-->
-
-
-        </header><!--/header-->
 
         <section id="slider"><!--slider-->
             <div class="container">
@@ -93,37 +69,7 @@
         </section><!--/slider-->
 
 
-        <footer id="footer"><!--Footer-->
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="companyinfo">
-                                <h2><span>Mega</span>-Deal</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="address">
-                                <img src="images/home/map.png" alt="" />
-                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
-                    </div>
-                </div>
-            </div>
-
-        </footer><!--/Footer-->
+        <jsp:include page="Footer.jsp" />  
 
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>

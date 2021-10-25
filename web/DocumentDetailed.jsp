@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Homepage</title>
+        <title>Document Detailed</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -35,115 +35,22 @@
 
     <body>
 
-        <header id="header"><!--header-->
-            <c:if test="${sessionScope.user eq null}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
-                                </div>
+        <c:if test="${sessionScope.user.rollId eq 1}">
+            <jsp:include page="HeaderCustomer.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 2}">
+            <jsp:include page="HeaderMarketing.js" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 3}">
+            <jsp:include page="HeaderAdmin.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 4}">
+            <jsp:include page="HeaderExpert.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 5}">
+            <jsp:include page="HeaderManager.jsp" />  
+        </c:if>
 
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-
-                                        <li><a href="">Test</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li></li>
-                                        <a href="Login" class="btn btn-default">Log in</a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-            <c:if test="${sessionScope.user.rollId eq 1}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="">Take test</a></li>
-                                        <li><a href="">Review Test</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--/header-middle-->
-
-            </c:if>
-
-
-            <c:if test="${sessionScope.user.rollId eq 2}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-
-                                        <li><a href="BlogList">Blog</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-
-            <c:if test="${sessionScope.user.rollId eq 3}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="UserList">User</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-
-        </header>
        	<section>
             <div class="container centerImgLanding" >
 
@@ -189,37 +96,7 @@
 
         </section>
 
-        <footer id="footer"><!--Footer-->
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="companyinfo">
-                                <h2><span>Mega</span>-Deal</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="address">
-                                <img src="images/home/map.png" alt="" />
-                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
-                    </div>
-                </div>
-            </div>
-
-        </footer><!--/Footer-->
+        <jsp:include page="Footer.jsp" />  
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

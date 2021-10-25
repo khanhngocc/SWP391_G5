@@ -36,86 +36,23 @@
     <!--/head-->
 
     <body>
-        <header id="header"><!--header-->
-
-            <c:if test="${sessionScope.user.rollId eq 1}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="">Take test</a></li>
-                                        <li><a href="">Review Test</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-
-            <c:if test="${sessionScope.user.rollId eq 2}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="HomeMarketing"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-
-                                        <li><a href="BlogList">Blog</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
 
-            <c:if test="${sessionScope.user.rollId eq 3}">
-                <div class="header-middle"><!--header-middle-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="logo pull-left">
-                                    <a href="HomeAdmin"><img src="images/home/partner1.png" alt="" /></a>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="shop-menu pull-right">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="UserList">User</a></li>
-                                        <li><a href="DocumentList">Document</a></li>
-                                        <li><a href="Personal?email=${user.email}">Account</a></li>
-                                        <li><a href="Logout">Log out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </header>
+        <c:if test="${sessionScope.user.rollId eq 1}">
+            <jsp:include page="HeaderCustomer.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 2}">
+            <jsp:include page="HeaderMarketing.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 3}">
+            <jsp:include page="HeaderAdmin.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 4}">
+            <jsp:include page="HeaderExpert.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 5}">
+            <jsp:include page="HeaderManager.jsp" />  
+        </c:if>
         <section>
 
 
@@ -127,7 +64,7 @@
                     <form action="Personal" method="post">
                         <input name="email" type="hidden" placeholder="Email" required="true" value="${user.email}" />
                         <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
-                      
+
                         <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
 
                         <button type="submit" class="btn btn-default">Update</button>
@@ -155,37 +92,8 @@
 
         </div>
     </section>
-    <footer id="footer"><!--Footer-->
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="companyinfo">
-                            <h2><span>Mega</span>-Deal</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-6">
-                        <div class="address">
-                            <img src="images/home/map.png" alt="" />
-                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
-                </div>
-            </div>
-        </div>
-
-    </footer>
+    <jsp:include page="Footer.jsp" /> 
 
 
     <script src="js/jquery.js"></script>
