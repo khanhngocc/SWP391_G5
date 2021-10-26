@@ -130,9 +130,27 @@ public class QuizDAO extends MyDAO {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        }        
     }
+    
+    public ArrayList<Quizzes> getPractice(int uid) {
+        ArrayList<Quizzes> x = new ArrayList<>();
+        xSql = "SELECT * FROM Quizzes where type='User Practice' and user_id=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
+
 
 //    public static void main(String[] args) {
 //        QuizDAO dao = new QuizDAO();
