@@ -33,7 +33,9 @@
     </head><!--/head-->
 
     <body>
-
+        <c:if test="${sessionScope.user eq null}">
+            <jsp:include page="HeaderFree.jsp" />  
+        </c:if>
         <c:if test="${sessionScope.user.rollId eq 1}">
             <jsp:include page="HeaderCustomer.jsp" />  
         </c:if>

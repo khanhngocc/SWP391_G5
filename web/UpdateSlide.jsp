@@ -52,7 +52,7 @@
                             <img src="${slide.image_Url}" alt="" style="height: 250px;width: 250px;margin-bottom: 10px"/>
                             <input name="fname" type="file" />
                             Backlink
-                            <input name="backlink" type="text" required="true" value="${slide.backlink}"/>
+                            <input name="backlink" type="text" required="true" value="${slide.backlink}" readonly="true"/>
                             Notes
                             <input name="notes" type="text"  value="${slide.note}"/>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Update</button>

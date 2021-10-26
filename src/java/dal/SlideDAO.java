@@ -232,20 +232,44 @@ public class SlideDAO extends MyDAO {
                 + "SET\n"
                 + "`title` = ?,\n"
                 + "`image` = ?,\n"
-                + "`backlink` = ?,\n"
                 + "`notes` = ?\n"
                 + "WHERE `id` = ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, slide.getTitle());
             ps.setString(2, slide.getImage_Url());
-            ps.setString(3, slide.getBacklink());
-            ps.setString(4, slide.getNote());
-            ps.setInt(5, slide.getId());
+            ps.setString(3, slide.getNote());
+            ps.setInt(4, slide.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+     public String getMaxID() {
+        String id = "1";
+        xSql = "SELECT max(id)+1 FROM quizpractice.slide;";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                if(rs.getString(1) != null)
+                    id = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+     
+    public static void main(String[] args) {
+        SlideDAO dao = new SlideDAO();
+        String a = dao.getMaxID();
+        System.out.println(a);
+    }
+
+    
 }

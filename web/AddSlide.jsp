@@ -49,8 +49,7 @@
                             <input name="title" type="text" required="true" />
                             Thumbnail
                             <input name="fname" type="file" required="true" />
-                             Backlink
-                            <input name="backlink" type="text" required="true" />
+                            
                             Notes
                             <input name="notes" type="text" required="true" />
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>

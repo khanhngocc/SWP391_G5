@@ -54,7 +54,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
         String srcImg = m.getParameter("srcImg");
         String id = m.getParameter("id");
         String title = m.getParameter("title");
-        String backlink = m.getParameter("backlink");
+      
         String notes = m.getParameter("notes");
         
         if (title.length() > 100) {
@@ -63,11 +63,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
             request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
         }
         
-        if (backlink.length() > 1000) {
-            message = "backlink comes over 3500 characters";
-            request.setAttribute("messUpdateSlide", message);
-            request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
-        }
+       
         
         if (notes.length() > 1000) {
             message = "notes comes over 3500 characters";
@@ -79,7 +75,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
         slide.setId(Integer.valueOf(id));
         slide.setTitle(title);
         slide.setImage_Url(srcImg);
-        slide.setBacklink(backlink);
+      
         slide.setNote(notes);
         
         if (m.getFile("fname") != null) {
