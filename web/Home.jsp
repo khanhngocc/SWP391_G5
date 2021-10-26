@@ -33,7 +33,7 @@
 
     <body>
 
-       <c:if test="${sessionScope.user.rollId eq 1}">
+        <c:if test="${sessionScope.user.rollId eq 1}">
             <jsp:include page="HeaderCustomer.jsp" />  
         </c:if>
         <c:if test="${sessionScope.user.rollId eq 2}">
@@ -48,78 +48,55 @@
         <c:if test="${sessionScope.user.rollId eq 5}">
             <jsp:include page="HeaderManager.jsp" />  
         </c:if>
-    <section id="slider"><!--slider-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
-                        </ol>
+        <section id="slider"><!--slider-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <c:forEach var = "i" begin = "0" end = "${sliderListSize-1}">
+                                    <li data-target="#slider-carousel" data-slide-to="${i}" <c:if test="${i eq 0}">class="active"</c:if>></li>
+                                </c:forEach>
+                               
+                            </ol>
 
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-6">
-                                    <h1><span>Mega</span>-Deal</h1>
-                                    <h2>Self-learning</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <div class="carousel-inner">
+                                <c:forEach items="${sliderList}" var="list">
+                                    <div class="item <c:if test="${list.id eq 1}">active</c:if>">
+                                        <div class="col-sm-6">
+                                            <h1><span>Mega</span>-Deal</h1>
+                                            <h2>${list.title}</h2>
+                                            <p>${list.note}</p>
 
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/home-3.jpg" class="girl img-responsive" alt="" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <img style="width: 400px;height: 400px" src="${list.image_Url}" class="girl img-responsive" alt="" />
 
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>Mega</span>-Deal</h1>
-                                    <h2>Creative Discussion</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/home2.jpg" class="girl img-responsive" alt="" />
-
-                                </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
 
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>Mega</span>-Deal</h1>
-                                    <h2>Work together</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/home1.jpg" class="girl img-responsive" alt="" />
-
-                                </div>
-                            </div>
-
+                            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         </div>
 
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section><!--/slider-->
+        </section><!--/slider-->
 
-    <jsp:include page="Footer.jsp" /> 
+        <jsp:include page="Footer.jsp" /> 
 
-    <script src="js/jquery.js"></script>
-    <script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-</body>
+        <script src="js/jquery.js"></script>
+        <script src="js/price-range.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

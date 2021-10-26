@@ -35,14 +35,16 @@ public class EditQuizController extends BaseRequiredLoginController {
         String id = request.getParameter("id");
         QuizDAO quizd = new QuizDAO();
         QuestionDAO qdao = new QuestionDAO();
-        ArrayList<Question> question = qdao.getQuestionByQuizId(id);
+        ArrayList<Question> question = qdao.getQuestionByQuizId(Integer.parseInt(id));
         Quizzes quiz = quizd.getQuizByID(id);
         request.setAttribute("question", question);
         request.setAttribute("quiz", quiz);
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
+        ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Quiz Category");
         ArrayList<Setting> listType = settingDAO.getListSettingByType("Exam type");
         request.setAttribute("listLevel", listLevel);
+        request.setAttribute("listCategory", listCategory);
         request.setAttribute("listType", listType);
         SubjectDAO subjectDAO = new SubjectDAO();
         ArrayList<Subject> listSubject = subjectDAO.listAllSubject("Published");
@@ -71,13 +73,14 @@ public class EditQuizController extends BaseRequiredLoginController {
         String title = m.getParameter("title");
         String des = m.getParameter("description");
         String subject = m.getParameter("subject");
+        String category = m.getParameter("category");
         String level = m.getParameter("level");
         String type = m.getParameter("type");
         String dur = m.getParameter("duration");
         String rate = m.getParameter("rate");
         QuizDAO qud = new QuizDAO();
         Quizzes quizess = qud.getQuizByID(id);
-        Quizzes newq = new Quizzes(Integer.parseInt(id), title, des, Integer.parseInt(subject), level, type, quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), "images/thumbnail/" + fileNameImg);
+        Quizzes newq = new Quizzes(Integer.parseInt(id), title, des, Integer.parseInt(subject),category, level, type, quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), "images/thumbnail/" + fileNameImg);
         qud.UpdateQuizzes(newq);
 
         response.sendRedirect("QuizList");

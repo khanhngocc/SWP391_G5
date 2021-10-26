@@ -6,42 +6,43 @@
 package controller.expert;
 
 import controller.base.BaseRequiredLoginController;
-import dal.QuizDAO;
-import dal.SubjectDAO;
+import dal.QuestionDAO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Quizzes;
+import model.Question;
 
 /**
  *
  * @author Admin
  */
-public class QuizListController extends BaseRequiredLoginController {
+public class QuestionListController extends BaseRequiredLoginController {
 
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QuizDAO qdao = new QuizDAO();
-        List<Quizzes> quizlist = qdao.getQuiz();
-        int pageSize = quizlist.size() % 10 == 0 ? quizlist.size() / 10 : quizlist.size() / 10 + 1;
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
+        QuestionDAO qdao = new QuestionDAO();
+        ArrayList<Question> question = qdao.getQuestions();
+        int pageSize = question.size() % 10 == 0 ? question.size() / 10 : question.size() / 10 + 1;
         int currentPage;
         try {
             currentPage = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
             currentPage = 1;
         }
-        request.setAttribute("list", quizlist.subList(10 * (currentPage - 1), 10 * currentPage > quizlist.size() ? quizlist.size() : 10 * currentPage));
+        request.setAttribute("question", question.subList(10 * (currentPage - 1), 10 * currentPage > question.size() ? question.size() : 10 * currentPage));
         request.setAttribute("pagesize", pageSize);
         request.setAttribute("page", currentPage);
-        request.setAttribute("sdao",new SubjectDAO());
-        request.getRequestDispatcher("QuizList.jsp").forward(request, response);
+        request.getRequestDispatcher("QuestionList.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
 }

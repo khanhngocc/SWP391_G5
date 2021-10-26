@@ -6,12 +6,13 @@
 package controller.common;
 
 import controller.base.BaseRequiredLoginController;
+import dal.SlideDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Slide;
 
 /**
  *
@@ -21,13 +22,16 @@ public class HomeController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       request.getRequestDispatcher("Home.jsp").forward(request, response);
+        SlideDAO slideDAO = new SlideDAO();
+        ArrayList<Slide> sliderList = slideDAO.listAllSlides("Published");
+        request.setAttribute("sliderList", sliderList);
+        request.setAttribute("sliderListSize", sliderList.size());
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-    }
 
+    }
 
 }

@@ -41,10 +41,6 @@
         <servlet-class>controller.free.DocumentDetailed</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeMarketing</servlet-name>
-        <servlet-class>controller.marketing.HomeMarketing</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BlogList</servlet-name>
         <servlet-class>controller.marketing.BlogList</servlet-class>
     </servlet>
@@ -89,10 +85,6 @@
         <servlet-class>controller.admin.UserListControl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeAdmin</servlet-name>
-        <servlet-class>controller.admin.HomeAdmin</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ActivateAccount</servlet-name>
         <servlet-class>controller.free.ActivateAccount</servlet-class>
     </servlet>
@@ -101,20 +93,12 @@
         <servlet-class>controller.expert.QuizListController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeExpertController</servlet-name>
-        <servlet-class>controller.expert.HomeExpertController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DeleteQuizController</servlet-name>
         <servlet-class>controller.expert.DeleteQuizController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddQuizController</servlet-name>
         <servlet-class>controller.expert.AddQuizController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddQuestionController</servlet-name>
-        <servlet-class>controller.expert.AddQuestionController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditQuizController</servlet-name>
@@ -133,10 +117,6 @@
         <servlet-class>controller.expert.ImportQuestionController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddQuestionInListController</servlet-name>
-        <servlet-class>controller.expert.AddQuestionInListController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddSubject</servlet-name>
         <servlet-class>controller.manager.AddSubject</servlet-class>
     </servlet>
@@ -147,10 +127,6 @@
     <servlet>
         <servlet-name>DeleteSubject</servlet-name>
         <servlet-class>controller.manager.DeleteSubject</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HomeManager</servlet-name>
-        <servlet-class>controller.manager.HomeManager</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SubjectDetailed</servlet-name>
@@ -183,6 +159,14 @@
     <servlet>
         <servlet-name>UpdateSlide</servlet-name>
         <servlet-class>controller.marketing.UpdateSlide</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionToQuizController</servlet-name>
+        <servlet-class>controller.expert.AddQuestionToQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionListController</servlet-name>
+        <servlet-class>controller.expert.QuestionListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
@@ -223,10 +207,6 @@
     <servlet-mapping>
         <servlet-name>DocumentDetailed</servlet-name>
         <url-pattern>/DocumentDetailed</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeMarketing</servlet-name>
-        <url-pattern>/HomeMarketing</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogList</servlet-name>
@@ -273,10 +253,6 @@
         <url-pattern>/UserList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeAdmin</servlet-name>
-        <url-pattern>/HomeAdmin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ActivateAccount</servlet-name>
         <url-pattern>/ActivateAccount</url-pattern>
     </servlet-mapping>
@@ -285,20 +261,12 @@
         <url-pattern>/QuizList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeExpertController</servlet-name>
-        <url-pattern>/HomeExpert</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DeleteQuizController</servlet-name>
         <url-pattern>/DeleteQuiz</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddQuizController</servlet-name>
         <url-pattern>/AddQuiz</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddQuestionController</servlet-name>
-        <url-pattern>/AddQuestion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditQuizController</servlet-name>
@@ -317,10 +285,6 @@
         <url-pattern>/ImportQuestion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddQuestionInListController</servlet-name>
-        <url-pattern>/AddQuestionInList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddSubject</servlet-name>
         <url-pattern>/AddSubject</url-pattern>
     </servlet-mapping>
@@ -331,10 +295,6 @@
     <servlet-mapping>
         <servlet-name>DeleteSubject</servlet-name>
         <url-pattern>/DeleteSubject</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeManager</servlet-name>
-        <url-pattern>/HomeManager</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SubjectDetailed</servlet-name>
@@ -367,6 +327,14 @@
     <servlet-mapping>
         <servlet-name>UpdateSlide</servlet-name>
         <url-pattern>/UpdateSlide</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionToQuizController</servlet-name>
+        <url-pattern>/AddQuestionToQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionListController</servlet-name>
+        <url-pattern>/QuestionList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>User Detailed</title>
+        <title>Edit Quiz</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -37,35 +37,7 @@
     <!--/head-->
 
     <body>
-        <header id="header"><!--header-->
-
-
-            <div class="header-middle"><!--header-middle-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="logo pull-left">
-                                <a href="HomeExpert"><img src="images/home/partner1.png" alt="" /></a>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="shop-menu pull-right">
-                                <ul class="nav navbar-nav">
-
-
-                                    <li><a href="QuizList">Quiz</a></li>
-                                    <li><a href="Personal?email=${user.email}">Account</a></li>
-                                    <li><a href="Logout">Log out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/header-middle-->
-
-
-        </header>
+        <jsp:include page="HeaderExpert.jsp" /> 
         <section>
             <div>
 
@@ -93,11 +65,18 @@
                                 </c:forEach>
                             </select>
 
+                            Category
+
+                            <select name="category" style="margin-bottom:10px">
+                                <c:forEach items="${listCategory}" var="list">
+                                    <option value="${list.value}" ${quiz.category eq list.value ? "selected" : "" }>${list.value}</option>
+                                </c:forEach>
+                            </select>
                             Level
 
                             <select name="level" style="margin-bottom:10px">
                                 <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.value}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
+                                    <option value="${list.id}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
                                 </c:forEach>
                             </select>
 
@@ -129,7 +108,7 @@
                                     <th><strong><a href="javascript:void(0);">Option 3</a></strong></th>
                                     <th><strong><a href="javascript:void(0);">Option 4</a></strong></th>
                                     <th><strong><a href="javascript:void(0);">Correct Option</a></strong></th>
-                                    <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                                    <th><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
                                 </tr>
 
                                 <c:forEach items="${question}" var="i">
@@ -145,14 +124,12 @@
                                         <td>${i.option4}</td>
                                         <td>${i.option_correct}</td>
                                         <td><a href="#" onclick="deleteQuestion(${i.id},${quiz.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                                        <td><a href="EditQuestion?id=${i.id}&quiz=${quiz.id}"><i class="fa fa-pencil"></i>Edit</a></td>
-                                        <td><a href="#"><i class="fa fa-eye"></i> View</a></td>
                                     </tr>     
                                 </c:forEach>
                             </table>
 
                         </form>
-                        <a href="AddQuestionInList?id=${quiz.id}">Add new Question</a><br>
+                        <a href="AddQuestionToQuiz?id=${quiz.id}">Add new Question</a><br>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
                     </div>                       
                 </div>
@@ -164,38 +141,7 @@
             </div>
 
         </section>
-        <!--/form-->
-        <footer id="footer"><!--Footer-->
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="companyinfo">
-                                <h2><span>Mega</span>-Deal</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="address">
-                                <img src="images/home/map.png" alt="" />
-                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
-                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
-                    </div>
-                </div>
-            </div>
-
-        </footer>
+        <jsp:include page="Footer.jsp" /> 
 
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

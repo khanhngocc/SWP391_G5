@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Update Slide</title>
+        <title>Update Slider</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                 <div class="col-sm-9">
                     <div class="signup-form">
                         <!--sign up form-->
-                        <h2>Update slide</h2>
+                        <h2>Update slider</h2>
 
                         <form action="UpdateSlide" enctype="multipart/form-data" method="post">
                             <input name="id" type="hidden" value="${slide.id}"/>

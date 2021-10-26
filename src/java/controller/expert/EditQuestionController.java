@@ -34,14 +34,15 @@ public class EditQuestionController extends BaseRequiredLoginController {
         request.setAttribute("question", question);
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
+        ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Question Category");
         request.setAttribute("listLevel", listLevel);
+        request.setAttribute("listCategory", listCategory);
         request.getRequestDispatcher("EditQuestion.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        String quiz = request.getParameter("quiz");
         String cate = request.getParameter("category");
         String lev = request.getParameter("level");
         String question = request.getParameter("question");
@@ -69,8 +70,8 @@ public class EditQuestionController extends BaseRequiredLoginController {
                 }
         QuestionDAO qdao = new QuestionDAO();
         qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, "Show", lev, 
-                Integer.parseInt(quiz), answer1, answer2, answer3, answer4, correctAns));
-        response.sendRedirect("EditQuiz?id="+quiz);
+                answer1, answer2, answer3, answer4, correctAns));
+        response.sendRedirect("QuestionList");
     }
      
 }

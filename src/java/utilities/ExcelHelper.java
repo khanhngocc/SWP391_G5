@@ -5,6 +5,7 @@
  */
 package utilities;
 
+import dal.QuestionDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -27,8 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelHelper {
 
-    public ArrayList<Question> importQuestion(String path) throws Exception {
-        ArrayList<Question> x = new ArrayList<>();
+    public void importQuestion(String path) throws Exception {
         String content = "";
         String category = "";
         String status = "";
@@ -85,9 +85,9 @@ public class ExcelHelper {
                         break;
                 }
             }
-            x.add(new Question(content, category, status, level, 0, option1, option2, option3, option4, optionCorrect));
+            QuestionDAO qdao = new QuestionDAO();
+            qdao.insertQuestion(new Question(content, category, status, level, option1, option2, option3, option4, optionCorrect));
         }
-        return x;
     }
 
     private Workbook getWorkbook(InputStream inputStream, String excelFilePath) throws Exception {

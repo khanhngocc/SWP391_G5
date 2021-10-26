@@ -11,23 +11,23 @@ import model.Question;
 /**
  *
  * @author INSPIRON 15-7559
+ * fixed: 22/10/2021
  */
 public class QuestionDAO extends MyDAO {
 
     public void insertQuestion(Question q) {
-        xSql = "INSERT INTO [QuizPractice].[dbo].[Question]\n"
-                + "           ([content]\n"
-                + "           ,[category]\n"
-                + "           ,[status]\n"
-                + "           ,[level]\n"
-                + "           ,[quiz_id]\n"
-                + "           ,[option1]\n"
-                + "           ,[option2]\n"
-                + "           ,[option3]\n"
-                + "           ,[option4]\n"
-                + "           ,[optionCorrect])\n"
+        xSql = "INSERT INTO Question\n"
+                + "           (content\n"
+                + "           ,category\n"
+                + "           ,status\n"
+                + "           ,level\n"
+                + "           ,option1\n"
+                + "           ,option2\n"
+                + "           ,option3\n"
+                + "           ,option4\n"
+                + "           ,optionCorrect)\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,? ,?,?,?,?,?)\n";
+                + "           (?,?,?,?,?,?,?,?,?)\n";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -35,33 +35,15 @@ public class QuestionDAO extends MyDAO {
             ps.setString(2, q.getCategory());
             ps.setString(3, q.getStatus());
             ps.setString(4, q.getLevel());
-            ps.setInt(5, q.getQuiz_id());
-            ps.setString(6, q.getOption1());
-            ps.setString(7, q.getOption2());
-            ps.setString(8, q.getOption3());
-            ps.setString(9, q.getOption4());
-            ps.setString(10, q.getOption_correct());
+            ps.setString(5, q.getOption1());
+            ps.setString(6, q.getOption2());
+            ps.setString(7, q.getOption3());
+            ps.setString(8, q.getOption4());
+            ps.setString(9, q.getOption_correct());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<Question> getQuestionByQuizId(String id) {
-        ArrayList<Question> x = new ArrayList<>();
-        xSql = "select * from Question where quiz_id = ?";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),
-                        rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return x;
     }
 
     public void deleteQuestion(int id) {
@@ -83,8 +65,8 @@ public class QuestionDAO extends MyDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                x = new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),
-                        rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
+                x = new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,16 +75,16 @@ public class QuestionDAO extends MyDAO {
     }
 
     public void EditQuestion(Question x) {
-        xSql = "UPDATE [QuizPractice].[dbo].[Question]\n"
-                + "   SET [content] = ?\n"
-                + "      ,[category] = ?\n"
-                + "      ,[status] = ?\n"
-                + "      ,[level] = ?\n"
-                + "      ,[option1] = ?\n"
-                + "      ,[option2] = ?\n"
-                + "      ,[option3] = ?\n"
-                + "      ,[option4] = ?\n"
-                + "      ,[optionCorrect] = ?\n"
+        xSql = "UPDATE Question\n"
+                + "   SET content = ?\n"
+                + "      ,category = ?\n"
+                + "      ,status = ?\n"
+                + "      ,level = ?\n"
+                + "      ,option1 = ?\n"
+                + "      ,option2 = ?\n"
+                + "      ,option3 = ?\n"
+                + "      ,option4 = ?\n"
+                + "      ,optionCorrect = ?\n"
                 + " WHERE id = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -121,4 +103,55 @@ public class QuestionDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+    
+    public ArrayList<Question> getQuestions(){
+        ArrayList<Question> x = new ArrayList<>();
+        xSql = "select * from Question";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    
+    public ArrayList<Question> getQuestionInQuiz(int id){
+        ArrayList<Question> x = new ArrayList<>();
+        xSql = "select * from Question q inner join Quizzes_Question qq on (q.id = qq.question_id) where qq.quiz_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+
+    public ArrayList<Question> getQuestionByQuizId(int id) {
+        ArrayList<Question> x = new ArrayList<>();
+        xSql = "select * from Quizzes_Question a inner join Question b on(a.question_id = b.id) inner join Quizzes c on(a.quiz_id = c.id) where c.id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Question(rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+   
 }

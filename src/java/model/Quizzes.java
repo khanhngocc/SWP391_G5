@@ -8,12 +8,14 @@ package model;
 /**
  *
  * @author Admin
+ * fixed: 10/22/2021
  */
 public class Quizzes {
     private int id;
     private String title;
     private String description;
     private int subject_id;
+    private String category;
     private String level;
     private String type;
     private int user_id;
@@ -25,10 +27,11 @@ public class Quizzes {
     public Quizzes() {
     }
 
-    public Quizzes(String title, String description, int subject_id, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
+    public Quizzes(String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
         this.title = title;
         this.description = description;
         this.subject_id = subject_id;
+        this.category = category;
         this.level = level;
         this.type = type;
         this.user_id = user_id;
@@ -38,11 +41,12 @@ public class Quizzes {
         this.thumbnail = thumbnail;
     }
 
-    public Quizzes(int id, String title, String description, int subject_id, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
+    public Quizzes(int id, String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.subject_id = subject_id;
+        this.category = category;
         this.level = level;
         this.type = type;
         this.user_id = user_id;
@@ -92,7 +96,13 @@ public class Quizzes {
         this.level = level;
     }
 
-    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getType() {
         return type;
