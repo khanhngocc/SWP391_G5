@@ -42,7 +42,7 @@
             <jsp:include page="HeaderCustomer.jsp" />  
         </c:if>
         <c:if test="${sessionScope.user.rollId eq 2}">
-            <jsp:include page="HeaderMarketing.js" />  
+            <jsp:include page="HeaderMarketing.jsp" />  
         </c:if>
         <c:if test="${sessionScope.user.rollId eq 3}">
             <jsp:include page="HeaderAdmin.jsp" />  

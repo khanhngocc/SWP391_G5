@@ -101,6 +101,51 @@ public class BlogDAO extends MyDAO {
         }
         return no;
     }
+    
+    public ArrayList<Blog> listAllBlog(String statusRestricted) {
+
+       
+        ArrayList<Blog> list = new ArrayList<>();
+
+        try {
+            String sql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
+                    + "where\n"
+                    + "Blog.user_id = User.id\n"
+                    
+                    + "and Blog.status like ? \n"
+                    + "order by created_Date desc\n"
+                    ;
+                 
+            PreparedStatement statement;
+
+            statement = connection.prepareStatement(sql);
+            
+            statement.setString(1, "%" + statusRestricted + "%");
+           
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+
+                Blog b = new Blog();
+                b.setId(rs.getInt(1));
+                b.setTitle(rs.getString(2));
+                b.setDescription(rs.getString(3));
+                b.setDate(rs.getDate(4));
+                b.setAuthor(rs.getString(5));
+                b.setTime(rs.getString(6));
+                b.setImg_url(rs.getString(7));
+                b.setCategory(rs.getString(8));
+                b.setStatus(rs.getString(9));
+                list.add(b);
+            }
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+
+    }
 
     public ArrayList<Blog> listAllBlog(int pageIndex, int pageSize, String searchName, String category, String statusRestricted) {
 
