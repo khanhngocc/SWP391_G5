@@ -12,6 +12,14 @@
     width: 68%;
 }
 
+.centerSearch {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 62%;
+    margin-bottom: 15px;
+}
+
 .centerDiv {
     display: block;
     margin-left: auto;

@@ -304,10 +304,6 @@ public class SlideDAO extends MyDAO {
         return id;
     }
     
-    public static void main(String[] args) {
-        SlideDAO dao = new SlideDAO();
-        String a = dao.getMaxID();
-        System.out.println(a);
-    }
+    
     
 }

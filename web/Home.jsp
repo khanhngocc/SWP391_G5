@@ -13,6 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Homepage</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -56,24 +57,27 @@
                             <ol class="carousel-indicators">
                                 <c:forEach var = "i" begin = "0" end = "${sliderListSize-1}">
                                     <li data-target="#slider-carousel" data-slide-to="${i}" <c:if test="${i eq 0}">class="active"</c:if>></li>
-                                </c:forEach>
-                               
+                                    </c:forEach>
+
                             </ol>
 
                             <div class="carousel-inner">
                                 <c:forEach items="${sliderList}" var="list">
-                                    <div class="item <c:if test="${list.id eq 1}">active</c:if>">
-                                        <div class="col-sm-6">
-                                            <h1><span>Mega</span>-Deal</h1>
-                                            <h2>${list.title}</h2>
+
+                                    <div class="item <c:if test="${list.id eq maxId}">active</c:if>">
+                                            <div class="col-sm-6">
+                                                <h1><span>Mega</span>-Deal</h1>
+                                                <h2>${list.title}</h2>
                                             <p>${list.note}</p>
 
                                         </div>
                                         <div class="col-sm-6">
-                                            <img style="width: 400px;height: 400px" src="${list.image_Url}" class="girl img-responsive" alt="" />
-
+                                            <a href="SlideDetailed?id=${list.id}" >
+                                                <img style="width: 400px;height: 400px" src="${list.image_Url}" class="girl img-responsive" alt="" />
+                                            </a>
                                         </div>
                                     </div>
+
                                 </c:forEach>
                             </div>
 
@@ -89,7 +93,287 @@
                 </div>
             </div>
         </section><!--/slider-->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Exam Category</h2>
+                            <div class="search_box centerSearch">
+                                <input type="text" placeholder="Search"/>
+                            </div>
+                            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Kids</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Fashion</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Households</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Interiors</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Clothing</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Bags</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Shoes</a></h4>
+                                    </div>
+                                </div>
+                            </div><!--/category-products-->
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9 padding-right">
+                        <div class="features_items"><!--features_items-->
+                            <h2 class="title text-center">Latest free exams</h2>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                            <h4>Quiz title</h4>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+
+                                                <h4>Quiz title</h4>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div><!--features_items-->
+
+
+
+                        <div class="recommended_items"><!--recommended_items-->
+                            <h2 class="title text-center">latest posts</h2>
+
+                            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active">	
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend1.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend2.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend3.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">	
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend1.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend2.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/recommend3.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>			
+                            </div>
+                        </div><!--/recommended_items-->
+
+                    </div>
+                </div>
+            </div>
+        </section>
         <jsp:include page="Footer.jsp" /> 
 
         <script src="js/jquery.js"></script>

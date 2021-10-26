@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.common;
-
+package controller.marketing;
 import controller.base.BaseRequiredLoginController;
 import dal.SlideDAO;
 import java.io.IOException;
-import java.util.ArrayList;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,29 +14,24 @@ import model.Slide;
 
 /**
  *
- * @author LEGION
+ * @author dell
  */
-public class HomeController extends BaseRequiredLoginController {
+public class SlideDetailed extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        // load slider
-        SlideDAO slideDAO = new SlideDAO();
-        ArrayList<Slide> sliderList = slideDAO.listAllSlides("Published");
-        int maxId = Integer.valueOf(slideDAO.getMaxID()) - 1;
-        
-        
-        
-        request.setAttribute("sliderList", sliderList);
-        request.setAttribute("sliderListSize", sliderList.size());
-        request.setAttribute("maxId", maxId);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+       String id = request.getParameter("id");
+        SlideDAO dao = new SlideDAO();
+        Slide slide = dao.getSlide(Integer.valueOf(id), "");
+        request.setAttribute("slide", slide);
+        request.getRequestDispatcher("SlideDetailed.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+       
     }
+
+   
 
 }
