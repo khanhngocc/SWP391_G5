@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Update Information</title>
+        <title>Change Passowrd</title>
         <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -57,31 +57,19 @@
                 <div class="row">
                     <jsp:include page="SidebarPersonal.jsp" /> 
                     <div class="col-sm-9 padding-right">
-                        <p class="text-primary">${messUpdateUser}</p>
+                        <p class="text-primary">${messChangePass}</p>
                         <div class="shopper-info col-sm-6">
-                            
-                            <form enctype="multipart/form-data" action="Personal" method="POST">
-                                <img id="profile-ava" class="imageAvatar" src="${userInfor.avatar}">
-                                <br>
-                                Choose a avatar
-                                <input type="file" name="fname">
-                                <input name="srcAvatar" type="hidden" value="${userInfor.avatar}" />
-                                <input name="email" type="hidden" value="${userInfor.email}" />
-                                Full Name
-                                <input name="name"type="text" placeholder="Full Name" required="true" value="${userInfor.fullname}"/>  
-                                Phone
-                                <input name="phone"type="text" placeholder="Phone Number" value="${userInfor.getPhone()}" />	
-                                Title
-                                <br>
-                                <select style="width: 15%;margin-top: 10px;margin-bottom: 10px" name="title" >
-                                    <c:forEach items="${listTitle}" var="list">
-                                        <option value="${list.value}" ${list.value == userInfor.title ? 'selected':''}>${list.value}</option>
-                                    </c:forEach>
-                                </select> 
-                                <br>
 
+                            <form action="ChangePassword" method="post">
 
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <input name="email" type="hidden" placeholder="Email" value="${user.email}" />
+                                Old password
+                                <input name="oldpass"type="password" placeholder="Old Password" required="true" />
+                                New password
+                                <input name="newpass"type="password" placeholder="New Password" required="true" />
+                                Re new password
+                                <input name="repass"type="password" placeholder="Re-Password" required="true" />  
+                                <button type="submit" class="btn btn-primary">Change</button>
                             </form>
                         </div>
                     </div>

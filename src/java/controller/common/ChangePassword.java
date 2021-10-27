@@ -23,7 +23,7 @@ public class ChangePassword extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+         request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
     }
 
     @Override
@@ -44,25 +44,25 @@ public class ChangePassword extends BaseRequiredLoginController {
         if (oldpass.equals(user.getPassword()) == false) {
             message = "old password is wrong";
             request.setAttribute("mess1", message);
-            request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
+            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
         }
 
         if (newpass.length() < 8) {
             message = "length of password must be greater than 8";
             request.setAttribute("mess1", message);
-            request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
+            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
         }
 
         if (newpass.equals(repass) == false) {
             message = "new password is different from re-password";
             request.setAttribute("mess1", message);
-            request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
+            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
         }
 
         
         int n = dao.changePassword(email, newpass);
-        request.setAttribute("mess1", message);
-        request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
+        request.setAttribute("messChangePass", message);
+        request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
 
     }
 

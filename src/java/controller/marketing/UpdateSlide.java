@@ -35,7 +35,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String message = "";
-// get path to save img
+        // get path to save img
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
         sb.append("images/slide");

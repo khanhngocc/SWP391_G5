@@ -93,7 +93,7 @@
                 </div>
             </div>
         </section><!--/slider-->
-        <section style="margin-bottom: 50px">
+        <section style="margin-bottom: 100px">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">

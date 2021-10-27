@@ -5,14 +5,18 @@
  */
 package controller.common;
 
+import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
+import dal.SettingDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Setting;
 import model.User;
 
 /**
@@ -23,37 +27,65 @@ public class PersonalInformation extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        UserDAO dao = new UserDAO();
-        User user = dao.getUser(email);
-        request.setAttribute("user",user);
-        PrintWriter out = response.getWriter();
-        
+        User session_user = (User) request.getSession(false).getAttribute("user");
+        UserDAO userDAO = new UserDAO();
+        User current_user = userDAO.getUser(session_user.getEmail());
+        request.setAttribute("userInfor", current_user);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listTitle = settingDAO.getListSettingByType("Title User");
+        request.setAttribute("listTitle", listTitle);
         request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
 
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         String email = request.getParameter("email");
-         String fullname = request.getParameter("name");
-         String phone = request.getParameter("phone");
-         String gender = request.getParameter("gender");
-         boolean gen = gender.equals("male")?true:false;
-         UserDAO dao = new UserDAO();
-         String mess;
-        int n=  dao.UpdateUser(email, fullname, phone, gen);
-        if(n>0){
-            mess = "Update Susssfully!";
-        }else{
-            mess = "Fail to update information";
+        System.out.println("post");
+        // get path to save img
+        String webPath = getServletContext().getRealPath("/");
+        StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
+        sb.append("images/avatar");
+
+        String fileNameImg = "";
+
+        // get file name of img uploaded
+        MultipartRequest m = new MultipartRequest(request, sb.toString());
+
+        if (m.getFile("fname") != null) {
+            String fileNameImgPath = m.getFile("fname").toString();
+            int indexOflast = fileNameImgPath.lastIndexOf("\\");
+            fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
-        request.setAttribute("mess", mess);
-         User user = dao.getUser(email);
-        request.setAttribute("user",user);
-         
-         request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
-        
+
+        String email = m.getParameter("email");
+        String fullname = m.getParameter("name");
+        String phone = m.getParameter("phone");
+        String srcAvatar = m.getParameter("srcAvatar");
+
+        User updatedUser = new User();
+        updatedUser.setEmail(email);
+
+        updatedUser.setFullname(fullname);
+
+        updatedUser.setPhone(phone);
+
+        updatedUser.setAvatar(srcAvatar);
+
+        if (m.getFile("fname") != null) {
+            updatedUser.setAvatar("images/avatar/" + fileNameImg);
+        }
+
+        UserDAO dao = new UserDAO();
+
+        dao.updateUser(updatedUser);
+        User new_user = dao.getUser(email);
+        request.setAttribute("userInfor", new_user);
+        request.setAttribute("messUpdateUser", "updated successfully!");
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listTitle = settingDAO.getListSettingByType("Title User");
+        request.setAttribute("listTitle", listTitle);
+        request.getRequestDispatcher("UpdateInformation.jsp").forward(request, response);
+
     }
 
 }

@@ -102,7 +102,7 @@ public class BlogDAO extends MyDAO {
         return no;
     }
     
-    public ArrayList<Blog> listAllBlog(String statusRestricted) {
+    public ArrayList<Blog> listFiveHotestBlog(String statusRestricted) {
 
        
         ArrayList<Blog> list = new ArrayList<>();
@@ -111,9 +111,9 @@ public class BlogDAO extends MyDAO {
             String sql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
                     + "where\n"
                     + "Blog.user_id = User.id\n"
-                    
                     + "and Blog.status like ? \n"
-                    + "order by created_Date desc\n"
+                    + "order by Blog.id desc\n"
+                    +"limit 5"
                     ;
                  
             PreparedStatement statement;
@@ -159,7 +159,7 @@ public class BlogDAO extends MyDAO {
                     + "and Blog.title like ?\n"
                     + "and Category like ?\n"
                     + "and Blog.status like ? \n"
-                    + "order by created_Date desc\n"
+                    + "order by Blog.id desc\n"
                     + "LIMIT ?,?";
                  
             PreparedStatement statement;

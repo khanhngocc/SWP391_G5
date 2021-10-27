@@ -32,7 +32,7 @@ public class HomeController extends BaseRequiredLoginController {
 
         // load posts
         BlogDAO blogDAO = new BlogDAO();
-        ArrayList<model.Blog> listAllBlog = blogDAO.listAllBlog("1");
+        ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
 
         
         request.setAttribute("sliderList", sliderList);

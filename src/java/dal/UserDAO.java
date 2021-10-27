@@ -74,7 +74,7 @@ public class UserDAO extends MyDAO {
             while (rs.next()) {
                 if (user == null) {
                     user = new User();
-                }                
+                }
                 user.setEmail(email);
                 user.setPassword(password);
                 user.getUrl().add(rs.getString("url"));
@@ -89,27 +89,30 @@ public class UserDAO extends MyDAO {
 
     }
 
-    public int UpdateUser(String email, String fullname, String phone, boolean gender) {
-        int n = 0;
-        String sql = "UPDATE User\n"
+    public void updateUser(User user) {
+        
+        xSql = "UPDATE User\n"
                 + "   SET fullname = ?\n"
-                + "      ,gender = ?\n"
+                + "      ,title = ?\n"
                 + "      ,phone = ?\n"
+                + "      ,avatar = ?\n"
                 + "     \n"
                 + " WHERE email = ?";
-        PreparedStatement statement;
+       
 
         try {
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, fullname);
-            statement.setBoolean(2, gender);
-            statement.setString(3, phone);
-            statement.setString(4, email);
-            n = statement.executeUpdate();
+             ps = con.prepareStatement(xSql);
+            ps.setString(1, user.getFullname());
+            ps.setString(2, user.getTitle());
+            ps.setString(3, user.getPhone());
+            ps.setString(4, user.getAvatar());
+            ps.setString(5, user.getEmail());
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return n;
+       
     }
 
     public int changePassword(String email, String password) {
@@ -254,5 +257,4 @@ public class UserDAO extends MyDAO {
         }
     }
 
-  
 }
