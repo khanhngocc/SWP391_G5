@@ -70,7 +70,7 @@
                                 Full Name
                                 <input name="name"type="text" placeholder="Full Name" required="true" value="${userInfor.fullname}"/>  
                                 Phone
-                                <input name="phone"type="text" placeholder="Phone Number" value="${userInfor.getPhone()}" />	
+                                <input name="phone"type="text" placeholder="Phone Number" value="${userInfor.getPhone()}" required="" />	
                                 Title
                                 <br>
                                 <select style="width: 15%;margin-top: 10px;margin-bottom: 10px" name="title" >

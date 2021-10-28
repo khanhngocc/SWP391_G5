@@ -46,12 +46,12 @@
                         <p class="text-primary">${messCreateSlide}</p>
                         <form action="AddSlide" enctype="multipart/form-data" method="post">
                             Title
-                            <input name="title" type="text" required="true" />
+                            <input name="title" type="text" required="true" value="${title}"/>
                             Thumbnail
                             <input name="fname" type="file" required="true" />
                             
                             Notes
-                            <input name="notes" type="text" required="true" />
+                            <textarea name="notes" rows="25" cols="70">${notes}</textarea>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
                     </div>

@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Slide;
+import utilities.ValidationField;
 
 /**
  *
  * @author dell
  */
 public class UpdateSlide extends BaseRequiredLoginController {
-    
+
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
@@ -30,63 +31,79 @@ public class UpdateSlide extends BaseRequiredLoginController {
         request.setAttribute("slide", slide);
         request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
     }
-    
+
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
+        boolean isValid = true;
+
         String message = "";
         // get path to save img
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
         sb.append("images/slide");
-        
+
         String fileNameImg = "";
 
         // get file name of img uploaded
         MultipartRequest m = new MultipartRequest(request, sb.toString());
-        
+
         if (m.getFile("fname") != null) {
             String fileNameImgPath = m.getFile("fname").toString();
             int indexOflast = fileNameImgPath.lastIndexOf("\\");
             fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
-        
+
         String srcImg = m.getParameter("srcImg");
         String id = m.getParameter("id");
         String title = m.getParameter("title");
-      
         String notes = m.getParameter("notes");
-        
-        if (title.length() > 100) {
-            message = "title comes over 100 characters";
-            request.setAttribute("messUpdateSlide", message);
-            request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
-        }
-        
-       
-        
-        if (notes.length() > 1000) {
-            message = "notes comes over 3500 characters";
-            request.setAttribute("messUpdateSlide", message);
-            request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
-        }
+        String backlink = m.getParameter("backlink");
         
         Slide slide = new Slide();
         slide.setId(Integer.valueOf(id));
         slide.setTitle(title);
         slide.setImage_Url(srcImg);
-      
+        slide.setBacklink(backlink);
         slide.setNote(notes);
-        
-        if (m.getFile("fname") != null) {
+
+        if (m.getFile("fname") != null && ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == true) {
             slide.setImage_Url("images/slide/" + fileNameImg);
         }
-        
-        SlideDAO slideDAO = new SlideDAO();
-        slideDAO.updateSlide(slide);
-        
-        response.sendRedirect("SlideList");
-        
+
+        request.setAttribute("slide", slide);
+        System.out.println(slide.getImage_Url());
+       
+        if (ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == false && !fileNameImg.equals("")) {
+            
+            message = "file input is not a image";
+            isValid = false;
+            dispatch(request, message, response);
+        }
+
+        if (title.length() > 100) {
+            message = "title comes over 100 characters";
+            isValid = false;
+            dispatch(request, message, response);
+        }
+
+        if (notes.length() > 1000) {
+            message = "notes comes over 1000 characters";
+            isValid = false;
+            dispatch(request, message, response);
+        }
+
+        if (isValid == true) {
+            SlideDAO slideDAO = new SlideDAO();
+            slideDAO.updateSlide(slide);
+            response.sendRedirect("SlideList");
+        }
+
     }
-    
+
+    private void dispatch(HttpServletRequest request, String message, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("messUpdateSlide", message);
+        request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
+    }
+
 }

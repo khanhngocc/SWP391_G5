@@ -72,7 +72,7 @@
 
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="SlideDetailed?id=${list.id}" >
+                                            <a href="${list.backlink}${list.id}" >
                                                 <img style="width: 400px;height: 400px" src="${list.image_Url}" class="girl img-responsive" alt="" />
                                             </a>
                                         </div>

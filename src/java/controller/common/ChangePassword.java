@@ -23,13 +23,15 @@ public class ChangePassword extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
+        request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String message = "Update successfully!";
+        boolean isValid = true;
+
+        String message = "";
 
         String email = request.getParameter("email");
 
@@ -41,29 +43,46 @@ public class ChangePassword extends BaseRequiredLoginController {
         String newpass = request.getParameter("newpass");
         String repass = request.getParameter("repass");
 
+        request.setAttribute("oldpass", oldpass);
+        request.setAttribute("newpass", newpass);
+        request.setAttribute("repass", repass);
+
         if (oldpass.equals(user.getPassword()) == false) {
             message = "old password is wrong";
-            request.setAttribute("mess1", message);
-            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
+            isValid = false;
+            dispatch(request, message, response);
         }
 
         if (newpass.length() < 8) {
             message = "length of password must be greater than 8";
-            request.setAttribute("mess1", message);
-            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
+            isValid = false;
+            dispatch(request, message, response);
         }
 
         if (newpass.equals(repass) == false) {
             message = "new password is different from re-password";
-            request.setAttribute("mess1", message);
-            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
+            isValid = false;
+            dispatch(request, message, response);
         }
 
-        
-        int n = dao.changePassword(email, newpass);
+        if (isValid == true) {
+            int n = dao.changePassword(email, newpass);
+            message = "Update successfully!";
+            clearField(request);
+            dispatch(request, message, response);
+        }
+
+    }
+
+    private void clearField(HttpServletRequest request) {
+        request.removeAttribute("oldpass");
+        request.removeAttribute("newpass");
+        request.removeAttribute("repass");
+    }
+
+    private void dispatch(HttpServletRequest request, String message, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("messChangePass", message);
         request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
-
     }
 
 }

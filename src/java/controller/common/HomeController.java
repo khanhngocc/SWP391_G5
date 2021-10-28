@@ -28,12 +28,12 @@ public class HomeController extends BaseRequiredLoginController {
         // load slider
         SlideDAO slideDAO = new SlideDAO();
         ArrayList<Slide> sliderList = slideDAO.listAllSlides("Published");
-        int maxId = Integer.valueOf(slideDAO.getMaxID()) - 1;
-
+        int maxId = Integer.valueOf(slideDAO.getMaxID("Published"));
+        
         // load posts
         BlogDAO blogDAO = new BlogDAO();
         ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
-
+ 
         
         request.setAttribute("sliderList", sliderList);
         request.setAttribute("sliderListSize", sliderList.size());

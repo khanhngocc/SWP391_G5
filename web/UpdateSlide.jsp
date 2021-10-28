@@ -42,7 +42,7 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Update slider</h2>
-
+                        <p class="text-primary">${messUpdateSlide}</p>
                         <form action="UpdateSlide" enctype="multipart/form-data" method="post">
                             <input name="id" type="hidden" value="${slide.id}"/>
                             <input name="srcImg" type="hidden"  value="${slide.image_Url}"/>

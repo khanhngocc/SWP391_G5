@@ -285,12 +285,13 @@ public class SlideDAO extends MyDAO {
         }
     }
     
-    public String getMaxID() {
+    public String getMaxID(String status) {
         String id = "1";
-        xSql = "SELECT max(id)+1 FROM quizpractice.slide;";
+        xSql = "SELECT max(id) FROM quizpractice.slide where status like ? ;";
         
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, status);
             rs = ps.executeQuery();
             if (rs.next()) {
                 

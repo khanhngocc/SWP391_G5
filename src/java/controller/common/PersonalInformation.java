@@ -56,13 +56,15 @@ public class PersonalInformation extends BaseRequiredLoginController {
             int indexOflast = fileNameImgPath.lastIndexOf("\\");
             fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
-
+        String title = m.getParameter("title");
         String email = m.getParameter("email");
         String fullname = m.getParameter("name");
         String phone = m.getParameter("phone");
         String srcAvatar = m.getParameter("srcAvatar");
 
         User updatedUser = new User();
+        updatedUser.setTitle(title);
+        
         updatedUser.setEmail(email);
 
         updatedUser.setFullname(fullname);

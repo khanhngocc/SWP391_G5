@@ -64,11 +64,11 @@
 
                                 <input name="email" type="hidden" placeholder="Email" value="${user.email}" />
                                 Old password
-                                <input name="oldpass"type="password" placeholder="Old Password" required="true" />
+                                <input name="oldpass"type="password" placeholder="Old Password" required="true" value="${oldpass}"/>
                                 New password
-                                <input name="newpass"type="password" placeholder="New Password" required="true" />
+                                <input name="newpass"type="password" placeholder="New Password" required="true" value="${newpass}"/>
                                 Re new password
-                                <input name="repass"type="password" placeholder="Re-Password" required="true" />  
+                                <input name="repass"type="password" placeholder="Re-Password" required="true" value="${repass}"/>  
                                 <button type="submit" class="btn btn-primary">Change</button>
                             </form>
                         </div>
