@@ -54,7 +54,7 @@
                             Backlink
                             <input name="backlink" type="text" required="true" value="${slide.backlink}" readonly="true"/>
                             Notes
-                            <input name="notes" type="text"  value="${slide.note}"/>
+                            <textarea name="notes" rows="25" cols="30">${slide.notes}</textarea>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Update</button>
                         </form>
                     </div>

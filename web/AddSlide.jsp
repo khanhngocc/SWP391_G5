@@ -51,7 +51,7 @@
                             <input name="fname" type="file" required="true" />
                             
                             Notes
-                            <textarea name="notes" rows="25" cols="70">${notes}</textarea>
+                            <textarea name="notes" rows="25" cols="30">${notes}</textarea>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
                     </div>

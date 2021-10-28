@@ -172,6 +172,22 @@
         <servlet-name>SlideDetailed</servlet-name>
         <servlet-class>controller.marketing.SlideDetailed</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddPracticeController</servlet-name>
+        <servlet-class>controller.customer.AddPracticeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionToPracticeController</servlet-name>
+        <servlet-class>controller.customer.AddQuestionToPracticeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PracticeDetailController</servlet-name>
+        <servlet-class>controller.customer.PracticeDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PracticeListController</servlet-name>
+        <servlet-class>controller.customer.PracticeListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -343,6 +359,22 @@
     <servlet-mapping>
         <servlet-name>SlideDetailed</servlet-name>
         <url-pattern>/SlideDetailed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPracticeController</servlet-name>
+        <url-pattern>/AddPractice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionToPracticeController</servlet-name>
+        <url-pattern>/AddQuestionToPractice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PracticeDetailController</servlet-name>
+        <url-pattern>/PracticeDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PracticeListController</servlet-name>
+        <url-pattern>/PracticeList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
