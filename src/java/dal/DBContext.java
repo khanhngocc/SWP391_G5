@@ -23,7 +23,7 @@ public class DBContext {
         try {
             //Change the username password and url to connect your own database
             String username = "root";
-            String password = "ducanh";
+            String password = "tuancb";
             String url = "jdbc:mysql://localhost:3306/quizpractice?useSSL=false";
             try { 
                 try {

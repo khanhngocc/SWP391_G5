@@ -133,13 +133,13 @@
                                                 <img src="images/404/sleeping-person.jpg" alt="" />
 
                                                 <h4>${i.title}</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                                
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
 
-                                                    <h4>${i.title}</h4>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                                    <h4><a href="FreeTestDetail?id=${i.id}">${i.title}</a></h4>
+                                                    <a href="QuizHandle?id=${i.id}" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
                                                 </div>
                                             </div>
                                         </div>

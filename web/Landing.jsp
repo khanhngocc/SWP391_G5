@@ -33,8 +33,36 @@
     </head><!--/head-->
 
     <body>
+        <header id="header"><!--header-->
 
-        <jsp:include page="HeaderFree.jsp" /> 
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="LandingPage"><img src="images/home/partner1.png" alt=""  /></a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+
+                                    <li><a href="TestControl">Test</a></li>
+                                    <li><a href="DocumentList">Document</a></li>
+                                    <li></li>
+                                    <a href="Login" class="btn btn-default">Log in</a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/header-middle-->
+
+
+        </header><!--/header-->
+
         <section ><!--slider-->
             <div class="container alginBodyLanding">
                 <img src="images/home/study.jpg" alt="" class="centerImgLanding">
@@ -42,7 +70,37 @@
         </section><!--/slider-->
 
 
-        <jsp:include page="Footer.jsp" /> 
+        <footer id="footer"><!--Footer-->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="companyinfo">
+                                <h2><span>Mega</span>-Deal</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="address">
+                                <img src="images/home/map.png" alt="" />
+                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <p class="pull-left">Copyright © 2021 Mega-Deal Inc. All rights reserved.</p>
+                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Group 5</a></span></p>
+                    </div>
+                </div>
+            </div>
+
+        </footer><!--/Footer-->
 
 
         <script src="js/jquery.js"></script>
