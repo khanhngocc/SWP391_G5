@@ -25,6 +25,12 @@ public class Question {
     public Question() {
     }
 
+    public Question(int id, String status, String option_correct) {
+        this.id = id;
+        this.status = status;
+        this.option_correct = option_correct;
+    }
+
     public Question(String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct) {
         this.content = content;
         this.category = category;

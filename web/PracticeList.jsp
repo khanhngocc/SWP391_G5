@@ -65,7 +65,7 @@
                             <td>${quizdao.getQuizByID(i.quiz_id).duration}</td>
                             <td>${i.percentage}</td>
                             <c:choose>
-                                <c:when test="${i.type eq 'User Practice'}">
+                                <c:when test="${quizdao.getQuizByID(i.quiz_id).type eq 'User Practice'}">
                                     <td>N/A</td>
                                     <td><a href="PracticeDetail?id=${i.quiz_id}"><i class="fa fa-eye"></i>View Detail</a></td>                                    
                                 </c:when>                                

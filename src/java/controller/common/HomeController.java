@@ -7,6 +7,8 @@ package controller.common;
 
 import controller.base.BaseRequiredLoginController;
 import dal.BlogDAO;
+import dal.QuizDAO;
+import dal.SettingDAO;
 import dal.SlideDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Quizzes;
 import model.Slide;
 
 /**
@@ -27,14 +30,16 @@ public class HomeController extends BaseRequiredLoginController {
 
         // load slider
         SlideDAO slideDAO = new SlideDAO();
+        QuizDAO quizdao = new QuizDAO();
+        SettingDAO settingdao = new SettingDAO();
         ArrayList<Slide> sliderList = slideDAO.listAllSlides("Published");
         int maxId = Integer.valueOf(slideDAO.getMaxID("Published"));
-        
+        ArrayList<Quizzes> freetest = quizdao.getQuizByType("Free Test");
         // load posts
         BlogDAO blogDAO = new BlogDAO();
         ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
  
-        
+        request.setAttribute("freetest", freetest);
         request.setAttribute("sliderList", sliderList);
         request.setAttribute("sliderListSize", sliderList.size());
         request.setAttribute("maxId", maxId);

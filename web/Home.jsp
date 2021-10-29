@@ -106,37 +106,12 @@
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Kids</a></h4>
+                                        <h4 class="panel-title"><a href="#">Long</a></h4>
                                     </div>
                                 </div>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Fashion</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Households</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Interiors</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Clothing</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Bags</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Shoes</a></h4>
+                                        <h4 class="panel-title"><a href="#">Short</a></h4>
                                     </div>
                                 </div>
                             </div><!--/category-products-->
@@ -148,127 +123,30 @@
                     <div class="col-sm-9 padding-right">
                         <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Latest free exams</h2>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
 
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
+                            <c:forEach items="${freetest}" var="i">
+                                <div class="col-sm-4">
+                                    <div class="product-image-wrapper">
 
-                                                <h4>Quiz title</h4>
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/404/sleeping-person.jpg" alt="" />
+
+                                                <h4>${i.title}</h4>
                                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
 
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
-
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-
-                                                <h4>Quiz title</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                                    <h4>${i.title}</h4>
+                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
-
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-
-                                                <h4>Quiz title</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
-
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-
-                                                <h4>Quiz title</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
-
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-
-                                                <h4>Quiz title</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/404/sleeping-person.jpg" alt="" />
-
-                                            <h4>Quiz title</h4>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-
-                                                <h4>Quiz title</h4>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            </c:forEach>
                         </div><!--features_items-->
 
 
