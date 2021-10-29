@@ -188,6 +188,14 @@
         <servlet-name>PracticeListController</servlet-name>
         <servlet-class>controller.customer.PracticeListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>controller.common.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ErrorPage</servlet-name>
+        <servlet-class>controller.free.ErrorPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -375,6 +383,14 @@
     <servlet-mapping>
         <servlet-name>PracticeListController</servlet-name>
         <url-pattern>/PracticeList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorPage</servlet-name>
+        <url-pattern>/ErrorPage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

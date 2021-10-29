@@ -39,6 +39,25 @@ public class UserDAO extends MyDAO {
         return (x);
     }
 
+    public User getUser(int id) {
+        User x = null;
+        xSql = "SELECT * FROM User WHERE id = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                x = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
+
     public ArrayList<User> getAllUser() {
         ArrayList<User> x = new ArrayList<>();
         xSql = "SELECT * FROM User";
@@ -90,7 +109,7 @@ public class UserDAO extends MyDAO {
     }
 
     public void updateUser(User user) {
-        
+
         xSql = "UPDATE User\n"
                 + "   SET fullname = ?\n"
                 + "      ,title = ?\n"
@@ -98,10 +117,9 @@ public class UserDAO extends MyDAO {
                 + "      ,avatar = ?\n"
                 + "     \n"
                 + " WHERE email = ?";
-       
 
         try {
-             ps = con.prepareStatement(xSql);
+            ps = con.prepareStatement(xSql);
             ps.setString(1, user.getFullname());
             ps.setString(2, user.getTitle());
             ps.setString(3, user.getPhone());
@@ -112,26 +130,25 @@ public class UserDAO extends MyDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
 
-    public int changePassword(String email, String password) {
-        int n = 0;
-        String sql = "UPDATE User\n"
+    public void changePassword(String email, String password) {
+        ;
+        xSql = "UPDATE User\n"
                 + "   SET password = ?\n"
                 + " WHERE email = ?";
-        PreparedStatement statement;
 
         try {
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, password);
-            statement.setString(2, email);
-
-            n = statement.executeUpdate();
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, password);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        return n;
+
     }
 
     public String getRollName(String email) {

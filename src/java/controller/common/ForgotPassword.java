@@ -5,44 +5,27 @@
  */
 package controller.common;
 
+import dal.AccountForgotDAO;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Properties;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.mail.Message;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Calendar;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.AccountForgot;
+import model.User;
+import utilities.GmailHelper;
+import utilities.ValidationField;
 
 /**
  *
  * @author dell
  */
 public class ForgotPassword extends HttpServlet {
-
-    private static String USER_NAME = "khanhkuro98";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "nwxrztxrkskmlfog"; // GMail password
-    private static String RECIPIENT = "";
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
-            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-    public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,104 +36,83 @@ public class ForgotPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        boolean isValid = true;
+
         String message = "recover successfully, please check your emai!";
+
         String email = request.getParameter("email");
+
+        request.setAttribute("emailCover", email);
+
         // wrong format email
-        if(validate(email) == false)
-        {
+        if (ValidationField.validateEmailFormat(email) == false) {
             message = "wrong format of email";
-            request.setAttribute("mess", message);
-            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+            isValid = false;
+            dispatch(request, message, response);
         }
+
         UserDAO dao = new UserDAO();
-        
         // account not existed
-        if(dao.getUser(email) == null)
-        {
-             message = "this email isn't signed up in the system";
-            request.setAttribute("mess", message);
-            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+        if (dao.getUser(email) == null) {
+            message = "this email isn't signed up in the system";
+            isValid = false;
+            dispatch(request, message, response);
         }
-        
-        // start recover
-        String recover_password = String.valueOf(generatePassword(10));
-        
-        
-        dao.changePassword(email, recover_password);
-        
-        RECIPIENT = email;
-        String from = USER_NAME;
-        String pass = PASSWORD;
-        String[] to = {RECIPIENT}; // list of recipient email addresses
-        String subject = "Request to reset password";
-        String body = "Hi you," + "\nYour new password is: " + recover_password  + "\n" + "Best regard," + "\nMegaDeal Technical Support";
 
-        try {
-            sendFromGMail(from, pass, to, subject, body);
-            request.setAttribute("mess", message);
-            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+        if (isValid == true) {
 
-    private static char[] generatePassword(int length) {
-        String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-        String specialCharacters = "!@#$";
-        String numbers = "1234567890";
-        String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
-        Random random = new Random();
-        char[] password = new char[length];
+            UserDAO userDAO = new UserDAO();
+            User current_user = userDAO.getUser(email);
 
-        password[0] = lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
-        password[1] = capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
-        password[2] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
-        password[3] = numbers.charAt(random.nextInt(numbers.length()));
+            // mark this account have permisson to reset password
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-        for (int i = 4; i < length; i++) {
-            password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
-        }
-        return password;
-    }
+            AccountForgotDAO accDAO = new AccountForgotDAO();
 
-    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NoSuchProviderException, MessagingException {
-        Properties props = System.getProperties();
-        String host = "smtp.gmail.com";
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.user", from);
-        props.put("mail.smtp.password", pass);
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
+            AccountForgot acc = new AccountForgot();
 
-        Session session = Session.getDefaultInstance(props);
-        MimeMessage message = new MimeMessage(session);
+            // set attribute
+            acc.setUser_id(current_user.getId());
+            acc.setTimeStarted(sdf.format(cal.getTime()));
+            cal.add(Calendar.MINUTE, 2);
+            acc.setTimeEnded(sdf.format(cal.getTime()));
+            acc.setAllowedReset("1");
+            acc.setDateCreated(java.time.LocalDate.now().toString());
 
-        try {
-            message.setFrom(new InternetAddress(from));
-            InternetAddress[] toAddress = new InternetAddress[to.length];
+            // create accountforgot
+            accDAO.createAccountForgot(acc);
+            String tail = "id=" + accDAO.getMaxID();
+            String encodedTail = Base64.getUrlEncoder().encodeToString(tail.getBytes());
+            String url = "http://localhost:8080/SWP391_G5/ResetPassword?" + encodedTail;
 
-            // To get the array of addresses
-            for (int i = 0; i < to.length; i++) {
-                toAddress[i] = new InternetAddress(to[i]);
+            // send link to reset password to email
+            GmailHelper gm = new GmailHelper();
+            String[] rep = {email};
+            String subject = "[Reset your password at MegaDeal system]";
+            String body = "Hi you,\n\n\n"
+                    + "Please click this link to get new password :" + url
+                    + "\n"
+                    + "/* Don't share this link for someone because of your account's privacy.*/"
+                    + "\n\n"
+                    + "Regard,\n"
+                    + "Mega Deal Support Team";
+            try {
+                gm.sendFromGMail(gm.getUSER_NAME(), gm.getPASSWORD(), rep, subject, body);
+                message = "Check your email to get link to reset password";
+                dispatch(request, message, response);
+            } catch (MessagingException ex) {
+                System.out.println(ex.getMessage());
             }
 
-            for (int i = 0; i < toAddress.length; i++) {
-                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
-            }
-
-            message.setSubject(subject);
-            message.setText(body);
-            Transport transport = session.getTransport("smtp");
-            transport.connect(host, from, pass);
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
-        } catch (AddressException ae) {
-            ae.printStackTrace();
-        } catch (MessagingException me) {
-            me.printStackTrace();
         }
+
+    }
+
+    private void dispatch(HttpServletRequest request, String message, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("mess", message);
+        request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
     }
 
 }

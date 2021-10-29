@@ -14,7 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Landing page</title>
+        <title>Forgot Password</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -39,16 +40,16 @@
             <!--form-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-1">
+                    <div class="centerDiv">
                         <div class="login-form">
                             <!--login form-->
-                            <h2>Recover your password</h2>
-                            <p>Type here your email signed up to get new password</p>
+                            <h2 class="text-center">Recover your password</h2>
+                            <p style="font-style: italic" class="text-center text-danger">Hint: Please type here your email signed up to get link reset password</p>
                             <p class="text-primary">${mess}</p>
                             <form action="ForgotPassword" method = "post">
-                                <input name="email" type="text" placeholder="Email" required="true" />
+                                <input name="email" type="text" placeholder="Email" required="true" value="${emailCover}" />
                                 
-                                <button type="submit" class="btn btn-default">Recover</button>
+                                <button type="submit" class="btn btn-default center-block">Recover</button>
                             </form>
 
                         </div>

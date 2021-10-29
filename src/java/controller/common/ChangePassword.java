@@ -66,7 +66,7 @@ public class ChangePassword extends BaseRequiredLoginController {
         }
 
         if (isValid == true) {
-            int n = dao.changePassword(email, newpass);
+            dao.changePassword(email, newpass);
             message = "Update successfully!";
             clearField(request);
             dispatch(request, message, response);
