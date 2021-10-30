@@ -134,7 +134,7 @@
 
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/404/sleeping-person.jpg" alt="" />
+                                                <img src="${i.thumbnail}" alt="" />
 
                                                 <h4>${i.title}</h4>
 

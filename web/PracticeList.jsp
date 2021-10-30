@@ -39,7 +39,8 @@
         <div class="container">
 
             <!--                <div class="col-sm-3"></div>-->
-            <a href="AddPractice"><i class="fa fa-book"></i> Add new Practice</a>
+            <div style="margin-bottom: 10px"><a href="AddPractice"><i class="fa fa-book"></i> Add new Practice</a></div>
+            
 
             <br>
             <div>

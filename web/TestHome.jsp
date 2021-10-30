@@ -23,6 +23,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Shop | E-Shopper</title>
+        <link href="css/customize.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -166,7 +167,7 @@
                             
                             <h2>SIDE-BAR</h2>
                              <div class="panel-group category-products">
-                                <form action="TestControl" method="POST"><div class="search_box pull-left">
+                                <form action="TestControl" method="POST"><div class="search_box centerSearch">
                                         <input type="text" name="search" placeholder="Search"/>
 
                                     </div></form>

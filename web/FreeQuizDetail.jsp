@@ -74,7 +74,7 @@
 
 
         </header>
-        <section>
+        <section style="margin-bottom: 100px">
             <div>
 
                 <div class="container">
@@ -83,7 +83,7 @@
                             
                             <h2>SIDE-BAR</h2>
                              <div class="panel-group category-products">
-                                <form action="TestControl" method="POST"><div class="search_box pull-left">
+                                <form action="TestControl" method="POST"><div class="search_box centerSearch">
                                         <input type="text" name="search" placeholder="Search"/>
 
                                     </div></form>
@@ -130,7 +130,7 @@
                         </div>
                     </div>
 
-                    <div class = "col-sm-9" >
+                    <div class = "col-sm-6" >
                         <!--sign up form-->
                         <div class="signup-form">
                         <h2>Quiz Detailed</h2>
@@ -193,10 +193,10 @@
                             <c:choose>
                             <c:when test="${sessionScope.user==null}">
 
-                            <center> <button type="button" class="btn btn-warning"><a href = "Login?id=${quiz.id}">Login To Take The Test</a></button></center>
+                            <center> <button class="btn btn-primary"><a href = "Login?id=${quiz.id}" style="color: white">Login To Take The Test</a></button></center>
                            </c:when>
                            <c:otherwise>
-                           <center> <button type="button" class="btn btn-warning"><a href = "QuizHandle?id=${quiz.id}">Take The Test</a></button></center>
+                           <center> <button class="btn btn-primary"><a href = "QuizHandle?id=${quiz.id}" style="color: white">Take The Test</a></button></center>
                            </c:otherwise>
                            </c:choose>
             </div>

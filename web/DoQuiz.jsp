@@ -39,7 +39,7 @@
     <body>       
         <section>
             <div class="container">
-                <br><br><br><br><br><br><br><hr>
+                <br><br><br><br><br><hr>
                 <div class="row">
                     <div>
                         <h1>${quiz.title}</h1> 
