@@ -10,10 +10,8 @@ import dal.QuestionDAO;
 import dal.QuizDAO;
 import dal.Quizzes_QuestionDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Question;
@@ -50,7 +48,7 @@ public class AddQuestionToPracticeController extends BaseRequiredLoginController
         Quizzes q = qdao.getQuizByID(request.getParameter("id"));
         q.setNumber_of_question(checkbox.length);
         qdao.UpdateQuizzes(q);
-        response.sendRedirect(""+id);
+        response.sendRedirect("QuizHandle?id="+id);
     }
 
 

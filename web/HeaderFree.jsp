@@ -12,7 +12,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
 
-                            <li><a href="">Test</a></li>
+                            <li><a href="TestControl">Test</a></li>
                             <li><a href="DocumentList">Document</a></li>
                             <li></li>
                             <a href="Login" class="btn btn-default">Log in</a>

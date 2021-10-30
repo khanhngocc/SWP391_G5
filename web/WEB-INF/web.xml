@@ -196,6 +196,34 @@
         <servlet-name>ErrorPage</servlet-name>
         <servlet-class>controller.free.ErrorPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizHandleController</servlet-name>
+        <servlet-class>controller.customer.QuizHandleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveQuizHandleController</servlet-name>
+        <servlet-class>controller.customer.SaveQuizHandleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitQuizController</servlet-name>
+        <servlet-class>controller.customer.SubmitQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeCategoryController</servlet-name>
+        <servlet-class>controller.common.HomeCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestByCategory</servlet-name>
+        <servlet-class>controller.free.TestByCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestControl</servlet-name>
+        <servlet-class>controller.free.TestControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FreeTestDetail</servlet-name>
+        <servlet-class>controller.free.FreeTestDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -391,6 +419,34 @@
     <servlet-mapping>
         <servlet-name>ErrorPage</servlet-name>
         <url-pattern>/ErrorPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizHandleController</servlet-name>
+        <url-pattern>/QuizHandle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveQuizHandleController</servlet-name>
+        <url-pattern>/SaveQuizHandle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitQuizController</servlet-name>
+        <url-pattern>/SubmitQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeCategoryController</servlet-name>
+        <url-pattern>/HomeCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestByCategory</servlet-name>
+        <url-pattern>/TestByCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestControl</servlet-name>
+        <url-pattern>/TestControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FreeTestDetail</servlet-name>
+        <url-pattern>/FreeTestDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
