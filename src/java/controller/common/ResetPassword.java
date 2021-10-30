@@ -55,17 +55,18 @@ public class ResetPassword extends HttpServlet {
 
     private void excutePost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String password = request.getParameter("newpass");
         String email = request.getParameter("email");
-        
+
         UserDAO userDAO = new UserDAO();
-        userDAO.changePassword(email, password);
-        
+        String encodedPassword = Base64.getUrlEncoder().encodeToString(password.getBytes());
+        userDAO.changePassword(email, encodedPassword);
+
         AccountForgot acc = new AccountForgot();
         acc.setId(idReset);
         acc.setAllowedReset("0");
-        
+
         request.setAttribute("messLogin", "reset password successfully, now you are able to login");
         request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
@@ -83,12 +84,12 @@ public class ResetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       if (isExpiredLink(request.getParameter("idEncoded")) == true) {
+        if (isExpiredLink(request.getParameter("idEncoded")) == true) {
             response.sendRedirect("ErrorPage");
         } else {
             excutePost(request, response);
         }
-      
+
     }
 
     private boolean isExpiredLink(String idEncoded) {

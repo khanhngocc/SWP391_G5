@@ -45,7 +45,7 @@
                         <div class="login-form">
                             <!--login form-->
                             <h2 class="text-center">Reset your password</h2>
-                            <p class="text-center text-danger"><i class="fa fa-warning"></i> Warning: This link will close after <span id="time"></span></p>
+                            <p class="text-center text-danger" style="font-size: 13px;"><i class="fa fa-warning"></i> Warning: This link will close after <span id="time"></span></p>
                             <p class="text-primary" id="messageReset"></p>
                             <form id="frm" action="ResetPassword" method = "POST">
                                 <input id="idText" name="idEncoded" type="hidden" value=""/>
@@ -122,7 +122,7 @@
                 var downloadTimer = setInterval(function () {
                     if (timeleft <= 0) {
                         clearInterval(downloadTimer);
-                        location.reload();
+                        window.location.href = url;
                     } else {
                         document.getElementById("time").innerHTML = timeleft + " seconds remaining";
                     }

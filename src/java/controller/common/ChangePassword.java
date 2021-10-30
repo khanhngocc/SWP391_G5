@@ -9,6 +9,7 @@ import controller.base.BaseRequiredLoginController;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,26 +48,26 @@ public class ChangePassword extends BaseRequiredLoginController {
         request.setAttribute("newpass", newpass);
         request.setAttribute("repass", repass);
 
-        if (oldpass.equals(user.getPassword()) == false) {
+        byte[] decodedBytes = Base64.getUrlDecoder().decode(user.getPassword());
+        String decodedPassword = new String(decodedBytes);
+
+        if (oldpass.equals(decodedPassword) == false) {
             message = "old password is wrong";
             isValid = false;
             dispatch(request, message, response);
-        }
-
-        if (newpass.length() < 8) {
-            message = "length of password must be greater than 8";
+        } else if (!newpass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
+            message = "password must contain number,lowercase,uppercase and length more than 8";
             isValid = false;
             dispatch(request, message, response);
-        }
-
-        if (newpass.equals(repass) == false) {
+        } else if (newpass.equals(repass) == false) {
             message = "new password is different from re-password";
             isValid = false;
             dispatch(request, message, response);
         }
 
         if (isValid == true) {
-            dao.changePassword(email, newpass);
+            String encodedPassword = Base64.getUrlEncoder().encodeToString(newpass.getBytes());
+            dao.changePassword(email, encodedPassword);
             message = "Update successfully!";
             clearField(request);
             dispatch(request, message, response);

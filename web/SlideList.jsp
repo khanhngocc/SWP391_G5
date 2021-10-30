@@ -98,20 +98,20 @@
                     <ul class="pagination">
 
                         <c:if test="${pageindex gt gap}">
-                            <li class="page-item"><a class="page-link" href="SlideList?page=1&searchName=${name_search}&categories=${status}">First</a></li>
+                            <li class="page-item"><a class="page-link" href="SlideList?page=1&searchName=${name_search}&status=${status}">First</a></li>
                             </c:if>
                             <c:forEach var = "i" begin = "${gap}" end = "1">
                                 <c:if test="${pageindex - gap gt 0}">
-                                <li class="page-item"><a class="page-link" href="SlideList?page=${pageindex -i}&searchName=${name_search}&categories=${status}">${pageindex - i}</a></li>
+                                <li class="page-item"><a class="page-link" href="SlideList?page=${pageindex -i}&searchName=${name_search}&status=${status}">${pageindex - i}</a></li>
                                 </c:if>
                             </c:forEach>
                             <c:forEach var = "i" begin = "1" end = "${gap}">
                                 <c:if test="${pageindex + gap le pagecount}">
-                                <li class="page-item"><a class="page-link" href="SlideList?page=${pageindex + i}&searchName=${name_search}&categories=${status}">${pageindex + i}</a></li> 
+                                <li class="page-item"><a class="page-link" href="SlideList?page=${pageindex + i}&searchName=${name_search}&status=${status}">${pageindex + i}</a></li> 
                                 </c:if>
                             </c:forEach>
                             <c:if test="${pageindex + gap lt pagecount}">
-                            <li class="page-item"><a class="page-link" href="SlideList?page=${pagecount}&searchName=${name_search}&categories=${status}">Last</a></li> 
+                            <li class="page-item"><a class="page-link" href="SlideList?page=${pagecount}&searchName=${name_search}&status=${status}">Last</a></li> 
                             </c:if>
                     </ul>
 

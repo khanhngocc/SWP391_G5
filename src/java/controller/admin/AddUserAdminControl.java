@@ -5,24 +5,12 @@ import controller.base.BaseRequiredLoginController;
 import static controller.common.RegisterServ.validate;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Properties;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
@@ -80,7 +68,8 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
         }
         if (checkuser) {
             mess = "Sign-up success!!";
-            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/" + fileNameImg, status, role));
+            String encodedPassword = Base64.getUrlEncoder().encodeToString(pass.getBytes());
+            udao.addUser(new User(name, title, email, phone, encodedPassword, Date.valueOf(java.time.LocalDate.now()), "images/avatar/" + fileNameImg, status, role));
             //send mail//
             GmailHelper gm = new GmailHelper();
             String[] rep = {email};

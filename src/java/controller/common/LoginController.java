@@ -8,6 +8,7 @@ package controller.common;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -35,12 +36,16 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         String username = request.getParameter("Email");
         String password = request.getParameter("Password");
-
+        
+        
+        String encodedPassword = Base64.getUrlEncoder().encodeToString(password.getBytes());
+        
         UserDAO db = new UserDAO();
-        User user = db.getAccount(username, password);
+        User user = db.getAccount(username, encodedPassword);
        
         String mess = "";
         if (user == null) {
@@ -71,5 +76,7 @@ public class LoginController extends HttpServlet {
 
         }
     }
+    
+   
 
 }

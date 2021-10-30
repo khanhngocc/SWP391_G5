@@ -76,7 +76,7 @@ public class ForgotPassword extends HttpServlet {
             // set attribute
             acc.setUser_id(current_user.getId());
             acc.setTimeStarted(sdf.format(cal.getTime()));
-            cal.add(Calendar.MINUTE, 2);
+            cal.add(Calendar.SECOND,85 );
             acc.setTimeEnded(sdf.format(cal.getTime()));
             acc.setAllowedReset("1");
             acc.setDateCreated(java.time.LocalDate.now().toString());

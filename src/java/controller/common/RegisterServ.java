@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -91,8 +92,8 @@ public class RegisterServ extends HttpServlet {
             mess = "Length of phone must be less than 12 characters";
             checkuser = false;
         }
-        if (pass.length() < 8) {
-            mess = "PassWord must be more than 8 characters";
+        if (!pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
+            mess = "password must contain number,lowercase,uppercase and length more than 8";
             checkuser = false;
         }
         if (!pass.equals(repass)) {
@@ -101,7 +102,8 @@ public class RegisterServ extends HttpServlet {
         }
         if (checkuser) {
             mess = "Please check your email to verify your account!";
-            udao.addUser(new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/user_circle.png", "Deactive", 1));
+            String encodedPassword = Base64.getUrlEncoder().encodeToString(pass.getBytes());
+            udao.addUser(new User(name, title, email, phone, encodedPassword, Date.valueOf(java.time.LocalDate.now()), "images/avatar/user_circle.png", "Deactive", 1));
             String maxId = udao.getMaxID();
             GmailHelper gmailHelper = new GmailHelper();
             String[] mailTo = {email};
