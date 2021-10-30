@@ -92,7 +92,7 @@
                     mess = "sorry, length of re-password comes over 100 characters";
                 } else if (!txtNewPass.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/))
                 {
-                    mess = "sorry, password must follow the rule in the right table";
+                    mess = "sorry, password must follow the rules in the right table";
                 } else if (txtNewPass !== txtRePass)
                 {
                     mess = "sorry, new password not equal re-password";
