@@ -99,21 +99,25 @@
                     <div class="col-sm-3">
                         <div class="left-sidebar">
                             <h2>Exam Category</h2>
-                            <div class="search_box centerSearch">
-                                <input type="text" placeholder="Search"/>
-                            </div>
+                            <form action="HomeCategory" method="post">
+                                <div class="search_box centerSearch">
+                                    <input name="search" type="text" placeholder="Search"/>
+                                </div>
+                            </form>
                             <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Long</a></h4>
+                                        <h4 class="panel-title"><a href="Home">All</a></h4>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">Short</a></h4>
+                                <c:forEach items="${lists}" var="i">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="HomeCategory?type=${i.value}">${i.value}</a></h4>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:forEach>
                             </div><!--/category-products-->
 
 
@@ -133,7 +137,7 @@
                                                 <img src="images/404/sleeping-person.jpg" alt="" />
 
                                                 <h4>${i.title}</h4>
-                                                
+
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">

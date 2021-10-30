@@ -39,7 +39,7 @@ public class SubmitQuizController extends BaseRequiredLoginController {
         for (Question question : answer) {
             if(question.getOption_correct().equals(qqdao.getQuestionById(String.valueOf(question.getId())).getOption_correct())) count++;
         }
-        hdao.addHistory(new History(x.getId(), quiz.getId(), Date.valueOf(java.time.LocalDate.now()) , 10.0f*count/answer.size(), ""));
+        hdao.addHistory(new History(x.getId(), quiz.getId(), Date.valueOf(java.time.LocalDate.now()) , 10.0f*count/answer.size(), 10.0f*count/answer.size()>=quiz.getRate()?"Pass":"Fail"));
         int history_id = hdao.getHistorys().get(hdao.getHistorys().size()-1).getId();
         for (Question question : answer) {
             ahdao.addAnswer_History(new Answer_History(history_id, question.getId(), question.getOption_correct()));

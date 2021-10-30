@@ -47,6 +47,7 @@ public class QuizHandleController extends BaseRequiredLoginController {
             q.setId(quiz.getId());
             q.setTitle(quiz.getTitle());
             q.setDuration(quiz.getDuration());
+            q.setRate(quiz.getRate());
             session.setAttribute("timer", q);
         }
         request.setAttribute("quiz", quiz);
