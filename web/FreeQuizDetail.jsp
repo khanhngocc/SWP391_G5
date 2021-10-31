@@ -171,10 +171,10 @@
                 <c:choose>
                     <c:when test="${sessionScope.user==null}">
 
-                        <center> <button class="btn btn-primary"><a href = "Login?id=${quiz.id}" style="color: white">Login To Take The Test</a></button></center>
+                        <center><a href="Login?id=${quiz.id}">Login To Take The Test</a></center>
                         </c:when>
                         <c:otherwise>
-                        <center> <button class="btn btn-primary"><a href = "QuizHandle?id=${quiz.id}" style="color: white">Take The Test</a></button></center>
+                        <center><a href="QuizHandle?id=${quiz.id}">Take The Test</a></center>
                         </c:otherwise>
                     </c:choose>
             </div>

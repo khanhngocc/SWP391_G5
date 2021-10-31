@@ -29,24 +29,30 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        if (id == null) {
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            request.setAttribute("id", Integer.parseInt(id));
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         String username = request.getParameter("Email");
         String password = request.getParameter("Password");
-        
-        
+        String id = request.getParameter("id");
+
         String encodedPassword = Base64.getUrlEncoder().encodeToString(password.getBytes());
-        
+
         UserDAO db = new UserDAO();
         User user = db.getAccount(username, encodedPassword);
-       
+
         String mess = "";
         if (user == null) {
             mess = "Username/ Password is invalid!";
@@ -69,14 +75,15 @@ public class LoginController extends HttpServlet {
             request.getSession().removeAttribute("messLogin");
             request.getSession().removeAttribute("usernameLogin");
             request.getSession().removeAttribute("passwordLogin");
- 
-            request.getSession().setAttribute("user", user);
-            
-            response.sendRedirect("Home");
 
+            request.getSession().setAttribute("user", user);
+
+            if (id.isEmpty()) {
+                response.sendRedirect("Home");
+            } else {
+                response.sendRedirect("QuizHandle?id=" + Integer.parseInt(id));
+            }
         }
     }
-    
-   
 
 }
