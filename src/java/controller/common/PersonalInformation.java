@@ -31,7 +31,7 @@ public class PersonalInformation extends BaseRequiredLoginController {
         User session_user = (User) request.getSession(false).getAttribute("user");
         UserDAO userDAO = new UserDAO();
         User current_user = userDAO.getUser(session_user.getEmail());
-        current_user.setPhone("0"+current_user.getPhone());
+        current_user.setPhone("0" + current_user.getPhone());
         request.setAttribute("userInfor", current_user);
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> listTitle = settingDAO.getListSettingByType("Title User");
@@ -42,7 +42,7 @@ public class PersonalInformation extends BaseRequiredLoginController {
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
+
         String message = "";
         boolean isValid = true;
         // get path to save img
@@ -65,7 +65,7 @@ public class PersonalInformation extends BaseRequiredLoginController {
         String fullname = m.getParameter("name");
         String phone = m.getParameter("phone");
         String srcAvatar = m.getParameter("srcAvatar");
-      
+
         User updatedUser = new User();
         updatedUser.setTitle(title);
 
@@ -77,17 +77,13 @@ public class PersonalInformation extends BaseRequiredLoginController {
 
         updatedUser.setAvatar(srcAvatar);
 
-        if (m.getFile("fname") != null && ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == true) {
+        if (m.getFile("fname") != null) {
             updatedUser.setAvatar("images/avatar/" + fileNameImg);
         }
 
         request.setAttribute("userInfor", updatedUser);
 
-        if (ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == false && !fileNameImg.equals("")) {
-            message = "file input is not a image";
-            isValid = false;
-            dispatch(request, message, response);
-        } else if (fullname.length() > 100) {
+        if (fullname.length() > 100) {
             message = "fullname comes over 100 characters";
             isValid = false;
             dispatch(request, message, response);

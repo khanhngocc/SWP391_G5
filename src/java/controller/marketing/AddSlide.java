@@ -56,12 +56,7 @@ public class AddSlide extends BaseRequiredLoginController {
         request.setAttribute("title", title);
         request.setAttribute("notes", notes);
       
-        if (ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == false) {
-            message = "file input is not a image";
-            isValid = false;
-            dispatch(request, message, response);
-        }
-
+      
         if (title.length() > 100) {
             message = "title comes over 100 characters";
             isValid = false;

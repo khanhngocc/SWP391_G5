@@ -33,7 +33,7 @@
     </head><!--/head-->
 
     <body>
-     
+
         <jsp:include page="HeaderMarketing.jsp" />  
 
         <section id="slider"><!--slider-->
@@ -43,16 +43,16 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Create a new slider</h2>
-                        <p class="text-primary">${messCreateSlide}</p>
-                        <form action="AddSlide" enctype="multipart/form-data" method="post">
+                        <p class="text-primary" id="messCreateSlide">${messCreateSlide}</p>
+                        <form id="frm" action="AddSlide" enctype="multipart/form-data" method="post">
                             Title
                             <input name="title" type="text" required="true" value="${title}"/>
                             Thumbnail
-                            <input name="fname" type="file" required="true" />
-                            
+                            <input id="fileImg" name="fname" type="file" required="true" />
+
                             Notes
                             <textarea name="notes" rows="25" cols="30">${notes}</textarea>
-                            <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>
+                            <button onclick="filevalidation('messCreateSlide')" type="button" class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
                     </div>
                     <br>
@@ -63,7 +63,8 @@
 
 
         <jsp:include page="Footer.jsp" />  
-
+     
+        <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

@@ -67,20 +67,13 @@ public class UpdateSlide extends BaseRequiredLoginController {
         slide.setBacklink(backlink);
         slide.setNote(notes);
 
-        if (m.getFile("fname") != null && ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == true) {
+        if (m.getFile("fname") != null) {
             slide.setImage_Url("images/slide/" + fileNameImg);
         }
 
         request.setAttribute("slide", slide);
       
-       
-        if (ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == false && !fileNameImg.equals("")) {
-            
-            message = "file input is not a image";
-            isValid = false;
-            dispatch(request, message, response);
-        }
-
+     
         if (title.length() > 100) {
             message = "title comes over 100 characters";
             isValid = false;

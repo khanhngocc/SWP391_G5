@@ -81,7 +81,7 @@
                                 <br>
 
 
-                                <button type="button" onclick="filevalidation()" class="btn btn-primary">Update</button>
+                                <button type="button" onclick="filevalidation('messageUpdate')" class="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>
@@ -90,32 +90,8 @@
         </section>
 
         <jsp:include page="Footer.jsp" /> 
-        <script>
-            function filevalidation(){
-                const fi = document.getElementById('fileImg');
-                // Check if any file is selected.
-                if (fi.files.length > 0) {
-                    for (const i = 0; i <= fi.files.length - 1; i++) {
-
-                        const fsize = fi.files.item(i).size;
-                        const file = Math.round((fsize / 1024));
-                        // The size of the file.
-
-                       if(file > 1024)
-                       {
-                           document.getElementById("messageUpdate").textContent
-                          = 'size of file inputed comes over 1024KB ';
-                       }
-                       else
-                       {
-                           document.getElementById("frm").submit();
-                       }
-
-                    }
-                }
-            }
-        </script>
-
+        
+        <script src="js/validation.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

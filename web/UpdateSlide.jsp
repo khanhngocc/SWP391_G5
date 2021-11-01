@@ -42,20 +42,20 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Update slider</h2>
-                        <p class="text-primary">${messUpdateSlide}</p>
-                        <form action="UpdateSlide" enctype="multipart/form-data" method="post">
+                        <p class="text-primary" id="messUpdateSlide">${messUpdateSlide}</p>
+                        <form id="frm" action="UpdateSlide" enctype="multipart/form-data" method="post">
                             <input name="id" type="hidden" value="${slide.id}"/>
                             <input name="srcImg" type="hidden"  value="${slide.image_Url}"/>
                             Title
                             <input name="title" type="text" required="true" value="${slide.title}"/>
                             <p>Thumbnail</p>
                             <img src="${slide.image_Url}" alt="" style="height: 250px;width: 250px;margin-bottom: 10px"/>
-                            <input name="fname" type="file" />
+                            <input id="fileImg"  name="fname" type="file" />
                             Backlink
                             <input name="backlink" type="text" required="true" value="${slide.backlink}" readonly="true"/>
                             Notes
                             <textarea name="notes" rows="25" cols="30">${slide.note}</textarea>
-                            <button type="submit" class="btn btn-default" style="margin-top: 10px">Update</button>
+                            <button onclick="filevalidation('messUpdateSlide')" type="button" class="btn btn-default" style="margin-top: 10px">Update</button>
                         </form>
                     </div>
                     <br>
@@ -66,7 +66,7 @@
 
 
         <jsp:include page="Footer.jsp" /> 
-
+        <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
