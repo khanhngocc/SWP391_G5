@@ -72,7 +72,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
         }
 
         request.setAttribute("slide", slide);
-        System.out.println(slide.getImage_Url());
+      
        
         if (ValidationField.isImageFileExtension(fileNameImg, ValidationField.standardExtension) == false && !fileNameImg.equals("")) {
             
