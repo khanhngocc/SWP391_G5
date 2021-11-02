@@ -38,7 +38,7 @@
         <section style="margin-bottom: 50px">
             <div class="container">
                 <img src="${slide.image_Url}" class="centerImgLanding" alt="">
-                <p class="centerImgLanding" style="margin-top: 10px;">${slide.note}</p>
+                <div class="centerImgLanding" style="margin-top: 10px;">${slide.note}</div>
             </div>
         </section><!--/slider-->
 

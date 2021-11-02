@@ -8,6 +8,7 @@ package controller.free;
 import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +34,12 @@ public class DocumentDetailed extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         BlogDAO blogDAO = new BlogDAO();
-        model.Blog b = blogDAO.getBlog(Integer.valueOf(id),"1");
+        model.Blog b = blogDAO.getBlog(Integer.valueOf(id), "1");
         request.setAttribute("blog", b);
+        ArrayList<model.Blog> listFiveBlog = blogDAO.listFiveHotestBlog("1");
+        request.setAttribute("list5", listFiveBlog);
+        ArrayList<String> listCategories = blogDAO.listCategories();
+        request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("DocumentDetailed.jsp").forward(request, response);
     }
 

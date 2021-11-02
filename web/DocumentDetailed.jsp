@@ -53,51 +53,94 @@
         <c:if test="${sessionScope.user.rollId eq 5}">
             <jsp:include page="HeaderManager.jsp" />  
         </c:if>
+        <section style="margin-top: 20px;margin-bottom: 100px"><!--slider-->
 
-       	<section>
-            <div class="container centerImgLanding" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Category</h2>
+                            <form action="DocumentList">
+                                <div class="search_box centerSearch">
+                                    <input type="text" placeholder="Search" name="categories" value="${categories}" hidden=""/>
+                                    <input name="searchName" type="text" placeholder="Search" value="${name_search}" onchange="this.form.submit()"/>
+                                </div>
+                            </form>
+                            <div class="panel-group category-products" id="accordian">
 
-                <div class="col-sm-9">
-                    <div class="blog-post-area">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="DocumentList">All</a></h4>
+                                    </div>
+                                </div>
+                                <c:forEach items="${listCategories}" var="list">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list}">${list}</a></h4>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div><!--/category-products-->
+                            <h2 class="title text-center">Hot Featured</h2>
+                            <div class="panel-group category-products" class ="container" style="border:none">
+                                <c:forEach items="${list5}" var="i">
+                                    <div class="col-md-6">
+                                        <img class="featuresBlog" src="${i.img_url}" alt=""><br>
+                                        <i><a href="DocumentDetailed?id=${i.id}">${i.title}</a></i>
+
+                                    </div>
+                                </c:forEach>
+                            </div>   
 
 
-                        <div class="single-blog-post">
-                            <h3>${blog.title}</h3>
-
-                            <div class="post-meta">
-                                <ul>
-                                    <li><i class="fa fa-key"></i>${blog.category}</li>
-                                    <li><i class="fa fa-user"></i>${blog.author}</li>
-                                    <li><i class="fa fa-clock-o"></i>${blog.time}</li>
-                                    <li><i class="fa fa-calendar"></i>${blog.date}</li>
-                                </ul>
-
-                            </div>
-                            <img src="${blog.img_url}" alt="" width="100%" />
-
-                            <p class="desc-blog">${blog.description}</p>
-                            <c:if test="${blog.attach_url ne ''}">
-                                <c:if test="${sessionScope.user ne null}">
-                                    <a href="${blog.attach_url}" download>
-                                        <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
-                                    </a>
-                                </c:if>
-                                <c:if test="${sessionScope.user eq null}">
-                                    <a href="#" class="isDisabled">
-                                        <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
-                                    </a>
-                                    <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
-                                </c:if>
-                            </c:if>
                         </div>
+                    </div> 
+                    <div class="col-sm-9 padding-right">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Documents</h2>
+                            <div class="single-blog-post">
+                                <h3>${blog.title}</h3>
+
+                                <div class="post-meta">
+                                    <ul>
+                                        <li><i class="fa fa-key"></i>${blog.category}</li>
+                                        <li><i class="fa fa-user"></i>${blog.author}</li>
+                                        <li><i class="fa fa-clock-o"></i>${blog.time}</li>
+                                        <li><i class="fa fa-calendar"></i>${blog.date}</li>
+                                    </ul>
+
+                                </div>
+                                <img src="${blog.img_url}" alt="" width="100%" />
+
+                                <p class="desc-blog">${blog.description}</p>
+                                <c:if test="${blog.attach_url ne ''}">
+                                    <c:if test="${sessionScope.user ne null}">
+                                        <a href="${blog.attach_url}" download>
+                                            <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user eq null}">
+                                        <a href="#" class="isDisabled">
+                                            <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
+                                        </a>
+                                        <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
+                                    </c:if>
+                                </c:if>
+                            </div>
+                        </div>
+
+
+
+
+
 
 
 
                     </div>
                 </div>
             </div>
-
         </section>
+
 
         <jsp:include page="Footer.jsp" />  
         <script src="js/blogHander.js"></script>

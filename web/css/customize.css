@@ -74,12 +74,12 @@ textarea {
 }
 
 .isDisabled {
-    
+
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
     pointer-events: none;
-   
+
 }
 
 .text-tooltip{
@@ -87,4 +87,10 @@ textarea {
     font-style: italic;
     color: red;
     margin-bottom: 50px;
+}
+
+.featuresBlog{
+    height: 50px;
+    width: 70px;
+    border-radius: 10%;
 }

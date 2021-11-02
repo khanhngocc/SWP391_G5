@@ -30,6 +30,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
     </head><!--/head-->
 
     <body>
@@ -54,7 +55,8 @@
                             Backlink
                             <input name="backlink" type="text" required="true" value="${slide.backlink}" readonly="true"/>
                             Notes
-                            <textarea name="notes" rows="25" cols="30">${slide.note}</textarea>
+                          
+                            <textarea name="notes" id="contentDetails" rows="10" cols="80">${slide.note}</textarea>
                             <button onclick="filevalidation('messUpdateSlide')" type="button" class="btn btn-default" style="margin-top: 10px">Update</button>
                         </form>
                     </div>
@@ -66,6 +68,28 @@
 
 
         <jsp:include page="Footer.jsp" /> 
+        <script>
+            let theEditor;
+
+            ClassicEditor
+                    .create(document.querySelector('#contentDetails'))
+                    .then(editor => {
+                      
+                        theEditor = editor;
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+          
+
+            function getDataFromTheEditor() {
+                return theEditor.getData();
+
+            }
+
+        </script>
         <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>

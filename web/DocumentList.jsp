@@ -53,67 +53,104 @@
         </c:if>
 
 
-        <section><!--slider-->
-            <div class="container" style="height: auto; margin-bottom: 40px">
-                <form action="DocumentList" class="searchform">
-                    <input type="text" placeholder="Search" name="categories" value="${categories}" hidden=""/>
-                    <input type="text" placeholder="Search" name="searchName" value="${name_search}"/>
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </form>
-                <form action="DocumentList" >
+        <section style="margin-top: 20px;margin-bottom: 100px"><!--slider-->
 
-                    <input type="text" placeholder="Search" name="searchName" value="${name_search}" hidden=""/>
-                    <select style="width: 10%;margin-top: 10px" name="categories" onchange="this.form.submit()" >
-                        <option value="">All</option>
-                        <c:forEach items="${listCategories}" var="list">
-                            <option value="${list}" ${list == category ? 'selected':''}>${list}</option>
-                        </c:forEach>
-                    </select>   
-                </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Category</h2>
+                            <form action="DocumentList">
+                                <div class="search_box centerSearch">
+                                    <input type="text" placeholder="Search" name="categories" value="${categories}" hidden=""/>
+                                    <input name="searchName" type="text" placeholder="Search" value="${name_search}" onchange="this.form.submit()"/>
+                                </div>
+                            </form>
+                            <div class="panel-group category-products" id="accordian">
 
-                <ul class="media-list">
-                    <c:forEach items="${list_all_blogs}" var="list">
-                        <li class="media" style="margin-top: 20px">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="DocumentList">All</a></h4>
+                                    </div>
+                                </div>
+                                <c:forEach items="${listCategories}" var="list">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list}">${list}</a></h4>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div><!--/category-products-->
+                             <h2 class="title text-center">Hot Featured</h2>
+                            <div class="panel-group category-products" class ="container" style="border:none">
+                                <c:forEach items="${list5}" var="i">
+                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                        <img class="featuresBlog" src="${i.img_url}" alt=""><br>
+                                        <div style="margin-top: 5px"><a href="DocumentDetailed?id=${i.id}">${i.title}</a></div>
 
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="${list.img_url}" style="width: 130px;height: 130px" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4>${list.title} </h4>
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-key"></i>${list.category}</li>
-                                    <li><i class="fa fa-user"></i>${list.author}</li>
-                                    <li><i class="fa fa-clock-o"></i>${list.time}</li>
-                                    <li><i class="fa fa-calendar"></i>${list.date}</li>
+                                    </div>
+                                </c:forEach>
+                            </div>   
+
+
+                        </div>
+                    </div> 
+                    <div class="col-sm-9 padding-right">
+                        <div class="recommended_items"><!--recommended_items-->
+                            <h2 class="title text-center">Documents</h2>
+                            <div class="col-sm-12">
+                                <ul class="media-list">
+                                    <c:forEach items="${list_all_blogs}" var="list">
+                                        <li class="media" style="margin-top: 20px">
+
+                                            <a class="pull-left" href="DocumentDetailed?id=${list.id}">
+                                                <img class="media-object" src="${list.img_url}" style="width: 130px;height: 130px" alt="">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 >${list.title} </h4>
+                                                <ul class="sinlge-post-meta">
+                                                    <li><i class="fa fa-key"></i>${list.category}</li>
+                                                    <li><i class="fa fa-user"></i>${list.author}</li>
+                                                    <li><i class="fa fa-clock-o"></i>${list.time}</li>
+                                                    <li><i class="fa fa-calendar"></i>${list.date}</li>
+                                                </ul>
+                                                <p class="block-ellipsis">${list.description}</p>
+
+                                                <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
-                                <p class="block-ellipsis">${list.description}</p>
-
-                                <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
                             </div>
-                        </li>
-                    </c:forEach>
-                </ul>
-                <div class="pagination-area">
-                    <ul class="pagination">
 
-                        <c:if test="${pageindex gt gap}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=1&searchName=${name_search}&categories=${category}">First</a></li>
-                            </c:if>
-                            <c:forEach var = "i" begin = "${gap}" end = "1">
-                                <c:if test="${pageindex - gap gt 0}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex -i}&searchName=${name_search}&categories=${category}">${pageindex - i}</a></li>
-                                </c:if>
-                            </c:forEach>
-                            <c:forEach var = "i" begin = "1" end = "${gap}">
-                                <c:if test="${pageindex + gap le pagecount}">
-                                <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex + i}&searchName=${name_search}&categories=${category}">${pageindex + i}</a></li> 
-                                </c:if>
-                            </c:forEach>
-                            <c:if test="${pageindex + gap lt pagecount}">
-                            <li class="page-item"><a class="page-link" href="DocumentList?page=${pagecount}&searchName=${name_search}&categories=${category}">Last</a></li> 
-                            </c:if>
-                    </ul>
+                        </div>
+                        <div class="pagination-area">
+                            <ul class="pagination">
 
+                                <c:if test="${pageindex gt gap}">
+                                    <li class="page-item"><a class="page-link" href="DocumentList?page=1&searchName=${name_search}&categories=${category}">First</a></li>
+                                    </c:if>
+                                    <c:forEach var = "i" begin = "${gap}" end = "1">
+                                        <c:if test="${pageindex - gap gt 0}">
+                                        <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex -i}&searchName=${name_search}&categories=${category}">${pageindex - i}</a></li>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:forEach var = "i" begin = "1" end = "${gap}">
+                                        <c:if test="${pageindex + gap le pagecount}">
+                                        <li class="page-item"><a class="page-link" href="DocumentList?page=${pageindex + i}&searchName=${name_search}&categories=${category}">${pageindex + i}</a></li> 
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:if test="${pageindex + gap lt pagecount}">
+                                    <li class="page-item"><a class="page-link" href="DocumentList?page=${pagecount}&searchName=${name_search}&categories=${category}">Last</a></li> 
+                                    </c:if>
+                            </ul>
+
+                        </div>
+
+
+
+
+                    </div>
                 </div>
             </div>
         </section><!--/slider-->
