@@ -67,12 +67,16 @@ public class ChangePassword extends BaseRequiredLoginController {
             message = "old password is wrong";
             isValid = false;
             dispatch(request, message, response);
+        }else if (oldpass.equals(newpass) == true) {
+            message = "new password is same as old password";
+            isValid = false;
+            dispatch(request, message, response);
         } else if (!newpass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
-            message = "password must contain number,lowercase,uppercase and length more than 8";
+            message = "new password must contain at least 1 number,at least 1 lowercase,at least 1 uppercase, length more than 8 and no special characters";
             isValid = false;
             dispatch(request, message, response);
         } else if (newpass.equals(repass) == false) {
-            message = "new password is different from re-password";
+            message = "re-password is different from new password";
             isValid = false;
             dispatch(request, message, response);
         }
