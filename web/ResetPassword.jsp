@@ -84,18 +84,26 @@
                 var txtNewPass = document.getElementById("newpass").value;
                 var txtRePass = document.getElementById("repass").value;
                 var mess;
-                if (txtNewPass.length > 100)
+                if(txtNewPass == "")
                 {
-                    mess = "sorry, length of new password comes over 100 characters";
-                } else if (txtRePass.length > 100)
+                     mess = "sorry,new password is empty";
+                }
+                else if(txtRePass == "")
                 {
-                    mess = "sorry, length of re-password comes over 100 characters";
+                     mess = "sorry,re-password is empty";
+                }
+                else if (txtNewPass.length > 25)
+                {
+                    mess = "sorry,length of new password comes over 25 characters";
+                } else if (txtRePass.length > 25)
+                {
+                    mess = "sorry,length of re-password comes over 25 characters";
                 } else if (!txtNewPass.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/))
                 {
-                    mess = "sorry, password must follow the rules in the right table";
+                    mess = "sorry,password must follow the rules in the right table";
                 } else if (txtNewPass !== txtRePass)
                 {
-                    mess = "sorry, new password not equal re-password";
+                    mess = "sorry,new password not equal re-password";
                 } else
                 {
                     document.getElementById("frm").submit();

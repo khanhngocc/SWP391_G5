@@ -51,16 +51,16 @@ public class ChangePassword extends BaseRequiredLoginController {
         byte[] decodedBytes = Base64.getUrlDecoder().decode(user.getPassword());
         String decodedPassword = new String(decodedBytes);
 
-        if (oldpass.length() > 100) {
-            message = "old password comes over 100 characters";
+        if (oldpass.length() > 25) {
+            message = "old password comes over 25 characters";
             isValid = false;
             dispatch(request, message, response);
-        } else if (newpass.length() > 100) {
-            message = "new password comes over 100 characters";
+        } else if (newpass.length() > 25) {
+            message = "new password comes over 25 characters";
             isValid = false;
             dispatch(request, message, response);
-        } else if (repass.length() > 100) {
-            message = "re-password comes over 100 characters";
+        } else if (repass.length() > 25) {
+            message = "re-password comes over 25 characters";
             isValid = false;
             dispatch(request, message, response);
         } else if (oldpass.equals(decodedPassword) == false) {

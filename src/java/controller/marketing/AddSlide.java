@@ -33,8 +33,6 @@ public class AddSlide extends BaseRequiredLoginController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        boolean isValid = true;
-
         // get path to save file
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
@@ -48,63 +46,27 @@ public class AddSlide extends BaseRequiredLoginController {
         int indexOflast = fileNameImgPath.lastIndexOf("\\");
         String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
 
-        String message = "";
-
         String title = m.getParameter("title");
         String notes = m.getParameter("notes");
 
-        request.setAttribute("title", title);
-        request.setAttribute("notes", notes);
-      
-      
-        if (title.length() > 100) {
-            message = "title comes over 100 characters";
-            isValid = false;
-            dispatch(request, message, response);
-        }
+        SlideDAO dao = new SlideDAO();
 
-        if (notes.length() > 1000) {
-            message = "notes comes over 1000 characters";
-            isValid = false;
-            dispatch(request, message, response);
-        }
+        Slide slide = new Slide();
+        slide.setTitle(title);
+        slide.setImage_Url("images/slide/" + fileNameImg);
+        slide.setBacklink("SlideDetailed?id=");
+        slide.setNote(notes);
 
-        if (isValid = true) {
+        User session_user = (User) request.getSession(false).getAttribute("user");
+        UserDAO userDAO = new UserDAO();
+        User current_user = userDAO.getUser(session_user.getEmail());
 
-            clearField(request);
-            
-            SlideDAO dao = new SlideDAO();
+        slide.setUser_id(current_user.getId());
 
-            Slide slide = new Slide();
-            slide.setTitle(title);
-            slide.setImage_Url("images/slide/" + fileNameImg);
-            slide.setBacklink("SlideDetailed?id=");
-            slide.setNote(notes);
+        dao.createSlide(slide, current_user);
 
-            User session_user = (User) request.getSession(false).getAttribute("user");
-            UserDAO userDAO = new UserDAO();
-            User current_user = userDAO.getUser(session_user.getEmail());
+        response.sendRedirect("SlideList");
 
-            slide.setUser_id(current_user.getId());
-
-            dao.createSlide(slide, current_user);
-
-            response.sendRedirect("SlideList");
-
-        }
-
-    }
-
-     private void clearField(HttpServletRequest request) {
-        request.removeAttribute("title");
-        request.removeAttribute("notes");
-     
-    }
-    
-    
-    private void dispatch(HttpServletRequest request, String message, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("messCreateSlide", message);
-        request.getRequestDispatcher("AddSlide.jsp").forward(request, response);
     }
 
 }

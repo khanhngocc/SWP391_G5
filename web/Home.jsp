@@ -68,8 +68,7 @@
                                             <div class="col-sm-6">
                                                 <h1><span>Mega</span>-Deal</h1>
                                                 <h2>${list.title}</h2>
-                                            <p>${list.note}</p>
-
+                                        
                                         </div>
                                         <div class="col-sm-6">
                                             <a href="${list.backlink}${list.id}" >

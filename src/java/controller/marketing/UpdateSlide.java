@@ -35,9 +35,6 @@ public class UpdateSlide extends BaseRequiredLoginController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        boolean isValid = true;
-
-        String message = "";
         // get path to save img
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
@@ -59,7 +56,7 @@ public class UpdateSlide extends BaseRequiredLoginController {
         String title = m.getParameter("title");
         String notes = m.getParameter("notes");
         String backlink = m.getParameter("backlink");
-        
+
         Slide slide = new Slide();
         slide.setId(Integer.valueOf(id));
         slide.setTitle(title);
@@ -71,32 +68,10 @@ public class UpdateSlide extends BaseRequiredLoginController {
             slide.setImage_Url("images/slide/" + fileNameImg);
         }
 
-        request.setAttribute("slide", slide);
-      
-     
-        if (title.length() > 100) {
-            message = "title comes over 100 characters";
-            isValid = false;
-            dispatch(request, message, response);
-        }
+        SlideDAO slideDAO = new SlideDAO();
+        slideDAO.updateSlide(slide);
+        response.sendRedirect("SlideList");
 
-        if (notes.length() > 1000) {
-            message = "notes comes over 1000 characters";
-            isValid = false;
-            dispatch(request, message, response);
-        }
-
-        if (isValid == true) {
-            SlideDAO slideDAO = new SlideDAO();
-            slideDAO.updateSlide(slide);
-            response.sendRedirect("SlideList");
-        }
-
-    }
-
-    private void dispatch(HttpServletRequest request, String message, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("messUpdateSlide", message);
-        request.getRequestDispatcher("UpdateSlide.jsp").forward(request, response);
     }
 
 }

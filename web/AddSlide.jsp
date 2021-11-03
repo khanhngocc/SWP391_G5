@@ -30,7 +30,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-        <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
     </head><!--/head-->
 
     <body>
@@ -44,17 +44,23 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Create a new slider</h2>
-                        <p class="text-primary" id="messCreateSlide">${messCreateSlide}</p>
-                        <form id="frm" action="AddSlide" enctype="multipart/form-data" method="post">
+                        <p class="text-primary" id="messCreateSlide"></p>
+                        <form name="myForm" action="AddSlide" enctype="multipart/form-data" method="post" onsubmit="return validSlide()">
                             Title
-                            <input name="title" type="text" required="true" value="${title}"/>
+                            <input name="title" type="text" required="true" />
                             Thumbnail
-                            <input id="fileImg" name="fname" type="file" required="true" />
+                            <input name="fname" type="file" required="true" />
 
                             Notes
-                            <textarea name="notes" id="contentDetails" rows="10" cols="80">${notes}</textarea>
+                            <textarea hidden="" name="notes" id="contentDetails" rows="10" cols="80"></textarea>
+                            <div id="toolbar-container"></div>
 
-                            <button onclick="filevalidation('messCreateSlide')" type="button" class="btn btn-default" style="margin-top: 10px">Create</button>
+                            <!-- This container will become the editable. -->
+
+                            <div id="editor">
+                                <p>This is the initial editor content.</p>
+                            </div>
+                            <button type="submit"  class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
                     </div>
                     <br>
@@ -67,20 +73,80 @@
         <jsp:include page="Footer.jsp" />  
         <script>
             let theEditor;
-
-            ClassicEditor
-                    .create(document.querySelector('#contentDetails'))
+            DecoupledEditor
+                    .create(document.querySelector('#editor'))
                     .then(editor => {
                         theEditor = editor;
+                        const toolbarContainer = document.querySelector('#toolbar-container');
 
+                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
                     })
                     .catch(error => {
                         console.error(error);
                     });
 
-        
             function getDataFromTheEditor() {
                 return theEditor.getData();
+
+            }
+
+            function validSlide() {
+
+                const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
+
+                // valid notes
+
+                var notes = getDataFromTheEditor();
+               
+                if (notes.length > 3000) {
+                    document.getElementById("messCreateSlide").textContent = "notes comes over 3000 characters";
+
+                    return false;
+                }
+                
+                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
+                //valid title
+                let title = document.forms["myForm"]["title"].value;
+                if (title.length > 100) {
+                    document.getElementById("messCreateSlide").textContent = "title comes over 100 characters";
+                    return false;
+                }
+
+                // valid file
+
+                let fi = document.forms["myForm"]["fname"];
+
+                var fileValue = fi.value;
+                var startIndex = fileValue.lastIndexOf(".");
+                var filename = fileValue.substring(startIndex, fileValue.length);
+
+                if (standardedExtensionImg.includes(filename) == false)
+                {
+                    document.getElementById("messCreateSlide").textContent
+                            = 'file input is not a image';
+                    return false;
+                }
+
+
+                for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                    const fsize = fi.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+
+
+
+                    if (file > 1024)
+                    {
+                        document.getElementById("messCreateSlide").textContent
+                                = 'size of file inputed comes over 1024 KB ';
+                        return false;
+                    }
+
+                }
+
+
+
 
             }
 
