@@ -41,50 +41,51 @@
             <div>
 
                 <div class="container">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Add a user</h2>
-                        <p class="text-primary">${mess}</p>
-                        <form action="AddUserAdmin" method="post" enctype="multipart/form-data">
-                            Choose a avatar
+                    <div class="col-sm-6">
+                        <div class="signup-form">
+                            <!--sign up form-->
+                            <h2>Add a user</h2>
+                            <p class="text-primary">${mess}</p>
+                            <form action="AddUserAdmin" method="post" enctype="multipart/form-data">
+                                Choose a avatar
 
-                            <input type="file" name="fname" required="true"/>
+                                <input type="file" name="fname" required="true"/>
 
-                            Email
-                            <input name="email" type="text" placeholder="Email" required="true" />
-                            Password
-                            <input name="password" type="password" placeholder="Password" required="true" />
-                            Full Name
-                            <input name="name"type="text" placeholder="Full Name" required="true" />  
-                            Title
-                            <select name="title" id="title" style="margin-bottom:10px">
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Ms">Ms</option>
+                                Email
+                                <input name="email" type="text" placeholder="Email" required="true" />
+                                Password
+                                <input name="password" type="password" placeholder="Password" required="true" />
+                                Full Name
+                                <input name="name"type="text" placeholder="Full Name" required="true" />  
+                                Title
+                                <select name="title" id="title" style="margin-bottom:10px">
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Ms">Ms</option>
 
-                            </select>  
-                            Phone
-                            <input name="phone"type="text" placeholder="Phone Number" />													
-                            Roll
-                            <select name="role" id="role" style="margin-bottom:10px">
-                                <option value="1">Customer</option>
-                                <option value="2">Marketing</option>
-                                <option value="3">Admin</option>
-                                <option value="4">Expert</option>
-                                <option value="5">Manager</option>
-                            </select>
+                                </select>  
+                                Phone
+                                <input name="phone"type="text" placeholder="Phone Number" />													
+                                Roll
+                                <select name="role" id="role" style="margin-bottom:10px">
+                                    <option value="1">Customer</option>
+                                    <option value="2">Marketing</option>
+                                    <option value="3">Admin</option>
+                                    <option value="4">Expert</option>
+                                    <option value="5">Manager</option>
+                                </select>
 
-                            Status
-                            <select name="status" style="margin-bottom: 10px" id="status">
-                                <option value="1">Active</option>
-                                <option value="2">Deactive</option>
-                            </select>
+                                Status
+                                <select name="status" style="margin-bottom: 10px" id="status">
+                                    <option value="1">Active</option>
+                                    <option value="2">Deactive</option>
+                                </select>
 
-                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
-                        </form>                            
+                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
+                            </form>                            
+                        </div>
                     </div>
                 </div>
-
 
 
 

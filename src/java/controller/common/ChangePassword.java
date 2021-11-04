@@ -9,12 +9,16 @@ import controller.base.BaseRequiredLoginController;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
+import utilities.MD5Helper;
 
 /**
  *
@@ -48,8 +52,14 @@ public class ChangePassword extends BaseRequiredLoginController {
         request.setAttribute("newpass", newpass);
         request.setAttribute("repass", repass);
 
-        byte[] decodedBytes = Base64.getUrlDecoder().decode(user.getPassword());
-        String decodedPassword = new String(decodedBytes);
+        MD5Helper md5 = new MD5Helper();
+        
+        boolean isRightOldPassword = false;
+        try {
+            isRightOldPassword = md5.verify(oldpass, user.getPassword());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (oldpass.length() > 25) {
             message = "old password comes over 25 characters";
@@ -63,11 +73,11 @@ public class ChangePassword extends BaseRequiredLoginController {
             message = "re-password comes over 25 characters";
             isValid = false;
             dispatch(request, message, response);
-        } else if (oldpass.equals(decodedPassword) == false) {
+        } else if (isRightOldPassword == false) {
             message = "old password is wrong";
             isValid = false;
             dispatch(request, message, response);
-        }else if (oldpass.equals(newpass) == true) {
+        } else if (oldpass.equals(newpass) == true) {
             message = "new password is same as old password";
             isValid = false;
             dispatch(request, message, response);
@@ -82,7 +92,12 @@ public class ChangePassword extends BaseRequiredLoginController {
         }
 
         if (isValid == true) {
-            String encodedPassword = Base64.getUrlEncoder().encodeToString(newpass.getBytes());
+            String encodedPassword = null;
+            try {
+                encodedPassword = md5.encryptString(newpass);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+            }
             dao.changePassword(email, encodedPassword);
             message = "Update successfully!";
             clearField(request);

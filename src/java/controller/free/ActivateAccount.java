@@ -23,11 +23,13 @@ public class ActivateAccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
+        String idEncrypt = request.getQueryString();
 
         UserDAO dao = new UserDAO();
 
-        dao.activateAccount(id);
+        int id = dao.getIDByEncryptId(idEncrypt);
+        
+        dao.activateAccount(""+id);
         
         request.getRequestDispatcher("ActivateAccount.jsp").forward(request, response);
     }

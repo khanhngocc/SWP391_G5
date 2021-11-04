@@ -45,9 +45,9 @@
                         <p class="text-primary">${mess}</p>
                         <form action="register" method="post">
                             Email
-                            <input name="email" type="text" placeholder="Email" required="true" />
+                            <input name="email" type="text" placeholder="Email" required="true" value="${userDrap.email}"/>
                             Name
-                            <input name="name" type="text" placeholder="Full Name" required="true" />
+                            <input name="name" type="text" placeholder="Full Name" required="true" value="${userDrap.fullname}"/>
                             Title
                             <select name="title" id="title" style="margin-bottom:10px">
                                 <option value="Mr">Mr</option>
@@ -56,11 +56,11 @@
 
                             </select> 
                             Phone
-                            <input name="phone" type="text" placeholder="Phone Number" required="true"/>
+                            <input name="phone" type="text" placeholder="Phone Number" required="true" value="${userDrap.phone}"/>
                             Password
-                            <input name="pass" type="password" placeholder="Password" required="true" />
+                            <input name="pass" type="password" placeholder="Password" required="true" value="${userDrap.password}"/>
                             Re-password
-                            <input name="repass" type="password" placeholder="Re-Password" required="true" />
+                            <input name="repass" type="password" placeholder="Re-Password" required="true" value="${userDrap.repassword}" />
                             <br>
                             <button type="submit" class="btn btn-default centerImgLanding">Signup</button>
 

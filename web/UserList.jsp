@@ -58,7 +58,7 @@
                         <th><strong><a href="javascript:void(0);" onclick="sort(4)">Phone</a></strong></th>
                         <th><strong><a href="javascript:void(0);" onclick="sort(5)">Role</a></strong></th>
                         <th><strong><a href="javascript:void(0);" onclick="sort(6)">Status</a></strong></th>                                
-                        <th colspan="3"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                        <th colspan="2"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
 
                     </tr>
 
@@ -71,7 +71,7 @@
                             <td>${i.phone}</td>
                             <td>${i.rollId}</td>
                             <td>${i.status}</td>
-                            <td><a href="#" onclick="deleteUser(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
+                           
                             <td><a href="EditUser?email=${i.email}"><i class="fa fa-pencil"></i> Edit</a></td>
                             <td><a href="UserDetail?email=${i.email}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>     

@@ -8,9 +8,12 @@ package controller.common;
 import dal.AccountForgotDAO;
 import dal.UserDAO;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.AccountForgot;
 import model.User;
 import utilities.GmailHelper;
+import utilities.MD5Helper;
 import utilities.ValidationField;
 
 /**
@@ -83,9 +87,24 @@ public class ForgotPassword extends HttpServlet {
 
             // create accountforgot
             accDAO.createAccountForgot(acc);
-            String tail = "id=" + accDAO.getMaxID();
-            String encodedTail = Base64.getUrlEncoder().encodeToString(tail.getBytes());
-            String url = "http://localhost:8080/SWP391_G5/ResetPassword?" + encodedTail;
+            
+            String max_id = accDAO.getMaxID();
+            
+            String tail = "id=" + max_id;
+            
+            MD5Helper md5Helper = new MD5Helper();
+            
+            String encodedTail = "";
+            
+            try {
+                encodedTail = md5Helper.encryptString(tail);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            accDAO.updateIdEncrypt(max_id, encodedTail);
+            
+            String url = "http://localhost:8080/SWP391_G5/ResetPassword?"+encodedTail ;
 
             // send link to reset password to email
             GmailHelper gm = new GmailHelper();

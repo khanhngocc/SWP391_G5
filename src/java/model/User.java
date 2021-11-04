@@ -24,9 +24,20 @@ public class User {
     private int rollId;
     private String title;
     private String status;
+    private String repassword;
     
     ArrayList<String> url = new ArrayList<>();
 
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
+
+    
+    
     public String getTitle() {
         return title;
     }

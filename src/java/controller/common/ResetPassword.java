@@ -9,6 +9,7 @@ import dal.AccountForgotDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.AccountForgot;
+import utilities.MD5Helper;
 
 /**
  *
@@ -60,7 +62,13 @@ public class ResetPassword extends HttpServlet {
         String email = request.getParameter("email");
 
         UserDAO userDAO = new UserDAO();
-        String encodedPassword = Base64.getUrlEncoder().encodeToString(password.getBytes());
+        MD5Helper md5 = new MD5Helper();
+        String encodedPassword = null;
+        try {
+            encodedPassword = md5.encryptString(password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
         userDAO.changePassword(email, encodedPassword);
 
         AccountForgot acc = new AccountForgot();
@@ -94,10 +102,7 @@ public class ResetPassword extends HttpServlet {
 
     private boolean isExpiredLink(String idEncoded) {
 
-        byte[] decodedBytes = Base64.getUrlDecoder().decode(idEncoded);
-        String decodedTail = new String(decodedBytes);
-        String id = decodedTail.substring(3, decodedTail.length());
-        idReset = Integer.valueOf(id);
+        idReset = accDAO.getIDByEncryptId(idEncoded);
 
         SimpleDateFormat formatdate = new SimpleDateFormat("yyyy-MM-dd");
         // check date

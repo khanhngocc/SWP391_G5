@@ -48,8 +48,7 @@ public class DocumentList extends HttpServlet {
         String name_search = request.getParameter("searchName");
         String category = request.getParameter("categories");
        
-        System.out.println("search :"+name_search);
-        System.out.println("cate: "+category);
+        
         
         if (name_search == null && category == null) {
             searchName = "";

@@ -2,9 +2,11 @@ package controller.admin;
 
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
+import controller.common.RegisterServ;
 import static controller.common.RegisterServ.validate;
 import dal.UserDAO;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.util.Base64;
 import java.util.logging.Level;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
 import utilities.GmailHelper;
+import utilities.MD5Helper;
 
 /**
  *
@@ -68,7 +71,13 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
         }
         if (checkuser) {
             mess = "Sign-up success!!";
-            String encodedPassword = Base64.getUrlEncoder().encodeToString(pass.getBytes());
+            MD5Helper md5 = new MD5Helper();
+            String encodedPassword = null;
+            try {
+                encodedPassword = md5.encryptString(pass);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(RegisterServ.class.getName()).log(Level.SEVERE, null, ex);
+            }
             udao.addUser(new User(name, title, email, phone, encodedPassword, Date.valueOf(java.time.LocalDate.now()), "images/avatar/" + fileNameImg, status, role));
             //send mail//
             GmailHelper gm = new GmailHelper();

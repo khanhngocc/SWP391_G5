@@ -8,6 +8,7 @@ package controller.common;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import utilities.MD5Helper;
 
 /**
  *
@@ -48,7 +50,13 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("Password");
         String id = request.getParameter("id");
 
-        String encodedPassword = Base64.getUrlEncoder().encodeToString(password.getBytes());
+        MD5Helper md5 = new MD5Helper();
+        String encodedPassword = null;
+        try {
+            encodedPassword = md5.encryptString(password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         UserDAO db = new UserDAO();
         User user = db.getAccount(username, encodedPassword);

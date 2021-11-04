@@ -8,6 +8,7 @@ package controller.common;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
 import utilities.GmailHelper;
+import utilities.MD5Helper;
 
 /**
  *
@@ -31,24 +33,7 @@ import utilities.GmailHelper;
  */
 public class RegisterServ extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-
-        }
-    }
-
+  
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX
             = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
@@ -75,43 +60,70 @@ public class RegisterServ extends HttpServlet {
         String repass = request.getParameter("repass");
         UserDAO udao = new UserDAO();
         String mess = "";
+        
         boolean checkuser = true;
-        if (udao.getUser(email) != null) {
-            mess = "This email has been used";
-            checkuser = false;
-        }
+
         if (validate(email) == false) {
             mess = "This email has wrong format";
             checkuser = false;
-        }
-        if (phone.chars().allMatch(Character::isDigit) == false) {
+        } else if (udao.getUser(email) != null) {
+            mess = "This email existed in the system";
+            checkuser = false;
+        } else if (phone.chars().allMatch(Character::isDigit) == false) {
             mess = "Phone is not digit";
             checkuser = false;
-        }
-        if (phone.length() > 12) {
+        } else if (phone.length() > 11) {
             mess = "Length of phone must be less than 12 characters";
             checkuser = false;
-        }
-        if (!pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
+        } else if (!pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
             mess = "password must contain number,lowercase,uppercase and length more than 8";
             checkuser = false;
-        }
-        if (!pass.equals(repass)) {
+        } else if (!pass.equals(repass)) {
             mess = "PassWord and Re-PassWord doesnot match";
             checkuser = false;
         }
+
+        User user = new User(name, title, email, phone, pass, Date.valueOf(java.time.LocalDate.now()), "images/avatar/user_circle.png", "Deactive", 1);
+        user.setRepassword(repass);
+        
         if (checkuser) {
             mess = "Please check your email to verify your account!";
-            String encodedPassword = Base64.getUrlEncoder().encodeToString(pass.getBytes());
-            udao.addUser(new User(name, title, email, phone, encodedPassword, Date.valueOf(java.time.LocalDate.now()), "images/avatar/user_circle.png", "Deactive", 1));
-            String maxId = udao.getMaxID();
+            MD5Helper md5 = new MD5Helper();
+            String encodedPassword = null;
+            try {
+                encodedPassword = md5.encryptString(pass);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(RegisterServ.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            user.setPassword(encodedPassword);
+
+            udao.addUser(user);
+
             GmailHelper gmailHelper = new GmailHelper();
+
+            String maxId = udao.getMaxID();
+
+            String tail = "id=" + maxId;
+
+            MD5Helper md5Helper = new MD5Helper();
+
+            String encodedTail = "";
+
+            try {
+                encodedTail = md5Helper.encryptString(tail);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            udao.updateIdEncrypt(maxId, encodedTail);
+
             String[] mailTo = {email};
             try {
                 gmailHelper.sendFromGMail(gmailHelper.getUSER_NAME(), gmailHelper.getPASSWORD(),
                         mailTo, "[Activate your account in Mega Deal]",
                         "Hi you,\n\n" + "Click this link to activate your account, then you are able to access the system.\n"
-                        + "http://localhost:8080/SWP391_G5/ActivateAccount?id=" + maxId
+                        + "http://localhost:8080/SWP391_G5/ActivateAccount?" + encodedTail
                         + "\n\n"
                         + "Regard,\n"
                         + "Mega Deal Support Team");
@@ -121,6 +133,7 @@ public class RegisterServ extends HttpServlet {
             request.setAttribute("messLogin", mess);
             dispath(request, response, "Login.jsp");
         } else {
+            request.setAttribute("userDrap", user);
             request.setAttribute("mess", mess);
             dispath(request, response, "Registration.jsp");
         }

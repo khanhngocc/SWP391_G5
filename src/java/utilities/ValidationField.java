@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class ValidationField {
 
-    public static String[] standardExtension = {"jpg", "jpeg", "png"};
+   
 
     public static final Pattern VALID_PHONE_NUMBER
             = Pattern.compile("^\\d{10}$");

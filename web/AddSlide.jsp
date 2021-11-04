@@ -98,8 +98,8 @@
 
                 var notes = getDataFromTheEditor();
                
-                if (notes.length > 3000) {
-                    document.getElementById("messCreateSlide").textContent = "notes comes over 3000 characters";
+                if (notes.length > 10000) {
+                    document.getElementById("messCreateSlide").textContent = "notes comes over 10000 characters";
 
                     return false;
                 }
