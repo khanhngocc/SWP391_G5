@@ -28,10 +28,14 @@ public class ActivateAccount extends HttpServlet {
         UserDAO dao = new UserDAO();
 
         int id = dao.getIDByEncryptId(idEncrypt);
-        
-        dao.activateAccount(""+id);
-        
-        request.getRequestDispatcher("ActivateAccount.jsp").forward(request, response);
+
+        if (id == -1) {
+            response.sendRedirect("ErrorPage");
+        } else {
+            dao.activateAccount("" + id);
+            request.getRequestDispatcher("ActivateAccount.jsp").forward(request, response);
+        }
+
     }
 
 }

@@ -3,7 +3,7 @@ package controller.admin;
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
 import controller.common.RegisterServ;
-import static controller.common.RegisterServ.validate;
+
 import dal.UserDAO;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.User;
 import utilities.GmailHelper;
 import utilities.MD5Helper;
+import utilities.ValidationField;
 
 /**
  *
@@ -61,7 +62,7 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
             mess = "This email has been used, re-enter!";
             checkuser = false;
         }
-        if (validate(email) == false) {
+        if (ValidationField.validateEmailFormat(email) == false) {
             mess = "This email has wrong format!";
             checkuser = false;
         }

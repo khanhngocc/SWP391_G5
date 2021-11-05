@@ -3,7 +3,7 @@
     Created on : Sep 24, 2021, 8:57:25 AM
     Author     : dell
 --%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,10 +50,9 @@
                             <input name="name" type="text" placeholder="Full Name" required="true" value="${userDrap.fullname}"/>
                             Title
                             <select name="title" id="title" style="margin-bottom:10px">
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Ms">Ms</option>
-
+                                <c:forEach items="${listTitle}" var="list">
+                                    <option value="${list.value}" ${list.value == userDrap.title ? 'selected':''}>${list.value}</option>
+                                </c:forEach>
                             </select> 
                             Phone
                             <input name="phone" type="text" placeholder="Phone Number" required="true" value="${userDrap.phone}"/>

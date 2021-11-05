@@ -171,7 +171,7 @@ public class AccountForgotDAO extends MyDAO {
     }
     
     public int getIDByEncryptId(String encryptId) {
-        int user_id = 0;
+        int user_id = -1;
         xSql = "SELECT id FROM account_forgot where idEncrypt = ? ;";
         
         try {

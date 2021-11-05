@@ -104,6 +104,9 @@ public class ResetPassword extends HttpServlet {
 
         idReset = accDAO.getIDByEncryptId(idEncoded);
 
+        if(idReset == -1)
+             return true;
+        
         SimpleDateFormat formatdate = new SimpleDateFormat("yyyy-MM-dd");
         // check date
         try {
