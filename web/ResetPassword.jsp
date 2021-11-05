@@ -47,14 +47,14 @@
                             <h2 class="text-center">Reset your password</h2>
                             <p class="text-center text-danger" style="font-size: 13px;"><i class="fa fa-warning"></i> Warning: This link will close after <span id="time"></span></p>
                             <p class="text-primary" id="messageReset"></p>
-                            <form id="frm" action="ResetPassword" method = "POST">
+                            <form name="myForm" action="ResetPassword" method = "POST" onsubmit="return verifyForm()">
                                 <input id="idText" name="idEncoded" type="hidden" value=""/>
                                 <input name="email" type="hidden" value="${emailReset}"/>
                                 New password
-                                <input id="newpass" name="newpass" type="password" placeholder="New password" required="true"/>
+                                <input name="newpass" type="password" placeholder="New password" required="true"/>
                                 Re-password
-                                <input id= "repass" name="repass" type="password" placeholder="Re-password" required="true"/>
-                                <button onclick="verifyForm()" type="button" class="btn btn-default center-block">Reset</button>
+                                <input name="repass" type="password" placeholder="Re-password" required="true"/>
+                                <button type="submit" class="btn btn-default center-block">Reset</button>
                             </form>
 
                         </div>
@@ -81,35 +81,30 @@
         <script>
 
             function verifyForm() {
-                var txtNewPass = document.getElementById("newpass").value;
-                var txtRePass = document.getElementById("repass").value;
-                var mess;
-                if(txtNewPass == "")
+                var txtNewPass = document.forms["myForm"]["newpass"].value;
+                var txtRePass = document.forms["myForm"]["repass"].value;
+              
+                if (txtNewPass.length > 25)
                 {
-                     mess = "new password is empty";
+                    document.getElementById("messageReset").textContent = "length of new password comes over 25 characters";
+                    return false;
                 }
-                else if(txtRePass == "")
+                
+                if (txtRePass.length > 25)
                 {
-                     mess = "re-password is empty";
+                    document.getElementById("messageReset").textContent = "length of re-password comes over 25 characters";
+                    return false;
                 }
-                else if (txtNewPass.length > 25)
+                if (!txtNewPass.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/))
                 {
-                    mess = "length of new password comes over 25 characters";
-                } else if (txtRePass.length > 25)
-                {
-                    mess = "length of re-password comes over 25 characters";
-                } else if (!txtNewPass.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/))
-                {
-                    mess = "sorry,password must follow the rules in the right table";
-                } else if (txtNewPass !== txtRePass)
-                {
-                    mess = "new password not equal re-password";
-                } else
-                {
-                    document.getElementById("frm").submit();
+                    document.getElementById("messageReset").textContent = "sorry,password must follow the rules in the right table";
+                    return false;
                 }
-
-                document.getElementById("messageReset").textContent = mess;
+                if (txtNewPass !== txtRePass)
+                {
+                    document.getElementById("messageReset").textContent = "new password not equal re-password";
+                    return false;
+                } 
             }
 
             window.onload = function () {
@@ -130,7 +125,7 @@
                 var downloadTimer = setInterval(function () {
                     if (timeleft <= 0) {
                         clearInterval(downloadTimer);
-                        window.location.href = url;
+                        window.location.href = "ErrorPage";
                     } else {
                         document.getElementById("time").innerHTML = timeleft + " seconds remaining";
                     }

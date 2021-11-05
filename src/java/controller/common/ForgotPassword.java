@@ -48,17 +48,18 @@ public class ForgotPassword extends HttpServlet {
         String email = request.getParameter("email");
 
         request.setAttribute("emailCover", email);
+        UserDAO dao = new UserDAO();
 
-        // wrong format email
-        if (ValidationField.validateEmailFormat(email) == false) {
+        // valid email
+        if (email.length() > 100) {
+            message = "email comes over 100 characters";
+            isValid = false;
+            dispatch(request, message, response);
+        } else if (ValidationField.validateEmailFormat(email) == false) {
             message = "wrong format of email";
             isValid = false;
             dispatch(request, message, response);
-        }
-
-        UserDAO dao = new UserDAO();
-        // account not existed
-        if (dao.getUser(email) == null) {
+        } else if (dao.getUser(email) == null) {
             message = "this email isn't signed up in the system";
             isValid = false;
             dispatch(request, message, response);
@@ -80,31 +81,31 @@ public class ForgotPassword extends HttpServlet {
             // set attribute
             acc.setUser_id(current_user.getId());
             acc.setTimeStarted(sdf.format(cal.getTime()));
-            cal.add(Calendar.SECOND,85 );
+            cal.add(Calendar.SECOND, 85);
             acc.setTimeEnded(sdf.format(cal.getTime()));
             acc.setAllowedReset("1");
             acc.setDateCreated(java.time.LocalDate.now().toString());
 
             // create accountforgot
             accDAO.createAccountForgot(acc);
-            
+
             String max_id = accDAO.getMaxID();
-            
+
             String tail = "id=" + max_id;
-            
+
             MD5Helper md5Helper = new MD5Helper();
-            
+
             String encodedTail = "";
-            
+
             try {
                 encodedTail = md5Helper.encryptString(tail);
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             accDAO.updateIdEncrypt(max_id, encodedTail);
-            
-            String url = "http://localhost:8080/SWP391_G5/ResetPassword?"+encodedTail ;
+
+            String url = "http://localhost:8080/SWP391_G5/ResetPassword?" + encodedTail;
 
             // send link to reset password to email
             GmailHelper gm = new GmailHelper();
