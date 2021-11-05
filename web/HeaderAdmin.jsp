@@ -10,6 +10,7 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
+                             <li><a href="SettingList">Setting</a></li>
                             <li><a href="UserList">User</a></li>
                             <li><a href="DocumentList">Document</a></li>
                             <li><a href="Personal">Account</a></li>
