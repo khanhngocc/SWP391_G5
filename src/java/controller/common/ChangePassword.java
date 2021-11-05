@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
 import utilities.MD5Helper;
+import utilities.ValidationField;
 
 /**
  *
@@ -81,7 +82,7 @@ public class ChangePassword extends BaseRequiredLoginController {
             message = "new password is same as old password";
             isValid = false;
             dispatch(request, message, response);
-        } else if (!newpass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
+        } else if (!newpass.matches(ValidationField.VALID_PASSWORD.toString())) {
             message = "new password must contain at least 1 number,at least 1 lowercase,at least 1 uppercase, length more than 8 and no special characters";
             isValid = false;
             dispatch(request, message, response);

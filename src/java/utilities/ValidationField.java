@@ -15,15 +15,15 @@ import java.util.regex.Pattern;
  */
 public class ValidationField {
 
-   
-
     public static final Pattern VALID_PHONE_NUMBER
-            = Pattern.compile("^\\d{10}$");
-    
+            = Pattern.compile("(84|0[3|5|7|8|9])+([0-9]{8})\\b");
+
+    public static final Pattern VALID_PASSWORD
+            = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$");
+
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX
             = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-  
     public static boolean validateEmailFormat(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();

@@ -8,6 +8,8 @@ package dal;
 import java.util.ArrayList;
 import model.Question;
 import model.Setting;
+import model.Slide;
+import model.User;
 
 /**
  *
@@ -54,8 +56,6 @@ public class SettingDAO extends MyDAO {
         }
         return list;
     }
-    
-    
 
     public int getRowCount() {
         int no = 0;
@@ -128,6 +128,95 @@ public class SettingDAO extends MyDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void changeSettingStatus(int id, String status) {
+        xSql = "Update settings set status = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, status);
+
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createSetting(Setting setting, User user) {
+        xSql = "INSERT INTO `settings`\n"
+                + "(`user_id`,\n"
+                + "`type`,\n"
+                + "`value`,\n"
+                + "`note`,\n"
+                + "`status`)\n"
+                + "VALUES\n"
+                + "(?,?,?,?,?);";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, user.getId());
+            ps.setString(2, setting.getType());
+            ps.setString(3, setting.getValue());
+            ps.setString(4, setting.getNote());
+            ps.setString(5, "Active");
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateSetting(Setting setting) {
+        xSql = "UPDATE `settings`\n"
+                + "SET\n"
+                + "`type` = ?,\n"
+                + "`value` = ?,\n"
+                + "`note` = ?\n"
+                + "WHERE `id` = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, setting.getType());
+            ps.setString(2, setting.getValue());
+            ps.setString(3, setting.getNote());
+            ps.setInt(4, setting.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Setting getSetting(int id) {
+
+        Setting s = new Setting();
+
+        xSql = "select id,type,value,note from settings\n"
+                + "where\n"
+                + "id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                s.setId(rs.getInt(1));
+                s.setType(rs.getString(2));
+                s.setValue(rs.getString(3));
+                s.setNote(rs.getString(4));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
     }
 
 }

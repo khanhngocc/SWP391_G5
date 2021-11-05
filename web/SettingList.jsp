@@ -47,7 +47,7 @@
                 </form>
 
                 <div style="margin-top: 20px; margin-bottom: 10px">
-                    
+
                     <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Status</p>
                     <form style ="float: left;margin-right: 15px;margin-left: 5px" action="SettingList" >
                         <input type="text" placeholder="Search" name="type" value="${type}" hidden=""/>
@@ -87,7 +87,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(1)">Type</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Value</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Status</a></th>
-
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Note</a></th>
                             <th scope="col" colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -98,9 +98,15 @@
                                 <td>${list.type}</td>
                                 <td>${list.value}</td>
                                 <td>${list.status}</td>
+                                <td>${list.note}</td>
                                 <td>
-                                    <div> <a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
-                                        <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> </div>
+                                    <c:if test="${list.status eq 'Active'}">
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Deactive')"><i class="fa fa-chain"></i> Deactive</a> 
+                                    </c:if>
+                                    <c:if test="${list.status eq 'Deactive'}">
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Active')"><i class="fa fa-chain"></i> Active</a> 
+                                    </c:if>
+                                    <a href="UpdateSetting?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> </div>
 
                                 </td> 
                             </tr>
@@ -135,7 +141,7 @@
 
         <jsp:include page="Footer.jsp" />  
         <script src="js/sortHelper.js"></script>
-        <script src="js/blogHander.js"></script>
+        <script src="js/SettingHelper.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

@@ -83,9 +83,9 @@ public class RegisterServ extends HttpServlet {
             mess = "email existed in the system";
             checkuser = false;
         } else if (!phone.matches(ValidationField.VALID_PHONE_NUMBER.toString())) {
-            mess = "phone number must contain 11 digit";
+            mess = "phone number wrong format of VietName's phone";
             checkuser = false;
-        } else if (!pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")) {
+        } else if (!pass.matches(ValidationField.VALID_PASSWORD.toString())) {
             mess = "password must contain at least 1 number,at least 1 lowercase,at least 1 uppercase, length more than 8 and no special characters";
             checkuser = false;
         } else if (!pass.equals(repass)) {

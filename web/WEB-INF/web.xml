@@ -228,6 +228,18 @@
         <servlet-name>SettingList</servlet-name>
         <servlet-class>controller.admin.SettingList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeSettingStatus</servlet-name>
+        <servlet-class>controller.admin.ChangeSettingStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSetting</servlet-name>
+        <servlet-class>controller.admin.AddSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSetting</servlet-name>
+        <servlet-class>controller.admin.UpdateSetting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -455,6 +467,18 @@
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
         <url-pattern>/SettingList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSettingStatus</servlet-name>
+        <url-pattern>/ChangeSettingStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSetting</servlet-name>
+        <url-pattern>/AddSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSetting</servlet-name>
+        <url-pattern>/UpdateSetting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

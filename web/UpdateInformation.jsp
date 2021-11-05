@@ -57,14 +57,14 @@
                 <div class="row">
                     <jsp:include page="SidebarPersonal.jsp" /> 
                     <div class="col-sm-9 padding-right">
-                        <p class="text-primary" id="messageUpdate">${messUpdateUser}</p>
+                        <p class="text-primary" id="messUpdateUser">${messUpdateUser}</p>
                         <div class="shopper-info col-sm-6">
 
-                            <form id="frm" enctype="multipart/form-data" action="Personal" method="POST">
+                            <form name="myForm" enctype="multipart/form-data" action="Personal" method="POST" onsubmit="return validUserProfile()">
                                 <img id="profile-ava" class="imageAvatar" src="${userInfor.avatar}">
                                 <br>
                                 Choose a avatar
-                                <input id="fileImg" type="file" name="fname">
+                                <input type="file" name="fname">
                                 <input name="srcAvatar" type="hidden" value="${userInfor.avatar}" />
                                 <input name="email" type="hidden" value="${userInfor.email}" />
                                 Full Name
@@ -81,7 +81,7 @@
                                 <br>
 
 
-                                <button type="button" onclick="filevalidation('messageUpdate')" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>

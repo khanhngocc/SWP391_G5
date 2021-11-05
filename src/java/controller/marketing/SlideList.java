@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Slide;
+import utilities.Constant;
 
 /**
  *
@@ -76,8 +77,8 @@ public class SlideList extends BaseRequiredLoginController {
         
         ArrayList<Slide> listAllSlide = dao.listAllSlides(pageIndex, pageSize, searchName, local_status);
         
-        ArrayList<String> listStatus = dao.listStatus();
-        request.setAttribute("listStatus", listStatus);
+       
+        request.setAttribute("listStatus", Constant.statusTypeTwo);
         request.setAttribute("list_all_slides", listAllSlide);
         request.setAttribute("pagecount", pageCount);
         request.setAttribute("pageindex", pageIndex);

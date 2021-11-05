@@ -13,5 +13,6 @@ import java.util.ArrayList;
  */
 public class Constant {
 
-    public static String[] status = {"Active","Deactive"};
+    public static String[] status = {"Active", "Deactive"};
+    public static String[] statusTypeTwo = {"Published", "Unpublished"};
 }

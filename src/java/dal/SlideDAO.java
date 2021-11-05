@@ -176,30 +176,7 @@ public class SlideDAO extends MyDAO {
         }
     }
     
-    public ArrayList<String> listStatus() {
-        
-        ArrayList<String> list = new ArrayList<>();
-        
-        try {
-            String sql = "Select distinct status from slide";
-            PreparedStatement statement;
-            
-            statement = connection.prepareStatement(sql);
-            
-            ResultSet rs = statement.executeQuery();
-            
-            while (rs.next()) {
-                
-                list.add(rs.getString(1));
-            }
-            
-            return list;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-    
+   
     public void createSlide(Slide slide, User user) {
         xSql = "INSERT INTO `slide`\n"
                 + "(\n"
