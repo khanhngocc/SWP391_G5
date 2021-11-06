@@ -17,7 +17,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    width: 85%;
 }
 
 .centerText {
@@ -100,8 +100,8 @@ textarea {
 .text-tooltip{
     font-size: 13px;
     font-style: italic;
-    color: red;
-    margin-bottom: 50px;
+   
+    
 }
 
 .featuresBlog{

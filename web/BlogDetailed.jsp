@@ -68,7 +68,7 @@
                             <p class="desc-blog">${blog.description}</p>
                             <c:if test="${blog.attach_url ne ''}">
                                 <a href="${blog.attach_url}" download>
-                                    <i class="fa fa-download" style="color: #FE980F;margin-bottom: 50px"></i> ${blog.attachName}
+                                    <i class="fa fa-download" style="color: #FE980F;margin-top: 30px"></i> ${blog.attachName}
                                 </a>
                             </c:if>
 

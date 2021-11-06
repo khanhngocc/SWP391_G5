@@ -35,10 +35,10 @@
     <body>
         <jsp:include page="HeaderMarketing.jsp" /> 
 
-        <section style="margin-bottom: 50px">
+        <section style="margin-bottom: 50px;margin-top: 20px">
             <div class="container">
                 <img src="${slide.image_Url}" class="centerImgSlide" alt="">
-                <div class="centerImgLanding" style="margin-top: 10px;">${slide.note}</div>
+                <div class="centerImgLanding" style="margin-top: 35px;">${slide.note}</div>
             </div>
         </section><!--/slider-->
 

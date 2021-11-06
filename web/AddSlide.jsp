@@ -121,7 +121,7 @@
                 if (fi.files[0].size > 1048576)
                 {
                     document.getElementById("messCreateSlide").textContent
-                            = 'size of thumbnail inputed comes over 1048576 bytes ';
+                            = 'size of thumbnail inputed comes over 1KB ';
                     return false;
                 }
 

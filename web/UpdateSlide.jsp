@@ -56,7 +56,7 @@
                             <input name="backlink" type="text" value="${slide.backlink}" readonly="true"/>
 
                             Notes
-                            <textarea hidden="" name="notes" id="contentDetails" rows="10" cols="80"></textarea>
+                            <textarea hidden="" name="notes" id="contentDetails"></textarea>
 
                             <div id="toolbar-container"></div>
 
@@ -128,7 +128,7 @@
                     if (fi.files[0].size > 1048576)
                     {
                         document.getElementById("messUpdateSlide").textContent
-                                = 'size of thumbnail inputed comes over 1048576 bytes ';
+                                = 'size of thumbnail inputed comes over 1KB ';
                         return false;
                     }
                 }

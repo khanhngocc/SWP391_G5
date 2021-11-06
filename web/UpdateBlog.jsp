@@ -60,8 +60,14 @@
                             <img src="${blog.img_url}" alt="" style="width: 200px;height: 200px;margin-bottom: 10px" />
                             <input name="imgURL" type="hidden" value="${blog.img_url}"  />
                             <input name="fname" type="file"/>
-                            Attach File
-                            <input name="attach" type="file"/>
+                            <p>Attach File </p> 
+                            <c:if test="${blog.attach_url ne ''}">
+                                <a href="${blog.attach_url}" download>
+                                    <i class="fa fa-download" style="color: #FE980F;"></i> ${blog.attachName}
+                                </a>
+                            </c:if>
+                            
+                            <input name="attach" style="margin-top: 6px" type="file"/>
                             <input name="attachURL" type="hidden" value="${blog.attach_url}"/>
                             Description
                             <textarea hidden="" name="desc" id="contentDetails">
@@ -138,7 +144,7 @@
                     if (fi.files[0].size > 1048576)
                     {
                         document.getElementById("messUpdateBlog").textContent
-                                = 'size of thumbnail inputed comes over 1048576 bytes ';
+                                = 'size of thumbnail inputed comes over 1KB ';
                         return false;
                     }
                 }
@@ -168,7 +174,7 @@
                     if (attach.files[0].size > 1048576)
                     {
                         document.getElementById("messUpdateBlog").textContent
-                                = 'size of attached file inputed comes over 1048576 bytes ';
+                                = 'size of attached file inputed comes over 1KB ';
                         return false;
                     }
 

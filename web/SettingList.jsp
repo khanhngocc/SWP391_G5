@@ -88,7 +88,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Value</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Note</a></th>
-                            <th scope="col" colspan="2">Action</th>
+                            <th scope="col" style="width: auto;text-align: center" colspan="2"><a href="javascript:void(0);">Action</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,16 +99,16 @@
                                 <td>${list.value}</td>
                                 <td>${list.status}</td>
                                 <td>${list.note}</td>
-                                <td>
+                                <td style="width: 200px">
                                     <c:if test="${list.status eq 'Active'}">
                                         <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Deactive')"><i class="fa fa-chain"></i> Deactive</a> 
                                     </c:if>
                                     <c:if test="${list.status eq 'Deactive'}">
-                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Active')"><i class="fa fa-chain"></i> Active</a> 
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Active')"><i class="fa fa-chain"></i> Active</a>  
                                     </c:if>
-                                    <a href="UpdateSetting?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> </div>
+                                    <a href="UpdateSetting?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
+                                </td>
 
-                                </td> 
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -69,7 +69,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(5)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(6)">TimeCreated</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(7)">DateCreated</a></th>
-                            <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
+                            <th scope="col" style="width: auto;text-align: center" colspan="3"><a href="javascript:void(0);" >Action</a></th>
                         </tr>
                     </thead>
                     <tbody>
