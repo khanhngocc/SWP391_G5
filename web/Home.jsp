@@ -172,7 +172,7 @@
                                                     <li><i class="fa fa-clock-o"></i>${list.time}</li>
                                                     <li><i class="fa fa-calendar"></i>${list.date}</li>
                                                 </ul>
-                                                <p class="block-ellipsis">${list.description}</p>
+                                                <div class="block-ellipsis">${list.description}</div>
 
                                                 <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
                                             </div>

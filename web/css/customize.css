@@ -5,6 +5,21 @@
     width: 50%;
 }
 
+.centerImgSlide {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    
+}
+
+.centerImgBlog {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
 .centerText {
     display: block;
     margin-left: auto;

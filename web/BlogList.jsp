@@ -49,7 +49,7 @@
                     <select style="width: 10%;margin-top: 10px" name="categories" onchange="this.form.submit()" >
                         <option value="">All</option>
                         <c:forEach items="${listCategories}" var="list">
-                            <option value="${list}" ${list == category ? 'selected':''}>${list}</option>
+                            <option value="${list.value}" ${list.value == category ? 'selected':''}>${list.value}</option>
                         </c:forEach>
                     </select>   
                 </form>
@@ -66,7 +66,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Thumbnail</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Category</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Author</a></th>
-                            <th scope="col" style="width: 105px"><a href="javascript:void(0);" onclick="sort(5)">Status</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(5)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(6)">TimeCreated</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(7)">DateCreated</a></th>
                             <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
@@ -81,17 +81,23 @@
                                 <td>${list.category}</td>
                                 <td>${list.author}</td>
                                 <c:if test="${list.status eq 1}">
-                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=0"><i class="fa fa-unlock"></i> deactivated</a></td>
+                                    <td>Activate</td>
                                 </c:if>
                                 <c:if test="${list.status eq 0}">
-                                    <td><a href="ChangeBlogStatus?id=${list.id}&status=1"><i class="fa fa-lock"></i> activated</a></td>
+                                    <td>Deactivate</td>
                                 </c:if>
                                 <td>${list.time}</td>
                                 <td>${list.date}</td>
 
-                                <td><a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
+                                <td style="width: 250px">
+                                    <c:if test="${list.status eq 1}">
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '0')"><i class="fa fa-chain"></i> Deactivate</a>
+                                    </c:if>
+                                    <c:if test="${list.status eq 0}">
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '1')"><i class="fa fa-chain"></i> Activate</a>
+                                    </c:if>
+                                    <a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
-                                    <a href="#" onclick="deleteBlog(${list.id})"><i class="fa fa-trash-o"></i> Delete</a> 
                                 </td> 
 
                             </tr>
@@ -124,9 +130,9 @@
         </section><!--/slider-->
 
 
-        <jsp:include page="Footer.jsp" />  
-        <script src="js/sortHelper.js"></script>
+        <jsp:include page="Footer.jsp" /> 
         <script src="js/blogHander.js"></script>
+        <script src="js/sortHelper.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

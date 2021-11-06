@@ -195,29 +195,7 @@ public class BlogDAO extends MyDAO {
 
     }
 
-    public ArrayList<String> listCategories() {
 
-        ArrayList<String> list = new ArrayList<>();
-
-        try {
-            String sql = "Select distinct Category from Blog";
-            PreparedStatement statement;
-
-            statement = connection.prepareStatement(sql);
-
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-
-                list.add(rs.getString(1));
-            }
-
-            return list;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
 
     public void deleteBlog(int id) {
         xSql = "Delete from Blog where id = ?";

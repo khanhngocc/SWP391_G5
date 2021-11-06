@@ -6,6 +6,7 @@
 package controller.free;
 
 import dal.BlogDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Setting;
 
 /**
  *
@@ -81,8 +83,9 @@ public class DocumentList extends HttpServlet {
         request.setAttribute("pageindex", pageIndex);
         request.setAttribute("gap", gap);
         request.setAttribute("name_search", searchName);
-        ArrayList<String> listCategories = dao.listCategories();
-        request.setAttribute("listCategories", listCategories);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> categoriesList = settingDAO.getListSettingByType("Post Category");
+        request.setAttribute("listCategories", categoriesList);
         request.setAttribute("category", local_category);
         request.getRequestDispatcher("DocumentList.jsp").forward(request, response);
     }

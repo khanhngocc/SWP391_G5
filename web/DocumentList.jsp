@@ -76,7 +76,7 @@
                                 <c:forEach items="${listCategories}" var="list">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list}">${list}</a></h4>
+                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list.value}">${list.value}</a></h4>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -114,7 +114,7 @@
                                                     <li><i class="fa fa-clock-o"></i>${list.time}</li>
                                                     <li><i class="fa fa-calendar"></i>${list.date}</li>
                                                 </ul>
-                                                <p class="block-ellipsis">${list.description}</p>
+                                                <div class="block-ellipsis">${list.description}</div>
 
                                                 <a class="btn btn-primary" href="DocumentDetailed?id=${list.id}">Read more</a>
                                             </div>

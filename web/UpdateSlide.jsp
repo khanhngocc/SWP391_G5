@@ -98,17 +98,6 @@
 
                 const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
 
-                // valid notes
-
-                var notes = getDataFromTheEditor();
-                
-                if (notes.length > 10000) {
-                    document.getElementById("messUpdateSlide").textContent = "notes comes over 10000 characters";
-
-                    return false;
-                }
-
-                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
 
                 //valid title
                 let title = document.forms["myForm"]["title"].value;
@@ -122,8 +111,9 @@
                 let fi = document.forms["myForm"]["fname"];
 
                 var fileValue = fi.value;
-                if (fileValue)
-                {
+
+                if (fileValue) {
+
                     var startIndex = fileValue.lastIndexOf(".");
                     var filename = fileValue.substring(startIndex, fileValue.length);
 
@@ -135,23 +125,31 @@
                     }
 
 
-                    for (const i = 0; i <= fi.files.length - 1; i++) {
-
-                        const fsize = fi.files.item(i).size;
-                        const file = Math.round((fsize / 1024));
-                        // The size of the file.
-
-
-
-                        if (file > 1024)
-                        {
-                            document.getElementById("messUpdateSlide").textContent
-                                    = 'size of file inputed comes over 1024 KB ';
-                            return false;
-                        }
-
+                    if (fi.files[0].size > 1048576)
+                    {
+                        document.getElementById("messUpdateSlide").textContent
+                                = 'size of thumbnail inputed comes over 1048576 bytes ';
+                        return false;
                     }
                 }
+
+                // valid notes
+
+                var notes = getDataFromTheEditor();
+
+                if (notes.length === 0) {
+                    document.getElementById("messUpdateSlide").textContent = "notes is empty";
+
+                    return false;
+                }
+
+                if (notes.length > 10000) {
+                    document.getElementById("messUpdateSlide").textContent = "notes comes over 10000 characters";
+
+                    return false;
+                }
+
+                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
 
             }
 

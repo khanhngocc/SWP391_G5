@@ -76,7 +76,7 @@
                                 <c:forEach items="${listCategories}" var="list">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list}">${list}</a></h4>
+                                            <h4 class="panel-title"><a href="DocumentList?searchName=${name_search}&categories=${list.value}">${list.value}</a></h4>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -110,7 +110,7 @@
                                     </ul>
 
                                 </div>
-                                <img src="${blog.img_url}" alt="" width="100%" />
+                                        <img src="${blog.img_url}" alt="" class="centerImgBlog" />
 
                                 <p class="desc-blog">${blog.description}</p>
                                 <c:if test="${blog.attach_url ne ''}">

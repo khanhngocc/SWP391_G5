@@ -33,10 +33,10 @@
     </head><!--/head-->
 
     <body>
-      
+
         <jsp:include page="HeaderMarketing.jsp" />  
 
-        <section ><!--slider-->
+        <section style="margin-bottom: 100px"><!--slider-->
             <div class="container centerImgLanding" >
 
                 <div class="col-sm-9">
@@ -55,16 +55,16 @@
                                 </ul>
                                 <span>
                                     <c:if test="${blog.status eq 1}">
-                                        <a href="ChangeBlogStatus?id=${blog.id}&status=0"><i class="fa fa-unlock"></i> deactivated</a>
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${blog.id}, '0')"><i class="fa fa-chain"></i> Deactivate</a>
                                     </c:if>
                                     <c:if test="${blog.status eq 0}">
-                                        <a href="ChangeBlogStatus?id=${blog.id}&status=1"><i class="fa fa-lock"></i> activated</a>
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${blog.id}, '1')"><i class="fa fa-chain"></i> Activate</a>
                                     </c:if>
                                     <a href="UpdateBlog?id=${blog.id}"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="#" onclick="deleteBlog(${blog.id})"><i class="fa fa-trash-o"></i> Delete</a>
+
                                 </span>
                             </div>
-                            <img src="${blog.img_url}" alt="" style="width: 100%"/>
+                            <img src="${blog.img_url}" alt="" class="centerImgBlog"/>
                             <p class="desc-blog">${blog.description}</p>
                             <c:if test="${blog.attach_url ne ''}">
                                 <a href="${blog.attach_url}" download>

@@ -30,10 +30,11 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
     </head><!--/head-->
 
     <body>
-        
+
         <jsp:include page="HeaderMarketing.jsp" /> 
 
         <section id="slider"><!--slider-->
@@ -44,36 +45,160 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Update blog</h2>
-                        <p class="text-primary">${messUpdateBlog}</p>
-                        <form action="UpdateBlog?id=${blog.id}" enctype="multipart/form-data" method="post">
+                        <p class="text-primary" id="messUpdateBlog"></p>
+                        <form name="myForm" action="UpdateBlog?id=${blog.id}" enctype="multipart/form-data" method="post" onsubmit="return validBlog()">
 
                             Title
                             <input name="title" type="text" required="true" value="${blog.title}"/>
                             Category
-                            <input name="category" type="text" required="true" value="${blog.category}"/>
+                            <select name="category" style="margin-bottom:10px">
+                                <c:forEach items="${categoriesList}" var="list">
+                                    <option value="${list.value}" ${list.value == blog.category ? 'selected':''}>${list.value}</option>
+                                </c:forEach>
+                            </select> 
                             <p>Thumbnail</p>
                             <img src="${blog.img_url}" alt="" style="width: 200px;height: 200px;margin-bottom: 10px" />
                             <input name="imgURL" type="hidden" value="${blog.img_url}"  />
                             <input name="fname" type="file"/>
-                            Description
-                            <textarea name="desc" rows="25" cols="70" required="true" >
-                                ${blog.description}
-                            </textarea>
                             Attach File
                             <input name="attach" type="file"/>
-                            <input name="attachURL" type="hidden" value="${blog.attach_url}"  />
+                            <input name="attachURL" type="hidden" value="${blog.attach_url}"/>
+                            Description
+                            <textarea hidden="" name="desc" id="contentDetails">
+                            </textarea>
+                            <div id="toolbar-container"></div>
+
+                            <!-- This container will become the editable. -->
+                            <div id="editor">
+                                ${blog.description}
+                            </div>
+
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Save</button>
                         </form>
                     </div>
-                    <br>
+
                 </div>
             </div>
 
         </section><!--/slider-->
 
 
-         <jsp:include page="Footer.jsp" /> 
+        <jsp:include page="Footer.jsp" /> 
+        <script>
+            let theEditor;
+            DecoupledEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        theEditor = editor;
+                        const toolbarContainer = document.querySelector('#toolbar-container');
 
+                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            function getDataFromTheEditor() {
+                return theEditor.getData();
+
+            }
+
+
+            function validBlog() {
+
+                const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
+                const standardedExtensionAttachedFile = ['.docx', '.doc', '.xlsx'];
+
+
+                //valid title
+                let title = document.forms["myForm"]["title"].value;
+                if (title.length > 100) {
+                    document.getElementById("messUpdateBlog").textContent = "title comes over 100 characters";
+                    return false;
+                }
+
+                // valid thumbnail
+
+                let fi = document.forms["myForm"]["fname"];
+
+
+                var fileValue = fi.value;
+                if (fileValue) {
+                    var startIndex = fileValue.lastIndexOf(".");
+                    var filename = fileValue.substring(startIndex, fileValue.length);
+
+                    if (standardedExtensionImg.includes(filename) == false)
+                    {
+                        document.getElementById("messUpdateBlog").textContent
+                                = 'thumnail input is not a image';
+                        return false;
+                    }
+
+
+                    if (fi.files[0].size > 1048576)
+                    {
+                        document.getElementById("messUpdateBlog").textContent
+                                = 'size of thumbnail inputed comes over 1048576 bytes ';
+                        return false;
+                    }
+                }
+
+
+
+
+                // valid attach file
+
+                var attach = document.forms["myForm"]["attach"];
+
+
+                var attachValue = attach.value;
+
+                // if choose attached file
+                if (attachValue) {
+                    var startIndexAttach = attachValue.lastIndexOf(".");
+                    var filenameAttach = attachValue.substring(startIndexAttach, attachValue.length);
+
+                    if (standardedExtensionAttachedFile.includes(filenameAttach) == false)
+                    {
+                        document.getElementById("messUpdateBlog").textContent
+                                = 'file attach is not a word or excel';
+                        return false;
+                    }
+
+                    if (attach.files[0].size > 1048576)
+                    {
+                        document.getElementById("messUpdateBlog").textContent
+                                = 'size of attached file inputed comes over 1048576 bytes ';
+                        return false;
+                    }
+
+                }
+
+                // valid desc
+
+                var description = getDataFromTheEditor();
+
+                if (description.length === 0) {
+                    document.getElementById("messUpdateBlog").textContent = "description is empty";
+
+                    return false;
+                }
+
+
+                if (description.length > 11000) {
+                    document.getElementById("messUpdateBlog").textContent = "description comes over 11000 characters";
+
+                    return false;
+                }
+
+                // get value from ckeditor to textarea
+                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
+
+
+
+            }
+
+        </script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

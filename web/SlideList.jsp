@@ -79,7 +79,7 @@
                                 <td>${list.backlink}</td>
                                 <td>${list.status}</td>
                                 <td>${list.author_name}</td>
-                                <td>
+                                <td style="width: 200px">
                                     <c:if test="${list.status eq 'Published'}">
                                         <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublished</a> 
                                     </c:if>

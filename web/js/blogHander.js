@@ -1,7 +1,17 @@
-function deleteBlog(id) {
-    var result = confirm("Do you want to delete this blog?");
+
+function changeBlogStatus(id,status) {
+    
+    var mess;
+    
+    if(status === 'Active')
+        mess = "Do you want to deactive this blog";
+    else
+         mess = "Do you want to active this blog";
+    
+    
+    var result = confirm(mess);
     if (result) {
-        window.location.href = "DeleteBlog?id=" + id;
+        window.location.href = "ChangeBlogStatus?id=" + id+"&status="+status;
     }
 
 }

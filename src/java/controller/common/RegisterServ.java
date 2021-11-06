@@ -67,8 +67,8 @@ public class RegisterServ extends HttpServlet {
         } else if (name.length() > 100) {
             mess = "fullname comes over 100 characters";
             checkuser = false;
-        } else if (phone.length() > 100) {
-            mess = "phone comes over 100 characters";
+        } else if (phone.length() > 10) {
+            mess = "phone comes over 10 characters";
             checkuser = false;
         } else if (pass.length() > 25) {
             mess = "password comes over 25 characters";
@@ -83,7 +83,7 @@ public class RegisterServ extends HttpServlet {
             mess = "email existed in the system";
             checkuser = false;
         } else if (!phone.matches(ValidationField.VALID_PHONE_NUMBER.toString())) {
-            mess = "phone number wrong format of VietName's phone";
+            mess = "phone number wrong format of phone";
             checkuser = false;
         } else if (!pass.matches(ValidationField.VALID_PASSWORD.toString())) {
             mess = "password must contain at least 1 number,at least 1 lowercase,at least 1 uppercase, length more than 8 and no special characters";
