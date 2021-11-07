@@ -64,26 +64,26 @@ public class RegisterServ extends HttpServlet {
         if (email.length() > 100) {
             mess = "email comes over 100 characters";
             checkuser = false;
-        } else if (name.length() > 100) {
-            mess = "fullname comes over 100 characters";
-            checkuser = false;
-        } else if (phone.length() > 10) {
-            mess = "phone comes over 10 characters";
-            checkuser = false;
-        } else if (pass.length() > 25) {
-            mess = "password comes over 25 characters";
-            checkuser = false;
-        } else if (repass.length() > 25) {
-            mess = "re-password comes over 25 characters";
-            checkuser = false;
         } else if (ValidationField.validateEmailFormat(email) == false) {
             mess = "email has wrong format";
             checkuser = false;
         } else if (udao.getUser(email) != null) {
             mess = "email existed in the system";
             checkuser = false;
+        } else if (name.length() > 100) {
+            mess = "fullname comes over 100 characters";
+            checkuser = false;
+        } else if (phone.length() > 10) {
+            mess = "phone comes over 10 characters";
+            checkuser = false;
         } else if (!phone.matches(ValidationField.VALID_PHONE_NUMBER.toString())) {
             mess = "phone number wrong format of phone";
+            checkuser = false;
+        } else if (pass.length() > 25) {
+            mess = "password comes over 25 characters";
+            checkuser = false;
+        } else if (repass.length() > 25) {
+            mess = "re-password comes over 25 characters";
             checkuser = false;
         } else if (!pass.matches(ValidationField.VALID_PASSWORD.toString())) {
             mess = "password must contain at least 1 number,at least 1 lowercase,at least 1 uppercase, length more than 8 and no special characters";

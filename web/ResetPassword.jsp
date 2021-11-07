@@ -60,12 +60,12 @@
                         </div>
                         <!--/login form-->
                     </div>
-                               
+
                     <div class="col-sm-4">
                         <div class="login-form">
                             <h2>Rule for password</h2>
                         </div>
-                         
+
                         <ul class="list-group">
                             <li class="list-group-item">Contain at least 8 characters</li>
                             <li class="list-group-item">Contain at least 1 number</li>
@@ -83,16 +83,10 @@
             function verifyForm() {
                 var txtNewPass = document.forms["myForm"]["newpass"].value;
                 var txtRePass = document.forms["myForm"]["repass"].value;
-              
+
                 if (txtNewPass.length > 25)
                 {
                     document.getElementById("messageReset").textContent = "length of new password comes over 25 characters";
-                    return false;
-                }
-                
-                if (txtRePass.length > 25)
-                {
-                    document.getElementById("messageReset").textContent = "length of re-password comes over 25 characters";
                     return false;
                 }
                 if (!txtNewPass.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/))
@@ -100,11 +94,17 @@
                     document.getElementById("messageReset").textContent = "sorry,password must follow the rules in the right table";
                     return false;
                 }
+                if (txtRePass.length > 25)
+                {
+                    document.getElementById("messageReset").textContent = "length of re-password comes over 25 characters";
+                    return false;
+                }
+
                 if (txtNewPass !== txtRePass)
                 {
                     document.getElementById("messageReset").textContent = "new password not equal re-password";
                     return false;
-                } 
+                }
             }
 
             window.onload = function () {

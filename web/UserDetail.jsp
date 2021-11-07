@@ -46,40 +46,30 @@
                         <div class="signup-form">
                             <!--sign up form-->
                             <h2>Update User</h2>
-                            <p class="text-primary">${mess}</p>
-                            <form enctype="multipart/form-data" id="myForm" action="EditUser?id=${user.id}" method="post">
+                            <p class="text-primary" id="messCreateUser"></p>
+                            <form name="myForm" enctype="multipart/form-data" action="EditUser" method="post" onsubmit="return validUserForm()">
                                 <img id="profile-ava" class="imageAvatar" src="${user.avatar}">
                                 <br>
                                 Choose a avatar
                                 <input type="file" name="fname">
-
                                 <input type="hidden" value="${user.avatar}" name="imageurl">
                                 Email
                                 <input name="email" type="text" placeholder="Email" required="true" value="${user.email}" readonly />
                                 Full Name
                                 <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                                 Title
-
-                                <select name="title" style="margin-bottom:10px">
+                                <select name="title" style="margin-bottom:10px;height: 40px">
                                     <c:forEach items="${listTitle}" var="list">
                                         <option value="${list.value}" ${list.value == user.title ? 'selected':''}>${list.value}</option>
                                     </c:forEach>
                                 </select>  
-
                                 Phone
                                 <input name="phone"type="text" placeholder="Phone Number" value="${user.getPhone()}" />							
                                 Created Date
-                                <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
-                                Roll
-                                <select name="roll" style="margin-bottom:10px">
-                                    <c:forEach items="${listAllRolls}" var="list">
-                                        <option value="${list.id}" ${list.id == user.rollId ? 'selected':''}>${list.name}</option>
-                                    </c:forEach>
-                                </select> 
-                                
+                                <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" readonly=""/>							
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" >Update</button>
                             </form>
-                                
+
                         </div>                       
                     </div>
                 </div>
@@ -91,7 +81,75 @@
 
         </section>
         <jsp:include page="Footer.jsp" /> 
+        <script>
 
+
+            function validUserForm() {
+
+
+                const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
+
+
+                // valid file
+
+                let fi = document.forms["myForm"]["fname"];
+
+                var fileValue = fi.value;
+
+                if (fileValue) {
+                    var startIndex = fileValue.lastIndexOf(".");
+                    var filename = fileValue.substring(startIndex, fileValue.length);
+
+                    if (standardedExtensionImg.includes(filename) == false)
+                    {
+                        document.getElementById("messCreateUser").textContent
+                                = 'file input is not a image';
+                        return false;
+                    }
+
+
+                    if (fi.files[0].size > 1048576)
+                    {
+                        document.getElementById("messCreateUser").textContent
+                                = 'size of avatar inputed comes over 1KB ';
+                        return false;
+                    }
+                }
+
+                //valid fullname
+                let fullname = document.forms["myForm"]["name"].value;
+
+                if (fullname.length > 100)
+                {
+                    document.getElementById("messCreateUser").textContent = "fullname comes over 100 characters";
+                    return false;
+                }
+
+                //valid phone
+                let phone = document.forms["myForm"]["phone"].value;
+
+
+
+                if (phone.length > 10)
+                {
+                    document.getElementById("messCreateUser").textContent = "phone comes over 10 characters";
+                    return false;
+                }
+
+
+                if (isVietnamesePhoneNumber(phone) === false)
+                {
+                    document.getElementById("messCreateUser").textContent = "phone is wrong format";
+                    return false;
+                }
+
+
+            }
+
+
+
+        </script>
+        <script src="js/validation.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
@@ -99,7 +157,7 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                
+
         </script>
     </body>
 

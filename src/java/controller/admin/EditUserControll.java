@@ -44,7 +44,7 @@ public class EditUserControll extends BaseRequiredLoginController {
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
+
         String fileNameImg = "";
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
@@ -58,13 +58,27 @@ public class EditUserControll extends BaseRequiredLoginController {
             int indexOflast = fileNameImgPath.lastIndexOf("\\");
             fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
         }
+
         String name = m.getParameter("name");
         String title = m.getParameter("title");
         String phone = m.getParameter("phone");
-        int role = Integer.parseInt(m.getParameter("roll"));
-        String status = m.getParameter("status");
+        String email = m.getParameter("email");
+        String current_avatar = m.getParameter("imageurl");
+
+        User user = new User();
+        user.setFullname(name);
+        user.setTitle(title);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setAvatar(current_avatar);
+
+        if (m.getFile("fname") != null) {
+            user.setAvatar("images/avatar/" + fileNameImg);
+        }
+
         UserDAO dao = new UserDAO();
-        dao.UpdateUser(Integer.parseInt(id), name, title, phone, role, status, "images/avatar/" + fileNameImg);
+        dao.updateUser(user);
+        
         response.sendRedirect("UserList");
     }
 
