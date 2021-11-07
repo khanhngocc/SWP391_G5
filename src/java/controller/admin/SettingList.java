@@ -75,10 +75,10 @@ public class SettingList extends BaseRequiredLoginController {
 
         
         ArrayList<model.Setting> listAllSettings = dao.listAllSettings(pageIndex, pageSize, searchName, status,type);
-        ArrayList<String> listAllTypes = dao.getAllTypes();
+      
         
         request.setAttribute("listAllSettings", listAllSettings);
-        request.setAttribute("listAllTypes", listAllTypes);
+        request.setAttribute("listAllTypes", Constant.settingType);
         request.setAttribute("listAllStatus", Constant.status);
         
         request.setAttribute("searchName", searchName);

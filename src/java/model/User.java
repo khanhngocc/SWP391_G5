@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class User {
     private int id;
     private String fullname;
-
+    private String rollName;
     private String email;
     private String phone;
     private String password;
@@ -28,7 +28,16 @@ public class User {
     
     ArrayList<String> url = new ArrayList<>();
 
-    public String getRepassword() {
+    public String getRollName() {
+        return rollName;
+    }
+
+    public void setRollName(String rollName) {
+        this.rollName = rollName;
+    }
+
+    
+   public String getRepassword() {
         return repassword;
     }
 

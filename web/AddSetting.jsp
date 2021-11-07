@@ -47,7 +47,11 @@
                         <p class="text-primary" id="messCreateSetting"></p>
                         <form name="myForm" action="AddSetting" method="post" onsubmit="return validSetting()">
                             Type
-                            <input name="type" type="text" required="true" />
+                            <select name="type" onchange="this.form.submit()" style="margin-bottom: 5px;height: 50px">
+                               <c:forEach items="${listAllTypes}" var="list">
+                                    <option value="${list}">${list}</option>
+                                </c:forEach>
+                            </select>   
                             Value
                             <input name="value" type="text" required="true" />
                             Note
@@ -68,12 +72,7 @@
             function validSetting() {
 
 
-                let type = document.forms["myForm"]["type"].value;
-                if (type.length > 100) {
-                    document.getElementById("messCreateSetting").textContent = "type comes over 100 characters";
-                    return false;
-                }
-
+            
                 let value = document.forms["myForm"]["value"].value;
                 if (value.length > 100) {
                     document.getElementById("messCreateSetting").textContent = "value comes over 100 characters";

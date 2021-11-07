@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Setting;
+import utilities.Constant;
 
 /**
  *
@@ -27,6 +28,7 @@ public class UpdateSetting extends BaseRequiredLoginController {
         SettingDAO settingDAO = new SettingDAO();
         Setting setting = settingDAO.getSetting(Integer.valueOf(id));
         request.setAttribute("setting", setting);
+        request.setAttribute("listAllTypes", Constant.settingType);
         request.getRequestDispatcher("UpdateSetting.jsp").forward(request, response);
     }
 

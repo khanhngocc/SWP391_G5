@@ -3,18 +3,22 @@ package controller.admin;
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
 import controller.common.RegisterServ;
+import dal.RollDAO;
+import dal.SettingDAO;
 
 import dal.UserDAO;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Roll;
+import model.Setting;
 import model.User;
 import utilities.GmailHelper;
 import utilities.MD5Helper;
@@ -28,11 +32,19 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listTitle = settingDAO.getListSettingByType("Title User");
+        request.setAttribute("listTitle", listTitle);
+        RollDAO rollDAO = new RollDAO();
+        ArrayList<Roll> listAllRolls = rollDAO.listAllRolls();
+        request.setAttribute("listAllRolls", listAllRolls);
         request.getRequestDispatcher("AddUserAdmin.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        
         String webPath = getServletContext().getRealPath("/");
         StringBuilder sb = new StringBuilder(webPath.replace("\\build", "").replace("\\", "/"));
         sb.append("images/avatar");
@@ -42,12 +54,13 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
         String fileNameImgPath = m.getFile("fname").toString();
         int indexOflast = fileNameImgPath.lastIndexOf("\\");
         String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
+        
         String email = m.getParameter("email");
         String name = m.getParameter("name");
         String title = m.getParameter("title");
         String phone = m.getParameter("phone");
         String pass = m.getParameter("password");
-        int role = Integer.parseInt(m.getParameter("role"));
+        int role = Integer.parseInt(m.getParameter("roll"));
         String status = m.getParameter("status");
         if (status.equals("1")) {
             status = "Active";
@@ -66,12 +79,13 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
             mess = "This email has wrong format!";
             checkuser = false;
         }
-        if (pass.length() < 8) {
-            mess = "PassWord must be more than 8 characters, re-enter!";
-            checkuser = false;
-        }
+       
         if (checkuser) {
-            mess = "Sign-up success!!";
+            
+            
+            
+            
+           
             MD5Helper md5 = new MD5Helper();
             String encodedPassword = null;
             try {
@@ -92,8 +106,7 @@ public class AddUserAdminControl extends BaseRequiredLoginController {
                     + "Mega Deal Support Team";
             try {
                 gm.sendFromGMail(gm.getUSER_NAME(), gm.getPASSWORD(), rep, subject, body);
-                request.setAttribute("mess", mess);
-                request.getRequestDispatcher("AddUserAdmin.jsp").forward(request, response);
+                response.sendRedirect("UserList");
             } catch (MessagingException ex) {
                 Logger.getLogger(AddUserAdminControl.class.getName()).log(Level.SEVERE, null, ex);
             }

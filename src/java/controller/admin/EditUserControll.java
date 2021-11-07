@@ -7,13 +7,18 @@ package controller.admin;
 
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
+import dal.RollDAO;
+import dal.SettingDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Roll;
+import model.Setting;
 import model.User;
 
 /**
@@ -28,6 +33,12 @@ public class EditUserControll extends BaseRequiredLoginController {
         UserDAO udao = new UserDAO();
         User x = udao.getUser(email);
         request.setAttribute("user", x);
+        SettingDAO settingDAO = new SettingDAO();
+        ArrayList<Setting> listTitle = settingDAO.getListSettingByType("Title User");
+        request.setAttribute("listTitle", listTitle);
+        RollDAO rollDAO = new RollDAO();
+        ArrayList<Roll> listAllRolls = rollDAO.listAllRolls();
+        request.setAttribute("listAllRolls", listAllRolls);
         request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
     }
 
@@ -50,7 +61,7 @@ public class EditUserControll extends BaseRequiredLoginController {
         String name = m.getParameter("name");
         String title = m.getParameter("title");
         String phone = m.getParameter("phone");
-        int role = Integer.parseInt(m.getParameter("role"));
+        int role = Integer.parseInt(m.getParameter("roll"));
         String status = m.getParameter("status");
         UserDAO dao = new UserDAO();
         dao.UpdateUser(Integer.parseInt(id), name, title, phone, role, status, "images/avatar/" + fileNameImg);

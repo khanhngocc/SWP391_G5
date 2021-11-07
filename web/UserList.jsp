@@ -33,21 +33,49 @@
     </head><!--/head-->
 
     <body>
-        
+
         <jsp:include page="HeaderAdmin.jsp" /> 
 
         <div class="container">
 
-            <!--                <div class="col-sm-3"></div>-->
-            <a href="AddUserAdmin"><i class="fa fa-book"></i> Add new User</a>
-            <div class="searchform" style="margin-top: 20px;">
-                <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for name"/>
-                <input type="text" id="myInput1" onkeyup="searchForm(5)" placeholder="Search for role"/>
-                <input type="text" id="myInput2" onkeyup="searchForm(6)" placeholder="Search for status"/>
+            <form action="UserList" class="searchform">
+                <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                <input type="text" placeholder="Search" name="roll" value="${roll}" hidden=""/>
+                <input type="text" placeholder="Search" name="searchName" value="${searchName}"/>
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </form>
+
+            <div style="margin-top: 20px; margin-bottom: 10px">
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Status</p>
+                <form style ="float: left;margin-right: 15px;margin-left: 5px" action="UserList" >
+                    <input type="text" placeholder="Search" name="roll" value="${roll}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+
+                    <select name="status" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listAllStatus}" var="list">
+                            <option value="${list}" ${list == status ? 'selected':''}>${list}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Roll</p>
+                <form style ="float: left;margin-left: 4px" action="UserList" >
+                    <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+                    <select name="roll" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listAllRolls}" var="list">
+                            <option value="${list.id}" ${list.id == roll ? 'selected':''}>${list.name}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
 
             </div>
-
             <br>
+            <div style="margin-top: 30px; margin-bottom: 20px">
+                <a href="AddUserAdmin"><i class="fa fa-book"></i> Add new User</a></div>
             <div>
                 <table class="table" id="myTable">
                     <tr>
@@ -58,39 +86,55 @@
                         <th><strong><a href="javascript:void(0);" onclick="sort(4)">Phone</a></strong></th>
                         <th><strong><a href="javascript:void(0);" onclick="sort(5)">Role</a></strong></th>
                         <th><strong><a href="javascript:void(0);" onclick="sort(6)">Status</a></strong></th>                                
-                        <th colspan="2"><center><strong><a href="javascript:void(0);">Action</a></strong></center></th>
+                        <th scope="col" style="width: auto" colspan="2"><a href="javascript:void(0);">Action</a></th>
 
                     </tr>
 
-                    <c:forEach items="${list}" var="i">
+                    <c:forEach items="${listAllUsers}" var="i">
                         <tr>
                             <td>${i.id}</td>
                             <td>${i.fullname}</td>
                             <td>${i.title}</td>
                             <td>${i.email}</td>
                             <td>${i.phone}</td>
-                            <td>${i.rollId}</td>
+                            <td>${i.rollName}</td>
                             <td>${i.status}</td>
-                           
-                            <td><a href="EditUser?email=${i.email}"><i class="fa fa-pencil"></i> Edit</a></td>
-                            <td><a href="UserDetail?email=${i.email}"><i class="fa fa-eye"></i> View</a></td>
+                            <td style="width: 210px">
+                                <c:if test="${i.status eq 'Active'}">
+                                    <a href="javascript:void(0);" onclick="changeUserStatus(${i.id}, 'Deactive')"><i class="fa fa-chain"></i> Deactive</a> 
+                                </c:if>
+                                <c:if test="${i.status eq 'Deactive'}">
+                                    <a href="javascript:void(0);" onclick="changeUserStatus(${i.id}, 'Active')"><i class="fa fa-chain"></i> Active</a> 
+                                </c:if>
+                                <a href="EditUser?email=${i.email}"><i class="fa fa-pencil"></i> Edit</a>
+                            </td>
+
+
                         </tr>     
                     </c:forEach>
                 </table>
 
                 <div class="pagination-area">
-                    <ul class="pagination"> 
-                        <c:forEach begin="1" end="${pagesize}" var="i">
-                            <c:choose>
-                                <c:when test="${page==i}">
-                                    <li><a href="" class="active">${i}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <li><a href="UserList?page=${i}">${i}</a></li> 
-                                    </c:otherwise>
-                                </c:choose>
+                    <ul class="pagination">
+
+                        <c:if test="${pageindex gt gap}">
+                            <li class="page-item"><a class="page-link" href="UserList?page=1&searchName=${searchName}&roll=${roll}&status=${status}">First</a></li>
+                            </c:if>
+                            <c:forEach var = "i" begin = "${gap}" end = "1">
+                                <c:if test="${pageindex - gap gt 0}">
+                                <li class="page-item"><a class="page-link" href="UserList?page=${pageindex -i}&searchName=${searchName}&roll=${roll}&status=${status}">${pageindex - i}</a></li>
+                                </c:if>
                             </c:forEach>
+                            <c:forEach var = "i" begin = "1" end = "${gap}">
+                                <c:if test="${pageindex + gap le pagecount}">
+                                <li class="page-item"><a class="page-link" href="UserList?page=${pageindex + i}&searchName=${searchName}&roll=${roll}&status=${status}">${pageindex + i}</a></li> 
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${pageindex + gap lt pagecount}">
+                            <li class="page-item"><a class="page-link" href="UserList?page=${pagecount}&searchName=${searchName}&roll=${roll}&status=${status}">Last</a></li> 
+                            </c:if>
                     </ul>
+
                 </div>
             </div>
 
@@ -98,7 +142,7 @@
         </div>
 
         <jsp:include page="Footer.jsp" /> 
-
+        <script src="js/userHelper.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
@@ -107,39 +151,7 @@
         <script src="js/main.js"></script>
         <script>
 
-                                function deleteUser(id) {
-                                    var result = confirm("Do you want to delete this user?");
-                                    if (result) {
-                                        window.location.href = "Delete?id=" + id;
-                                    }
 
-                                }
-
-
-                                function searchForm(number) {
-                                    var input, filter, table, tr, td, i, txtValue, in_num;
-                                    in_num = parseInt(number);
-                                    if (in_num === 1)
-                                        input = document.getElementById("myInput");
-                                    if (in_num === 5)
-                                        input = document.getElementById("myInput1");
-                                    if (in_num === 6)
-                                        input = document.getElementById("myInput2");
-                                    filter = input.value.toUpperCase();
-                                    table = document.getElementById("myTable");
-                                    tr = table.getElementsByTagName("tr");
-                                    for (i = 0; i < tr.length; i++) {
-                                        td = tr[i].getElementsByTagName("td")[in_num];
-                                        if (td) {
-                                            txtValue = td.textContent || td.innerText;
-                                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = "";
-                                            } else {
-                                                tr[i].style.display = "none";
-                                            }
-                                        }
-                                    }
-                                }
         </script>
         <script>
             function sort(number) {

@@ -40,22 +40,7 @@ public class SettingDAO extends MyDAO {
         return list;
     }
 
-    public ArrayList<String> getAllTypes() {
-        ArrayList<String> list = new ArrayList<>();
-        xSql = "select distinct type from Settings";
-        try {
-            ps = con.prepareStatement(xSql);
 
-            rs = ps.executeQuery();
-            while (rs.next()) {
-
-                list.add(rs.getString(1));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 
     public int getRowCount() {
         int no = 0;

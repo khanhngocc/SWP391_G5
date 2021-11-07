@@ -48,7 +48,11 @@
                         <form name="myForm" action="UpdateSetting" method="post" onsubmit="return validSetting()">
                             <input name="id" type="hidden" value="${setting.id}"/>
                             Type
-                            <input name="type" type="text" required="true" value="${setting.type}"/>
+                            <select name="type" onchange="this.form.submit()" style="margin-bottom: 5px;height: 50px">
+                               <c:forEach items="${listAllTypes}" var="list">
+                                    <option value="${list}" ${list == setting.type ? 'selected':''}>${list}</option>
+                                </c:forEach>
+                            </select> 
                             Value
                             <input name="value" type="text" required="true" value="${setting.value}"/>
                             Note
@@ -69,12 +73,7 @@
             function validSetting() {
 
 
-                let type = document.forms["myForm"]["type"].value;
-                if (type.length > 100) {
-                    document.getElementById("messUpdateSetting").textContent = "type comes over 100 characters";
-                    return false;
-                }
-
+            
                 let value = document.forms["myForm"]["value"].value;
                 if (value.length > 100) {
                     document.getElementById("messUpdateSetting").textContent = "value comes over 100 characters";

@@ -240,6 +240,10 @@
         <servlet-name>UpdateSetting</servlet-name>
         <servlet-class>controller.admin.UpdateSetting</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeUserStatus</servlet-name>
+        <servlet-class>controller.admin.ChangeUserStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -479,6 +483,10 @@
     <servlet-mapping>
         <servlet-name>UpdateSetting</servlet-name>
         <url-pattern>/UpdateSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUserStatus</servlet-name>
+        <url-pattern>/ChangeUserStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

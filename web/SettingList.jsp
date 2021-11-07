@@ -88,7 +88,7 @@
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(2)">Value</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Status</a></th>
                             <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Note</a></th>
-                            <th scope="col" style="width: auto;text-align: center" colspan="2"><a href="javascript:void(0);">Action</a></th>
+                            <th scope="col" style="width: auto" colspan="2"><a href="javascript:void(0);">Action</a></th>
                         </tr>
                     </thead>
                     <tbody>

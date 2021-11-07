@@ -45,7 +45,7 @@
                     <div class="col-sm-6">
                         <div class="signup-form">
                             <!--sign up form-->
-                            <h2>User Detailed</h2>
+                            <h2>Update User</h2>
                             <p class="text-primary">${mess}</p>
                             <form enctype="multipart/form-data" id="myForm" action="EditUser?id=${user.id}" method="post">
                                 <img id="profile-ava" class="imageAvatar" src="${user.avatar}">
@@ -60,11 +60,10 @@
                                 <input name="name"type="text" placeholder="Full Name" required="true" value="${user.fullname}"/>  
                                 Title
 
-                                <select name="title" id="title" style="margin-bottom:10px">
-                                    <option value="Mr" ${user.title=='Mr'?"selected":""}>Mr</option>
-                                    <option value="Mrs" ${user.title=='Mrs'?"selected":""}>Mrs</option>
-                                    <option value="Ms" ${user.title=='Ms'?"selected":""}>Ms</option>
-
+                                <select name="title" style="margin-bottom:10px">
+                                    <c:forEach items="${listTitle}" var="list">
+                                        <option value="${list.value}" ${list.value == user.title ? 'selected':''}>${list.value}</option>
+                                    </c:forEach>
                                 </select>  
 
                                 Phone
@@ -72,20 +71,15 @@
                                 Created Date
                                 <input name="create_date"type="text" placeholder="Created Date" value="${user.createDate}" />							
                                 Roll
-                                <select name="role" style="margin-bottom:10px">
-                                    <option value="1" ${user.rollId==1?"selected":""}>Customer</option>
-                                    <option value="2" ${user.rollId==2?"selected":""}>Marketing</option>
-                                    <option value="3" ${user.rollId==3?"selected":""}>Admin</option>
-                                    <option value="4" ${user.rollId==4?"selected":""}>Expert</option>
-                                    <option value="5" ${user.rollId==5?"selected":""}>Manager</option>
-                                </select>
-                                Status
-                                <select name="status" style="margin-bottom: 10px">
-                                    <option value="Active" ${user.status.equals("Active")?"selected":""}>Active</option>
-                                    <option value="Deactive" ${user.status.equals("Deactive")?"selected":""}>Deactive</option>                                       
-                                </select>								                            
+                                <select name="roll" style="margin-bottom:10px">
+                                    <c:forEach items="${listAllRolls}" var="list">
+                                        <option value="${list.id}" ${list.id == user.rollId ? 'selected':''}>${list.name}</option>
+                                    </c:forEach>
+                                </select> 
+                                
+                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" >Update</button>
                             </form>
-                            <button type="text" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit()">Update</button>
+                                
                         </div>                       
                     </div>
                 </div>
@@ -105,11 +99,7 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                            function Submit() {
-                                var form;
-                                form = document.getElementById("myForm");
-                                form.submit();
-                            }
+                                
         </script>
     </body>
 

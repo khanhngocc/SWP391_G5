@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controller.admin;
+
 import controller.base.BaseRequiredLoginController;
 import dal.SettingDAO;
 import dal.UserDAO;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Setting;
 import model.User;
+import utilities.Constant;
 
 /**
  *
@@ -22,29 +24,28 @@ public class AddSetting extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       request.getRequestDispatcher("AddSetting.jsp").forward(request, response);
+        request.setAttribute("listAllTypes", Constant.settingType);
+        request.getRequestDispatcher("AddSetting.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String type = request.getParameter("type");
-       String value = request.getParameter("value");
-       String note = request.getParameter("note");
-       
-       Setting setting = new Setting();
-       setting.setType(type);
-       setting.setValue(value);
-       setting.setNote(note);
-       
+        String type = request.getParameter("type");
+        String value = request.getParameter("value");
+        String note = request.getParameter("note");
+
+        Setting setting = new Setting();
+        setting.setType(type);
+        setting.setValue(value);
+        setting.setNote(note);
+
         User session_user = (User) request.getSession(false).getAttribute("user");
         UserDAO userDAO = new UserDAO();
         User current_user = userDAO.getUser(session_user.getEmail());
-        
+
         SettingDAO settingDAO = new SettingDAO();
         settingDAO.createSetting(setting, current_user);
         response.sendRedirect("SettingList");
     }
-
-   
 
 }

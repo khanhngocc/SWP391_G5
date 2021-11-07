@@ -51,7 +51,7 @@
                             Title
                             <input name="title" type="text" required="true" />
                             Category
-                            <select name="category" style="margin-bottom:10px">
+                            <select name="category" style="margin-bottom:10px;height: 50px">
                                 <c:forEach items="${categoriesList}" var="list">
                                     <option value="${list.value}">${list.value}</option>
                                 </c:forEach>

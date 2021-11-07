@@ -65,7 +65,7 @@
                                 </span>
                             </div>
                             <img src="${blog.img_url}" alt="" class="centerImgBlog"/>
-                            <p class="desc-blog">${blog.description}</p>
+                            <div class="desc-blog">${blog.description}</div>
                             <c:if test="${blog.attach_url ne ''}">
                                 <a href="${blog.attach_url}" download>
                                     <i class="fa fa-download" style="color: #FE980F;margin-top: 30px"></i> ${blog.attachName}

@@ -15,4 +15,6 @@ public class Constant {
 
     public static String[] status = {"Active", "Deactive"};
     public static String[] statusTypeTwo = {"Published", "Unpublished"};
+    public static String[] settingType = {"Exam type", "Question Level",
+        "Quiz Category", "Question Category", "Title User", "Post Category"};
 }

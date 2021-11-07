@@ -58,22 +58,19 @@
                                 Full Name
                                 <input name="name"type="text" placeholder="Full Name" required="true" />  
                                 Title
-                                <select name="title" id="title" style="margin-bottom:10px">
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Ms">Ms</option>
-
-                                </select>  
+                                <select name="title" style="margin-bottom:10px">
+                                    <c:forEach items="${listTitle}" var="list">
+                                        <option value="${list.value}" ${list.value == userDrap.title ? 'selected':''}>${list.value}</option>
+                                    </c:forEach>
+                                </select> 
                                 Phone
                                 <input name="phone"type="text" placeholder="Phone Number" />													
                                 Roll
-                                <select name="role" id="role" style="margin-bottom:10px">
-                                    <option value="1">Customer</option>
-                                    <option value="2">Marketing</option>
-                                    <option value="3">Admin</option>
-                                    <option value="4">Expert</option>
-                                    <option value="5">Manager</option>
-                                </select>
+                                <select name="roll" style="margin-bottom:10px">
+                                    <c:forEach items="${listAllRolls}" var="list">
+                                        <option value="${list.id}" ${list.id == userDrap.rollId ? 'selected':''}>${list.name}</option>
+                                    </c:forEach>
+                                </select> 
 
                                 Status
                                 <select name="status" style="margin-bottom: 10px" id="status">

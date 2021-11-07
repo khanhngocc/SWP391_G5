@@ -112,7 +112,7 @@
                                 </div>
                                         <img src="${blog.img_url}" alt="" class="centerImgBlog" />
 
-                                <p class="desc-blog">${blog.description}</p>
+                                <div class="desc-blog">${blog.description}</div>
                                 <c:if test="${blog.attach_url ne ''}">
                                     <c:if test="${sessionScope.user ne null}">
                                         <a href="${blog.attach_url}" download>

@@ -58,22 +58,90 @@ public class UserDAO extends MyDAO {
         return (x);
     }
 
-    public ArrayList<User> getAllUser() {
-        ArrayList<User> x = new ArrayList<>();
-        xSql = "SELECT * FROM User";
+    public int getRowCount() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM user";
         try {
             ps = con.prepareStatement(xSql);
+
             rs = ps.executeQuery();
-            while (rs.next()) {
-                x.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10)));
+            if (rs.next()) {
+                no = rs.getInt(1);
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (x);
+        return no;
+    }
+
+    public int getRowCountForSearch(String searchName, String roll, String status) {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM user WHERE (phone like ? or email like ? or fullname like ?) and roll_id like ? and status like ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + searchName + "%");
+            ps.setString(3, "%" + searchName + "%");
+            ps.setString(4, "%" + roll + "%");
+            ps.setString(5, "%" + status + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public ArrayList<User> getAllUsers(int pageIndex, int pageSize, String searchName, String roll, String status) {
+
+        int numberOfRecord = (pageIndex - 1) * pageSize;
+
+        ArrayList<User> list = new ArrayList<>();
+
+        xSql = "select user.id,fullname,title,email,phone,roll.name,status from user,roll\n"
+                + "where user.roll_id = roll.id\n"
+                + "and\n"
+                + "(phone like ? or email like ? or fullname like ?)\n"
+                + "and\n"
+                + "roll_id like ?\n"
+                + "and \n"
+                + "status like ?\n"
+                + "order by user.id desc\n"
+                + "limit ?,?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + searchName + "%");
+            ps.setString(3, "%" + searchName + "%");
+            ps.setString(4, "%" + roll + "%");
+            ps.setString(5, "%" + status + "%");
+            ps.setInt(6, numberOfRecord);
+            ps.setInt(7, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt(1));
+                user.setFullname(rs.getString(2));
+                user.setTitle(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setPhone(rs.getString(5));
+                user.setRollName(rs.getString(6));
+                user.setStatus(rs.getString(7));
+                list.add(user);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     public User getAccount(String email, String password) {
@@ -226,7 +294,7 @@ public class UserDAO extends MyDAO {
                 + "      ,roll_id = ?\n"
                 + "      ,status = ?\n"
                 + "     \n"
-                + " WHERE [id] = ?";
+                + " WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(xSql);
@@ -273,8 +341,8 @@ public class UserDAO extends MyDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void updateIdEncrypt(String id,String encryptId) {
+
+    public void updateIdEncrypt(String id, String encryptId) {
         xSql = "UPDATE user\n"
                 + "SET\n"
                 + "`idEncrypt` = ?\n"
@@ -289,24 +357,40 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
+
     public int getIDByEncryptId(String encryptId) {
         int user_id = -1;
         xSql = "SELECT id FROM user where idEncrypt = ? ;";
-        
+
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, encryptId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                
-             user_id = rs.getInt(1);
-                
+
+                user_id = rs.getInt(1);
+
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return user_id;
+    }
+
+    public void changeUserStatus(Integer id, String status) {
+        xSql = "Update user set status = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            
+            ps.setString(1, status);
+            
+            ps.setInt(2, id);
+            
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
