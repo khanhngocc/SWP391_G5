@@ -25,9 +25,10 @@ public class Question {
     public Question() {
     }
 
-    public Question(int id, String status, String option_correct) {
+    public Question(int id, String status, String option1, String option_correct) {
         this.id = id;
         this.status = status;
+        this.option1 = option1;
         this.option_correct = option_correct;
     }
 

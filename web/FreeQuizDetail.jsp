@@ -183,10 +183,10 @@
                 <c:choose>
                     <c:when test="${sessionScope.user==null}">
 
-                        <center><a href="Login?id=${quiz.id}">Login To Take The Test</a></center>
+                        <center><a href="Login?id=${quiz.id}" class="btn btn-primary">Login To Take The Test</a></center>
                         </c:when>
                         <c:otherwise>
-                        <center><a href="QuizHandle?id=${quiz.id}">Take The Test</a></center>
+                        <center><a href="QuizHandle?id=${quiz.id}" class="btn btn-primary">Take The Test</a></center>
                         </c:otherwise>
                     </c:choose>
             </div>

@@ -72,4 +72,20 @@ public class HistoryDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+    
+    public History getHistorybyID(int id) {
+        History x = null;
+        xSql = "select * from History where id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x = new History(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4), rs.getFloat(5), rs.getString(6));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
 }

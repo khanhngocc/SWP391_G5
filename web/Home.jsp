@@ -118,7 +118,15 @@
                                     </div>
                                 </c:forEach>
                             </div><!--/category-products-->
+                            <div class="panel-group category-products" class ="container" style="border:none">
+                                <c:forEach items="${list5}" var="i">
+                                    <div class="col-md-6">
+                                        <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
+                                        <i><a href="FreeTestDetail?id=${i.id}">${i.title}</a></i>
 
+                                    </div>
+                                </c:forEach>
+                            </div>   
 
                         </div>
                     </div>
@@ -151,8 +159,8 @@
                                 </div>
                             </c:forEach>
                         </div><!--features_items-->
-
-
+                      
+                      
 
                         <div class="recommended_items"><!--recommended_items-->
                             <h2 class="title text-center">latest posts</h2>

@@ -248,6 +248,14 @@
         <servlet-name>ValidEmail</servlet-name>
         <servlet-class>controller.admin.ValidEmail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizResultController</servlet-name>
+        <servlet-class>controller.customer.QuizResultController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizReviewController</servlet-name>
+        <servlet-class>controller.customer.QuizReviewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -495,6 +503,14 @@
     <servlet-mapping>
         <servlet-name>ValidEmail</servlet-name>
         <url-pattern>/ValidEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizResultController</servlet-name>
+        <url-pattern>/QuizResult</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizReviewController</servlet-name>
+        <url-pattern>/QuizReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
