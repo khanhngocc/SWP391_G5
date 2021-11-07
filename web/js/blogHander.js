@@ -20,5 +20,4 @@ function changeSlideStatus(id,status) {
     if (result) {
         window.location.href = "ChangeSlideStatus?id=" + id+"&status="+status;
     }
-
 }

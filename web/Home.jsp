@@ -68,7 +68,7 @@
                                             <div class="col-sm-6">
                                                 <h1><span>Mega</span>-Deal</h1>
                                                 <h2>${list.title}</h2>
-                                        
+
                                         </div>
                                         <div class="col-sm-6">
                                             <a href="${list.backlink}${list.id}" >
@@ -119,6 +119,15 @@
                                 </c:forEach>
                             </div><!--/category-products-->
 
+                            <div class="panel-group category-products" class ="container" style="border:none">
+                                <c:forEach items="${list5}" var="i">
+                                    <div class="col-md-6">
+                                        <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
+                                        <i><a href="FreeTestDetail?id=${i.id}">${i.title}</a></i>
+
+                                    </div>
+                                </c:forEach>
+                            </div>   
 
                         </div>
                     </div>

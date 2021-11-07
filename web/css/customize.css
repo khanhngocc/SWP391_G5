@@ -94,3 +94,15 @@ textarea {
     width: 70px;
     border-radius: 10%;
 }
+
+.imgTestHome{
+                height: 200px;
+                width: 200px;
+                border-radius: 10%;
+            }
+
+            #img-left-side{
+                height: 50px;
+                width: 70px;
+                border-radius: 10%;
+            }

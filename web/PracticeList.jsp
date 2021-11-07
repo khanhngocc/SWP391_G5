@@ -65,18 +65,17 @@
                             <td>${i.taken}</td>
                             <td>${quizdao.getQuizByID(i.quiz_id).duration}</td>
                             <td>${i.percentage}</td>
+                            <td>${i.status}</td>
                             <c:choose>
                                 <c:when test="${quizdao.getQuizByID(i.quiz_id).type eq 'User Practice'}">
-                                    <td>N/A</td>
                                     <td><a href="PracticeDetail?id=${i.quiz_id}"><i class="fa fa-eye"></i>View Detail</a></td>                                    
                                 </c:when>                                
-                                <c:otherwise>
-                                    <td>${i.status}</td>
+                                <c:otherwise>                                    
                                     <td><a href=""><i class="fa fa-eye"></i>View Detail</a></td>
                                 </c:otherwise>
                             </c:choose> 
-                            <td><a href=""><i class="fa fa-eye"></i>View Result</a></td>
-                            <td><a href=""><i class="fa fa-eye"></i>Review</a></td>
+                            <td><a href="QuizResult?id=${i.id}"><i class="fa fa-eye"></i>View Result</a></td>
+                            <td><a href="QuizReview?id=${i.id}"><i class="fa fa-eye"></i>Review</a></td>
                         </tr>     
                     </c:forEach>
                 </table>

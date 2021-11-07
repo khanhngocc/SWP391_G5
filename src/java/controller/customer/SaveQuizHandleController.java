@@ -30,10 +30,14 @@ public class SaveQuizHandleController extends BaseRequiredLoginController {
         String timer = request.getParameter("timer"); //<b>03m : 16s</b>
         int minute = Integer.parseInt(timer.substring(3, 5));
         int second = Integer.parseInt(timer.substring(9, 11));
+        String flag = request.getParameter("flag");
         HttpSession session = request.getSession();
         ArrayList<Question> answer = (ArrayList<Question>)session.getAttribute("answer");
         Quizzes q = (Quizzes)session.getAttribute("timer");
         q.setDuration(60*minute+second);
+        if(flag.equals("1")){
+            answer.get(pre-1).setOption1(answer.get(pre-1).getOption1().equals("Unflag")?"Flag":"Unflag");
+        }
         if(!select.isEmpty()){
             answer.get(pre-1).setStatus("Answered");
             answer.get(pre-1).setOption_correct(select);

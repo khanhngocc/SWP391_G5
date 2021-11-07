@@ -40,7 +40,7 @@ public class QuizHandleController extends BaseRequiredLoginController {
             currentPage = 1;
             ArrayList<Question> answer = new ArrayList<>();
             for (Question question : questions) {
-                answer.add(new Question(question.getId(), "Not yet answer", ""));
+                answer.add(new Question(question.getId(), "Not yet answer","Unflag", ""));
             }
             session.setAttribute("answer", answer);
             Quizzes q = new Quizzes();
