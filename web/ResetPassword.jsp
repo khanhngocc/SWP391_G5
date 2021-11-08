@@ -100,7 +100,7 @@
                     return false;
                 }
 
-                if (txtNewPass !== txtRePass)
+                if (txtRePass !== txtNewPass)
                 {
                     document.getElementById("messageReset").textContent = "new password not equal re-password";
                     return false;
