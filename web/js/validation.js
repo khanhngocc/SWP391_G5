@@ -103,34 +103,139 @@ function validPractice() {
         return false;
     }
 
+    // valid description
+    let description = document.forms["myForm"]["description"].value;
+    if (description)
+    {
+        if (description.length > 50) {
+            document.getElementById("messCreatePractice").textContent = "description comes over 50 characters";
+            return false;
+        }
+    }
+
+
     // valid duration
     let duration = document.forms["myForm"]["duration"].value;
     if (Number.isInteger(parseInt(duration)) === false) {
-        document.getElementById("messCreatePractice").textContent = "duration is not a integer number";
+        document.getElementById("messCreatePractice").textContent = "duration is not a number";
         return false;
     }
 
     if (parseInt(duration) < 0)
     {
-        document.getElementById("messCreatePractice").textContent = "duration is not a positive integer number";
+        document.getElementById("messCreatePractice").textContent = "duration is not a positive number";
         return false;
     }
 
-    if (parseInt(duration) > Number.MAX_SAFE_INTEGER)
+    if (parseInt(duration) > 10800)
     {
-        document.getElementById("messCreatePractice").textContent = "duration is out of boundary";
+        document.getElementById("messCreatePractice").textContent = "duration is out of boundary, (limit of duration is 10800 seconds)";
         return false;
     }
 
 }
 
 
-function validAddQuestionToPractice(){
-    var numberOfQuestion = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    
-    if(numberOfQuestion === 0)
+function validAddQuestionToPractice() {
+    var numberOfQuestion = document.querySelectorAll('input[name="checkbox"]:checked').length;
+
+    if (numberOfQuestion === 0)
     {
         document.getElementById("messCreatePractice").textContent = "please choose at least 1 question to add to quiz!";
         return false;
     }
+}
+
+function validQuestionImport() {
+    const standardedExtensionFile = ['.xlsx'];
+    // valid file
+
+    let fi = document.forms["myForm"]["fname"];
+
+    var fileValue = fi.value;
+
+    var startIndex = fileValue.lastIndexOf(".");
+    var filename = fileValue.substring(startIndex, fileValue.length);
+
+    if (standardedExtensionFile.includes(filename) == false)
+    {
+        document.getElementById("messImportQuestion").textContent
+                = 'file input is not a excel';
+        return false;
+    }
+
+
+
+    if (fi.files[0].size > 1048576)
+    {
+        document.getElementById("messImportQuestion").textContent
+                = 'size of file inputed comes over 1KB ';
+        return false;
+    }
+}
+
+function validEditQuiz() {
+    
+    const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
+    // valid file
+
+    let fi = document.forms["myForm"]["fname"];
+
+    var fileValue = fi.value;
+
+    if (fileValue)
+    {
+        var startIndex = fileValue.lastIndexOf(".");
+        var filename = fileValue.substring(startIndex, fileValue.length);
+
+        if (standardedExtensionImg.includes(filename) == false)
+        {
+            document.getElementById("messCreatePractice").textContent
+                    = 'file input is not a image';
+            return false;
+        }
+
+
+
+        if (fi.files[0].size > 1048576)
+        {
+            document.getElementById("messCreatePractice").textContent
+                    = 'size of image inputed comes over 1KB ';
+            return false;
+        }
+    }
+
+    // valid title
+    let title = document.forms["myForm"]["title"].value;
+    if (title.length > 100) {
+        document.getElementById("messCreatePractice").textContent = "title comes over 100 characters";
+        return false;
+    }
+
+    // valid description
+    let description = document.forms["myForm"]["description"].value;
+    if (description.length > 50) {
+        document.getElementById("messCreatePractice").textContent = "description comes over 50 characters";
+        return false;
+    }
+
+    // valid duration
+    let duration = document.forms["myForm"]["duration"].value;
+    if (Number.isInteger(parseInt(duration)) === false) {
+        document.getElementById("messCreatePractice").textContent = "duration is not a number";
+        return false;
+    }
+
+    if (parseInt(duration) < 0)
+    {
+        document.getElementById("messCreatePractice").textContent = "duration is not a positive number";
+        return false;
+    }
+
+    if (parseInt(duration) > 10800)
+    {
+        document.getElementById("messCreatePractice").textContent = "duration is out of boundary, (limit of duration is 10800 seconds)";
+        return false;
+    }
+
 }

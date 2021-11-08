@@ -76,7 +76,7 @@
                 </div>
                 <br>
                 <div style="margin-top: 30px; margin-bottom: 20px">
-                    <a href="AddSetting"><i class="fa fa-book"></i> Create a setting</a> 
+                    <a href="AddSetting"><i class="fa fa-plus"></i> Create a setting</a> 
                 </div>
 
                 <table class="table" id="myTable">

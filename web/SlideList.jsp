@@ -54,7 +54,7 @@
                     </select>   
                 </form>
                 <div style="margin-top: 30px; margin-bottom: 20px">
-                    <a href="AddSlide"><i class="fa fa-book"></i> Create a slider</a> 
+                    <a href="AddSlide"><i class="fa fa-plus"></i> Create a slider</a> 
                 </div>
 
                 <table class="table" id="myTable">

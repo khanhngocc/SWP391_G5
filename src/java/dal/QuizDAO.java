@@ -19,6 +19,89 @@ import java.util.List;
  */
 public class QuizDAO extends MyDAO {
 
+    public int getRowCount() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM quizzes";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public int getRowCountForSearch(String searchName, String subject, String category, String type) {
+        int no = 0;
+
+        xSql = "SELECT COUNT(*) FROM quizzes WHERE\n"
+                + "title like ?\n"
+                + "and\n"
+                + "subject_id like ?\n"
+                + "and\n"
+                + "category like ?\n"
+                + "and\n"
+                + "type like ?\n";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + subject + "%");
+            ps.setString(3, "%" + category + "%");
+            ps.setString(4, "%" + type + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public ArrayList<Quizzes> listAllQuizes(int pageIndex, int pageSize, String searchName, String subject, String category, String type) {
+        int numberOfRecord = (pageIndex - 1) * pageSize;
+
+        ArrayList<Quizzes> list = new ArrayList<>();
+        xSql = "SELECT * FROM quizzes\n"
+                + "where\n"
+                + "title like ?\n"
+                + "and\n"
+                + "subject_id like ?\n"
+                + "and\n"
+                + "category like ?\n"
+                + "and\n"
+                + "type like ?\n"
+                + "order by id desc\n"
+                + "limit ?,? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + subject + "%");
+            ps.setString(3, "%" + category + "%");
+            ps.setString(4, "%" + type + "%");
+            ps.setInt(5, numberOfRecord);
+            ps.setInt(6, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public ArrayList<Quizzes> getQuiz() {
         ArrayList<Quizzes> x = new ArrayList<>();
         xSql = "SELECT * FROM Quizzes";
@@ -37,14 +120,14 @@ public class QuizDAO extends MyDAO {
         return (x);
     }
 
-public ArrayList<Quizzes> getTop5Quiz() {
+    public ArrayList<Quizzes> getTop5Quiz() {
         ArrayList<Quizzes> x = new ArrayList<>();
         xSql = "SELECT * FROM Quizzes where type = 'Free Test' order by id desc LIMIT 5 ";
-        
+
         try {
-            
+
             ps = con.prepareStatement(xSql);
-           
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
@@ -152,9 +235,9 @@ public ArrayList<Quizzes> getTop5Quiz() {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
     public ArrayList<Quizzes> getPractice(int uid) {
         ArrayList<Quizzes> x = new ArrayList<>();
         xSql = "SELECT * FROM Quizzes where type='User Practice' and user_id=?";
@@ -172,7 +255,7 @@ public ArrayList<Quizzes> getTop5Quiz() {
         }
         return (x);
     }
-    
+
     public ArrayList<Quizzes> getQuizByType(String type) {
         ArrayList<Quizzes> x = new ArrayList<>();
         xSql = "SELECT * FROM Quizzes where type = ? order by id desc limit 6";
@@ -216,8 +299,7 @@ public ArrayList<Quizzes> getTop5Quiz() {
 //        QuizDAO dao = new QuizDAO();
 //        dao.addQuiz(new Quizzes("abc", "abc", 1, 10, "Free Test", 25, 0, 200, 0.6f, "abc"));
 //    }
-
-public List<Quizzes> getQuizByName(String res) {
+    public List<Quizzes> getQuizByName(String res) {
         List<Quizzes> list = new ArrayList();
         xSql = "SELECT * FROM Quizzes where `title` like ? and `type` = ?";
         try {
@@ -234,19 +316,10 @@ public List<Quizzes> getQuizByName(String res) {
         return list;
     }
 
-    public static void main(String[] args) {
-        QuizDAO dao = new QuizDAO();
-        List<Quizzes> l = dao.getTop5Quiz();
-        for (Quizzes quizzes : l) {
-            System.out.println(quizzes.getTitle());
-        }
-        ;
-    }
-
     public List<Quizzes> getQuizbyCategory(String type) {
 
         List<Quizzes> list = new ArrayList();
-        xSql = "SELECT *\n" +"FROM Quizzes\n" +"where category like ? and type = 'Free Test' ";
+        xSql = "SELECT *\n" + "FROM Quizzes\n" + "where category like ? and type = 'Free Test' ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, type);

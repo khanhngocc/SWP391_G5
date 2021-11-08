@@ -37,7 +37,7 @@
 
 
                 <div style="margin-top: 30px; margin-bottom: 20px">
-                    <a href="AddSubject"><i class="fa fa-book"></i> Create a subject</a> 
+                    <a href="AddSubject"><i class="fa fa-plus"></i> Create a subject</a> 
                 </div>
 
                 <table class="table" id="myTable">

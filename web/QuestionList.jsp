@@ -38,7 +38,7 @@
         <div class="container">
 
             <!--                <div class="col-sm-3"></div>-->
-            <a href="ImportQuestion"><i class="fa fa-book"></i> Import Question List</a>
+            <a href="ImportQuestion"><i class="fa fa-upload"></i> Import Question List</a>
             <div class="searchform" style="margin-top: 20px;">
                 <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for content"/>
             </div>

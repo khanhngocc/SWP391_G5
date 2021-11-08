@@ -75,7 +75,7 @@
             </div>
             <br>
             <div style="margin-top: 30px; margin-bottom: 20px">
-                <a href="AddUserAdmin"><i class="fa fa-book"></i> Add new User</a></div>
+                <a href="AddUserAdmin"><i class="fa fa-plus"></i> Add new User</a></div>
             <div>
                 <table class="table" id="myTable">
                     <tr>

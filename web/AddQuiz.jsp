@@ -41,60 +41,59 @@
             <div>
 
                 <div class="container">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Add a Quiz</h2>
-                        <p class="text-primary">${mess}</p>
-                        <form action="AddQuiz" method="post" enctype="multipart/form-data">
-                            Choose a image (Thumbnail)
+                    <div class="col-sm-6">
+                        <div class="signup-form">
+                            <!--sign up form-->
+                            <h2>Add a Quiz</h2>
+                            <p class="text-primary" id="messCreatePractice"></p>
+                            <form name="myForm" action="AddQuiz" method="post" enctype="multipart/form-data" onsubmit="return validPractice()">
+                                Choose a image (Thumbnail)
 
-                            <input type="file" name="fname" required="true"/>
+                                <input type="file" name="fname" required="true"/>
 
-                            Title
-                            <input name="title" type="text" placeholder="Title" required="true" />
-                            Description
-                            <input name="description" type="text" placeholder="Description" required="true" />
-                            Subject 
-                            <select name="subject" id="subject" style="margin-bottom:10px">
-                                <c:forEach items="${listSubject}" var="list">
-                                    <option value="${list.id}">${list.title}</option>
-                                </c:forEach>
-                            </select>
-                            Category 
-                            <select name="category" id="subject" style="margin-bottom:10px">
-                                <c:forEach items="${listCategory}" var="list">
-                                    <option value="${list.value}">${list.value}</option>
-                                </c:forEach>
-                            </select>
-                            Level
-                            <select name="level" style="margin-bottom:10px">
-                                <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.id}">${list.value}</option>
-                                </c:forEach>
-                            </select>                              
-                            Type
-                            <select name="type" style="margin-bottom:10px">
-                                <c:forEach items="${listType}" var="list">
-                                    <option value="${list.value}">${list.value}</option>
-                                </c:forEach>
-                            </select>  
-                            Duration (in seconds)
-                            <input name="duration" type="text" placeholder="Duration" />													                           
+                                Title
+                                <input name="title" type="text" placeholder="Title" required="true" />
+                                Description
+                                <input name="description" type="text" placeholder="Description" />
+                                Subject 
+                                <select name="subject" id="subject" style="margin-bottom:10px;height: 40px">
+                                    <c:forEach items="${listSubject}" var="list">
+                                        <option value="${list.id}">${list.title}</option>
+                                    </c:forEach>
+                                </select>
+                                Category 
+                                <select name="category" id="subject" style="margin-bottom:10px;height: 40px">
+                                    <c:forEach items="${listCategory}" var="list">
+                                        <option value="${list.value}">${list.value}</option>
+                                    </c:forEach>
+                                </select>
+                                Level
+                                <select name="level" style="margin-bottom:10px;height: 40px">
+                                    <c:forEach items="${listLevel}" var="list">
+                                        <option value="${list.id}">${list.value}</option>
+                                    </c:forEach>
+                                </select>                              
+                                Type
+                                <select name="type" style="margin-bottom:10px;height: 40px">
+                                    <c:forEach items="${listType}" var="list">
+                                        <option value="${list.value}">${list.value}</option>
+                                    </c:forEach>
+                                </select>  
+                                Duration (in seconds)
+                                <input name="duration" type="text" placeholder="Duration" required=""/>													                           
 
-                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
-                        </form>                            
+                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
+                            </form>                            
+                        </div>
                     </div>
+
                 </div>
-
-
-
-
 
             </div>
         </div>
     </section>
     <jsp:include page="Footer.jsp" /> 
-
+    <script src="js/validation.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/price-range.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>

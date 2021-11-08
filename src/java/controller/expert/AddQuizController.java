@@ -25,8 +25,7 @@ import model.User;
 
 /**
  *
- * @author Admin
- * fixed: 22/10/2021 Done
+ * @author Admin fixed: 22/10/2021 Done
  */
 public class AddQuizController extends BaseRequiredLoginController {
 
@@ -54,27 +53,22 @@ public class AddQuizController extends BaseRequiredLoginController {
 
         MultipartRequest m = new MultipartRequest(request, sb.toString());
         String fileNameImgPath = m.getFile("fname").toString();
-        try {
-            int indexOflast = fileNameImgPath.lastIndexOf("\\");
-            String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
-            String title = m.getParameter("title");
-            String description = m.getParameter("description");
-            int subject_id = Integer.parseInt(m.getParameter("subject"));
-            String category = m.getParameter("category");
-            String level = m.getParameter("level");
-            String type = m.getParameter("type");
-            int duration = Integer.parseInt(m.getParameter("duration"));
-            User user = (User) session.getAttribute("user");
 
-            UserDAO udao = new UserDAO();
-            QuizDAO qdao = new QuizDAO();
-            qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
-            response.sendRedirect("QuizList");
-        } catch (Exception e) {
-            String mess = "Cannot convert string to integer!";
-            request.setAttribute(mess, "mess");
-            request.getRequestDispatcher("AddQuiz.jsp").forward(request, response);
-        }
+        int indexOflast = fileNameImgPath.lastIndexOf("\\");
+        String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
+        String title = m.getParameter("title");
+        String description = m.getParameter("description");
+        int subject_id = Integer.parseInt(m.getParameter("subject"));
+        String category = m.getParameter("category");
+        String level = m.getParameter("level");
+        String type = m.getParameter("type");
+        int duration = Integer.parseInt(m.getParameter("duration"));
+        User user = (User) session.getAttribute("user");
+
+        UserDAO udao = new UserDAO();
+        QuizDAO qdao = new QuizDAO();
+        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
+        response.sendRedirect("QuizList");
 
     }
 
