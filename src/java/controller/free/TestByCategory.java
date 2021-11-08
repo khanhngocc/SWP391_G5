@@ -9,6 +9,7 @@ import dal.QuizDAO;
 import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +53,9 @@ public class TestByCategory extends HttpServlet {
             throws ServletException, IOException {
         String type = request.getParameter("type");
         QuizDAO qdao = new QuizDAO();
-        List<Quizzes> lq = qdao.getQuizbyCategory(type);
+        List<Quizzes> lq = new ArrayList<Quizzes>();
+        if(type.equals("all")) lq =qdao.getQuizByType("Free Test");
+                else  lq = qdao.getQuizbyCategory(type);
         request.setAttribute("lq",lq );
         SettingDAO setdao = new SettingDAO();
         List<Setting> lists = setdao.getListSettingByType("Quiz Category");

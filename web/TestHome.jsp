@@ -86,7 +86,7 @@
                                             <ul><c:forEach var="i" items="${lists}">
                                                     <li><a href="TestByCategory?type=${i.value}">${i.value} </a></li>
                                                     </c:forEach>
-
+ <li><a href="TestByCategory?type=all">All </a></li>
                                             </ul>
                                         </div>
                                     </div>

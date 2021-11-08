@@ -38,7 +38,24 @@ public class UserDAO extends MyDAO {
         }
         return (x);
     }
-
+public ArrayList<User> getUserByRole(int id) {
+        ArrayList<User> x = new ArrayList<>();
+        xSql = "SELECT * FROM User WHERE roll_id = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add( new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10))
+                );}
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
     public User getUser(int id) {
         User x = null;
         xSql = "SELECT * FROM User WHERE id = ? ";
@@ -63,6 +80,26 @@ public class UserDAO extends MyDAO {
         xSql = "SELECT * FROM User";
         try {
             ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
+    
+     public ArrayList<User> getAllUserByName(String name, int role) {
+        ArrayList<User> x = new ArrayList<>();
+        xSql = "SELECT * FROM User where fullname = ? and roll_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, name);
+            ps.setInt(2, role);
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
@@ -272,6 +309,14 @@ public class UserDAO extends MyDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static void main(String[] args) {
+        UserDAO ud = new UserDAO();
+        User x = ud.getUser(7);
+     
+            System.out.println(x.getEmail());
+        
     }
 
 }

@@ -224,6 +224,54 @@
         <servlet-name>FreeTestDetail</servlet-name>
         <servlet-class>controller.free.FreeTestDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClassManager</servlet-name>
+        <servlet-class>controller.manager.ClassManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassShow</servlet-name>
+        <servlet-class>controller.manager.ClassShow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassDetail</servlet-name>
+        <servlet-class>controller.manager.ClassDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeacherInfo</servlet-name>
+        <servlet-class>controller.manager.TeacherInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListStudentInClass</servlet-name>
+        <servlet-class>controller.manager.ListStudentInClass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveStudentFromClass</servlet-name>
+        <servlet-class>controller.manager.RemoveStudentFromClass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStudentToClass</servlet-name>
+        <servlet-class>controller.manager.AddStudentToClass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassEdit</servlet-name>
+        <servlet-class>controller.manager.ClassEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddLesson</servlet-name>
+        <servlet-class>controller.manager.AddLesson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonDetail</servlet-name>
+        <servlet-class>controller.manager.LessonDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteLesson</servlet-name>
+        <servlet-class>controller.manager.DeleteLesson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClassListOfCustomer</servlet-name>
+        <servlet-class>controller.customer.ClassListOfCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -448,9 +496,57 @@
         <servlet-name>FreeTestDetail</servlet-name>
         <url-pattern>/FreeTestDetail</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassManager</servlet-name>
+        <url-pattern>/ClassManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassShow</servlet-name>
+        <url-pattern>/ClassShow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassDetail</servlet-name>
+        <url-pattern>/ClassDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherInfo</servlet-name>
+        <url-pattern>/TeacherInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListStudentInClass</servlet-name>
+        <url-pattern>/ListStudentInClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveStudentFromClass</servlet-name>
+        <url-pattern>/RemoveStudentFromClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStudentToClass</servlet-name>
+        <url-pattern>/AddStudentToClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassEdit</servlet-name>
+        <url-pattern>/ClassEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddLesson</servlet-name>
+        <url-pattern>/AddLesson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonDetail</servlet-name>
+        <url-pattern>/LessonDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLesson</servlet-name>
+        <url-pattern>/DeleteLesson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClassListOfCustomer</servlet-name>
+        <url-pattern>/ClassListOfCustomer</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
 </web-app>
