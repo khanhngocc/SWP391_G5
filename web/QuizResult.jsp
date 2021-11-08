@@ -71,7 +71,7 @@
                                             <td>${listCategory.get(i).getValue()}</td>
                                             <td>${array[i]}</td>                                        
                                             <td>${arrayCorrect[i]}</td>                                            
-                                            <td><%= arrayCorrect[count] * 100 / array[count]%>%</td>
+                                            <td><%= array[count] == 0 ? "100" : arrayCorrect[count] * 100 / array[count]%>%</td>
                                             <%count++;%>
                                         </tr>     
                                     </c:forEach>

@@ -35,6 +35,8 @@ public class HomeCategoryController extends BaseRequiredLoginController {
         BlogDAO blogDAO = new BlogDAO();
         ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
         List<Setting> lists = setdao.getListSettingByType("Quiz Category");
+        List<Quizzes> list5 = quizdao.getTop5Quiz();
+        request.setAttribute("list5", list5);
         request.setAttribute("freetest", freetest);
         request.setAttribute("lists", lists);
         request.setAttribute("sliderList", sliderList);
@@ -56,6 +58,8 @@ public class HomeCategoryController extends BaseRequiredLoginController {
         BlogDAO blogDAO = new BlogDAO();
         ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
         List<Setting> lists = setdao.getListSettingByType("Quiz Category");
+          List<Quizzes> list5 = quizdao.getTop5Quiz();
+        request.setAttribute("list5", list5);
         request.setAttribute("freetest", freetest);
         request.setAttribute("lists", lists);
         request.setAttribute("sliderList", sliderList);

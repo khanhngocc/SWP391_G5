@@ -43,7 +43,8 @@
             <div>
 
                 <div class="container">
-                    <div class="signup-form">
+                    <div class="col-sm-9">
+                         <div class="signup-form">
                         <!--sign up form-->
                         <h2>Practice Detailed</h2>
                         <form enctype="multipart/form-data" id="myForm" action="" method="post">
@@ -87,9 +88,11 @@
 
                         </form>
 
-                        <button class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit(${quiz.id})">Practice Result</button>    
+                        <button class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px" onclick="Submit(${history.id})">Practice Result</button>    
 
                     </div>                       
+                    </div>
+                   
                 </div>
 
 
@@ -108,7 +111,7 @@
         <script src="js/main.js"></script>
         <script>
                             function Submit(id) {
-                                window.location.href = "PracticeResult?id=" + id;
+                                window.location.href = "QuizResult?id=" + id;
                             }
         </script>
     </body>

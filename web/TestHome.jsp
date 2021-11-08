@@ -12,19 +12,7 @@
 <html lang="en">
     <head>
 
-        <style>
-            .imgTestHome{
-                height: 200px;
-                width: 200px;
-                border-radius: 10%;
-            }
-
-            #img-left-side{
-                height: 50px;
-                width: 70px;
-                border-radius: 10%;
-            }
-        </style>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -58,7 +46,7 @@
             <jsp:include page="HeaderCustomer.jsp" />  
         </c:if>
 
-        <section>
+        <section style="margin-bottom: 100px">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
@@ -67,7 +55,7 @@
                             <h2>SIDE-BAR</h2>
                             <div class="panel-group category-products">
                                 <form action="TestControl" method="POST"><div class="search_box centerSearch">
-                                        <input type="text" name="search" placeholder="Search"/>
+                                        <input type="text" name="search" placeholder="Search" value="${search}"/>
 
                                     </div></form>
                             </div>

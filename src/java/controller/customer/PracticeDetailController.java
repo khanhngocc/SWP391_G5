@@ -6,6 +6,7 @@
 package controller.customer;
 
 import controller.base.BaseRequiredLoginController;
+import dal.HistoryDAO;
 import dal.QuestionDAO;
 import dal.QuizDAO;
 import dal.SettingDAO;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.History;
 import model.Question;
 import model.Quizzes;
 import model.Setting;
@@ -28,17 +30,19 @@ import model.User;
  */
 public class PracticeDetailController extends BaseRequiredLoginController {
 
-    @Override
+    @Override 
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
-        String id = request.getParameter("id");
+        String id = request.getParameter("id");// history id
+        HistoryDAO hdao = new HistoryDAO();
+        History h = hdao.getHistorybyID(Integer.parseInt(id));
         SubjectDAO sdao = new SubjectDAO();
         QuizDAO qqdao = new QuizDAO();
         SettingDAO stdao = new SettingDAO();
         QuestionDAO qdao = new QuestionDAO();
-        Quizzes quiz = qqdao.getQuizByID(id);
-        ArrayList<Question> question = qdao.getQuestionInQuiz(Integer.parseInt(id));
+        Quizzes quiz = qqdao.getQuizByID(String.valueOf(h.getQuiz_id()));
+        ArrayList<Question> question = qdao.getQuestionInQuiz(h.getQuiz_id());
         ArrayList<Setting> listCategory = stdao.getListSettingByType("Question Category");
         int[] array = new int[listCategory.size()];
         for (int i : array) {
@@ -53,6 +57,7 @@ public class PracticeDetailController extends BaseRequiredLoginController {
         request.setAttribute("array", array);
         request.setAttribute("quiz", quiz);
         request.setAttribute("sub", sub);
+        request.setAttribute("history", h);
         request.setAttribute("listCategory", listCategory);
         request.getRequestDispatcher("PracticeDetail.jsp").forward(request, response);
     }

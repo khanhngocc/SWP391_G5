@@ -98,9 +98,9 @@
                     <div class="col-sm-3">
                         <div class="left-sidebar">
                             <h2>Exam Category</h2>
-                            <form action="HomeCategory" method="post">
+                            <form action="TestControl" method="post">
                                 <div class="search_box centerSearch">
-                                    <input name="search" type="text" placeholder="Search"/>
+                                    <input name="search" type="text" placeholder="Search" />
                                 </div>
                             </form>
                             <div class="panel-group category-products" id="accordian"><!--category-productsr-->
@@ -141,7 +141,7 @@
 
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${i.thumbnail}" alt="" />
+                                                <img src="${i.thumbnail}" class="imgTestHome" alt="" />
 
                                                 <h4>${i.title}</h4>
 

@@ -68,7 +68,7 @@
                             <td>${i.status}</td>
                             <c:choose>
                                 <c:when test="${quizdao.getQuizByID(i.quiz_id).type eq 'User Practice'}">
-                                    <td><a href="PracticeDetail?id=${i.quiz_id}"><i class="fa fa-eye"></i>View Detail</a></td>                                    
+                                    <td><a href="PracticeDetail?id=${i.id}"><i class="fa fa-eye"></i>View Detail</a></td>                                    
                                 </c:when>                                
                                 <c:otherwise>                                    
                                     <td><a href=""><i class="fa fa-eye"></i>View Detail</a></td>
