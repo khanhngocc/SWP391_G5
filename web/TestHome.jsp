@@ -12,7 +12,7 @@
 <html lang="en">
     <head>
 
-        
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -38,14 +38,25 @@
     </head><!--/head-->
 
     <body>
-        
+
         <c:if test="${sessionScope.user eq null}">
             <jsp:include page="HeaderFree.jsp" />  
         </c:if>
         <c:if test="${sessionScope.user.rollId eq 1}">
             <jsp:include page="HeaderCustomer.jsp" />  
         </c:if>
-
+        <c:if test="${sessionScope.user.rollId eq 2}">
+            <jsp:include page="HeaderMarketing.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 3}">
+            <jsp:include page="HeaderAdmin.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 4}">
+            <jsp:include page="HeaderExpert.jsp" />  
+        </c:if>
+        <c:if test="${sessionScope.user.rollId eq 5}">
+            <jsp:include page="HeaderManager.jsp" />  
+        </c:if>
         <section style="margin-bottom: 100px">
             <div class="container">
                 <div class="row">

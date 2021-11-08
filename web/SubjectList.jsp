@@ -28,12 +28,12 @@
     </head><!--/head-->
 
     <body>
-        
+
         <jsp:include page="HeaderManager.jsp" /> 
 
         <section><!--slider-->
             <div class="container" style="height: auto; margin-bottom: 40px">
-            
+
 
 
                 <div style="margin-top: 30px; margin-bottom: 20px">
@@ -50,7 +50,7 @@
                             <th scope="col">Status</th>
                             <th scope="col">Price</th>
                             <th scope="col">Sale Price</th>
-                            <th scope="col" style="width: auto;text-align: center" colspan="3">Action</th>
+                            <th scope="col" style="width: auto;" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,18 +59,20 @@
                                 <th scope="row">${list.id}</th>
                                 <td>${list.title}</td>
                                 <td>${list.author_name}</td>
-                                <c:if test="${list.status eq 'Published'}">
-                                    <td><a href="ChangeSubjectStatus?id=${list.id}&status=Unpublished"><i class="fa fa-unlock"></i> Unpublished</a></td>
-                                </c:if>
-                                <c:if test="${list.status eq 'Unpublished'}">
-                                    <td><a href="ChangeSubjectStatus?id=${list.id}&status=Published"><i class="fa fa-lock"></i> Published</a></td>
-                                </c:if>
+                                <td>${list.status}</td>
                                 <td>${list.price}</td>
                                 <td>${list.salePrice}</td>
 
-                                <td><a href="SubjectDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
+                                <td>
+                                    <c:if test="${list.status eq 'Published'}">
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublished</a>
+                                    </c:if>
+                                    <c:if test="${list.status eq 'Unpublished'}">
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Published')"><i class="fa fa-chain"></i> Published</a>
+                                    </c:if>
+                                    <a href="SubjectDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="UpdateSubject?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
-                                    
+
                                 </td> 
 
                             </tr>
@@ -105,7 +107,7 @@
 
         <jsp:include page="Footer.jsp" /> 
 
-        <script src="js/subjectHandle.js"></script>
+        <script src="js/subjectHelper.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

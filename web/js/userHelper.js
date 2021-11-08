@@ -3,9 +3,9 @@ function changeUserStatus(id, status) {
     var mess;
 
     if (status === 'Active')
-        mess = "Do you want to deactive this user?";
-    else
         mess = "Do you want to active this user?";
+    else
+        mess = "Do you want to deactive this user?";
 
 
     var result = confirm(mess);
