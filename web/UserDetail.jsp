@@ -128,20 +128,23 @@
                 //valid phone
                 let phone = document.forms["myForm"]["phone"].value;
 
+                if (phone) {
+
+                    if (phone.length > 10)
+                    {
+                        document.getElementById("messCreateUser").textContent = "phone comes over 10 characters";
+                        return false;
+                    }
 
 
-                if (phone.length > 10)
-                {
-                    document.getElementById("messCreateUser").textContent = "phone comes over 10 characters";
-                    return false;
+                    if (isVietnamesePhoneNumber(phone) === false)
+                    {
+                        document.getElementById("messCreateUser").textContent = "phone is wrong format";
+                        return false;
+                    }
                 }
 
 
-                if (isVietnamesePhoneNumber(phone) === false)
-                {
-                    document.getElementById("messCreateUser").textContent = "phone is wrong format";
-                    return false;
-                }
 
 
             }

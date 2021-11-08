@@ -36,7 +36,7 @@
     <body>
         <jsp:include page="HeaderCustomer.jsp" />  
 
-        <div class="container">
+        <div class="container" style="margin-bottom:150px">
 
             <!--                <div class="col-sm-3"></div>-->
             <div style="margin-bottom: 10px"><a href="AddPractice"><i class="fa fa-book"></i> Add new Practice</a></div>

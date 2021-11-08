@@ -56,31 +56,25 @@ public class AddPracticeController extends BaseRequiredLoginController {
 
         MultipartRequest m = new MultipartRequest(request, sb.toString());
         String fileNameImgPath = m.getFile("fname").toString();
-        try {
-            int indexOflast = fileNameImgPath.lastIndexOf("\\");
-            String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
-            String title = m.getParameter("title");
-            String description = m.getParameter("description");
-            int subject_id = Integer.parseInt(m.getParameter("subject"));
-            String category = m.getParameter("category");
-            String level = m.getParameter("level");
-            String type = m.getParameter("type");
-            int duration = Integer.parseInt(m.getParameter("duration"));
-            User user = (User) session.getAttribute("user");
 
-            UserDAO udao = new UserDAO();
-            QuizDAO qdao = new QuizDAO();
-            qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, "User Practice", udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
-            ArrayList<Quizzes> temp = qdao.getQuiz();
-            Collections.reverse(temp);
-            response.sendRedirect("AddQuestionToPractice?id="+temp.get(0).getId());
-        } catch (Exception e) {
-            String mess = "Cannot convert string to integer!";
-            request.setAttribute(mess, "mess");
-            request.getRequestDispatcher("AddQuiz.jsp").forward(request, response);
-        }
+        int indexOflast = fileNameImgPath.lastIndexOf("\\");
+        String fileNameImg = fileNameImgPath.substring(indexOflast + 1, fileNameImgPath.length());
+        String title = m.getParameter("title");
+        String description = m.getParameter("description");
+        int subject_id = Integer.parseInt(m.getParameter("subject"));
+        String category = m.getParameter("category");
+        String level = m.getParameter("level");
+        String type = m.getParameter("type");
+        int duration = Integer.parseInt(m.getParameter("duration"));
+        User user = (User) session.getAttribute("user");
+
+        UserDAO udao = new UserDAO();
+        QuizDAO qdao = new QuizDAO();
+        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, "User Practice", udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
+        ArrayList<Quizzes> temp = qdao.getQuiz();
+        Collections.reverse(temp);
+        response.sendRedirect("AddQuestionToPractice?id=" + temp.get(0).getId());
 
     }
 
-    
 }

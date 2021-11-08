@@ -45,8 +45,10 @@
             </div>
 
             <br>
+             <p class="text-primary" id="messCreatePractice"></p>
             <div>
-                <form action="AddQuestionToPractice" method="post"><table class="table" id="myTable">
+                <form name="myForm" action="AddQuestionToPractice" method="post" onsubmit="return validAddQuestionToPractice()">
+                    <table class="table" id="myTable">
                         <tr>
                             <th><strong><a href="javascript:void(0);" onclick="sort(0)">ID</a></strong></th>
                             <th><strong><a href="javascript:void(0);" onclick="sort(1)">Content</a></strong></th>
@@ -88,7 +90,7 @@
 
         <jsp:include page="Footer.jsp" />  
 
-
+        <script src="js/validation.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
