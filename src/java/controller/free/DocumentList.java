@@ -76,7 +76,7 @@ public class DocumentList extends HttpServlet {
 
         
         ArrayList<model.Blog> listAllBlog = dao.listAllBlog(pageIndex, pageSize, searchName, local_category,"1");
-        ArrayList<model.Blog> listFiveBlog = dao.listFiveHotestBlog("1");
+        ArrayList<model.Blog> listFiveBlog = dao.listSixHotestBlog("1");
         request.setAttribute("list5", listFiveBlog);
         request.setAttribute("list_all_blogs", listAllBlog);
         request.setAttribute("pagecount", pageCount);

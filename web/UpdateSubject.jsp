@@ -38,13 +38,13 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Update subject</h2>
-                        <p class="text-primary">${messUpdateSubject}</p>
-                        <form action="UpdateSubject" method="POST">
+                        <p class="text-primary" id="messAddSubject"></p>
+                        <form name="myForm" action="UpdateSubject" method="POST" onsubmit="return validAddSubject()">
                             <input type="hidden" name="id" value="${subject.id}" />
                             Title
                             <input type="text" name="title" value="${subject.title}"  required=""/>
                             Status
-                            <select name="status" style="margin-bottom:10px">
+                            <select name="status" style="margin-bottom:10px;height: 40px">
                                 <option value="Published" ${subject.status == 'Published' ?"selected":""}>Published</option>
                                 <option value="Unpublished" ${subject.status == 'Unpublished' ?"selected":""}>Unpublished</option>
 
@@ -52,7 +52,7 @@
                             Price
                             <input type="text" name="price" value="${subject.price}" required=""/>
                             Sale Price
-                            <input type="text" name="salePrice" value="${subject.salePrice}" required=""/>
+                            <input type="text" name="salePrice" value="${subject.salePrice}"/>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Update</button>
                         </form>
 
@@ -66,7 +66,7 @@
 
 
         <jsp:include page="Footer.jsp" /> 
-
+        <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

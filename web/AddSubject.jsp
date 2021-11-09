@@ -28,7 +28,7 @@
     </head><!--/head-->
 
     <body>
-       
+
         <jsp:include page="HeaderManager.jsp" />  
 
         <section id="slider"><!--slider-->
@@ -39,14 +39,14 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Create a new subject</h2>
-                        <p class="text-primary">${messAddSubject}</p>
-                        <form action="AddSubject" method="POST">
+                        <p class="text-primary" id="messAddSubject"></p>
+                        <form name="myForm" action="AddSubject" method="POST" onsubmit="return validAddSubject()">
                             Title
                             <input type="text" name="title"  required=""/>
                             Price
                             <input type="text" name="price"  required=""/>
                             Sale Price
-                            <input type="text" name="salePrice" required=""/>
+                            <input type="text" name="salePrice" />
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
 
@@ -56,11 +56,11 @@
                 </div>
             </div>
 
-        </section><!--/slider-->
+        </section>
 
 
         <jsp:include page="Footer.jsp" />  
-
+        <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

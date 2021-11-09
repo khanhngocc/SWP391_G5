@@ -23,7 +23,7 @@ import model.User;
  */
 public class UpdateSubject extends BaseRequiredLoginController {
 
-    private String patternFloat ="^([+-]?\\d*\\.?\\d*)$";
+  
     
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,34 +38,23 @@ public class UpdateSubject extends BaseRequiredLoginController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         
-        String message = "create successfully!";
+     
         String id = request.getParameter("id");
         String status = request.getParameter("status");
         String title = request.getParameter("title");
         String price = request.getParameter("price");
-        System.out.println("pice: "+price);
+        
         String salePrice = request.getParameter("salePrice");
+        
+        if (salePrice.equals("")) {
+            salePrice="0";
+        }
+        
+        
         float num_price = 0;
         float num_sale = 0;
 
-        if (title.length() > 50) {
-            message = "length of title must be less than 50 characters";
-            request.setAttribute("messUpdateSubject", message);
-            request.getRequestDispatcher("UpdateSubject.jsp").forward(request, response);
-        }
-
-        if (price.matches(patternFloat) == false) {
-            message = "price is not a number";
-            request.setAttribute("messUpdateSubject", message);
-            request.getRequestDispatcher("UpdateSubject.jsp").forward(request, response);
-        }
-
-        if (salePrice.matches(patternFloat) == false) {
-            message = "sale price is not a number";
-            request.setAttribute("messUpdateSubject", message);
-            request.getRequestDispatcher("UpdateSubject.jsp").forward(request, response);
-        }
-
+       
         try {
             num_price = Float.parseFloat(price);
         } catch (Exception e) {

@@ -99,10 +99,10 @@
                                     </div>
                                 </div>
                                 <div class="panel-group category-products" class ="container" style="border:none">
-                                    <c:forEach items="${list5}" var="i">
-                                        <div class="col-md-6">
-                                            <img id="img-left-side"src="${i.thumbnail}" alt=""><br>
-                                            <i><a href="FreeTestDetail?id=${i.id}">${i.title}</a></i>
+                                  <c:forEach items="${list5}" var="i">
+                                        <div class="col-md-6" style="margin-bottom: 14px">
+                                            <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
+                                            <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
 
                                         </div>
                                     </c:forEach>

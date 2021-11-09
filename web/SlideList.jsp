@@ -81,10 +81,10 @@
                                 <td>${list.author_name}</td>
                                 <td style="width: 200px">
                                     <c:if test="${list.status eq 'Published'}">
-                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublished</a> 
+                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublish</a> 
                                     </c:if>
                                     <c:if test="${list.status eq 'Unpublished'}">
-                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id}, 'Published')"><i class="fa fa-chain"></i> Published</a> 
+                                        <a href="javascript:void(0);" onclick="changeSlideStatus(${list.id}, 'Published')"><i class="fa fa-chain"></i> Publish</a> 
                                     </c:if>
                                     <a href="UpdateSlide?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 
 

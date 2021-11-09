@@ -30,7 +30,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
+
     </head><!--/head-->
 
     <body>
@@ -43,8 +43,8 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>Update slider</h2>
-                        <p class="text-primary" id="messUpdateSlide"></p>
-                        <form name="myForm" action="UpdateSlide" enctype="multipart/form-data" method="post" onsubmit="return validSlide()">
+                        <p class="text-primary" id="messCreateSlide"></p>
+                        <form name="myForm" action="UpdateSlide" enctype="multipart/form-data" method="post" onsubmit="return validUpdateSlide()">
                             <input name="id" type="hidden" value="${slide.id}"/>
                             <input name="srcImg" type="hidden"  value="${slide.image_Url}"/>
                             Title
@@ -53,16 +53,11 @@
                             <img src="${slide.image_Url}" alt="" style="height: 250px;width: 250px;margin-bottom: 10px"/>
                             <input name="fname" type="file" />
                             Backlink
-                            <input name="backlink" type="text" value="${slide.backlink}" readonly="true"/>
+                            <input name="backlink" type="text" value="${slide.backlink}"/>
 
                             Notes
-                            <textarea hidden="" name="notes" id="contentDetails"></textarea>
+                            <textarea name="notes" rows="10">${slide.note}</textarea>
 
-                            <div id="toolbar-container"></div>
-
-                            <div id="editor">
-                                ${slide.note}
-                            </div>
                             <button type="submit" class="btn btn-default" style="margin-top: 10px">Update</button>
                         </form>
                     </div>
@@ -75,26 +70,9 @@
 
         <jsp:include page="Footer.jsp" /> 
         <script>
-            let theEditor;
-            DecoupledEditor
-                    .create(document.querySelector('#editor'))
-                    .then(editor => {
-                        theEditor = editor;
-                        const toolbarContainer = document.querySelector('#toolbar-container');
-
-                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-
-            function getDataFromTheEditor() {
-                return theEditor.getData();
-
-            }
 
 
-            function validSlide() {
+            function validUpdateSlide() {
 
                 const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
 
@@ -102,7 +80,7 @@
                 //valid title
                 let title = document.forms["myForm"]["title"].value;
                 if (title.length > 100) {
-                    document.getElementById("messUpdateSlide").textContent = "title comes over 100 characters";
+                    document.getElementById("messCreateSlide").textContent = "title comes over 100 characters";
                     return false;
                 }
 
@@ -112,14 +90,14 @@
 
                 var fileValue = fi.value;
 
-                if (fileValue) {
-
+                if (fileValue)
+                {
                     var startIndex = fileValue.lastIndexOf(".");
                     var filename = fileValue.substring(startIndex, fileValue.length);
 
                     if (standardedExtensionImg.includes(filename) == false)
                     {
-                        document.getElementById("messUpdateSlide").textContent
+                        document.getElementById("messCreateSlide").textContent
                                 = 'file input is not a image';
                         return false;
                     }
@@ -127,32 +105,36 @@
 
                     if (fi.files[0].size > 1048576)
                     {
-                        document.getElementById("messUpdateSlide").textContent
+                        document.getElementById("messCreateSlide").textContent
                                 = 'size of thumbnail inputed comes over 1KB ';
                         return false;
                     }
                 }
 
+
+                //valid backlink
+                let backlink = document.forms["myForm"]["backlink"].value;
+                if (backlink.length > 100) {
+                    document.getElementById("messCreateSlide").textContent = "backlink comes over 100 characters";
+                    return false;
+                }
+
                 // valid notes
 
-                var notes = getDataFromTheEditor();
-
-                if (notes.length === 0) {
-                    document.getElementById("messUpdateSlide").textContent = "notes is empty";
-
-                    return false;
+                let notes = document.forms["myForm"]["notes"].value;
+                if (notes)
+                {
+                    if (notes.length > 50) {
+                        document.getElementById("messCreateSlide").textContent = "notes comes over 50 characters";
+                        return false;
+                    }
                 }
 
-                if (notes.length > 10000) {
-                    document.getElementById("messUpdateSlide").textContent = "notes comes over 10000 characters";
 
-                    return false;
-                }
 
-                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
+
 
             }
-
         </script>
         <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>

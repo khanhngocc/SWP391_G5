@@ -48,13 +48,14 @@ public class AddSlide extends BaseRequiredLoginController {
 
         String title = m.getParameter("title");
         String notes = m.getParameter("notes");
+        String backlink = m.getParameter("backlink");
 
         SlideDAO dao = new SlideDAO();
 
         Slide slide = new Slide();
         slide.setTitle(title);
         slide.setImage_Url("images/slide/" + fileNameImg);
-        slide.setBacklink("SlideDetailed?id=");
+        slide.setBacklink(backlink);
         slide.setNote(notes);
 
         User session_user = (User) request.getSession(false).getAttribute("user");

@@ -175,7 +175,7 @@ function validQuestionImport() {
 }
 
 function validEditQuiz() {
-    
+
     const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
     // valid file
 
@@ -239,3 +239,70 @@ function validEditQuiz() {
     }
 
 }
+
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function validAddSubject() {
+
+    // valid title
+    let title = document.forms["myForm"]["title"].value;
+    if (title.length > 100) {
+        document.getElementById("messAddSubject").textContent = "title comes over 100 characters";
+        return false;
+    }
+
+    // valid price
+    let price = document.forms["myForm"]["price"].value;
+
+    if (isNumeric(price) === false)
+    {
+        document.getElementById("messAddSubject").textContent = "price is not a number";
+        return false;
+    }
+
+    if (parseFloat(price) < 0)
+    {
+        document.getElementById("messAddSubject").textContent = "price must be a positive value";
+        return false;
+    }
+
+    if (parseFloat(price) > Number.MAX_SAFE_INTEGER)
+    {
+        document.getElementById("messAddSubject").textContent = "price is out of boundary (limit is 9007199254740991)";
+        return false;
+    }
+
+    // valid saleprice
+    let salePrice = document.forms["myForm"]["salePrice"].value;
+
+    if (salePrice)
+    {
+        if (isNumeric(salePrice) === false)
+        {
+            document.getElementById("messAddSubject").textContent = "sale price is not a number";
+            return false;
+        }
+
+        if (parseFloat(salePrice) < 0)
+        {
+            document.getElementById("messAddSubject").textContent = "sale price must be a positive value";
+            return false;
+        }
+
+        if (parseFloat(salePrice) > Number.MAX_SAFE_INTEGER)
+        {
+            document.getElementById("messAddSubject").textContent = "sale price is out of boundary (limit is 9007199254740991)";
+            return false;
+        }
+
+        if (parseFloat(salePrice) > parseFloat(price))
+        {
+            document.getElementById("messAddSubject").textContent = "sale price must be less than price!";
+            return false;
+        }
+    }
+
+}
+

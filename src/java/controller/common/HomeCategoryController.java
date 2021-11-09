@@ -33,7 +33,7 @@ public class HomeCategoryController extends BaseRequiredLoginController {
         int maxId = Integer.valueOf(slideDAO.getMaxID("Published"));
         ArrayList<Quizzes> freetest = quizdao.getQuizByTypeCategory("Free Test", type);
         BlogDAO blogDAO = new BlogDAO();
-        ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
+        ArrayList<model.Blog> listAllBlog = blogDAO.listSixHotestBlog("1");
         List<Setting> lists = setdao.getListSettingByType("Quiz Category");
         List<Quizzes> list5 = quizdao.getTop5Quiz();
         request.setAttribute("list5", list5);
@@ -56,7 +56,7 @@ public class HomeCategoryController extends BaseRequiredLoginController {
         int maxId = Integer.valueOf(slideDAO.getMaxID("Published"));
         List<Quizzes> freetest = quizdao.getQuizByName(search);
         BlogDAO blogDAO = new BlogDAO();
-        ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
+        ArrayList<model.Blog> listAllBlog = blogDAO.listSixHotestBlog("1");
         List<Setting> lists = setdao.getListSettingByType("Quiz Category");
           List<Quizzes> list5 = quizdao.getTop5Quiz();
         request.setAttribute("list5", list5);

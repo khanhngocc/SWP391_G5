@@ -21,16 +21,13 @@
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->       
+
         <link rel="shortcut icon" href="images/ico/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
+
     </head><!--/head-->
 
     <body>
@@ -45,22 +42,16 @@
                         <!--sign up form-->
                         <h2>Create a new slider</h2>
                         <p class="text-primary" id="messCreateSlide"></p>
-                        <form name="myForm" action="AddSlide" enctype="multipart/form-data" method="post" onsubmit="return validSlide()">
+                        <form name="myForm" action="AddSlide" enctype="multipart/form-data" method="post" onsubmit="return validAddSlide()" >
                             Title
                             <input name="title" type="text" required="true" />
                             Thumbnail
                             <input name="fname" type="file" required="true" />
-
+                            BackLink
+                            <input name="backlink" type="text" required="true" />
                             Notes
-                            <textarea hidden="" name="notes" id="contentDetails" rows="10" cols="80"></textarea>
-                            <div id="toolbar-container"></div>
-
-                            <!-- This container will become the editable. -->
-
-                            <div id="editor">
-                                <p>This is the initial editor content.</p>
-                            </div>
-                            <button type="submit"  class="btn btn-default" style="margin-top: 10px">Create</button>
+                            <textarea name="notes" rows="10"></textarea>
+                            <button type="submit" class="btn btn-default" style="margin-top: 10px">Create</button>
                         </form>
                     </div>
                     <br>
@@ -70,27 +61,9 @@
         </section><!--/slider-->
 
 
-        <jsp:include page="Footer.jsp" />  
+        <jsp:include page="Footer.jsp" />
         <script>
-            let theEditor;
-            DecoupledEditor
-                    .create(document.querySelector('#editor'))
-                    .then(editor => {
-                        theEditor = editor;
-                        const toolbarContainer = document.querySelector('#toolbar-container');
-
-                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-
-            function getDataFromTheEditor() {
-                return theEditor.getData();
-
-            }
-
-            function validSlide() {
+         function validAddSlide() {
 
                 const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
 
@@ -125,28 +98,29 @@
                     return false;
                 }
 
+                //valid backlink
+                let backlink = document.forms["myForm"]["backlink"].value;
+                if (backlink.length > 100) {
+                    document.getElementById("messCreateSlide").textContent = "backlink comes over 100 characters";
+                    return false;
+                }
+
                 // valid notes
 
-                var notes = getDataFromTheEditor();
-
-                if (notes.length === 0) {
-                    document.getElementById("messCreateSlide").textContent = "notes is empty";
-
-                    return false;
+                let notes = document.forms["myForm"]["notes"].value;
+                if (notes)
+                {
+                    if (notes.length > 50) {
+                        document.getElementById("messCreateSlide").textContent = "notes comes over 50 characters";
+                        return false;
+                    }
                 }
 
-                if (notes.length > 10000) {
-                    document.getElementById("messCreateSlide").textContent = "notes comes over 10000 characters";
 
-                    return false;
-                }
-
-                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
 
 
 
             }
-
         </script>
         <script src="js/validation.js"></script>
         <script src="js/blogHander.js"></script>

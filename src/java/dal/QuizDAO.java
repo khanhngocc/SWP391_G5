@@ -122,7 +122,7 @@ public class QuizDAO extends MyDAO {
 
     public ArrayList<Quizzes> getTop5Quiz() {
         ArrayList<Quizzes> x = new ArrayList<>();
-        xSql = "SELECT * FROM Quizzes where type = 'Free Test' order by id desc LIMIT 5 ";
+        xSql = "SELECT * FROM Quizzes where type = 'Free Test' order by id desc LIMIT 4";
 
         try {
 

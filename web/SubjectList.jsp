@@ -65,10 +65,10 @@
 
                                 <td>
                                     <c:if test="${list.status eq 'Published'}">
-                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublished</a>
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Unpublished')"><i class="fa fa-chain"></i> Unpublish</a>
                                     </c:if>
                                     <c:if test="${list.status eq 'Unpublished'}">
-                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Published')"><i class="fa fa-chain"></i> Published</a>
+                                        <a href="javascript:void(0);" onclick="changeStatus(${list.id}, 'Published')"><i class="fa fa-chain"></i> Publish</a>
                                     </c:if>
                                     <a href="SubjectDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="UpdateSubject?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 

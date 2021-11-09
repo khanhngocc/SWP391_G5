@@ -37,7 +37,7 @@ public class HomeController extends BaseRequiredLoginController {
 
         // load posts
         BlogDAO blogDAO = new BlogDAO();
-        ArrayList<model.Blog> listAllBlog = blogDAO.listFiveHotestBlog("1");
+        ArrayList<model.Blog> listAllBlog = blogDAO.listSixHotestBlog("1");
 
         // load free test
         SettingDAO setdao = new SettingDAO();

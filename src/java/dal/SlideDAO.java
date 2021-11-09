@@ -247,14 +247,16 @@ public class SlideDAO extends MyDAO {
                 + "SET\n"
                 + "`title` = ?,\n"
                 + "`image` = ?,\n"
-                + "`notes` = ?\n"
+                + "`notes` = ?,\n"
+                  + "`backlink` = ?\n"
                 + "WHERE `id` = ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, slide.getTitle());
             ps.setString(2, slide.getImage_Url());
             ps.setString(3, slide.getNote());
-            ps.setInt(4, slide.getId());
+            ps.setString(4, slide.getBacklink());
+            ps.setInt(5, slide.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

@@ -102,7 +102,7 @@ public class BlogDAO extends MyDAO {
         return no;
     }
     
-    public ArrayList<Blog> listFiveHotestBlog(String statusRestricted) {
+    public ArrayList<Blog> listSixHotestBlog(String statusRestricted) {
 
        
         ArrayList<Blog> list = new ArrayList<>();
@@ -113,7 +113,7 @@ public class BlogDAO extends MyDAO {
                     + "Blog.user_id = User.id\n"
                     + "and Blog.status like ? \n"
                     + "order by Blog.id desc\n"
-                    +"limit 5"
+                    +"limit 4"
                     ;
                  
             PreparedStatement statement;

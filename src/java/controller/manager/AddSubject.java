@@ -16,8 +16,6 @@ import model.User;
  */
 public class AddSubject extends BaseRequiredLoginController {
 
-    private String patternFloat ="^([+-]?\\d*\\.?\\d*)$";
-    
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("AddSubject.jsp").forward(request, response);
@@ -26,31 +24,16 @@ public class AddSubject extends BaseRequiredLoginController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String message = "create successfully!";
-
         String title = request.getParameter("title");
         String price = request.getParameter("price");
         String salePrice = request.getParameter("salePrice");
+        
+        if(salePrice.equals(""))
+             salePrice = "0";
+        
+        
         float num_price = 0;
         float num_sale = 0;
-
-        if (title.length() > 50) {
-            message = "length of title must be less than 50 characters";
-            request.setAttribute("messAddSubject", message);
-            request.getRequestDispatcher("AddSubject.jsp").forward(request, response);
-        }
-
-        if (price.matches(patternFloat) == false) {
-            message = "price is not a number";
-            request.setAttribute("messAddSubject", message);
-            request.getRequestDispatcher("AddSubject.jsp").forward(request, response);
-        }
-
-        if (salePrice.matches(patternFloat) == false) {
-            message = "sale price is not a number";
-            request.setAttribute("messAddSubject", message);
-            request.getRequestDispatcher("AddSubject.jsp").forward(request, response);
-        }
 
         try {
             num_price = Float.parseFloat(price);
@@ -76,9 +59,8 @@ public class AddSubject extends BaseRequiredLoginController {
 
         SubjectDAO dao = new SubjectDAO();
         dao.createSubject(subject, current_user);
-        
-        request.setAttribute("messAddSubject", message);
-        request.getRequestDispatcher("AddSubject.jsp").forward(request, response);
+
+        response.sendRedirect("SubjectList");
     }
 
 }

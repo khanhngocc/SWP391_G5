@@ -91,10 +91,10 @@
 
                                 <td style="width: 250px">
                                     <c:if test="${list.status eq 1}">
-                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '0')"><i class="fa fa-chain"></i> Deactivate</a>
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '0')"><i class="fa fa-chain"></i> Deactive</a>
                                     </c:if>
                                     <c:if test="${list.status eq 0}">
-                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '1')"><i class="fa fa-chain"></i> Activate</a>
+                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${list.id}, '1')"><i class="fa fa-chain"></i> Active</a>
                                     </c:if>
                                     <a href="BlogDetailed?id=${list.id}"><i class="fa fa-eye"></i> View</a> 
                                     <a href="UpdateBlog?id=${list.id}"><i class="fa fa-pencil"></i> Update</a> 

@@ -68,12 +68,13 @@
                                             <div class="col-sm-6">
                                                 <h1><span>Mega</span>-Deal</h1>
                                                 <h2>${list.title}</h2>
-                                        
+                                            <p>${list.note}</p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="${list.backlink}${list.id}" >
+                                            <a href="${list.backlink}" >
                                                 <img style="width: 400px;height: 400px" src="${list.image_Url}" class="girl img-responsive" alt="" />
                                             </a>
+
                                         </div>
                                     </div>
 
@@ -119,13 +120,13 @@
                                 </c:forEach>
                             </div><!--/category-products-->
                             <div class="panel-group category-products" class ="container" style="border:none">
-                                <c:forEach items="${list5}" var="i">
-                                    <div class="col-md-6">
-                                        <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
-                                        <i><a href="FreeTestDetail?id=${i.id}">${i.title}</a></i>
+                               <c:forEach items="${list5}" var="i">
+                                        <div class="col-md-6" style="margin-bottom: 14px">
+                                            <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
+                                            <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
 
-                                    </div>
-                                </c:forEach>
+                                        </div>
+                                    </c:forEach>
                             </div>   
 
                         </div>
@@ -159,8 +160,8 @@
                                 </div>
                             </c:forEach>
                         </div><!--features_items-->
-                      
-                      
+
+
 
                         <div class="recommended_items"><!--recommended_items-->
                             <h2 class="title text-center">latest posts</h2>
