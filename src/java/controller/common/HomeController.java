@@ -42,12 +42,15 @@ public class HomeController extends BaseRequiredLoginController {
         // load free test
         SettingDAO setdao = new SettingDAO();
         QuizDAO quizdao = new QuizDAO();
-        List<Setting> lists = setdao.getListSettingByType("Quiz Category");
+
         ArrayList<Quizzes> freetest = quizdao.getQuizByType("Free Test");
-        List<Quizzes> list5 = quizdao.getTop5Quiz();
-        request.setAttribute("list5", list5);
+        List<Setting> listCategories = setdao.getListSettingByType("Quiz Category");
+        List<Quizzes> listFiveHotFreeTest = quizdao.getTop5Quiz();
+
         request.setAttribute("freetest", freetest);
-        request.setAttribute("lists", lists);
+
+        request.setAttribute("listCategories", listCategories);
+        request.setAttribute("listFiveHotFreeTest", listFiveHotFreeTest);
 
         request.setAttribute("sliderList", sliderList);
         request.setAttribute("sliderListSize", sliderList.size());

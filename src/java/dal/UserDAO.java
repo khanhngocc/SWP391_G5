@@ -317,25 +317,10 @@ public class UserDAO extends MyDAO {
         }
     }
 
-    public void updateIdEncrypt(String id, String encryptId) {
-        xSql = "UPDATE user\n"
-                + "SET\n"
-                + "`idEncrypt` = ?\n"
-                + "WHERE `id` = ? ;";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setString(1, encryptId);
-            ps.setString(2, id);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+   
     public int getIDByEncryptId(String encryptId) {
         int user_id = -1;
-        xSql = "SELECT id FROM user where idEncrypt = ? ;";
+        xSql = "SELECT id FROM user where upper(md5(concat('id=',id))) = ? order by id desc;";
 
         try {
             ps = con.prepareStatement(xSql);

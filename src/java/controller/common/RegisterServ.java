@@ -126,8 +126,6 @@ public class RegisterServ extends HttpServlet {
                 Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            udao.updateIdEncrypt(maxId, encodedTail);
-
             String[] mailTo = {email};
             try {
                 gmailHelper.sendFromGMail(gmailHelper.getUSER_NAME(), gmailHelper.getPASSWORD(),

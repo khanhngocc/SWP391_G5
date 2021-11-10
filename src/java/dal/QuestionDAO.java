@@ -104,6 +104,46 @@ public class QuestionDAO extends MyDAO {
         }
     }
     
+      public int getRowCount() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM question";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public int getRowCountForSearch(String searchName, String subject, String category, String level, String status) {
+        int no = 0;
+
+        xSql = "";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + subject + "%");
+            ps.setString(3, "%" + category + "%");
+           
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+    
     public ArrayList<Question> getQuestions(){
         ArrayList<Question> x = new ArrayList<>();
         xSql = "select * from Question";

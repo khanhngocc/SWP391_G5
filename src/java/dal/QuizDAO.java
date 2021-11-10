@@ -333,16 +333,16 @@ public class QuizDAO extends MyDAO {
         }
         return list;
     }
-    
+
     public boolean isModifyQuiz(int quiz_id) {
-       
+
         xSql = "SELECT * FROM history where quiz_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, quiz_id);
             rs = ps.executeQuery();
             if (rs.next()) {
-               return false;
+                return false;
             }
             rs.close();
             ps.close();
@@ -350,6 +350,76 @@ public class QuizDAO extends MyDAO {
             e.printStackTrace();
         }
         return true;
+    }
+    
+        public int getRowCountAllFreeTest() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM quizzes where type = 'Free Test'";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public int getRowCountForFilterFreeTest(String searchName, String category) {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM quizzes WHERE title like ? and category like ? and type = 'Free Test'";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + category + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public ArrayList<Quizzes> listAllFreeQuizes(int pageIndex, int pageSize, String searchName, String category) {
+
+        int numberOfRecord = (pageIndex - 1) * pageSize;
+
+        ArrayList<Quizzes> list = new ArrayList<>();
+        xSql = "select * from quizzes\n"
+                + "where\n"
+                + "type = 'Free Test'\n"
+                + "and\n"
+                + "title like ?\n"
+                + "and\n"
+                + "category like ?\n"
+                + "order by id desc\n"
+                + "limit ?,?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + category + "%");
+            ps.setInt(3, numberOfRecord);
+            ps.setInt(4, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

@@ -96,42 +96,7 @@
         <section style="margin-bottom: 100px">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="left-sidebar">
-                            <h2>Exam Category</h2>
-                            <form action="TestControl" method="post">
-                                <div class="search_box centerSearch">
-                                    <input name="search" type="text" placeholder="Search" />
-                                </div>
-                            </form>
-                            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="Home">All</a></h4>
-                                    </div>
-                                </div>
-                                <c:forEach items="${lists}" var="i">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="HomeCategory?type=${i.value}">${i.value}</a></h4>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div><!--/category-products-->
-                            <div class="panel-group category-products" class ="container" style="border:none">
-                               <c:forEach items="${list5}" var="i">
-                                        <div class="col-md-6" style="margin-bottom: 14px">
-                                            <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
-                                            <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
-
-                                        </div>
-                                    </c:forEach>
-                            </div>   
-
-                        </div>
-                    </div>
-
+                    <jsp:include page="SideBarForExam.jsp" />  
                     <div class="col-sm-9 padding-right">
                         <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Latest free exams</h2>
@@ -139,23 +104,27 @@
                             <c:forEach items="${freetest}" var="i">
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">
-
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${i.thumbnail}" class="imgTestHome" alt="" />
-
-                                                <h4>${i.title}</h4>
+                                                <img class="imgTestHome"  src="${i.thumbnail}" alt="" />
+                                                <h2>${(i.getDuration()-i.getDuration()%60)/60} min  ${i.getDuration()%60}  secs</h2>
+                                                <p>${i.title}</p>
 
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
-
-                                                    <h4><a href="FreeTestDetail?id=${i.id}">${i.title}</a></h4>
-                                                    <a href="QuizHandle?id=${i.id}" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
+                                                    <h2>${i.getDuration()} secs </h2>
+                                                    <p><a href="FreeTestDetail?id=${i.id}">${i.title}</a></p>
+                                                    <a href = "QuizHandle?id=${i.id}" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Do Test</a>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="choose">
+                                            <ul class="nav nav-pills nav-justified">
+                                                <li style="color:orange;text-align:center">${i.type}</li>
+                                                <li style="color:orange;text-align:center">${i.getNumber_of_question()} questions</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -163,7 +132,7 @@
 
 
 
-                        <div class="recommended_items"><!--recommended_items-->
+                        <div class="recommended_items" style="margin-top: 40px"><!--recommended_items-->
                             <h2 class="title text-center">latest posts</h2>
                             <div class="col-sm-12">
                                 <ul class="media-list">

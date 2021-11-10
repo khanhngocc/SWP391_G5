@@ -64,63 +64,13 @@
         <c:if test="${sessionScope.user.rollId eq 5}">
             <jsp:include page="HeaderManager.jsp" />  
         </c:if>
-        <section style="margin-bottom: 100px">
+        <section style="margin-top: 20px;margin-bottom: 100px">
             <div>
 
                 <div class="container">
-                    <div class="col-sm-3">
-                        <div class="left-sidebar">
+                    <jsp:include page="SideBarForExam.jsp" />  
 
-                            <h2>SIDE-BAR</h2>
-                            <div class="panel-group category-products">
-                                <form action="TestControl" method="POST"><div class="search_box centerSearch">
-                                        <input type="text" name="search" placeholder="Search"/>
-
-                                    </div></form>
-                            </div>
-                            <div class="panel-group category-products" id="accordian"style="border:none"><!--category-productsr-->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                Test Categories
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="sportswear" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul><c:forEach var="i" items="${lists}">
-                                                    <li><a href="TestByCategory?type=${i.value}">${i.value} </a></li>
-                                                    </c:forEach>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-group category-products" class ="container" style="border:none">
-                                  <c:forEach items="${list5}" var="i">
-                                        <div class="col-md-6" style="margin-bottom: 14px">
-                                            <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
-                                            <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
-
-                                        </div>
-                                    </c:forEach>
-                                </div>   
-
-
-
-                            </div><!--/category-productsr-->
-
-
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div class = "col-sm-6" >
+                    <div class="col-sm-5 padding-right">
                         <!--sign up form-->
                         <div class="signup-form">
                             <h2>Quiz Detailed</h2>

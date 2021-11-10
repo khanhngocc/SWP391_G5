@@ -57,72 +57,16 @@
         <c:if test="${sessionScope.user.rollId eq 5}">
             <jsp:include page="HeaderManager.jsp" />  
         </c:if>
-        <section style="margin-bottom: 100px">
+        <section style="margin-top: 20px;margin-bottom: 100px">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="left-sidebar">
-
-                            <h2>SIDE-BAR</h2>
-                            <div class="panel-group category-products">
-                                <form action="TestControl" method="POST"><div class="search_box centerSearch">
-                                        <input type="text" name="search" placeholder="Search" value="${search}"/>
-
-                                    </div></form>
-                            </div>
-                            <div class="panel-group category-products" id="accordian"style="border:none"><!--category-productsr-->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                Test Categories
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="sportswear" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul><c:forEach var="i" items="${lists}">
-                                                    <li><a href="TestByCategory?type=${i.value}">${i.value} </a></li>
-                                                    </c:forEach>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-group category-products" class ="container" style="border:none">
-                                    <c:forEach items="${list5}" var="i">
-                                        <div class="col-md-6" style="margin-bottom: 14px">
-                                            <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
-                                            <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
-
-                                        </div>
-                                    </c:forEach>
-                                </div>   
-
-
-
-                            </div><!--/category-productsr-->
-
-
-
-
-
-
-                        </div>
-                    </div>
+                    <jsp:include page="SideBarForExam.jsp" />  
 
                     <div class="col-sm-9 padding-right">
                         <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Test List</h2>
 
-
-
-
-
-
-
-                            <c:forEach var="i" items="${lq}">	
+                            <c:forEach var="i" items="${listAllFreeQuizzes}">	
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
@@ -151,20 +95,27 @@
                             </c:forEach>
 
                         </div><!--features_items-->
-                        <center><div class="pagination-area">
-                                <ul class="pagination"> 
-                                    <c:forEach begin="1" end="${pagesize}" var="i">
-                                        <c:choose>
-                                            <c:when test="${page==i}">
-                                                <li><a href="" class="active">${i}</a></li>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <li><a href="TestControl?page=${i}">${i}</a></li> 
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                </ul>
-                            </div></center>
+                        <div class="pagination-area">
+                            <ul class="pagination">
+                                <c:if test="${pageindex gt gap}">
+                                    <li class="page-item"><a class="page-link" href="TestControl?page=1&searchName=${searchName}&category=${category}">First</a></li>
+                                    </c:if>
+                                    <c:forEach var = "i" begin = "${gap}" end = "1">
+                                        <c:if test="${pageindex - gap gt 0}">
+                                        <li class="page-item"><a class="page-link" href="TestControl?page=${pageindex -i}&searchName=${searchName}&category=${category}">${pageindex - i}</a></li>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:forEach var = "i" begin = "1" end = "${gap}">
+                                        <c:if test="${pageindex + gap le pagecount}">
+                                        <li class="page-item"><a class="page-link" href="TestControl?page=${pageindex + i}&searchName=${searchName}&category=${category}">${pageindex + i}</a></li> 
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:if test="${pageindex + gap lt pagecount}">
+                                    <li class="page-item"><a class="page-link" href="TestControl?page=${pagecount}&searchName=${searchName}&category=${category}">Last</a></li> 
+                                    </c:if>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>

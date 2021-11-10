@@ -114,22 +114,7 @@ public class AccountForgotDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
-     public void updateIdEncrypt(String id,String encryptId) {
-        xSql = "UPDATE account_forgot\n"
-                + "SET\n"
-                + "`idEncrypt` = ?\n"
-                + "WHERE `id` = ? ;";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setString(1, encryptId);
-            ps.setString(2, id);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+  
     
     public String getMaxID() {
         String id = "1";
@@ -172,7 +157,7 @@ public class AccountForgotDAO extends MyDAO {
     
     public int getIDByEncryptId(String encryptId) {
         int user_id = -1;
-        xSql = "SELECT id FROM account_forgot where idEncrypt = ? ;";
+        xSql = "SELECT id FROM account_forgot where upper(md5(concat('id=',id))) = ? order by id desc;";
         
         try {
             ps = con.prepareStatement(xSql);

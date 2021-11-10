@@ -103,7 +103,7 @@ public class ForgotPassword extends HttpServlet {
                 Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            accDAO.updateIdEncrypt(max_id, encodedTail);
+           
 
             String url = "http://localhost:8080/SWP391_G5/ResetPassword?" + encodedTail;
 

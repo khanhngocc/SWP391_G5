@@ -19,71 +19,77 @@ import javax.servlet.http.HttpServletResponse;
 import model.Quizzes;
 import model.Setting;
 
-/**
- *
- * @author INSPIRON 15-7559
- */
 public class TestControl extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String res = request.getParameter("search");
-        QuizDAO dao = new QuizDAO();
-        SettingDAO setdao = new SettingDAO();
-        List<Quizzes> list = dao.getQuizByName(res);
-        List<Setting> lists = setdao.getListSettingByType("Quiz Category");
-        List<Quizzes> list5 = dao.getTop5Quiz();
-        request.setAttribute("search", res);
-        request.setAttribute("list5", list5);
-        request.setAttribute("lists", lists);
-        request.setAttribute("lq", list);
-        request.getRequestDispatcher("TestHome.jsp").forward(request, response);
-
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        QuizDAO qdao = new QuizDAO();
-        ArrayList<Quizzes> lq = qdao.getQuizByType("Free Test");
 
-        int pageSize = lq.size() % 12 == 0 ? lq.size() / 12 : lq.size() / 12 + 1;
-        int currentPage;
-        try {
-            currentPage = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception e) {
-            currentPage = 1;
-        }
-        request.setAttribute("lq", lq.subList(12 * (currentPage - 1), 12 * currentPage > lq.size() ? lq.size() : 12 * currentPage));
-        request.setAttribute("pagesize", pageSize);
-        request.setAttribute("page", currentPage);
-        SettingDAO setdao = new SettingDAO();
-        List<Setting> lists = setdao.getListSettingByType("Quiz Category");
         QuizDAO dao = new QuizDAO();
-        List<Quizzes> list5 = dao.getTop5Quiz();
-        request.setAttribute("list5", list5);
-        request.setAttribute("lists", lists);
+
+        int pageSize = 6;
+
+        String raw_pageindex = request.getParameter("page");
+
+        if (raw_pageindex == null) {
+            raw_pageindex = "1";
+        }
+
+        int pageIndex = 0;
+        try {
+            pageIndex = Integer.parseInt(raw_pageindex);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        int rowCount = 0;
+
+        String searchName = request.getParameter("searchName");
+        String category = request.getParameter("category");
+
+        // case default: don't search and don't filter
+        if (searchName == null && category == null) {
+
+            searchName = "";
+            category = "";
+            rowCount = dao.getRowCountAllFreeTest();
+
+        } else { // case specific: search or filter
+
+            rowCount = dao.getRowCountForFilterFreeTest(searchName, category);
+
+        }
+
+        int pageCount;
+
+        if (rowCount % pageSize == 0) {
+            pageCount = rowCount / pageSize;
+        } else {
+            pageCount = rowCount / pageSize + 1;
+        }
+
+        int gap = 1;
+
+        ArrayList<Quizzes> listAllFreeQuizzes = dao.listAllFreeQuizes(pageIndex, pageSize, searchName, category);
+
+        SettingDAO setdao = new SettingDAO();
+        List<Setting> listCategories = setdao.getListSettingByType("Quiz Category");
+        List<Quizzes> listFiveHotFreeTest = dao.getTop5Quiz();
+
+        request.setAttribute("listAllFreeQuizzes", listAllFreeQuizzes);
+        request.setAttribute("listCategories", listCategories);
+        request.setAttribute("listFiveHotFreeTest", listFiveHotFreeTest);
+
+        request.setAttribute("searchName", searchName);
+
+        request.setAttribute("category", category);
+
+        request.setAttribute("pagecount", pageCount);
+        request.setAttribute("pageindex", pageIndex);
+        request.setAttribute("gap", gap);
+
         request.getRequestDispatcher("TestHome.jsp").forward(request, response);
 
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
