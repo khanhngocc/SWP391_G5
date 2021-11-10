@@ -252,6 +252,10 @@
         <servlet-name>QuizReviewController</servlet-name>
         <servlet-class>controller.customer.QuizReviewController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckIsAllowToExcute</servlet-name>
+        <servlet-class>controller.expert.CheckIsAllowToExcute</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -503,6 +507,10 @@
     <servlet-mapping>
         <servlet-name>QuizReviewController</servlet-name>
         <url-pattern>/QuizReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckIsAllowToExcute</servlet-name>
+        <url-pattern>/CheckIsAllowToExcute</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

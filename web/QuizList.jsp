@@ -30,6 +30,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head><!--/head-->
 
     <body>
@@ -89,6 +90,7 @@
 
 
             <div style="margin-top: 30px; margin-bottom: 20px">
+
                 <a href="AddQuiz"><i class="fa fa-plus"></i> Add new Quiz</a>
             </div>
             <div>
@@ -122,8 +124,8 @@
                                     <td><a href="QuizDetail?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
                                 </c:when>                                
                                 <c:otherwise>
-                                    <td><a href="#" onclick="deleteQuiz(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                                    <td><a href="EditQuiz?id=${i.id}"><i class="fa fa-pencil"></i>Edit</a></td>
+                                    <td><a href="#" onclick="isAllowToExcute(${i.id}, 'DeleteQuiz')"><i class="fa fa-trash-o"></i> Delete</a></td>
+                                    <td><a href="#" onclick="isAllowToExcute(${i.id}, 'EditQuiz')"><i class="fa fa-pencil"></i>Edit</a></td>
                                     <td><a href="QuizDetail?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
                                 </c:otherwise>
                             </c:choose>
@@ -132,7 +134,7 @@
                     </c:forEach>
                 </table>
 
-                 <div class="pagination-area">
+                <div class="pagination-area">
                     <ul class="pagination">
 
                         <c:if test="${pageindex gt gap}">
@@ -172,34 +174,65 @@
                                             if (result) {
                                                 window.location.href = "DeleteQuiz?id=" + id;
                                             }
+                                        }
+
+                                        function isAllowToExcute(id, url)
+                                        {
+
+                                            $.ajax({
+                                                url: "CheckIsAllowToExcute",
+                                                type: 'GET',
+                                                dataType: 'json',
+                                                data: {quizId: id},
+                                                success: function (data) {
+
+                                                    if (data === false)
+                                                    {
+                                                        alert("Someone has taken this quiz so that you can't modify it");
+                                                    } else
+                                                    {
+                                                        if (url === "DeleteQuiz")
+                                                        {
+                                                            deleteQuiz(id);
+                                                        } else
+                                                        {
+                                                            window.location.href = url + "?id=" + id;
+                                                        }
+
+                                                    }
+
+
+                                                }
+                                            });
+
+
+
 
                                         }
 
-        </script>
-        <script>
-            function sort(number) {
-                var in_num, table, rows, switching, i, x, y, shouldSwitch;
-                in_num = parseInt(number);
-                table = document.getElementById("myTable");
-                switching = true;
-                while (switching) {
-                    switching = false;
-                    rows = table.rows;
-                    for (i = 1; i < rows.length - 1; i++) {
-                        shouldSwitch = false;
-                        x = rows[i].getElementsByTagName("td")[in_num];
-                        y = rows[i + 1].getElementsByTagName("td")[in_num];
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                    if (shouldSwitch) {
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                    }
-                }
-            }
+                                        function sort(number) {
+                                            var in_num, table, rows, switching, i, x, y, shouldSwitch;
+                                            in_num = parseInt(number);
+                                            table = document.getElementById("myTable");
+                                            switching = true;
+                                            while (switching) {
+                                                switching = false;
+                                                rows = table.rows;
+                                                for (i = 1; i < rows.length - 1; i++) {
+                                                    shouldSwitch = false;
+                                                    x = rows[i].getElementsByTagName("td")[in_num];
+                                                    y = rows[i + 1].getElementsByTagName("td")[in_num];
+                                                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                        shouldSwitch = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (shouldSwitch) {
+                                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                    switching = true;
+                                                }
+                                            }
+                                        }
         </script>
     </body>
 </html>

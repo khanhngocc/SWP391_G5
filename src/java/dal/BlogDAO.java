@@ -101,28 +101,23 @@ public class BlogDAO extends MyDAO {
         }
         return no;
     }
-    
+
     public ArrayList<Blog> listSixHotestBlog(String statusRestricted) {
 
-       
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            String sql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
+            xSql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
                     + "where\n"
                     + "Blog.user_id = User.id\n"
                     + "and Blog.status like ? \n"
                     + "order by Blog.id desc\n"
-                    +"limit 4"
-                    ;
-                 
-            PreparedStatement statement;
+                    + "limit 4";
 
-            statement = connection.prepareStatement(sql);
-            
-            statement.setString(1, "%" + statusRestricted + "%");
-           
-            ResultSet rs = statement.executeQuery();
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + statusRestricted + "%");
+
+            rs = ps.executeQuery();
 
             while (rs.next()) {
 
@@ -138,8 +133,10 @@ public class BlogDAO extends MyDAO {
                 b.setStatus(rs.getString(9));
                 list.add(b);
             }
-
+            rs.close();
+            ps.close();
             return list;
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,7 +158,7 @@ public class BlogDAO extends MyDAO {
                     + "and Blog.status like ? \n"
                     + "order by Blog.id desc\n"
                     + "LIMIT ?,?";
-                 
+
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
@@ -194,8 +191,6 @@ public class BlogDAO extends MyDAO {
         return list;
 
     }
-
-
 
     public void deleteBlog(int id) {
         xSql = "Delete from Blog where id = ?";

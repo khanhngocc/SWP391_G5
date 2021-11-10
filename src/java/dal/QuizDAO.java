@@ -333,5 +333,23 @@ public class QuizDAO extends MyDAO {
         }
         return list;
     }
+    
+    public boolean isModifyQuiz(int quiz_id) {
+       
+        xSql = "SELECT * FROM history where quiz_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, quiz_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+               return false;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
 }
