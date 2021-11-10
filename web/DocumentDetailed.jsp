@@ -88,7 +88,7 @@
                                         <a href="#" class="isDisabled">
                                             <i class="fa fa-download" style="color: #FE980F;margin-top: 30px"></i> ${blog.attachName}
                                         </a>
-                                        <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login">Login</a></p>
+                                        <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login?documentId=${blog.id}">Login</a></p>
                                     </c:if>
                                 </c:if>
                             </div>

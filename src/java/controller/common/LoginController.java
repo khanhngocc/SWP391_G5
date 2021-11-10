@@ -29,10 +29,19 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        if (id == null) {
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else {
+        String documentId = request.getParameter("documentId");
+
+        if (id != null) {
             request.setAttribute("id", Integer.parseInt(id));
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
+
+        if (documentId != null) {
+            request.setAttribute("documentId", documentId);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
+
+        if (id == null && documentId == null) {
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
 
@@ -46,6 +55,7 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("Email");
         String password = request.getParameter("Password");
         String id = request.getParameter("id");
+        String documentId = request.getParameter("documentId");
 
         MD5Helper md5 = new MD5Helper();
         String encodedPassword = null;
@@ -83,10 +93,16 @@ public class LoginController extends HttpServlet {
 
             request.getSession().setAttribute("user", user);
 
-            if (id.isEmpty()) {
+            if (id.isEmpty() && documentId.isEmpty()) {
                 response.sendRedirect("Home");
             } else {
-                response.sendRedirect("QuizHandle?id=" + Integer.parseInt(id));
+                if (!id.isEmpty()) {
+                    response.sendRedirect("QuizHandle?id=" + Integer.parseInt(id));
+                }
+
+                if (!documentId.isEmpty()) {
+                    response.sendRedirect("DocumentDetailed?id=" + documentId);
+                }
             }
         }
     }

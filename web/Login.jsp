@@ -50,6 +50,7 @@
                     <p class="text-primary">${messLogin}</p>
                     <form action="Login" method="post">
                         <input name="id" type="hidden" value="${id}">
+                         <input name="documentId" type="hidden" value="${documentId}">
                         <input name="Email" type="text" placeholder="Email" required="true" value="${usernameLogin}"/>
                         <input name="Password" type="password" placeholder="Password" required="true" value="${passwordLogin}"/>
                         <span>
