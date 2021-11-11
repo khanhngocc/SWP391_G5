@@ -23,6 +23,7 @@
                 </div>
             </c:forEach>
         </div><!--/category-products-->
+         <h2>Hot Featured</h2>
         <div class="panel-group category-products" class ="container" style="border:none">
             <c:forEach items="${listFiveHotFreeTest}" var="i">
                 <div class="col-md-6" style="margin-bottom: 14px">

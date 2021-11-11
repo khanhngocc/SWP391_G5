@@ -38,7 +38,7 @@ public class DocumentDetailed extends HttpServlet {
         BlogDAO blogDAO = new BlogDAO();
         model.Blog b = blogDAO.getBlog(Integer.valueOf(id), "1");
         request.setAttribute("blog", b);
-        ArrayList<model.Blog> listFiveBlog = blogDAO.listSixHotestBlog("1");
+        ArrayList<model.Blog> listFiveBlog = blogDAO.listFourFeaturedBlog("1");
         request.setAttribute("list5", listFiveBlog);
         SettingDAO settingDAO = new SettingDAO();
         ArrayList<Setting> categoriesList = settingDAO.getListSettingByType("Post Category");

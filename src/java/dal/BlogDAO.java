@@ -103,20 +103,20 @@ public class BlogDAO extends MyDAO {
         return no;
     }
 
-    public ArrayList<Blog> listSixHotestBlog(String statusRestricted) {
+    public ArrayList<Blog> listFourFeaturedBlog(String statusRestricted) {
 
         ArrayList<Blog> list = new ArrayList<>();
 
         try {
-            xSql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
+            xSql = "select Blog.id,Blog.title,image_Url from Blog\n"
                     + "where\n"
-                    + "Blog.user_id = User.id\n"
+                    + "isFeatured = '1' \n"
                     + "and Blog.status like ? \n"
                     + "order by Blog.id desc\n"
                     + "limit 4";
 
             ps = con.prepareStatement(xSql);
-            ps.setString(1, "%" + statusRestricted + "%");
+            ps.setString(1, statusRestricted);
 
             rs = ps.executeQuery();
 
@@ -125,13 +125,8 @@ public class BlogDAO extends MyDAO {
                 Blog b = new Blog();
                 b.setId(rs.getInt(1));
                 b.setTitle(rs.getString(2));
-                b.setDescription(rs.getString(3));
-                b.setDate(rs.getDate(4));
-                b.setAuthor(rs.getString(5));
-                b.setTime(rs.getString(6));
-                b.setImg_url(rs.getString(7));
-                b.setCategory(rs.getString(8));
-                b.setStatus(rs.getString(9));
+                b.setImg_url(rs.getString(3));
+
                 list.add(b);
             }
             rs.close();
@@ -289,6 +284,49 @@ public class BlogDAO extends MyDAO {
         }
     }
     
+     public ArrayList<Blog> listSixLastestBlog(String statusRestricted) {
+
+        ArrayList<Blog> list = new ArrayList<>();
+
+        try {
+            xSql = "select Blog.id,Blog.title,description,created_Date,User.fullname,timeCreated,image_Url,Category,Blog.status from Blog,User\n"
+                    + "where\n"
+                    + "Blog.user_id = User.id\n"
+                    + "and Blog.status like ? \n"
+                    + "order by Blog.id desc\n"
+                    + "limit 6";
+
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + statusRestricted + "%");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Blog b = new Blog();
+                b.setId(rs.getInt(1));
+                b.setTitle(rs.getString(2));
+                b.setDescription(rs.getString(3));
+                b.setDate(rs.getDate(4));
+                b.setAuthor(rs.getString(5));
+                b.setTime(rs.getString(6));
+                b.setImg_url(rs.getString(7));
+                b.setCategory(rs.getString(8));
+                b.setStatus(rs.getString(9));
+                list.add(b);
+            }
+            rs.close();
+            ps.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+
+    }
+
+
     public void changeBlogFeature(int id, String status) {
         xSql = "Update Blog set isFeatured = ? where id= ? ";
         try {

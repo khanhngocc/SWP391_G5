@@ -48,7 +48,7 @@
 
                         <div class="single-blog-post">
                             <h3>${blog.title}</h3>
-                            <input id="isFeatured" type="hidden" value="">
+                            <input id="isFeatured" type="hidden" value="${blog.isFeatured}">
                             <div class="post-meta">
                                 <ul>
                                     <li><i class="fa fa-key"></i>${blog.category}</li>
@@ -62,9 +62,9 @@
                                     <span id="starFeature" onclick="markStar(${blog.id})" class="styleStarBlog fa fa-star" <c:if test="${blog.isFeatured eq 0}">style="cursor:pointer;"</c:if> <c:if test="${blog.isFeatured eq 1}">style="cursor:pointer;color:#FE980F;"</c:if>></span>
 
 
-                                </span>
-                            </div>
-                            <img src="${blog.img_url}" alt="" class="centerImgBlog"/>
+                                    </span>
+                                </div>
+                                    <img src="${blog.img_url}" alt="" class="centerImgBlog"/>
                             <div class="desc-blog">${blog.description}</div>
                             <c:if test="${blog.attach_url ne ''}">
                                 <a href="${blog.attach_url}" download>
@@ -91,17 +91,17 @@
         <jsp:include page="Footer.jsp" />  
         <script>
 
-            window.onload = function () {
-                document.getElementById('isFeatured').value = ${blog.isFeatured};
-            }
 
             function markStar(id) {
+                
                 var current_status = document.getElementById("isFeatured").value;
                 var status;
-                if(current_status == "1")
+
+                if (current_status == "1")
                     status = "0";
-                else 
+                else
                     status = "1";
+
                 $.ajax({
                     url: "MarkStarBlog",
                     type: 'GET',
