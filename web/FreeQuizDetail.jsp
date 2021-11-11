@@ -81,13 +81,13 @@
                                 <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                                 <h2>${quiz.getTitle()}</h2>
                                 <p>${quiz.getDescription()}</p>
-                                <img src="images/product-details/rating.png" alt="" />
+                               
                                 <p><b>Subject:</b> ${sub.title}</p>
                                 <p><b>Category:</b> ${quiz.category}</p>
                                 <p><b>Level:</b> ${quiz.getLevel()}</p>
                                 <p><b>Type:</b> ${quiz.type}</p>
                                 <p><b>Number of question:</b> ${quiz.getNumber_of_question()}</p>
-                                <p><b>Duration:</b> ${quiz.getDuration()}</p>
+                                <p id="timeTest"><b>Duration:</b></p>
                                 <p><b>Rate:</b> ${quiz.getRate()}</p>
                                 <c:choose>
                                     <c:when test="${sessionScope.user==null}">
@@ -108,7 +108,29 @@
 
         </section>
         <jsp:include page="Footer.jsp" />  
+        <script>
+            
+             window.onload = function () {
+             document.getElementById("timeTest").innerHTML += " "+format('${quiz.getDuration()}');             
+    }
+            
+            function format(time) {
+                // Hours, minutes and seconds
+                var hrs = ~~(time / 3600);
+                var mins = ~~((time % 3600) / 60);
+                var secs = ~~time % 60;
 
+                // Output like "1:01" or "4:03:59" or "123:03:59"
+                var ret = "";
+                if (hrs > 0) {
+                    ret += "" + hrs+"h" + " : " + (mins < 10 ? "0" : "");
+                }
+                ret += "" + mins+"m" + " : " + (secs < 10 ? "0" : "");
+                ret += "" + secs+"s";
+                return ret;
+            }
+
+        </script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

@@ -80,7 +80,7 @@
 
                                 <select name="level" style="margin-bottom:10px;height: 40px">
                                     <c:forEach items="${listLevel}" var="list">
-                                        <option value="${list.id}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
+                                        <option value="${list.value}" ${quiz.getLevel() eq list.value ? "selected" : "" }>${list.value}</option>
                                     </c:forEach>
                                 </select>
 

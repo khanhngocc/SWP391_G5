@@ -109,7 +109,7 @@
                                             <div class="productinfo text-center">
                                                 <img src="${i.thumbnail}" alt="" />
 
-                                                 <h5>${i.title}</h5>
+                                                 <h4>${i.title}</h4>
 
                                             </div>
                                             <div class="product-overlay">

@@ -56,7 +56,7 @@
         <section style="margin-top: 20px;margin-bottom: 100px"><!--slider-->
 
             <div class="container">
-                  <div class="row">
+                <div class="row">
                     <div class="col-sm-3">
                         <jsp:include page="LeftSideBarDocument.jsp" />  
                     </div> 
@@ -75,7 +75,7 @@
                                     </ul>
 
                                 </div>
-                                        <img src="${blog.img_url}" alt="" class="centerImgBlog" />
+                                <img src="${blog.img_url}" alt="" class="centerImgBlog" />
 
                                 <div class="desc-blog">${blog.description}</div>
                                 <c:if test="${blog.attach_url ne ''}">
@@ -85,9 +85,6 @@
                                         </a>
                                     </c:if>
                                     <c:if test="${sessionScope.user eq null}">
-                                        <a href="#" class="isDisabled">
-                                            <i class="fa fa-download" style="color: #FE980F;margin-top: 30px"></i> ${blog.attachName}
-                                        </a>
                                         <p class="text-tooltip">Hint: Please login to download attached file! <a href="Login?documentId=${blog.id}">Login</a></p>
                                     </c:if>
                                 </c:if>

@@ -70,7 +70,7 @@
                                 Level
                                 <select name="level" style="margin-bottom:10px;height: 40px">
                                     <c:forEach items="${listLevel}" var="list">
-                                        <option value="${list.id}">${list.value}</option>
+                                        <option value="${list.value}">${list.value}</option>
                                     </c:forEach>
                                 </select>                              
                                 Type
