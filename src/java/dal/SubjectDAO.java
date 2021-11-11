@@ -183,14 +183,14 @@ public class SubjectDAO extends MyDAO{
                 + "           ,user_id\n"
                 + "           ,status\n"
                 + "           ,price\n"
-                + "           ,salePrice)\n"
+                + "           ,salePrice,createdDate)\n"
                 + "     VALUES\n"
                 + "           (\n"
                 + "		?  \n"
                 + "           , ? \n"
                 + "           , ? \n"
                 + "           ,? \n"
-                + "           , ?)";
+                + "           , ?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, subject.getTitle());
@@ -198,6 +198,7 @@ public class SubjectDAO extends MyDAO{
             ps.setString(3, "Published");
             ps.setFloat(4, subject.getPrice());
             ps.setFloat(5, subject.getSalePrice());
+            ps.setDate(6, subject.getCreatedDate());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

@@ -3,6 +3,7 @@
     Created on : Sep 12, 2021, 8:32:26 PM
     Author     : dell
 --%>
+<%@page import="model.Blog"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,6 +31,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head><!--/head-->
 
     <body>
@@ -45,7 +48,7 @@
 
                         <div class="single-blog-post">
                             <h3>${blog.title}</h3>
-
+                            <input id="isFeatured" type="hidden" value="">
                             <div class="post-meta">
                                 <ul>
                                     <li><i class="fa fa-key"></i>${blog.category}</li>
@@ -54,13 +57,10 @@
                                     <li><i class="fa fa-calendar"></i>${blog.date}</li>
                                 </ul>
                                 <span>
-                                    <c:if test="${blog.status eq 1}">
-                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${blog.id}, '0')"><i class="fa fa-chain"></i> Deactivate</a>
-                                    </c:if>
-                                    <c:if test="${blog.status eq 0}">
-                                        <a href="javascript:void(0);" onclick="changeBlogStatus(${blog.id}, '1')"><i class="fa fa-chain"></i> Activate</a>
-                                    </c:if>
-                                    <a href="UpdateBlog?id=${blog.id}"><i class="fa fa-pencil"></i> Edit</a>
+
+
+                                    <span id="starFeature" onclick="markStar(${blog.id})" class="styleStarBlog fa fa-star" <c:if test="${blog.isFeatured eq 0}">style="cursor:pointer;"</c:if> <c:if test="${blog.isFeatured eq 1}">style="cursor:pointer;color:#FE980F;"</c:if>></span>
+
 
                                 </span>
                             </div>
@@ -89,7 +89,41 @@
 
 
         <jsp:include page="Footer.jsp" />  
+        <script>
 
+            window.onload = function () {
+                document.getElementById('isFeatured').value = ${blog.isFeatured};
+            }
+
+            function markStar(id) {
+                var current_status = document.getElementById("isFeatured").value;
+                var status;
+                if(current_status == "1")
+                    status = "0";
+                else 
+                    status = "1";
+                $.ajax({
+                    url: "MarkStarBlog",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {id: id, status: status},
+                    success: function (data) {
+
+                        document.getElementById("isFeatured").value = data;
+
+                        if (data == "1")
+                        {
+                            document.getElementById("starFeature").style = "cursor:pointer;color:#FE980F;";
+                        } else
+                        {
+                            document.getElementById("starFeature").style = "cursor:pointer;";
+                        }
+
+                    }
+                });
+
+            }
+        </script>
         <script src="js/blogHander.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>

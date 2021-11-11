@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author dell
@@ -16,7 +18,17 @@ public class Subject {
     private float price;
     private float salePrice;
     private String author_name;
+    private Date createdDate;
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
+    
     public String getAuthor_name() {
         return author_name;
     }

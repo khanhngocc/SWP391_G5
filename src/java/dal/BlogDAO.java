@@ -43,7 +43,7 @@ public class BlogDAO extends MyDAO {
 
     public Blog getBlog(int id, String statusRestricted) {
         Blog b = new Blog();
-        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status,attachFile_Url from Blog,User\n"
+        xSql = "select Blog.id,Blog.title,description,created_Date,fullname,Blog.user_id,timeCreated,image_Url,Category,Blog.status,attachFile_Url,isFeatured from Blog,User\n"
                 + "where\n"
                 + "Blog.user_id = User.id\n"
                 + "and\n"
@@ -67,6 +67,7 @@ public class BlogDAO extends MyDAO {
                 b.setStatus(rs.getString(10));
                 b.setAttach_url(rs.getString(11));
                 b.setAttachName(getNameAttachFile(rs.getString(11)));
+                b.setIsFeatured(rs.getString(12));
             }
             rs.close();
             ps.close();
@@ -231,7 +232,7 @@ public class BlogDAO extends MyDAO {
                 + "           ,timeCreated\n"
                 + "           ,Category\n"
                 + "           ,status\n"
-                + "           ,attachFile_Url)\n"
+                + "           ,attachFile_Url,isFeatured)\n"
                 + "     VALUES\n"
                 + "           (? \n"
                 + "           ,?\n"
@@ -241,7 +242,7 @@ public class BlogDAO extends MyDAO {
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
-                + "           ,?)";
+                + "           ,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, blog.getTitle());
@@ -253,6 +254,7 @@ public class BlogDAO extends MyDAO {
             ps.setString(7, blog.getCategory());
             ps.setString(8, blog.getStatus());
             ps.setString(9, blog.getAttach_url());
+            ps.setString(10, "0");
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -280,6 +282,22 @@ public class BlogDAO extends MyDAO {
             ps.setString(6, blog.getCategory());
             ps.setString(7, blog.getAttach_url());
             ps.setInt(8, blog.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void changeBlogFeature(int id, String status) {
+        xSql = "Update Blog set isFeatured = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, status);
+
+            ps.setInt(2, id);
+
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

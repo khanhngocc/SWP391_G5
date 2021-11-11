@@ -248,6 +248,10 @@
         <servlet-name>CheckIsAllowToExcute</servlet-name>
         <servlet-class>controller.expert.CheckIsAllowToExcute</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarkStarBlog</servlet-name>
+        <servlet-class>controller.marketing.MarkStarBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -495,6 +499,10 @@
     <servlet-mapping>
         <servlet-name>CheckIsAllowToExcute</servlet-name>
         <url-pattern>/CheckIsAllowToExcute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkStarBlog</servlet-name>
+        <url-pattern>/MarkStarBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

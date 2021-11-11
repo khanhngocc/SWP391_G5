@@ -4,6 +4,7 @@ import controller.base.BaseRequiredLoginController;
 import dal.SubjectDAO;
 import dal.UserDAO;
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +53,7 @@ public class AddSubject extends BaseRequiredLoginController {
         subject.setTitle(title);
         subject.setPrice(num_price);
         subject.setSalePrice(num_sale);
+        subject.setCreatedDate(Date.valueOf(java.time.LocalDate.now()));
 
         User session_user = (User) request.getSession(false).getAttribute("user");
         UserDAO userDAO = new UserDAO();

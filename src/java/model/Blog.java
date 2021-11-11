@@ -25,7 +25,17 @@ public class Blog {
     private String status;
     private String attach_url;
     private String attachName;
+    private String isFeatured;
 
+    public String getIsFeatured() {
+        return isFeatured;
+    }
+
+    public void setIsFeatured(String isFeatured) {
+        this.isFeatured = isFeatured;
+    }
+    
+    
     public String getAttachName() {
         return attachName;
     }
