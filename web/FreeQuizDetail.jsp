@@ -69,76 +69,41 @@
 
                 <div class="container">
                     <jsp:include page="SideBarForExam.jsp" />  
+                    <div class="product-details"><!--product-details-->
+                        <div class="col-sm-6">
+                            <div class="view-product">
+                                <img src="${quiz.getThumbnail()}" alt="" />
 
-                    <div class="col-sm-5 padding-right">
-                        <!--sign up form-->
-                        <div class="signup-form">
-                            <h2>Quiz Detailed</h2>
-                            <p class="text-primary">${mess}</p>
-                            <form enctype="multipart/form-data" id="myForm" action="" method="post">
-                                <img id="profile-ava" class="imageAvatar" src="${quiz.getThumbnail()}">
-                                <br>
-
-                                Title
-                                <input name="title" type="text" placeholder="Tittle" readonly value="${quiz.getTitle()}" />
-                                Brief Information
-                                <textarea name="description"type="text" readonly>${quiz.getDescription()}</textarea>
-
-                                Subject
-
-                                <input name="subject" type="text" placeholder="Tittle" readonly value="${sub.title}" />
-
-                                Category
-                                <input name="category" type="text" placeholder="Tittle" readonly value="${quiz.category}" />
-
-                                Level
-                                <input name="level"type="text" placeholder="Level" value="${quiz.getLevel()}" readonly />							
-                                User ID:
-                                <input readonly value="${quiz.getUser_id()}"/>							
-                                Type
-                                <input name="title" type="text" placeholder="Tittle" readonly value="${quiz.type}" />
-
-                                Number of Questions: 
-                                <input readonly value="${quiz.getNumber_of_question()}"/>
-                                Duration
-                                <input name="duration"type="number" placeholder="Duration" value="${quiz.getDuration()}" readonly="true"/>	
-                                Rate
-                                <input name="rate"type="text" placeholder="Rate" value="${quiz.getRate()}" readonly="true" />
-
-
-                                <a href="javascript:void(0)" onclick="Show('myTable')"><h2>Quiz Content</h2></a>
-
-
-                                <table  class="table" id="myTable" style="display: none">
-                                    <tr>
-                                        <th><strong><a href="javascript:void(0);" onclick="sort(0)">Sub-Category</a></strong></th>
-                                        <th><strong><a href="javascript:void(0);" onclick="sort(1)"># Question</a></strong></th>                                   
-                                    </tr>
-
-                                    <c:forEach begin="0" end="${listCategory.size()-1}" var="i">
-                                        <tr>
-                                            <td>${listCategory.get(i).value}</td>
-                                            <td>${array[i]}</td>                                        
-                                        </tr>     
-                                    </c:forEach>
-                                </table>
-
-                            </form>
-
+                            </div>
                         </div>
-                    </div>                       
+                        <div class="col-sm-6">
+                            <div class="product-information"><!--/product-information-->
+                                <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+                                <h2>${quiz.getTitle()}</h2>
+                                <p>${quiz.getDescription()}</p>
+                                <img src="images/product-details/rating.png" alt="" />
+                                <p><b>Subject:</b> ${sub.title}</p>
+                                <p><b>Category:</b> ${quiz.category}</p>
+                                <p><b>Level:</b> ${quiz.getLevel()}</p>
+                                <p><b>Type:</b> ${quiz.type}</p>
+                                <p><b>Number of question:</b> ${quiz.getNumber_of_question()}</p>
+                                <p><b>Duration:</b> ${quiz.getDuration()}</p>
+                                <p><b>Rate:</b> ${quiz.getRate()}</p>
+                                <c:choose>
+                                    <c:when test="${sessionScope.user==null}">
+
+                                        <a href="Login?id=${quiz.id}" class="btn btn-primary">Login To Take The Test</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="QuizHandle?id=${quiz.id}" class="btn btn-primary">Take The Test</a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                            </div><!--/product-information-->
+                        </div>
+                    </div>
+
                 </div>
-
-
-                <c:choose>
-                    <c:when test="${sessionScope.user==null}">
-
-                        <center><a href="Login?id=${quiz.id}" class="btn btn-primary">Login To Take The Test</a></center>
-                        </c:when>
-                        <c:otherwise>
-                        <center><a href="QuizHandle?id=${quiz.id}" class="btn btn-primary">Take The Test</a></center>
-                        </c:otherwise>
-                    </c:choose>
             </div>
 
         </section>

@@ -101,30 +101,26 @@
                         <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Latest free exams</h2>
 
-                            <c:forEach items="${freetest}" var="i">
+                          <c:forEach items="${freetest}" var="i">
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">
+
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img class="imgTestHome"  src="${i.thumbnail}" alt="" />
-                                                <h2>${(i.getDuration()-i.getDuration()%60)/60} min  ${i.getDuration()%60}  secs</h2>
-                                                <p>${i.title}</p>
+                                                <img src="${i.thumbnail}" alt="" />
+
+                                                 <h5>${i.title}</h5>
 
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
-                                                    <h2>${i.getDuration()} secs </h2>
-                                                    <p><a href="FreeTestDetail?id=${i.id}">${i.title}</a></p>
-                                                    <a href = "QuizHandle?id=${i.id}" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Do Test</a>
+
+                                                    <h4><a href="FreeTestDetail?id=${i.id}">${i.title}</a></h4>
+                                                    <a href="QuizHandle?id=${i.id}" class="btn btn-default add-to-cart"><i class="fa fa-pencil"></i>Take</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="choose">
-                                            <ul class="nav nav-pills nav-justified">
-                                                <li style="color:orange;text-align:center">${i.type}</li>
-                                                <li style="color:orange;text-align:center">${i.getNumber_of_question()} questions</li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
                             </c:forEach>
