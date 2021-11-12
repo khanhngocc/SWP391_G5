@@ -74,11 +74,11 @@ public class TestControl extends HttpServlet {
 
         SettingDAO setdao = new SettingDAO();
         List<Setting> listCategories = setdao.getListSettingByType("Quiz Category");
-        List<Quizzes> listFiveHotFreeTest = dao.getTop5Quiz();
+        List<Quizzes> listFourFeaturedTest = dao.getFourFeaturedQuiz();
 
         request.setAttribute("listAllFreeQuizzes", listAllFreeQuizzes);
         request.setAttribute("listCategories", listCategories);
-        request.setAttribute("listFiveHotFreeTest", listFiveHotFreeTest);
+        request.setAttribute("listFourFeaturedTest", listFourFeaturedTest);
 
         request.setAttribute("searchName", searchName);
 

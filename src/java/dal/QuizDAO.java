@@ -157,7 +157,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -175,7 +175,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12),rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -185,25 +185,27 @@ public class QuizDAO extends MyDAO {
         return (x);
     }
 
-    public ArrayList<Quizzes> getTop5Quiz() {
-        ArrayList<Quizzes> x = new ArrayList<>();
-        xSql = "SELECT * FROM Quizzes where type = 'Free Test' order by id desc LIMIT 4";
+    public ArrayList<Quizzes> getFourFeaturedQuiz() {
+        ArrayList<Quizzes> list = new ArrayList<>();
+        xSql = "SELECT id,title,thumnail FROM Quizzes where type = 'Free Test' and isFeatured = true order by id desc LIMIT 4";
 
         try {
 
             ps = con.prepareStatement(xSql);
-
             rs = ps.executeQuery();
             while (rs.next()) {
-                x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+               Quizzes quiz = new Quizzes();
+               quiz.setId(rs.getInt(1));
+               quiz.setTitle(rs.getString(2));
+               quiz.setThumbnail(rs.getString(3));
+               list.add(quiz);
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (x);
+        return list;
     }
 
     public void deleteQuiz(int id) {
@@ -229,8 +231,10 @@ public class QuizDAO extends MyDAO {
                 + "           ,numberOfQuestion\n"
                 + "           ,duration\n"
                 + "           ,rate\n"
-                + "           ,thumnail)\n"
-                + "     VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                + "           ,thumnail\n"
+                + "           ,createdDate\n"
+                + "           ,isFeatured)\n"
+                + "     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, q.getTitle());
@@ -244,6 +248,8 @@ public class QuizDAO extends MyDAO {
             ps.setInt(9, q.getDuration());
             ps.setFloat(10, q.getRate());
             ps.setString(11, q.getThumbnail());
+            ps.setDate(12, q.getCreate_date());
+            ps.setBoolean(13, q.isIsFeatured());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,7 +264,7 @@ public class QuizDAO extends MyDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                q = new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12));
+                q = new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14));
             }
             return q;
         } catch (Exception e) {
@@ -281,6 +287,7 @@ public class QuizDAO extends MyDAO {
                 + "      ,duration = ?\n"
                 + "      ,rate = ?\n"
                 + "      ,thumnail = ?\n"
+            
                 + " WHERE id=?";
 
         try {
@@ -296,6 +303,7 @@ public class QuizDAO extends MyDAO {
             ps.setInt(9, q.getDuration());
             ps.setFloat(10, q.getRate());
             ps.setString(11, q.getThumbnail());
+          
             ps.setInt(12, q.getId());
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -311,7 +319,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -330,7 +338,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -350,7 +358,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -373,7 +381,7 @@ public class QuizDAO extends MyDAO {
             ps.setString(2, "Free Test");
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -391,7 +399,7 @@ public class QuizDAO extends MyDAO {
 
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -416,8 +424,8 @@ public class QuizDAO extends MyDAO {
         }
         return true;
     }
-
-    public int getRowCountAllFreeTest() {
+    
+        public int getRowCountAllFreeTest() {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM quizzes where type = 'Free Test'";
         try {
@@ -477,7 +485,7 @@ public class QuizDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Quizzes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12)));
+                        rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getFloat(11), rs.getString(12), rs.getDate(13), rs.getBoolean(14)));
             }
             rs.close();
             ps.close();
@@ -487,4 +495,21 @@ public class QuizDAO extends MyDAO {
         return list;
     }
 
+    public void changeQuizFeature(int id, String status) {
+        xSql = "Update quizzes set isFeatured = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, status);
+
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+ 
 }

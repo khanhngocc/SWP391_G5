@@ -260,6 +260,18 @@
         <servlet-name>Trend</servlet-name>
         <servlet-class>controller.common.Trend</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddQuestionController</servlet-name>
+        <servlet-class>controller.expert.AddQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewQuestionController</servlet-name>
+        <servlet-class>controller.expert.ViewQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MarkStarQuiz</servlet-name>
+        <servlet-class>controller.expert.MarkStarQuiz</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -519,6 +531,18 @@
     <servlet-mapping>
         <servlet-name>Trend</servlet-name>
         <url-pattern>/Trend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionController</servlet-name>
+        <url-pattern>/AddQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewQuestionController</servlet-name>
+        <url-pattern>/ViewQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkStarQuiz</servlet-name>
+        <url-pattern>/MarkStarQuiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

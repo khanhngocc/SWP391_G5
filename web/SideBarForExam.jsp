@@ -25,9 +25,9 @@
         </div><!--/category-products-->
          <h2>Hot Featured</h2>
         <div class="panel-group category-products" class ="container" style="border:none">
-            <c:forEach items="${listFiveHotFreeTest}" var="i">
+            <c:forEach items="${listFourFeaturedTest}" var="i">
                 <div class="col-md-6" style="margin-bottom: 14px">
-                    <img id="img-left-side" src="${i.thumbnail}" alt=""><br>
+                    <img class="featuresBlog" src="${i.thumbnail}" alt=""><br>
                     <div style="margin-top: 8px"><a href="FreeTestDetail?id=${i.id}">${i.title}</a></div>
 
                 </div>

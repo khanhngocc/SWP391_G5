@@ -44,55 +44,35 @@
                     <div class="signup-form">
                         <form id="create-test" action="EditQuestion" method="post">
                             <p><input type="hidden" name="id" value="${question.id}" ></p>                    
-                            <h4> Question Edit</h4>
+                            <h4> Question Detail</h4>
                             
                             Category
+                            <input type="text" name="answer1" placeholder="Category" value="${question.category}" readonly>
                             
-                            <select name="category" style="margin-bottom:10px">
-                                <c:forEach items="${listCategory}" var="list">
-                                    <option value="${list.value}" ${question.category eq list.value ? "selected" : "" }>${list.value}</option>
-                                </c:forEach>
-                            </select> 
                             
                             Subject
                             
-                            <select name="subject" style="margin-bottom:10px">
-                                <c:forEach items="${listSubject}" var="list">
-                                    <option value="${list.title}" ${question.subject eq list.title ? "selected" : "" }>${list.title}</option>
-                                </c:forEach>
-                            </select>
+                            <input type="text" name="answer1" placeholder="Subject" value="${question.subject}" readonly>
                             
                             Level
 
-                            <select name="level" style="margin-bottom:10px">
-                                <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.value}" ${question.level eq list.value ? "selected" : "" }>${list.value}</option>
-                                </c:forEach>
-                            </select>
+                            <input type="text" name="answer1" placeholder="Level" value="${question.level}" readonly>
+                            
                             Content
-                            <textarea name="question" id="quest" >${question.content}</textarea>
+                            <textarea name="question" id="quest" readonly>${question.content}</textarea>
                             Option 1
-                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
+                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}" readonly>
                             Option 2
-                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
+                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}" readonly>
                             Option 3
-                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
+                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}" readonly>
                             Option 4
-                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
+                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}" readonly>
 
                             Correct Answer:
-                            <p>                           
-                                <select name="correct" id="correct">
-                                    <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
-                                    <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
-                                    <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
-                                    <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
-                                </select>
-                            </p>       
-                            <p><input type="hidden" name="quiz" value="${quiz}"></p>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Update</button>
+                            <input type="text" name="answer4" placeholder="Correct Answer" value="${question.option_correct}" readonly>
                         </form>
-
+                        <br><br>
                     </div>
                 </div>
             </div>

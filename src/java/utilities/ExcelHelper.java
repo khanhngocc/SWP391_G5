@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import model.Question;
@@ -38,6 +40,7 @@ public class ExcelHelper {
         String option3 = "";
         String option4 = "";
         String optionCorrect = "";
+        String subject = "";
         InputStream ips = new FileInputStream(new File(path));
         Workbook wb = getWorkbook(ips, path);
         Sheet sheet = wb.getSheetAt(0);
@@ -83,10 +86,13 @@ public class ExcelHelper {
                     case 8:
                         optionCorrect = (String) getCellValue(cell);
                         break;
+                    case 9:
+                        subject = (String) getCellValue(cell);
+                        break;
                 }
             }
             QuestionDAO qdao = new QuestionDAO();
-            qdao.insertQuestion(new Question(content, category, status, level, option1, option2, option3, option4, optionCorrect));
+            qdao.insertQuestion(new Question(content, category, status, level, option1, option2, option3, option4, optionCorrect, subject, Date.valueOf(LocalDate.now())));
         }
     }
 

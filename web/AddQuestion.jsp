@@ -42,9 +42,9 @@
                 <div class="col-sm-9">
 
                     <div class="signup-form">
-                        <form id="create-test" action="EditQuestion" method="post">
+                        <form id="create-test" action="AddQuestion" method="post">
                             <p><input type="hidden" name="id" value="${question.id}" ></p>                    
-                            <h4> Question Edit</h4>
+                            <h4> Question Add</h4>
                             
                             Category
                             
@@ -70,27 +70,27 @@
                                 </c:forEach>
                             </select>
                             Content
-                            <textarea name="question" id="quest" >${question.content}</textarea>
+                            <textarea name="question" id="quest" placeholder="Question"></textarea>
                             Option 1
-                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
+                            <input type="text" name="answer1" placeholder="Answer 1">
                             Option 2
-                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
+                            <input type="text" name="answer2" placeholder="Answer 2">
                             Option 3
-                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
+                            <input type="text" name="answer3" placeholder="Answer 3">
                             Option 4
-                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
+                            <input type="text" name="answer4" placeholder="Answer 4">
 
                             Correct Answer:
                             <p>                           
                                 <select name="correct" id="correct">
-                                    <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
-                                    <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
-                                    <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
-                                    <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
+                                    <option value="1"> Answer 1</option>
+                                    <option value="2"> Answer 2</option>
+                                    <option value="3"> Answer 3</option>
+                                    <option value="4"> Answer 4</option>                               
                                 </select>
                             </p>       
                             <p><input type="hidden" name="quiz" value="${quiz}"></p>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Update</button>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
                         </form>
 
                     </div>

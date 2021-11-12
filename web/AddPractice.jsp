@@ -40,26 +40,27 @@
         <jsp:include page="HeaderCustomer.jsp" />  
         <section>
             <div>
-
                 <div class="container">
                     <div class="col-sm-6">
                         <div class="signup-form">
                             <!--sign up form-->
                             <h2>Add a Practice</h2>
                             <p class="text-primary" id="messCreatePractice"></p>
-                            <form name="myForm" action="AddPractice" method="post" enctype="multipart/form-data" onsubmit="return validPractice();">
-                                Choose a image (Thumbnail)
-                                <input type="file" name="fname" required="true"/>
+                            <form name="myForm" action="AddPractice" method="post" onsubmit="return validPractice();">
+                                
                                 Title
                                 <input name="title" type="text" placeholder="Title" required="true" />
                                 Description
                                 <input name="description" type="text" placeholder="Description" />
                                 Subject 
-                                <select name="subject" id="subject" style="margin-bottom:10px;height: 40px">
+                                <select name="subject" id="subject" style="margin-bottom:10px;height: 40px" onchange="setLimit()">
                                     <c:forEach items="${listSubject}" var="list">
                                         <option value="${list.id}">${list.title}</option>
                                     </c:forEach>
                                 </select>
+                                <c:forEach items="${listSubject}" var="list">
+                                    <input type="hidden" id="${list.id}" value="${qdao.getQuestionsBySubject(list.title).size()}"></option>
+                                    </c:forEach>
                                 Category 
                                 <select name="category" id="subject" style="margin-bottom:10px;height: 40px">
                                     <c:forEach items="${listCategory}" var="list">
@@ -68,7 +69,10 @@
                                 </select>
 
                                 Duration (in seconds)
-                                <input name="duration" type="text" placeholder="Duration" required=""/>													                           
+                                <input name="duration" type="text" placeholder="Duration" required/>	
+                                
+                                Number of Question
+                                <input id="number" name="number" type="number" value="1" min="1" max="${qdao.getQuestionsBySubject("Math").size()}" required/>	
 
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
                             </form>                            
@@ -89,6 +93,19 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        function setLimit(){
+            var subject = document.getElementById('subject');
+            var _subject = subject.value;
+            var input = document.getElementById(_subject).value;
+            console.log(subject);
+            console.log(_subject);
+            console.log(input);
+            var number = document.getElementById('number');
+            number.value = 1;
+            number.max = parseInt(input);            
+        }
+    </script>
 </body>
 
 </html>

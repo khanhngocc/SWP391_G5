@@ -69,33 +69,6 @@ function validUserProfile() {
 
 
 function validPractice() {
-    const standardedExtensionImg = ['.jpg', '.jpeg', '.png', '.gif'];
-    // valid file
-
-    let fi = document.forms["myForm"]["fname"];
-
-    var fileValue = fi.value;
-
-    var startIndex = fileValue.lastIndexOf(".");
-    var filename = fileValue.substring(startIndex, fileValue.length);
-
-    if (standardedExtensionImg.includes(filename) == false)
-    {
-        document.getElementById("messCreatePractice").textContent
-                = 'file input is not a image';
-        return false;
-    }
-
-
-
-    if (fi.files[0].size > 1048576)
-    {
-        document.getElementById("messCreatePractice").textContent
-                = 'size of image inputed comes over 1KB ';
-        return false;
-    }
-
-
     // valid title
     let title = document.forms["myForm"]["title"].value;
     if (title.length > 100) {

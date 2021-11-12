@@ -52,12 +52,13 @@ public class FreeTestDetail extends HttpServlet {
         SettingDAO setdao = new SettingDAO();
         Quizzes quiz = quizd.getQuizByID(id);
         List<Setting> listCategories = setdao.getListSettingByType("Quiz Category");
-        List<Quizzes> listFiveHotFreeTest = dao.getTop5Quiz();
+        List<Quizzes> listFourFeaturedTest = dao.getFourFeaturedQuiz();
+
         Subject sub = sdao.getSubject(quiz.getSubject_id(), "Published");
         
         request.setAttribute("listCategories", listCategories);
         
-        request.setAttribute("listFiveHotFreeTest", listFiveHotFreeTest);
+        request.setAttribute("listFourFeaturedTest", listFourFeaturedTest);
        
         request.setAttribute("array", array);
         request.setAttribute("quiz", quiz);

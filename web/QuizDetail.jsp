@@ -32,6 +32,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <!--/head-->
 
@@ -43,9 +45,20 @@
                 <div class="container">
                     <div class="col-sm-6"> 
                         <div class="signup-form">
-                            <!--sign up form-->
-                            <h2>Quiz Detailed</h2>
-                            <p class="text-primary">${mess}</p>
+
+                            <div>
+                              
+                                <c:if test="${quiz.type eq 'Free Test'}">
+                                    <span id="starFeature" onclick="markStar(${quiz.id})" class="fa fa-star" 
+                                          <c:if test="${quiz.isFeatured eq 'false'}">style="cursor:pointer;float: right"</c:if> 
+                                          <c:if test="${quiz.isFeatured eq 'true'}">style="cursor:pointer;color:#FE980F;float: right"</c:if>
+                                              >
+                                          </span>
+                                </c:if>
+
+                            </div>
+                            <input id="isFeatured" type="hidden" value="${quiz.isFeatured}">
+
                             <form enctype="multipart/form-data" id="myForm" action="" method="post">
                                 <img id="profile-ava" class="imageAvatar" src="${quiz.getThumbnail()}">
                                 <br>
@@ -109,7 +122,41 @@
 
         </section>
         <jsp:include page="Footer.jsp" /> 
+        <script>
 
+
+            function markStar(id) {
+
+                var current_status = document.getElementById("isFeatured").value;
+                var status;
+
+                if (current_status == "true")
+                    status = "0";
+                else
+                    status = "1";
+               
+                $.ajax({
+                    url: "MarkStarQuiz",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {id: id, status: status},
+                    success: function (data) {
+
+                        document.getElementById("isFeatured").value = data;
+
+                        if (data == "1")
+                        {
+                            document.getElementById("starFeature").style = "cursor:pointer;color:#FE980F;float: right";
+                        } else
+                        {
+                            document.getElementById("starFeature").style = "cursor:pointer;float: right";
+                        }
+
+                    }
+                });
+
+            }
+        </script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

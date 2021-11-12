@@ -5,12 +5,14 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
- * @author Admin
- * fixed: 10/22/2021
+ * @author Admin fixed: 10/22/2021
  */
 public class Quizzes {
+
     private int id;
     private String title;
     private String description;
@@ -23,25 +25,13 @@ public class Quizzes {
     private int duration;
     private float rate;
     private String thumbnail;
+    private Date create_date;
+    private boolean isFeatured;
 
     public Quizzes() {
     }
 
-    public Quizzes(String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
-        this.title = title;
-        this.description = description;
-        this.subject_id = subject_id;
-        this.category = category;
-        this.level = level;
-        this.type = type;
-        this.user_id = user_id;
-        this.number_of_question = number_of_question;
-        this.duration = duration;
-        this.rate = rate;
-        this.thumbnail = thumbnail;
-    }
-
-    public Quizzes(int id, String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail) {
+    public Quizzes(int id, String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail, Date create_date, boolean isFeatured) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -54,8 +44,44 @@ public class Quizzes {
         this.duration = duration;
         this.rate = rate;
         this.thumbnail = thumbnail;
+        this.create_date = create_date;
+        this.isFeatured = isFeatured;
     }
 
+    public Quizzes(String title, String description, int subject_id, String category, String level, String type, int user_id, int number_of_question, int duration, float rate, String thumbnail, Date create_date, boolean isFeatured) {
+        this.title = title;
+        this.description = description;
+        this.subject_id = subject_id;
+        this.category = category;
+        this.level = level;
+        this.type = type;
+        this.user_id = user_id;
+        this.number_of_question = number_of_question;
+        this.duration = duration;
+        this.rate = rate;
+        this.thumbnail = thumbnail;
+        this.create_date = create_date;
+        this.isFeatured = isFeatured;
+    }
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
+    public boolean isIsFeatured() {
+        return isFeatured;
+    }
+
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
@@ -151,5 +177,5 @@ public class Quizzes {
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
-    
+
 }

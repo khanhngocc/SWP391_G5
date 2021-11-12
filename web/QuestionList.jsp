@@ -39,6 +39,7 @@
 
             <!--                <div class="col-sm-3"></div>-->
             <a href="ImportQuestion"><i class="fa fa-upload"></i> Import Question List</a>
+            <a style="padding-left: 70px" href="AddQuestion"><i class="fa fa-upload"></i> Add Question </a>
             <div class="searchform" style="margin-top: 20px;">
                 <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for content"/>
             </div>
@@ -75,7 +76,7 @@
                             <td>${i.option_correct}</td>                            
                             <td><a href="#" onclick="deleteQuiz(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
                             <td><a href="EditQuestion?id=${i.id}"><i class="fa fa-pencil"></i>Edit</a></td>
-                            <td><a href="QuestionDetail?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
+                            <td><a href="ViewQuestion?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>     
                     </c:forEach>
                 </table>

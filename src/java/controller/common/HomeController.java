@@ -45,12 +45,12 @@ public class HomeController extends BaseRequiredLoginController {
 
         ArrayList<Quizzes> freetest = quizdao.getQuizByType("Free Test");
         List<Setting> listCategories = setdao.getListSettingByType("Quiz Category");
-        List<Quizzes> listFiveHotFreeTest = quizdao.getTop5Quiz();
+       List<Quizzes> listFourFeaturedTest = quizdao.getFourFeaturedQuiz();
 
         request.setAttribute("freetest", freetest);
 
         request.setAttribute("listCategories", listCategories);
-        request.setAttribute("listFiveHotFreeTest", listFiveHotFreeTest);
+        request.setAttribute("listFourFeaturedTest", listFourFeaturedTest);
 
         request.setAttribute("sliderList", sliderList);
         request.setAttribute("sliderListSize", sliderList.size());
@@ -63,5 +63,5 @@ public class HomeController extends BaseRequiredLoginController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
+   
 }

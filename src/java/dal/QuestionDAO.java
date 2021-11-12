@@ -64,9 +64,11 @@ public class QuestionDAO extends MyDAO {
                 + "           ,option2\n"
                 + "           ,option3\n"
                 + "           ,option4\n"
-                + "           ,optionCorrect)\n"
+                + "           ,optionCorrect\n"
+                + "           ,subject\n"
+                + "           ,createdDate)\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?,?,?)\n";
+                + "           (?,?,?,?,?,?,?,?,?,?,?)\n";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -79,6 +81,8 @@ public class QuestionDAO extends MyDAO {
             ps.setString(7, q.getOption3());
             ps.setString(8, q.getOption4());
             ps.setString(9, q.getOption_correct());
+            ps.setString(10, q.getSubject());
+            ps.setDate(11, q.getCreate_date());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +109,7 @@ public class QuestionDAO extends MyDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 x = new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,6 +128,8 @@ public class QuestionDAO extends MyDAO {
                 + "      ,option3 = ?\n"
                 + "      ,option4 = ?\n"
                 + "      ,optionCorrect = ?\n"
+                + "      ,subject = ?\n"
+                + "      ,createdDate = ?\n"
                 + " WHERE id = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -136,7 +142,9 @@ public class QuestionDAO extends MyDAO {
             ps.setString(7,x.getOption3());
             ps.setString(8,x.getOption4());
             ps.setString(9,x.getOption_correct());
-            ps.setInt(10, x.getId());
+            ps.setString(10, x.getSubject());
+            ps.setDate(11, x.getCreate_date());
+            ps.setInt(12, x.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -191,7 +199,7 @@ public class QuestionDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,7 +216,7 @@ public class QuestionDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -225,9 +233,26 @@ public class QuestionDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 x.add(new Question(rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13)));
+                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getDate(15)));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    
+    public ArrayList<Question> getQuestionsBySubject(String subject){
+        ArrayList<Question> x = new ArrayList<>();
+        xSql = "select * from Question where subject = ?";
+        try{
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subject);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
+            }
+        } catch(Exception e){
             e.printStackTrace();
         }
         return x;
