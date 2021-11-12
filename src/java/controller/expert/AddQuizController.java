@@ -13,6 +13,8 @@ import dal.SubjectDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -67,9 +69,7 @@ public class AddQuizController extends BaseRequiredLoginController {
 
         UserDAO udao = new UserDAO();
         QuizDAO qdao = new QuizDAO();
-        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg));
+        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg, Date.valueOf(LocalDate.now()), false));
         response.sendRedirect("QuizList");
-
     }
-
 }

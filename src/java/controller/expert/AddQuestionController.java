@@ -11,6 +11,8 @@ import dal.SettingDAO;
 import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,16 +26,10 @@ import model.Subject;
  *
  * @author Admin
  */
-public class EditQuestionController extends BaseRequiredLoginController {
+public class AddQuestionController extends BaseRequiredLoginController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String quiz = request.getParameter("quiz");
-        QuestionDAO qdao = new QuestionDAO();
-        Question question = qdao.getQuestionById(id);
-        request.setAttribute("quiz", quiz);
-        request.setAttribute("question", question);
         SettingDAO settingDAO = new SettingDAO();
         SubjectDAO subjectDAO = new SubjectDAO();
         ArrayList<Subject> listSubject = subjectDAO.listAllSubject("Published");
@@ -42,12 +38,11 @@ public class EditQuestionController extends BaseRequiredLoginController {
         request.setAttribute("listLevel", listLevel);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("listSubject", listSubject);
-        request.getRequestDispatcher("EditQuestion.jsp").forward(request, response);
+        request.getRequestDispatcher("AddQuestion.jsp").forward(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
         String cate = request.getParameter("category");
         String subject = request.getParameter("subject");
         String lev = request.getParameter("level");
@@ -75,10 +70,7 @@ public class EditQuestionController extends BaseRequiredLoginController {
                         correctAns = "";
                 }
         QuestionDAO qdao = new QuestionDAO();
-        Question x = qdao.getQuestionById(id);
-        qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, "Show", lev, 
-                answer1, answer2, answer3, answer4, correctAns, subject, x.getCreate_date()));
+        qdao.insertQuestion(new Question(question, cate, "Show", lev, answer1, answer2, answer3, answer4, correctAns, subject, Date.valueOf(LocalDate.now())));
         response.sendRedirect("QuestionList");
     }
-     
 }

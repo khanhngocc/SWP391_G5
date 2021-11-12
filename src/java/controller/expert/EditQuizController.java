@@ -81,7 +81,7 @@ public class EditQuizController extends BaseRequiredLoginController {
         String imageurl = m.getParameter("imageurl");
         QuizDAO qud = new QuizDAO();
         Quizzes quizess = qud.getQuizByID(id);
-        Quizzes newq = new Quizzes(Integer.parseInt(id), title, des, Integer.parseInt(subject),category, level, type, quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), imageurl);
+        Quizzes newq = new Quizzes(Integer.parseInt(id), title, des, Integer.parseInt(subject),category, level, type, quizess.getUser_id(), quizess.getNumber_of_question(), Integer.parseInt(dur), Float.parseFloat(rate), imageurl,quizess.getCreate_date(), quizess.isIsFeatured());
          if (m.getFile("fname") != null) {
             newq.setThumbnail("images/thumbnail/" + fileNameImg);
         }

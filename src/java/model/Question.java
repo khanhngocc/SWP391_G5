@@ -6,6 +6,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -21,6 +23,8 @@ public class Question {
     private String option3;
     private String option4;
     private String option_correct;
+    private String subject;
+    private Date create_date;
 
     public Question() {
     }
@@ -32,19 +36,7 @@ public class Question {
         this.option_correct = option_correct;
     }
 
-    public Question(String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct) {
-        this.content = content;
-        this.category = category;
-        this.status = status;
-        this.level = level;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.option_correct = option_correct;
-    }
-
-    public Question(int id, String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct) {
+    public Question(int id, String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct, String subject, Date create_date) {
         this.id = id;
         this.content = content;
         this.category = category;
@@ -55,6 +47,22 @@ public class Question {
         this.option3 = option3;
         this.option4 = option4;
         this.option_correct = option_correct;
+        this.subject = subject;
+        this.create_date = create_date;
+    }
+
+    public Question(String content, String category, String status, String level, String option1, String option2, String option3, String option4, String option_correct, String subject, Date create_date) {
+        this.content = content;
+        this.category = category;
+        this.status = status;
+        this.level = level;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.option_correct = option_correct;
+        this.subject = subject;
+        this.create_date = create_date;
     }
 
     public int getId() {
@@ -135,6 +143,22 @@ public class Question {
 
     public void setOption_correct(String option_correct) {
         this.option_correct = option_correct;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
 }
