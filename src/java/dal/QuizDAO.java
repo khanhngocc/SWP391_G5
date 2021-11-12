@@ -19,6 +19,71 @@ import java.util.List;
  */
 public class QuizDAO extends MyDAO {
 
+    public int getNewQuizRowCount(String type) {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM quizzes where createdDate = curdate() and type = ? ;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, type);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+  
+
+    public int getAllQuizRowCountInRange(String fromDate, String toDate, String type) {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM quizzes\n"
+                + "where\n"
+                + "createdDate between ? and ?\n"
+                + "and\n"
+                + "type = ? ;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, fromDate);
+            ps.setString(2, toDate);
+            ps.setString(3, type);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+   public int getAllNumberQuizTaken(String type, String date) {
+        int no = 0;
+        xSql = "select count(*) from quizzes where type = ?\n"
+                + "and\n"
+                + "quizzes.id in (select quiz_id from history where taken = ?);";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, type);
+            ps.setString(2, date);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
     public int getRowCount() {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM quizzes";
@@ -351,8 +416,8 @@ public class QuizDAO extends MyDAO {
         }
         return true;
     }
-    
-        public int getRowCountAllFreeTest() {
+
+    public int getRowCountAllFreeTest() {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM quizzes where type = 'Free Test'";
         try {

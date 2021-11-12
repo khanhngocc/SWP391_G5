@@ -2,7 +2,7 @@ package controller.admin;
 
 import com.oreilly.servlet.MultipartRequest;
 import controller.base.BaseRequiredLoginController;
-import controller.common.RegisterServ;
+import controller.free.RegisterServ;
 import dal.RollDAO;
 import dal.SettingDAO;
 

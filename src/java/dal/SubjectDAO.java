@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dal;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +19,50 @@ import model.User;
  * @author dell
  */
 public class SubjectDAO extends MyDAO{
+    
     public int getRowCount(String statusRestricted) {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM Subject where status like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + statusRestricted + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+    
+    public int getNewRowCount() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM subject where createdDate = curdate();";
+        try {
+            ps = con.prepareStatement(xSql);
+           
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public int getAllRowCountInRange(String fromDate, String toDate) {
+        int no = 0;
+        xSql = "select COUNT(*) from subject where createdDate between ? and ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, fromDate);
+            ps.setString(2, toDate);
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);

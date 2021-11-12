@@ -11,6 +11,7 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
+                            <li><a href="DataStatistic">DashBoard</a></li>
                             <li><a href="QuestionList">Question</a></li>
                             <li><a href="QuizList">Quiz</a></li>
                             <li><a href="TestControl">Test</a></li>

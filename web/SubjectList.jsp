@@ -43,14 +43,13 @@
                 <table class="table" id="myTable">
                     <thead>
                         <tr>
-
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Sale Price</th>
-                            <th scope="col" style="width: auto;" colspan="3">Action</th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(0)">ID</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(1)">Title</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(3)">Author</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(4)">Status</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(5)">Price</a></th>
+                            <th scope="col"><a href="javascript:void(0);" onclick="sort(6)">Sale Price</a></th>
+                            <th scope="col" style="width: auto;" colspan="3"><a href="javascript:void(0);" onclick="sort(2)">Action</a></th>
                         </tr>
                     </thead>
                     <tbody>

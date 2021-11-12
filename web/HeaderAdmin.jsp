@@ -10,6 +10,7 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
+                            <li><a href="DataStatistic">DashBoard</a></li>
                             <li><a href="SettingList">Setting</a></li>
                             <li><a href="UserList">User</a></li>
                             <li><a href="TestControl">Test</a></li>

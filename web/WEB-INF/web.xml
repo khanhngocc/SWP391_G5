@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>RegisterServ</servlet-name>
-        <servlet-class>controller.common.RegisterServ</servlet-class>
+        <servlet-class>controller.free.RegisterServ</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -186,7 +186,7 @@
     </servlet>
     <servlet>
         <servlet-name>ResetPassword</servlet-name>
-        <servlet-class>controller.common.ResetPassword</servlet-class>
+        <servlet-class>controller.free.ResetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ErrorPage</servlet-name>
@@ -251,6 +251,14 @@
     <servlet>
         <servlet-name>MarkStarBlog</servlet-name>
         <servlet-class>controller.marketing.MarkStarBlog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DataStatistic</servlet-name>
+        <servlet-class>controller.common.DataStatistic</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Trend</servlet-name>
+        <servlet-class>controller.common.Trend</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
@@ -503,6 +511,14 @@
     <servlet-mapping>
         <servlet-name>MarkStarBlog</servlet-name>
         <url-pattern>/MarkStarBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DataStatistic</servlet-name>
+        <url-pattern>/DataStatistic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Trend</servlet-name>
+        <url-pattern>/Trend</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

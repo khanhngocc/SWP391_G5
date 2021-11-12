@@ -306,3 +306,31 @@ function validAddSubject() {
 
 }
 
+
+function validformDashboard() {
+    let toDate = document.forms["myForm"]["dateTo"].value;
+    let fromDate = document.forms["myForm"]["dateFrom"].value;
+
+    if (fromDate > toDate)
+    {
+        document.getElementById("createStatistic").textContent = "from-date must be less than to-date";
+        return false;
+    }
+    
+    let arrayToDate = toDate.split("-");
+    let arrayFromDate = fromDate.split("-");
+
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    let firstDate = new Date(arrayToDate[0], arrayToDate[1]-1, arrayToDate[2]);
+    let secondDate = new Date(arrayFromDate[0], arrayFromDate[1]-1, arrayFromDate[2]);
+
+    let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+    
+    if(diffDays > 30)
+    {
+       document.getElementById("createStatistic").textContent = "distant between two dates must be less than 30 days";
+        return false; 
+    }
+
+
+}

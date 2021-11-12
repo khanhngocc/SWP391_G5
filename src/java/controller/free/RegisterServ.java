@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.common;
+package controller.free;
 
+import controller.common.ForgotPassword;
 import dal.SettingDAO;
 import dal.UserDAO;
 import java.io.IOException;

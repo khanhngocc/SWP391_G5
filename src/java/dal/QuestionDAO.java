@@ -5,6 +5,7 @@
  */
 package dal;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import model.Question;
 
@@ -14,6 +15,44 @@ import model.Question;
  * fixed: 22/10/2021
  */
 public class QuestionDAO extends MyDAO {
+    
+    
+     public int getNewRowCount() {
+        int no = 0;
+        xSql = "SELECT COUNT(*) FROM question where createdDate = curdate();";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
+
+    public int getAllRowCountInRange(String fromDate, String toDate) {
+        int no = 0;
+        xSql = "select COUNT(*) from question where createdDate between ? and ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, fromDate);
+            ps.setString(2, toDate);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                no = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return no;
+    }
 
     public void insertQuestion(Question q) {
         xSql = "INSERT INTO Question\n"
