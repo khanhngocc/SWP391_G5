@@ -40,10 +40,13 @@ public class EditQuestionController extends BaseRequiredLoginController {
         ArrayList<Subject> listSubject = subjectDAO.listAllSubject("Published");
         ArrayList<Setting> listLevel = settingDAO.getListSettingByType("Question Level");
         ArrayList<Setting> listCategory = settingDAO.getListSettingByType("Question Category");
+        int numberOfAnswer = qdao.getNumberOfAnswer(Integer.valueOf(id));
+        request.setAttribute("numberOfAnswer", numberOfAnswer);
         request.setAttribute("listLevel", listLevel);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("listSubject", listSubject);
         request.setAttribute("listStatus", Constant.status);
+        
         request.getRequestDispatcher("EditQuestion.jsp").forward(request, response);
     }
 
@@ -57,7 +60,15 @@ public class EditQuestionController extends BaseRequiredLoginController {
         String answer1 = request.getParameter("answer1");
         String answer2 = request.getParameter("answer2");
         String answer3 = request.getParameter("answer3");
+        
+        if(answer3 == null)
+             answer3 ="null";
+        
         String answer4 = request.getParameter("answer4");
+        
+        if(answer4 == null)
+            answer4 ="null";
+        
         String correct = request.getParameter("correct");
         String status = request.getParameter("status");
         String correctAns;

@@ -40,19 +40,24 @@
         <section style="margin-top: 50px;margin-bottom: 200px">
             <div class="container">
                 <div class="row">
-                    
+
                     <div class="col-sm-6" style="border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC">
-                        <h4 style="color: cadetblue">${question.content}</h4>
+                        <h4>${question.content}</h4>
                         <h5> Select one:</h5>
                         <div>                               
-                            <input type="radio" id="html" name="fav_language" value="${question.option1}" ${question.option1 eq answer.get(page-1).option_correct?"checked":""}>
+                            <input type="radio"  name="fav_language" value="${question.option1}" ${question.option1 eq question.option_correct?"checked":""}>
                             <label for="html">${question.option1}</label><br>
-                            <input type="radio" id="css" name="fav_language" value="${question.option2}" ${question.option2 eq answer.get(page-1).option_correct?"checked":""}>
+                            <input type="radio"  name="fav_language" value="${question.option2}" ${question.option2 eq question.option_correct?"checked":""}>
                             <label for="css">${question.option2}</label><br>
-                            <input type="radio" id="javascript" name="fav_language" value="${question.option3}" ${question.option3 eq answer.get(page-1).option_correct?"checked":""}>
-                              <label for="javascript">${question.option3}</label><br>
-                            <input type="radio" id="c#" name="fav_language" value="${question.option4}" ${question.option4 eq answer.get(page-1).option_correct?"checked":""}>
-                              <label for="c#">${question.option4}</label>
+                            <c:if test="${question.option3 ne 'null'}">
+                                <input type="radio"  name="fav_language" value="${question.option3}" ${question.option3 eq question.option_correct?"checked":""}>
+                                <label for="javascript">${question.option3}</label><br>
+                            </c:if>
+                            <c:if test="${question.option4 ne 'null'}">
+                                <input type="radio"  name="fav_language" value="${question.option4}" ${question.option4 eq question.option_correct?"checked":""}>
+                                  <label for="c#">${question.option4}</label>
+                            </c:if>
+
                         </div>
                     </div>
                 </div>

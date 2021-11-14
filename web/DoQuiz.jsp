@@ -48,116 +48,121 @@
             border-width: 0 10px 10px 0;
             border-color: transparent #d2322d transparent transparent;
         }
-        </style>
-        <body>       
-            <section>
-                <div class="container">
-                    <br><br><br><br><br><hr>
-                    <div class="row">
-                        <div>
-                            <h1>${quiz.title}</h1> 
+    </style>
+    <body>       
+        <section>
+            <div class="container">
+                <br><br><br><br><br><hr>
+                <div class="row">
+                    <div>
+                        <h1>${quiz.title}</h1> 
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <!--Question left -->
+                    <div class="col-sm-2">   
+                        <h4>Question ${page}</h4>
+                        <h5>${answer.get(page-1).status}</h5>
+                        <h5><i class="fa fa-flag"></i><a href="javascript:void(0);" onclick="changePage(${quiz.id},${page},${page}, 1)">${answer.get(page-1).option1 eq 'Flag'?" Unflag":" Flag"}</a></h5>
+                    </div>
+
+                    <!-- Question mid -->
+                    <div class="col-sm-6" style="border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC">
+                        <h4 style="color: cadetblue">${question.content}</h4>
+                        <h5> Select one:</h5>
+                        <div>                               
+                            <input type="radio" id="html" name="fav_language" value="${question.option1}" ${question.option1 eq answer.get(page-1).option_correct?"checked":""}>
+                            <label for="html">${question.option1}</label><br>
+                            <input type="radio" id="css" name="fav_language" value="${question.option2}" ${question.option2 eq answer.get(page-1).option_correct?"checked":""}>
+                            <label for="css">${question.option2}</label><br>
+                            <c:if test="${question.option3 ne 'null'}">
+                                <input type="radio" id="javascript" name="fav_language" value="${question.option3}" ${question.option3 eq answer.get(page-1).option_correct?"checked":""}>
+                                  <label for="javascript">${question.option3}</label><br>
+                            </c:if>
+                            <c:if test="${question.option4 ne 'null'}">
+                                <input type="radio" id="c#" name="fav_language" value="${question.option4}" ${question.option4 eq answer.get(page-1).option_correct?"checked":""}>
+                                  <label for="c#">${question.option4}</label>
+                            </c:if>
+
                         </div>
+                        <br>  
+
+                        <c:if test="${page eq 1}">
+                            <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page+1}, 0)">Next</button>
+                        </c:if>
+                        <c:if test="${page eq pageSize}">
+                            <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page-1}, 0)">Previous</button>
+                        </c:if>
+                        <c:if test="${page ne 1 && page ne pageSize}">
+                            <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page-1}, 0)">Previous</button>
+                            <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page+1}, 0)">Next</button>                                
+                        </c:if>
 
                     </div>
 
-                    <div class="row">
-                        <!--Question left -->
-                        <div class="col-sm-2">   
-                            <h4>Question ${page}</h4>
-                            <h5>${answer.get(page-1).status}</h5>
-                            <h5><i class="fa fa-flag"></i><a href="javascript:void(0);" onclick="changePage(${quiz.id},${page},${page},1)">${answer.get(page-1).option1 eq 'Flag'?" Unflag":" Flag"}</a></h5>
+                    <!-- question right -->
+                    <div class="col-sm-4">
+                        <h5>Question Navigation</h5>
+
+                        <div class="pagination-area">
+                            <ul class="pagination">      
+                                <c:forEach begin="1" end="${pageSize}" var="i">
+                                    <c:if test="${(answer.get(i-1).status eq 'Answered') and (answer.get(i-1).option1 eq 'Flag')}">                                 
+                                        <li><a class="active triangle-top-right" onclick="changePage(${quiz.id},${page},${i}, 0)">${i}</a></li>
+                                        </c:if>
+
+                                    <c:if test="${(answer.get(i-1).status eq 'Answered') and (answer.get(i-1).option1 eq 'Unflag')}">
+                                        <li><a class="active" onclick="changePage(${quiz.id},${page},${i}, 0)">${i}</a></li>
+                                        </c:if>
+
+                                    <c:if test="${(answer.get(i-1).status eq 'Not yet answer') and (answer.get(i-1).option1 eq 'Flag')}">
+                                        <li><a class="triangle-top-right" onclick="changePage(${quiz.id},${page},${i}, 0)">${i}</a></li>
+                                        </c:if>
+
+                                    <c:if test="${(answer.get(i-1).status eq 'Not yet answer') and (answer.get(i-1).option1 eq 'Unflag')}">
+                                        <li><a onclick="changePage(${quiz.id},${page},${i}, 0)">${i}</a></li>
+                                        </c:if>    
+                                    </c:forEach>
+                            </ul>
                         </div>
-
-                        <!-- Question mid -->
-                        <div class="col-sm-6" style="border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC">
-                                <h4 style="color: cadetblue">${question.content}</h4>
-                                <h5> Select one:</h5>
-                                <div>                               
-                                    <input type="radio" id="html" name="fav_language" value="${question.option1}" ${question.option1 eq answer.get(page-1).option_correct?"checked":""}>
-                                    <label for="html">${question.option1}</label><br>
-                                    <input type="radio" id="css" name="fav_language" value="${question.option2}" ${question.option2 eq answer.get(page-1).option_correct?"checked":""}>
-                                    <label for="css">${question.option2}</label><br>
-                                    <input type="radio" id="javascript" name="fav_language" value="${question.option3}" ${question.option3 eq answer.get(page-1).option_correct?"checked":""}>
-                                      <label for="javascript">${question.option3}</label><br>
-                                    <input type="radio" id="c#" name="fav_language" value="${question.option4}" ${question.option4 eq answer.get(page-1).option_correct?"checked":""}>
-                                      <label for="c#">${question.option4}</label>
-                                </div>
-                                <br>  
-
-                                <c:if test="${page eq 1}">
-                                    <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page+1},0)">Next</button>
-                                </c:if>
-                                <c:if test="${page eq pageSize}">
-                                    <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page-1},0)">Previous</button>
-                                </c:if>
-                                <c:if test="${page ne 1 && page ne pageSize}">
-                                    <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page-1},0)">Previous</button>
-                                    <button class="btn btn-default" style="margin-top: 10px" onclick="changePage(${quiz.id},${page},${page+1},0)">Next</button>                                
-                                </c:if>
-
-                            </div>
-
-                            <!-- question right -->
-                            <div class="col-sm-4">
-                                <h5>Question Navigation</h5>
-                                
-                                <div class="pagination-area">
-                                    <ul class="pagination">      
-                                        <c:forEach begin="1" end="${pageSize}" var="i">
-                                            <c:if test="${(answer.get(i-1).status eq 'Answered') and (answer.get(i-1).option1 eq 'Flag')}">                                 
-                                                <li><a class="active triangle-top-right" onclick="changePage(${quiz.id},${page},${i},0)">${i}</a></li>
-                                            </c:if>
-
-                                            <c:if test="${(answer.get(i-1).status eq 'Answered') and (answer.get(i-1).option1 eq 'Unflag')}">
-                                                <li><a class="active" onclick="changePage(${quiz.id},${page},${i},0)">${i}</a></li>
-                                            </c:if>
-                                                
-                                            <c:if test="${(answer.get(i-1).status eq 'Not yet answer') and (answer.get(i-1).option1 eq 'Flag')}">
-                                                <li><a class="triangle-top-right" onclick="changePage(${quiz.id},${page},${i},0)">${i}</a></li>
-                                            </c:if>
-
-                                            <c:if test="${(answer.get(i-1).status eq 'Not yet answer') and (answer.get(i-1).option1 eq 'Unflag')}">
-                                                <li><a onclick="changePage(${quiz.id},${page},${i},0)">${i}</a></li>
-                                            </c:if>    
-                                        </c:forEach>
-                                    </ul>
-                                </div>
-                                <button id="durationx" hidden="true">${timer.duration}</button>
-                                <div><span id="display" style="color:#FF0000;font-size:15px"><i class="fa fa-clock"></i></span></div>
-                                <div><span id="submitted" style="color:#FF0000;font-size:15px"></span></div>
-                                <button class="btn btn-default" onclick="changePage(${quiz.id},${page}, -1,0)">Finish attempt</button>
-                            </div>
-                        </div>
-                        <hr>
+                        <button id="durationx" hidden="true">${timer.duration}</button>
+                        <div><span id="display" style="color:#FF0000;font-size:15px"><i class="fa fa-clock"></i></span></div>
+                        <div><span id="submitted" style="color:#FF0000;font-size:15px"></span></div>
+                        <button class="btn btn-default" onclick="changePage(${quiz.id},${page}, -1, 0)">Finish attempt</button>
                     </div>
-                </section>
+                </div>
+                <hr>
+            </div>
+        </section>
 
 
-                <script src="js/jquery.js"></script>
-                <script src="js/price-range.js"></script>
-                <script src="js/jquery.scrollUp.min.js"></script>
-                <script src="js/bootstrap.min.js"></script>
-                <script src="js/jquery.prettyPhoto.js"></script>
-                <script src="js/main.js"></script>
-                <script src="js/TimerHelper.js"></script>
-                <script>
-                                    function changePage(id, current, change, flag) {
-                                        var selectcol = document.getElementsByName('fav_language');
-                                        var select = "";
-                                        var timer = document.getElementById('display').innerHTML;
-                                        for (i = 0; i < selectcol.length; i++) {
-                                            if (selectcol[i].checked)
-                                                select = selectcol[i].value;
-                                        }
-                                        if(change===-1){
-                                            var result = confirm("Do you really want to submit this test?");
-                                            if (result) {
-                                                window.location.href = "SaveQuizHandle?id=" + id + "&pre=" + current + "&next=" + change + "&select=" + select + "&timer=" + timer + "&flag=" + flag;
-                                            }
-                                        }
+        <script src="js/jquery.js"></script>
+        <script src="js/price-range.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/TimerHelper.js"></script>
+        <script>
+                            function changePage(id, current, change, flag) {
+                                var selectcol = document.getElementsByName('fav_language');
+                                var select = "";
+                                var timer = document.getElementById('display').innerHTML;
+                                for (i = 0; i < selectcol.length; i++) {
+                                    if (selectcol[i].checked)
+                                        select = selectcol[i].value;
+                                }
+                                if (change === -1) {
+                                    var result = confirm("Do you really want to submit this test?");
+                                    if (result) {
                                         window.location.href = "SaveQuizHandle?id=" + id + "&pre=" + current + "&next=" + change + "&select=" + select + "&timer=" + timer + "&flag=" + flag;
                                     }
-                </script>
-            </body>
+                                }
+                                window.location.href = "SaveQuizHandle?id=" + id + "&pre=" + current + "&next=" + change + "&select=" + select + "&timer=" + timer + "&flag=" + flag;
+                            }
+        </script>
+    </body>
 
-        </html>
+</html>

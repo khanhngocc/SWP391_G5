@@ -289,21 +289,58 @@ public class QuestionDAO extends MyDAO {
         }
         return x;
     }
-    
-        public void changeQuestionStatus(Integer id, String status) {
+
+    public void changeQuestionStatus(Integer id, String status) {
         xSql = "Update question set status = ? where id= ? ";
         try {
             ps = con.prepareStatement(xSql);
-            
+
             ps.setString(1, status);
-            
+
             ps.setInt(2, id);
-            
+
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public boolean isEmptyAnswer(int question_id, int no_ans) {
+       
+        xSql = "SELECT option? FROM question where id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, no_ans);
+            ps.setInt(2, question_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if ("null".equals(rs.getString(1))) {
+                    return true;
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public int getNumberOfAnswer(int question_id){
+    
+        int num = 2;
+        
+        for(int i= 3 ; i<= 4 ; i++)
+        {
+            if(isEmptyAnswer(question_id, i) == false)
+                  num++;
+        }
+        
+        return num;
+        
+    }
+    
+   
 
 }

@@ -303,7 +303,6 @@ public class QuizDAO extends MyDAO {
             ps.setInt(9, q.getDuration());
             ps.setFloat(10, q.getRate());
             ps.setString(11, q.getThumbnail());
-          
             ps.setInt(12, q.getId());
             ps.executeUpdate();
         } catch (SQLException ex) {

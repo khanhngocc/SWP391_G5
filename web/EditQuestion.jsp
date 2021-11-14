@@ -45,7 +45,7 @@
                     <div class="signup-form">
                         <form name="myForm" action="EditQuestion" method="post" onsubmit="return validQuestion()">
                             <p><input type="hidden" name="id" value="${question.id}" ></p>                    
-                            <h4> Question Edit</h4>
+                            <h4>Edit Question</h4>
 
                             Category
 
@@ -72,7 +72,7 @@
                             </select>
                             Status
                             <select name="status" style="margin-bottom:10px;height: 40px">
-                              
+
                                 <c:forEach items="${listStatus}" var="list">
                                     <option value="${list}" ${list == question.status ? 'selected':''}>${list}</option>
                                 </c:forEach>
@@ -87,21 +87,42 @@
                             </div>
 
                             Option 1
-                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}">
+                            <input type="text" name="answer1" placeholder="Answer 1" required="" value="${question.option1}">
                             Option 2
-                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}">
-                            Option 3
-                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}">
-                            Option 4
-                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}">
+                            <input type="text" name="answer2" placeholder="Answer 2" required="" value="${question.option2}">
+                            <div id="containerAns">
+                                <c:if test="${question.option3 ne 'null'}">
+                                    <div id="answer3">
+                                        Option 3
+                                        <input type="text"  name="answer3" placeholder="Answer 3"  value="${question.option3}">
+                                        <i class='fa fa-trash-o' style='color:#f03b35' onclick="removeAnswer(3)"></i> 
+                                    </div>
 
+                                </c:if>
+                                <c:if test="${question.option4 ne 'null'}">
+                                    <div id="answer4">
+                                        Option 4
+                                        <input type="text"  name="answer4" placeholder="Answer 4"  value="${question.option4}">
+                                        <i class='fa fa-trash-o' style='color:#f03b35' onclick="removeAnswer(4)"></i>
+                                    </div>   
+
+                                </c:if>
+                            </div>
+                            <div style="margin-bottom: 10px;margin-top: 10px">
+                                <a href="javascript:void(0)" onclick="appendAnswer();"><i class="fa fa-plus"></i> append more answer</a>
+                            </div> 
                             Correct Answer:
                             <div>                           
-                                <select name="correct" id="correct" style="height: 40px">
+                                <select name="correct" id="correctAnswer" style="height: 40px">
                                     <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
                                     <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
-                                    <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
-                                    <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
+                                    <c:if test="${question.option3 ne 'null'}">
+                                        <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
+                                    </c:if>
+                                    <c:if test="${question.option4 ne 'null'}">
+                                        <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
+                                    </c:if>
+
                                 </select>
                             </div>       
                             <p><input type="hidden" name="quiz" value="${quiz}"></p>
@@ -130,6 +151,51 @@
             function getDataFromTheEditor() {
                 return theEditor.getData();
 
+            }
+
+            var count = ${numberOfAnswer};
+            function appendAnswer()
+            {
+                if (count === 4)
+                {
+                    document.getElementById("messCreateQuestion").textContent = 'limit number of answer is 4 ';
+                    return;
+                }
+
+                count++;
+
+                // create answer
+                var div = document.createElement("div");
+                div.id = "answer" + count;
+                div.innerHTML += "Option " + count + "";
+                var inputName = document.createElement("input");
+                inputName.type = "text";
+                inputName.name = "answer" + count;
+                inputName.placeholder = "Answer " + count;
+                div.appendChild(inputName);
+                div.innerHTML += "<i class='fa fa-trash-o' style='color:#f03b35'\n\
+            onclick='removeAnswer(" + count + ")' ></i>";
+                div.appendChild(document.createElement("br"));
+                document.getElementById("containerAns").appendChild(div);
+
+                // add answer to select
+                var optionAns = document.createElement("option");
+                optionAns.value = "" + count;
+                optionAns.innerHTML = "Answer " + count;
+                var containerCorrectAns = document.getElementById("correctAnswer");
+                containerCorrectAns.appendChild(optionAns);
+            }
+
+            function removeAnswer(index)
+            {
+                // remove answer
+                var container = document.getElementById("containerAns");
+                var answer = document.getElementById("answer" + index);
+                container.removeChild(answer);
+                // remove answer from select
+                var containerCorrectAns = document.getElementById("correctAnswer");
+                containerCorrectAns.remove(count - 1);
+                count--;
             }
 
             function validQuestion() {
@@ -167,20 +233,31 @@
                     document.getElementById("messCreateQuestion").textContent = "answer2 comes over 2000 characters";
                     return false;
                 }
+
                 let answer3 = document.forms["myForm"]["answer3"].value;
-                if (answer3.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
-                    return false;
+
+                if (answer3) {
+                    if (answer3.length > 2000) {
+                        document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
+                        return false;
+                    }
                 }
+
                 let answer4 = document.forms["myForm"]["answer4"].value;
-                if (answer4.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
-                    return false;
+
+                if (answer4)
+                {
+                    if (answer4.length > 2000) {
+                        document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
+                        return false;
+                    }
                 }
+
 
 
 
             }
+
 
         </script>
         <script src="js/jquery.js"></script>

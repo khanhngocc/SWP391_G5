@@ -52,6 +52,13 @@ public class AddQuestionController extends BaseRequiredLoginController {
         String answer3 = request.getParameter("answer3");
         String answer4 = request.getParameter("answer4");
         String correct = request.getParameter("correct");
+        
+        if(answer3 == null)
+             answer3 ="null";
+        
+         if(answer4 == null)
+            answer4 ="null";
+        
         String correctAns;
                 switch (correct) {
                     case "1":

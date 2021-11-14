@@ -76,24 +76,25 @@
 
                             <!-- This container will become the editable. -->
                             <div id="editor" style="margin-bottom: 5px">
-
+                                <p>This is the initial editor content.</p>
                             </div>
                             Option 1
                             <input type="text" name="answer1" placeholder="Answer 1" required="">
                             Option 2
                             <input type="text" name="answer2" placeholder="Answer 2" required="">
-                            Option 3
-                            <input type="text" name="answer3" placeholder="Answer 3">
-                            Option 4
-                            <input type="text" name="answer4" placeholder="Answer 4">
+                            <div id="containerAns">
 
+                            </div>
+
+                            <div style="margin-bottom: 10px;margin-top: 10px">
+                                <a href="javascript:void(0)" onclick="appendAnswer();"><i class="fa fa-plus"></i> append more answer</a>
+                            </div> 
                             Correct Answer:
 
-                            <select name="correct" id="correct" style="height: 40px">
-                                <option value="1"> Answer 1</option>
-                                <option value="2"> Answer 2</option>
-                                <option value="3"> Answer 3</option>
-                                <option value="4"> Answer 4</option>                               
+                            <select name="correct"  id="correctAnswer" style="height: 40px">
+                                <option value="1">Answer 1</option>
+                                <option value="2">Answer 2</option>
+
                             </select>
 
 
@@ -122,6 +123,51 @@
             function getDataFromTheEditor() {
                 return theEditor.getData();
 
+            }
+
+            var count = 2;
+            function appendAnswer()
+            {
+                if (count === 4)
+                {
+                    document.getElementById("messCreateQuestion").textContent = 'limit number of answer is 4 ';
+                    return;
+                }
+
+                count++;
+
+                // create answer
+                var div = document.createElement("div");
+                div.id = "answer" + count;
+                div.innerHTML += "Option " + count + "";
+                var inputName = document.createElement("input");
+                inputName.type = "text";
+                inputName.name = "answer" + count;
+                inputName.placeholder = "Answer " + count;
+                div.appendChild(inputName);
+                div.innerHTML += "<i class='fa fa-trash-o' style='color:#f03b35'\n\
+            onclick='removeAnswer(" + count + ")' ></i>";
+                div.appendChild(document.createElement("br"));
+                document.getElementById("containerAns").appendChild(div);
+
+                // add answer to select
+                var optionAns = document.createElement("option");
+                optionAns.value = "" + count;
+                optionAns.innerHTML = "Answer " + count;
+                var containerCorrectAns = document.getElementById("correctAnswer");
+                containerCorrectAns.appendChild(optionAns);
+            }
+
+            function removeAnswer(index)
+            {
+                // remove answer
+                var container = document.getElementById("containerAns");
+                var answer = document.getElementById("answer" + index);
+                container.removeChild(answer);
+                // remove answer from select
+                var containerCorrectAns = document.getElementById("correctAnswer");
+                containerCorrectAns.remove(count - 1);
+                count--;
             }
 
             function validQuestion() {
@@ -159,16 +205,26 @@
                     document.getElementById("messCreateQuestion").textContent = "answer2 comes over 2000 characters";
                     return false;
                 }
+
                 let answer3 = document.forms["myForm"]["answer3"].value;
-                if (answer3.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
-                    return false;
+
+                if (answer3) {
+                    if (answer3.length > 2000) {
+                        document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
+                        return false;
+                    }
                 }
+
                 let answer4 = document.forms["myForm"]["answer4"].value;
-                if (answer4.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
-                    return false;
+
+                if (answer4)
+                {
+                    if (answer4.length > 2000) {
+                        document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
+                        return false;
+                    }
                 }
+
 
 
 
