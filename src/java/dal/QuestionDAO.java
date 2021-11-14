@@ -11,13 +11,11 @@ import model.Question;
 
 /**
  *
- * @author INSPIRON 15-7559
- * fixed: 22/10/2021
+ * @author INSPIRON 15-7559 fixed: 22/10/2021
  */
 public class QuestionDAO extends MyDAO {
-    
-    
-     public int getNewRowCount() {
+
+    public int getNewRowCount() {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM question where createdDate = curdate();";
         try {
@@ -133,15 +131,15 @@ public class QuestionDAO extends MyDAO {
                 + " WHERE id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1,x.getContent());
-            ps.setString(2,x.getCategory());
-            ps.setString(3,x.getStatus());
-            ps.setString(4,x.getLevel());
-            ps.setString(5,x.getOption1());
-            ps.setString(6,x.getOption2());
-            ps.setString(7,x.getOption3());
-            ps.setString(8,x.getOption4());
-            ps.setString(9,x.getOption_correct());
+            ps.setString(1, x.getContent());
+            ps.setString(2, x.getCategory());
+            ps.setString(3, x.getStatus());
+            ps.setString(4, x.getLevel());
+            ps.setString(5, x.getOption1());
+            ps.setString(6, x.getOption2());
+            ps.setString(7, x.getOption3());
+            ps.setString(8, x.getOption4());
+            ps.setString(9, x.getOption_correct());
             ps.setString(10, x.getSubject());
             ps.setDate(11, x.getCreate_date());
             ps.setInt(12, x.getId());
@@ -150,8 +148,8 @@ public class QuestionDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
-      public int getRowCount() {
+
+    public int getRowCount() {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM question";
         try {
@@ -172,13 +170,24 @@ public class QuestionDAO extends MyDAO {
     public int getRowCountForSearch(String searchName, String subject, String category, String level, String status) {
         int no = 0;
 
-        xSql = "";
+        xSql = "select COUNT(*) from question\n"
+                + "where\n"
+                + "content like ?\n"
+                + "and\n"
+                + "subject like ?\n"
+                + "and\n"
+                + "category like ?\n"
+                + "and \n"
+                + "level like ?\n"
+                + "and\n"
+                + "status like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + searchName + "%");
             ps.setString(2, "%" + subject + "%");
             ps.setString(3, "%" + category + "%");
-           
+            ps.setString(4, "%" + level + "%");
+            ps.setString(5, "%" + status + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -190,24 +199,47 @@ public class QuestionDAO extends MyDAO {
         }
         return no;
     }
-    
-    public ArrayList<Question> getQuestions(){
-        ArrayList<Question> x = new ArrayList<>();
-        xSql = "select * from Question";
+
+    public ArrayList<Question> listAllQuestions(int pageIndex, int pageSize, String searchName, String subject, String category, String level, String status) {
+
+        int numberOfRecord = (pageIndex - 1) * pageSize;
+        ArrayList<Question> list = new ArrayList<>();
+        xSql = "select * from question\n"
+                + "where\n"
+                + "content like ?\n"
+                + "and\n"
+                + "subject like ?\n"
+                + "and\n"
+                + "category like ?\n"
+                + "and \n"
+                + "level like ?\n"
+                + "and\n"
+                + "status like ?\n"
+                + "order by id desc\n"
+                + "limit ?,?";
         try {
             ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + searchName + "%");
+            ps.setString(2, "%" + subject + "%");
+            ps.setString(3, "%" + category + "%");
+            ps.setString(4, "%" + level + "%");
+            ps.setString(5, "%" + status + "%");
+            ps.setInt(6, numberOfRecord);
+            ps.setInt(7, pageSize);
             rs = ps.executeQuery();
             while (rs.next()) {
-                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                list.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
             }
+            rs.close();
+            ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return x;
+        return list;
     }
-    
-    public ArrayList<Question> getQuestionInQuiz(int id){
+
+    public ArrayList<Question> getQuestionInQuiz(int id) {
         ArrayList<Question> x = new ArrayList<>();
         xSql = "select * from Question q inner join Quizzes_Question qq on (q.id = qq.question_id) where qq.quiz_id = ?";
         try {
@@ -240,11 +272,11 @@ public class QuestionDAO extends MyDAO {
         }
         return x;
     }
-    
-    public ArrayList<Question> getQuestionsBySubject(String subject){
+
+    public ArrayList<Question> getQuestionsBySubject(String subject) {
         ArrayList<Question> x = new ArrayList<>();
         xSql = "select * from Question where subject = ?";
-        try{
+        try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, subject);
             rs = ps.executeQuery();
@@ -252,10 +284,26 @@ public class QuestionDAO extends MyDAO {
                 x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return x;
     }
-   
+    
+        public void changeQuestionStatus(Integer id, String status) {
+        xSql = "Update question set status = ? where id= ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            
+            ps.setString(1, status);
+            
+            ps.setInt(2, id);
+            
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

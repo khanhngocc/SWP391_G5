@@ -12,7 +12,8 @@ import java.sql.Date;
  * @author dell
  */
 public class Subject {
-     private int id;
+
+    private int id;
     private String title;
     private String status;
     private float price;
@@ -27,8 +28,7 @@ public class Subject {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-    
-    
+
     public String getAuthor_name() {
         return author_name;
     }
@@ -36,8 +36,7 @@ public class Subject {
     public void setAuthor_name(String author_name) {
         this.author_name = author_name;
     }
-    
-    
+
     public int getId() {
         return id;
     }

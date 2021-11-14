@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Question;
 import model.Setting;
 import model.Subject;
+import utilities.Constant;
 
 /**
  *
@@ -42,6 +43,7 @@ public class EditQuestionController extends BaseRequiredLoginController {
         request.setAttribute("listLevel", listLevel);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("listSubject", listSubject);
+        request.setAttribute("listStatus", Constant.status);
         request.getRequestDispatcher("EditQuestion.jsp").forward(request, response);
     }
 
@@ -57,28 +59,29 @@ public class EditQuestionController extends BaseRequiredLoginController {
         String answer3 = request.getParameter("answer3");
         String answer4 = request.getParameter("answer4");
         String correct = request.getParameter("correct");
+        String status = request.getParameter("status");
         String correctAns;
-                switch (correct) {
-                    case "1":
-                        correctAns = answer1;
-                        break;
-                    case "2":
-                        correctAns = answer2;
-                        break;
-                    case "3":
-                        correctAns = answer3;
-                        break;
-                    case "4":
-                        correctAns = answer4;
-                        break;
-                    default:
-                        correctAns = "";
-                }
+        switch (correct) {
+            case "1":
+                correctAns = answer1;
+                break;
+            case "2":
+                correctAns = answer2;
+                break;
+            case "3":
+                correctAns = answer3;
+                break;
+            case "4":
+                correctAns = answer4;
+                break;
+            default:
+                correctAns = "";
+        }
         QuestionDAO qdao = new QuestionDAO();
         Question x = qdao.getQuestionById(id);
-        qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, "Show", lev, 
+        qdao.EditQuestion(new Question(Integer.parseInt(id), question, cate, status, lev,
                 answer1, answer2, answer3, answer4, correctAns, subject, x.getCreate_date()));
         response.sendRedirect("QuestionList");
     }
-     
+
 }

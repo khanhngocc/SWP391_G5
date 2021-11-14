@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Edit Question</title>
+        <title>Add Question</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -32,64 +32,71 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
     </head>
     <!--/head-->
 
     <body>
         <jsp:include page="HeaderExpert.jsp" /> 
-         <section>
+        <section>
             <div class="container">
                 <div class="col-sm-9">
-
+                    <p id="messCreateQuestion" class="text-primary"></p>
                     <div class="signup-form">
-                        <form id="create-test" action="AddQuestion" method="post">
-                            <p><input type="hidden" name="id" value="${question.id}" ></p>                    
-                            <h4> Question Add</h4>
-                            
+                        <form name="myForm" action="AddQuestion" method="post" onsubmit="return validQuestion()">
+
+                            <h4>Add Question</h4>
+
                             Category
-                            
-                            <select name="category" style="margin-bottom:10px">
+
+                            <select name="category" style="margin-bottom:10px;height: 40px">
                                 <c:forEach items="${listCategory}" var="list">
-                                    <option value="${list.value}" ${question.category eq list.value ? "selected" : "" }>${list.value}</option>
+                                    <option value="${list.value}">${list.value}</option>
                                 </c:forEach>
                             </select> 
-                            
+
                             Subject
-                            
-                            <select name="subject" style="margin-bottom:10px">
+
+                            <select name="subject" style="margin-bottom:10px;height: 40px">
                                 <c:forEach items="${listSubject}" var="list">
-                                    <option value="${list.title}" ${question.subject eq list.title ? "selected" : "" }>${list.title}</option>
+                                    <option value="${list.title}">${list.title}</option>
                                 </c:forEach>
                             </select>
-                            
+
                             Level
 
-                            <select name="level" style="margin-bottom:10px">
+                            <select name="level" style="margin-bottom:10px;height: 40px">
                                 <c:forEach items="${listLevel}" var="list">
-                                    <option value="${list.value}" ${question.level eq list.value ? "selected" : "" }>${list.value}</option>
+                                    <option value="${list.value}">${list.value}</option>
                                 </c:forEach>
                             </select>
                             Content
-                            <textarea name="question" id="quest" placeholder="Question"></textarea>
+                            <textarea name="question" id="contentDetails" hidden="" placeholder="Question"></textarea>
+                            <div id="toolbar-container"></div>
+
+                            <!-- This container will become the editable. -->
+                            <div id="editor" style="margin-bottom: 5px">
+
+                            </div>
                             Option 1
-                            <input type="text" name="answer1" placeholder="Answer 1">
+                            <input type="text" name="answer1" placeholder="Answer 1" required="">
                             Option 2
-                            <input type="text" name="answer2" placeholder="Answer 2">
+                            <input type="text" name="answer2" placeholder="Answer 2" required="">
                             Option 3
                             <input type="text" name="answer3" placeholder="Answer 3">
                             Option 4
                             <input type="text" name="answer4" placeholder="Answer 4">
 
                             Correct Answer:
-                            <p>                           
-                                <select name="correct" id="correct">
-                                    <option value="1"> Answer 1</option>
-                                    <option value="2"> Answer 2</option>
-                                    <option value="3"> Answer 3</option>
-                                    <option value="4"> Answer 4</option>                               
-                                </select>
-                            </p>       
-                            <p><input type="hidden" name="quiz" value="${quiz}"></p>
+
+                            <select name="correct" id="correct" style="height: 40px">
+                                <option value="1"> Answer 1</option>
+                                <option value="2"> Answer 2</option>
+                                <option value="3"> Answer 3</option>
+                                <option value="4"> Answer 4</option>                               
+                            </select>
+
+
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
                         </form>
 
@@ -98,7 +105,76 @@
             </div>
         </section>
         <jsp:include page="Footer.jsp" /> 
+        <script>
+            let theEditor;
+            DecoupledEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        theEditor = editor;
+                        const toolbarContainer = document.querySelector('#toolbar-container');
 
+                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            function getDataFromTheEditor() {
+                return theEditor.getData();
+
+            }
+
+            function validQuestion() {
+
+                // valid content
+
+                var content = getDataFromTheEditor();
+
+                if (content.length === 0) {
+                    document.getElementById("messCreateQuestion").textContent = "content is empty";
+
+                    return false;
+                }
+
+
+                if (content.length > 11000) {
+                    document.getElementById("messCreateQuestion").textContent = "content comes over 11000 characters";
+
+                    return false;
+                }
+
+                // get value from ckeditor to textarea
+                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
+
+
+                //valid answer
+                let answer1 = document.forms["myForm"]["answer1"].value;
+                if (answer1.length > 2000) {
+                    document.getElementById("messCreateQuestion").textContent = "answer1 comes over 2000 characters";
+                    return false;
+                }
+
+                let answer2 = document.forms["myForm"]["answer2"].value;
+                if (answer2.length > 2000) {
+                    document.getElementById("messCreateQuestion").textContent = "answer2 comes over 2000 characters";
+                    return false;
+                }
+                let answer3 = document.forms["myForm"]["answer3"].value;
+                if (answer3.length > 2000) {
+                    document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
+                    return false;
+                }
+                let answer4 = document.forms["myForm"]["answer4"].value;
+                if (answer4.length > 2000) {
+                    document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
+                    return false;
+                }
+
+
+
+            }
+
+        </script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>

@@ -37,44 +37,27 @@
 
     <body>
         <jsp:include page="HeaderExpert.jsp" /> 
-         <section>
+        <section style="margin-top: 50px;margin-bottom: 200px">
             <div class="container">
-                <div class="col-sm-9">
-
-                    <div class="signup-form">
-                        <form id="create-test" action="EditQuestion" method="post">
-                            <p><input type="hidden" name="id" value="${question.id}" ></p>                    
-                            <h4> Question Detail</h4>
-                            
-                            Category
-                            <input type="text" name="answer1" placeholder="Category" value="${question.category}" readonly>
-                            
-                            
-                            Subject
-                            
-                            <input type="text" name="answer1" placeholder="Subject" value="${question.subject}" readonly>
-                            
-                            Level
-
-                            <input type="text" name="answer1" placeholder="Level" value="${question.level}" readonly>
-                            
-                            Content
-                            <textarea name="question" id="quest" readonly>${question.content}</textarea>
-                            Option 1
-                            <input type="text" name="answer1" placeholder="Answer 1" value="${question.option1}" readonly>
-                            Option 2
-                            <input type="text" name="answer2" placeholder="Answer 2" value="${question.option2}" readonly>
-                            Option 3
-                            <input type="text" name="answer3" placeholder="Answer 3" value="${question.option3}" readonly>
-                            Option 4
-                            <input type="text" name="answer4" placeholder="Answer 4" value="${question.option4}" readonly>
-
-                            Correct Answer:
-                            <input type="text" name="answer4" placeholder="Correct Answer" value="${question.option_correct}" readonly>
-                        </form>
-                        <br><br>
+                <div class="row">
+                    
+                    <div class="col-sm-6" style="border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC">
+                        <h4 style="color: cadetblue">${question.content}</h4>
+                        <h5> Select one:</h5>
+                        <div>                               
+                            <input type="radio" id="html" name="fav_language" value="${question.option1}" ${question.option1 eq answer.get(page-1).option_correct?"checked":""}>
+                            <label for="html">${question.option1}</label><br>
+                            <input type="radio" id="css" name="fav_language" value="${question.option2}" ${question.option2 eq answer.get(page-1).option_correct?"checked":""}>
+                            <label for="css">${question.option2}</label><br>
+                            <input type="radio" id="javascript" name="fav_language" value="${question.option3}" ${question.option3 eq answer.get(page-1).option_correct?"checked":""}>
+                              <label for="javascript">${question.option3}</label><br>
+                            <input type="radio" id="c#" name="fav_language" value="${question.option4}" ${question.option4 eq answer.get(page-1).option_correct?"checked":""}>
+                              <label for="c#">${question.option4}</label>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
         </section>
         <jsp:include page="Footer.jsp" /> 

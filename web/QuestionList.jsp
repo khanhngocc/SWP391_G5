@@ -37,14 +37,79 @@
         <jsp:include page="HeaderExpert.jsp" /> 
         <div class="container">
 
-            <!--                <div class="col-sm-3"></div>-->
-            <a href="ImportQuestion"><i class="fa fa-upload"></i> Import Question List</a>
-            <a style="padding-left: 70px" href="AddQuestion"><i class="fa fa-upload"></i> Add Question </a>
-            <div class="searchform" style="margin-top: 20px;">
-                <input type="text" id="myInput" onkeyup="searchForm(1)" placeholder="Search for content"/>
-            </div>
+            <form action="QuestionList" class="searchform">
+                <input type="text" placeholder="Search" name="subject" value="${subject}" hidden=""/>
+                <input type="text" placeholder="Search" name="category" value="${category}" hidden=""/>
+                <input type="text" placeholder="Search" name="level" value="${level}" hidden=""/>
+                <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                <input type="text" placeholder="Search" name="searchName" value="${searchName}"/>
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </form>
 
+            <div style="margin-top: 20px; margin-bottom: 10px">
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Subject</p>
+                <form style ="float: left;margin-right: 15px;margin-left: 5px" action="QuestionList" >
+                    <input type="text" placeholder="Search" name="category" value="${category}" hidden=""/>
+                    <input type="text" placeholder="Search" name="level" value="${level}" hidden=""/>
+                    <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+                    <select name="subject" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listSubjects}" var="list">
+                            <option value="${list.title}" ${list.title == subject ? 'selected':''}>${list.title}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Category</p>
+                <form style ="float: left;margin-left: 4px;margin-right: 15px" action="QuestionList" >
+                    <input type="text" placeholder="Search" name="subject" value="${subject}" hidden=""/>
+                    <input type="text" placeholder="Search" name="level" value="${level}" hidden=""/>
+                    <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+                    <select name="category" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listCategory}" var="list">
+                            <option value="${list.value}" ${list.value == category ? 'selected':''}>${list.value}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Level</p>
+                <form style ="float: left;margin-left: 4px;;margin-right: 15px" action="QuestionList" >
+                    <input type="text" placeholder="Search" name="subject" value="${subject}" hidden=""/>
+                    <input type="text" placeholder="Search" name="category" value="${category}" hidden=""/>
+                    <input type="text" placeholder="Search" name="status" value="${status}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+                    <select name="level" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listLevel}" var="list">
+                            <option value="${list.value}" ${list.value == level ? 'selected':''}>${list.value}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+
+                <p class="text-primary" style ="float: left;margin: 5px 0 0 4px">Status</p>
+                <form style ="float: left;margin-left: 4px" action="QuestionList" >
+                    <input type="text" placeholder="Search" name="subject" value="${subject}" hidden=""/>
+                    <input type="text" placeholder="Search" name="category" value="${category}" hidden=""/>
+                    <input type="text" placeholder="Search" name="level" value="${level}" hidden=""/>
+                    <input type="text" placeholder="Search" name="searchName" value="${searchName}" hidden=""/>
+                    <select name="status" onchange="this.form.submit()" >
+                        <option value="">All</option>
+                        <c:forEach items="${listStatus}" var="list">
+                            <option value="${list}" ${list == status ? 'selected':''}>${list}</option>
+                        </c:forEach>
+                    </select>   
+                </form>
+            </div>
             <br>
+            <div style="margin-top: 30px; margin-bottom: 20px">
+                <a href="ImportQuestion"><i class="fa fa-upload"></i> Import Question List</a>
+                <a style="margin-left: 6px" href="AddQuestion"><i class="fa fa-plus"></i> Add Question </a>
+            </div>       
+
             <div>
                 <table class="table" id="myTable">
                     <tr>
@@ -62,7 +127,7 @@
 
                     </tr>
 
-                    <c:forEach items="${question}" var="i">
+                    <c:forEach items="${listQuestions}" var="i">
                         <tr>
                             <td>${i.id}</td>
                             <td>${i.content}</td>
@@ -74,26 +139,39 @@
                             <td>${i.option3}</td>
                             <td>${i.option4}</td>
                             <td>${i.option_correct}</td>                            
-                            <td><a href="#" onclick="deleteQuiz(${i.id})"><i class="fa fa-trash-o"></i> Delete</a></td>
-                            <td><a href="EditQuestion?id=${i.id}"><i class="fa fa-pencil"></i>Edit</a></td>
-                            <td><a href="ViewQuestion?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
+                            <c:if test="${i.status eq 'Active'}">
+                                <td><a href="javascript:void(0);" onclick="changeQuestionStatus(${i.id}, 'Deactive')"><i class="fa fa-chain"></i> Deactive</a> </td>
+                        </c:if>
+                        <c:if test="${i.status eq 'Deactive'}">
+                            <td><a href="javascript:void(0);" onclick="changeQuestionStatus(${i.id}, 'Active')"><i class="fa fa-chain"></i> Active</a> </td>
+                        </c:if>
+                        <td><a href="EditQuestion?id=${i.id}"><i class="fa fa-pencil"></i>Edit</a></td>
+                        <td><a href="ViewQuestion?id=${i.id}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>     
                     </c:forEach>
                 </table>
 
                 <div class="pagination-area">
-                    <ul class="pagination"> 
-                        <c:forEach begin="1" end="${pagesize}" var="i">
-                            <c:choose>
-                                <c:when test="${page==i}">
-                                    <li><a href="" class="active">${i}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <li><a href="QuestionList?page=${i}">${i}</a></li> 
-                                    </c:otherwise>
-                                </c:choose>
+                    <ul class="pagination">
+
+                        <c:if test="${pageindex gt gap}">
+                            <li class="page-item"><a class="page-link" href="QuestionList?page=1&searchName=${searchName}&subject=${subject}&category=${category}&level=${level}&status=${status}">First</a></li>
+                            </c:if>
+                            <c:forEach var = "i" begin = "${gap}" end = "1">
+                                <c:if test="${pageindex - gap gt 0}">
+                                <li class="page-item"><a class="page-link" href="QuestionList?page=${pageindex -i}&searchName=${searchName}&subject=${subject}&category=${category}&level=${level}&status=${status}">${pageindex - i}</a></li>
+                                </c:if>
                             </c:forEach>
+                            <c:forEach var = "i" begin = "1" end = "${gap}">
+                                <c:if test="${pageindex + gap le pagecount}">
+                                <li class="page-item"><a class="page-link" href="QuestionList?page=${pageindex + i}&searchName=${searchName}&subject=${subject}&category=${category}&level=${level}&status=${status}">${pageindex + i}</a></li> 
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${pageindex + gap lt pagecount}">
+                            <li class="page-item"><a class="page-link" href="QuestionList?page=${pagecount}&searchName=${searchName}&subject=${subject}&category=${category}&level=${level}&status=${status}">Last</a></li> 
+                            </c:if>
                     </ul>
+
                 </div>
             </div>
 
@@ -101,65 +179,32 @@
         </div>
         <jsp:include page="Footer.jsp" /> 
 
-
+        <script src="js/sortHelper.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/price-range.js"></script>
         <script src="js/jquery.scrollUp.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
+
         <script>
-                                function deleteQuiz(id) {
-                                    var result = confirm("Do you want to delete this question?");
+                                function changeQuestionStatus(id, status) {
+
+                                    var mess;
+
+                                    if (status === 'Active')
+                                        mess = "Do you want to active this question?";
+                                    else
+                                        mess = "Do you want to deactive this question?";
+
+
+                                    var result = confirm(mess);
                                     if (result) {
-                                        window.location.href = "DeleteQuestion?id=" + id;
+                                        window.location.href = "ChangeQuestionStatus?id=" + id + "&status=" + status;
                                     }
+
                                 }
-                                function searchForm(number) {
-                                    var input, filter, table, tr, td, i, txtValue, in_num;
-                                    in_num = parseInt(number);
-                                    if (in_num === 1)
-                                        input = document.getElementById("myInput");
-                                    filter = input.value.toUpperCase();
-                                    table = document.getElementById("myTable");
-                                    tr = table.getElementsByTagName("tr");
-                                    for (i = 0; i < tr.length; i++) {
-                                        td = tr[i].getElementsByTagName("td")[in_num];
-                                        if (td) {
-                                            txtValue = td.textContent || td.innerText;
-                                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = "";
-                                            } else {
-                                                tr[i].style.display = "none";
-                                            }
-                                        }
-                                    }
-                                }
-        </script>
-        <script>
-            function sort(number) {
-                var in_num, table, rows, switching, i, x, y, shouldSwitch;
-                in_num = parseInt(number);
-                table = document.getElementById("myTable");
-                switching = true;
-                while (switching) {
-                    switching = false;
-                    rows = table.rows;
-                    for (i = 1; i < rows.length - 1; i++) {
-                        shouldSwitch = false;
-                        x = rows[i].getElementsByTagName("td")[in_num];
-                        y = rows[i + 1].getElementsByTagName("td")[in_num];
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                    if (shouldSwitch) {
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                    }
-                }
-            }
+
         </script>
     </body>
 </html>

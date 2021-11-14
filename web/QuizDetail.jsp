@@ -43,15 +43,18 @@
             <div>
 
                 <div class="container">
-                     <input id="isFeatured" type="hidden" value="${quiz.isFeatured}">
+                    <input id="isFeatured" type="hidden" value="${quiz.isFeatured}">
                     <div class="product-details"><!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                <img src="${quiz.getThumbnail()}" alt="" />
+                                <img  
+                                <c:if test="${quiz.type eq 'Free Test'}">src="${quiz.getThumbnail()}"</c:if> 
+                                <c:if test="${quiz.type eq 'User Practice'}">src="images/thumbnail/userPractice.jpg"</c:if>                                        
+                                alt="" />
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
+                            <div class="col-sm-4">
                             <c:if test="${quiz.type eq 'Free Test'}">
                                 <span id="starFeature" onclick="markStar(${quiz.id})" class="fa fa-star" 
                                       <c:if test="${quiz.isFeatured eq 'false'}">style="cursor:pointer;float: right"</c:if> 
@@ -70,7 +73,7 @@
                                 <p><b>Number of question:</b> ${quiz.getNumber_of_question()}</p>
                                 <p id="timeTest"><b>Duration:</b></p>
                                 <p><b>Rate:</b> ${quiz.getRate()}</p>
-                              
+
 
                             </div><!--/product-information-->
                         </div>

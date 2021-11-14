@@ -173,10 +173,6 @@
         <servlet-class>controller.customer.AddPracticeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddQuestionToPracticeController</servlet-name>
-        <servlet-class>controller.customer.AddQuestionToPracticeController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PracticeDetailController</servlet-name>
         <servlet-class>controller.customer.PracticeDetailController</servlet-class>
     </servlet>
@@ -271,6 +267,10 @@
     <servlet>
         <servlet-name>MarkStarQuiz</servlet-name>
         <servlet-class>controller.expert.MarkStarQuiz</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeQuestionStatus</servlet-name>
+        <servlet-class>controller.expert.ChangeQuestionStatus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServ</servlet-name>
@@ -445,10 +445,6 @@
         <url-pattern>/AddPractice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddQuestionToPracticeController</servlet-name>
-        <url-pattern>/AddQuestionToPractice</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PracticeDetailController</servlet-name>
         <url-pattern>/PracticeDetail</url-pattern>
     </servlet-mapping>
@@ -543,6 +539,10 @@
     <servlet-mapping>
         <servlet-name>MarkStarQuiz</servlet-name>
         <url-pattern>/MarkStarQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeQuestionStatus</servlet-name>
+        <url-pattern>/ChangeQuestionStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

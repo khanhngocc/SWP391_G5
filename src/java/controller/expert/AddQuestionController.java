@@ -70,7 +70,7 @@ public class AddQuestionController extends BaseRequiredLoginController {
                         correctAns = "";
                 }
         QuestionDAO qdao = new QuestionDAO();
-        qdao.insertQuestion(new Question(question, cate, "Show", lev, answer1, answer2, answer3, answer4, correctAns, subject, Date.valueOf(LocalDate.now())));
+        qdao.insertQuestion(new Question(question, cate, "Active", lev, answer1, answer2, answer3, answer4, correctAns, subject, Date.valueOf(LocalDate.now())));
         response.sendRedirect("QuestionList");
     }
 }
