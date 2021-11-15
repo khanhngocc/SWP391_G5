@@ -90,7 +90,7 @@ public class SubjectDAO extends MyDAO{
 
             statement = connection.prepareStatement(sql);
   
-            statement.setString(1, "%" + statusRestricted + "%");
+            statement.setString(1, statusRestricted );
            
             ResultSet rs = statement.executeQuery();
 
@@ -203,18 +203,7 @@ public class SubjectDAO extends MyDAO{
         return s;
     }
 
-    public void deleteSubject(int id) {
-        xSql = "Delete from Subject where id = ?";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1, id);
-
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 
     public void createSubject(Subject subject, User user) {
         xSql = "INSERT INTO Subject\n"

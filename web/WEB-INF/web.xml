@@ -125,10 +125,6 @@
         <servlet-class>controller.manager.ChangeSubjectStatus</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteSubject</servlet-name>
-        <servlet-class>controller.manager.DeleteSubject</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SubjectDetailed</servlet-name>
         <servlet-class>controller.manager.SubjectDetailed</servlet-class>
     </servlet>
@@ -395,10 +391,6 @@
     <servlet-mapping>
         <servlet-name>ChangeSubjectStatus</servlet-name>
         <url-pattern>/ChangeSubjectStatus</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteSubject</servlet-name>
-        <url-pattern>/DeleteSubject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SubjectDetailed</servlet-name>
