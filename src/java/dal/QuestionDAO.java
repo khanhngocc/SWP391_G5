@@ -315,9 +315,8 @@ public class QuestionDAO extends MyDAO {
             ps.setInt(2, question_id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                if ("null".equals(rs.getString(1))) {
-                    return true;
-                }
+                if(rs.getString(1) == null)
+                return true;
             }
             rs.close();
             ps.close();
@@ -340,6 +339,8 @@ public class QuestionDAO extends MyDAO {
         return num;
         
     }
+    
+   
     
    
 

@@ -91,18 +91,18 @@
                             Option 2
                             <input type="text" name="answer2" placeholder="Answer 2" required="" value="${question.option2}">
                             <div id="containerAns">
-                                <c:if test="${question.option3 ne 'null'}">
+                                <c:if test="${question.option3 ne null}">
                                     <div id="answer3">
                                         Option 3
-                                        <input type="text"  name="answer3" placeholder="Answer 3"  value="${question.option3}">
+                                        <input type="text"  name="answer3" placeholder="Answer 3" required="" value="${question.option3}">
                                         <i class='fa fa-trash-o' style='color:#f03b35' onclick="removeAnswer(3)"></i> 
                                     </div>
 
                                 </c:if>
-                                <c:if test="${question.option4 ne 'null'}">
+                                <c:if test="${question.option4 ne null}">
                                     <div id="answer4">
                                         Option 4
-                                        <input type="text"  name="answer4" placeholder="Answer 4"  value="${question.option4}">
+                                        <input type="text"  name="answer4" placeholder="Answer 4" required="" value="${question.option4}">
                                         <i class='fa fa-trash-o' style='color:#f03b35' onclick="removeAnswer(4)"></i>
                                     </div>   
 
@@ -116,10 +116,10 @@
                                 <select name="correct" id="correctAnswer" style="height: 40px">
                                     <option value="1" ${question.option1 eq question.option_correct?"selected":""}> Answer 1</option>
                                     <option value="2" ${question.option2 eq question.option_correct?"selected":""}> Answer 2</option>
-                                    <c:if test="${question.option3 ne 'null'}">
+                                    <c:if test="${question.option3 ne null}">
                                         <option value="3" ${question.option3 eq question.option_correct?"selected":""}> Answer 3</option>
                                     </c:if>
-                                    <c:if test="${question.option4 ne 'null'}">
+                                    <c:if test="${question.option4 ne null}">
                                         <option value="4" ${question.option4 eq question.option_correct?"selected":""}> Answer 4</option>                               
                                     </c:if>
 
@@ -172,6 +172,8 @@
                 inputName.type = "text";
                 inputName.name = "answer" + count;
                 inputName.placeholder = "Answer " + count;
+                inputName.setAttribute("required", "");
+                inputName.required = true;
                 div.appendChild(inputName);
                 div.innerHTML += "<i class='fa fa-trash-o' style='color:#f03b35'\n\
             onclick='removeAnswer(" + count + ")' ></i>";

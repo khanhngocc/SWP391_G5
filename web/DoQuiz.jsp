@@ -77,11 +77,11 @@
                             <label for="html">${question.option1}</label><br>
                             <input type="radio" id="css" name="fav_language" value="${question.option2}" ${question.option2 eq answer.get(page-1).option_correct?"checked":""}>
                             <label for="css">${question.option2}</label><br>
-                            <c:if test="${question.option3 ne 'null'}">
+                            <c:if test="${question.option3 ne null}">
                                 <input type="radio" id="javascript" name="fav_language" value="${question.option3}" ${question.option3 eq answer.get(page-1).option_correct?"checked":""}>
                                   <label for="javascript">${question.option3}</label><br>
                             </c:if>
-                            <c:if test="${question.option4 ne 'null'}">
+                            <c:if test="${question.option4 ne null}">
                                 <input type="radio" id="c#" name="fav_language" value="${question.option4}" ${question.option4 eq answer.get(page-1).option_correct?"checked":""}>
                                   <label for="c#">${question.option4}</label>
                             </c:if>

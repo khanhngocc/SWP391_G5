@@ -144,6 +144,8 @@
                 inputName.type = "text";
                 inputName.name = "answer" + count;
                 inputName.placeholder = "Answer " + count;
+                inputName.setAttribute("required", "");
+                inputName.required = true;       
                 div.appendChild(inputName);
                 div.innerHTML += "<i class='fa fa-trash-o' style='color:#f03b35'\n\
             onclick='removeAnswer(" + count + ")' ></i>";
