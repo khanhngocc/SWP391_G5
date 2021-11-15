@@ -84,6 +84,7 @@ public class Trend extends BaseRequiredLoginController {
         request.setAttribute("dateFrom", dateFrom.format(formatTypeDateSQL));
         request.setAttribute("dateTo", dateTo.format(formatTypeDateSQL));
         request.setAttribute("listDataTrend", listDataTrend);
+        request.setAttribute("listsize", listDataTrend.size());
 
         request.getRequestDispatcher("Trend.jsp").forward(request, response);
 

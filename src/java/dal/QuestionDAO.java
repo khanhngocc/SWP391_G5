@@ -290,6 +290,23 @@ public class QuestionDAO extends MyDAO {
         return x;
     }
 
+    public ArrayList<Question> getActiveQuestionsBySubject(String subject) {
+        ArrayList<Question> x = new ArrayList<>();
+        xSql = "select * from Question where subject = ? and status = 'Active'";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subject);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getDate(12)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    
     public void changeQuestionStatus(Integer id, String status) {
         xSql = "Update question set status = ? where id= ? ";
         try {

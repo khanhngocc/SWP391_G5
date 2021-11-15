@@ -73,7 +73,7 @@ public class AddPracticeController extends BaseRequiredLoginController {
         qdao.addQuiz(new Quizzes(title, description, subject_id, category, "3", "User Practice", udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f,"",Date.valueOf(LocalDate.now()),false));
         ArrayList<Quizzes> temp = qdao.getQuiz();
         Collections.reverse(temp);
-        ArrayList<Question> question = qqdao.getQuestionsBySubject(sdao.getSubject(subject_id, "Published").getTitle());
+        ArrayList<Question> question = qqdao.getActiveQuestionsBySubject(sdao.getSubject(subject_id, "Published").getTitle());
         Collections.shuffle(question);
         for (int i = 0; i < number; i++) {
              qqqdao.addQuizzes_Question(new Quizzes_Question(temp.get(0).getId(), question.get(i).getId()));       

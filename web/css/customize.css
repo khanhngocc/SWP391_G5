@@ -129,3 +129,15 @@ textarea {
     
 }
 
+.square_red {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+}
+
+.square_blue {
+  height: 15px;
+  width: 15px;
+  background-color: blue;
+  margin-top: 10px;
+}

@@ -38,7 +38,7 @@ public class AddQuestionToQuizController extends BaseRequiredLoginController {
         SubjectDAO sdao = new SubjectDAO();
         QuizDAO qqdao = new QuizDAO();
         QuestionDAO qdao = new QuestionDAO();
-        ArrayList<Question> question = qdao.getQuestionsBySubject(sdao.getSubject(qqdao.getQuizByID(id).getSubject_id(),"Published").getTitle());
+        ArrayList<Question> question = qdao.getActiveQuestionsBySubject(sdao.getSubject(qqdao.getQuizByID(id).getSubject_id(),"Published").getTitle());
         request.setAttribute("qqdao", new Quizzes_QuestionDAO());
         request.setAttribute("id", id);
         request.setAttribute("question", question);

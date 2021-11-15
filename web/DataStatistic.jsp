@@ -39,7 +39,7 @@
     <body>
 
         <jsp:include page="Header.jsp" />  
-        <section style="margin-top: 30px;margin-bottom: 250px;">
+        <section style="margin-top: 30px;margin-bottom: 100px;">
             <div class="container">
                 <div class="row">
                     <jsp:include page="SidebarForDashBoard.jsp" /> 
