@@ -98,12 +98,17 @@
             var subject = document.getElementById('subject');
             var _subject = subject.value;
             var input = document.getElementById(_subject).value;
+            var p = document.getElementById('messCreatePractice');
+            console.log(p);
             console.log(subject);
             console.log(_subject);
             console.log(input);
             var number = document.getElementById('number');
             number.value = 1;
-            number.max = parseInt(input);            
+            if(input==='0') p.textContent = "This subject does not have any question.";
+            else p.textContent = "";
+            number.max = parseInt(input);     
+            
         }
     </script>
 </body>

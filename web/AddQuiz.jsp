@@ -72,13 +72,7 @@
                                     <c:forEach items="${listLevel}" var="list">
                                         <option value="${list.value}">${list.value}</option>
                                     </c:forEach>
-                                </select>                              
-                                Type
-                                <select name="type" style="margin-bottom:10px;height: 40px">
-                                    <c:forEach items="${listType}" var="list">
-                                        <option value="${list.value}">${list.value}</option>
-                                    </c:forEach>
-                                </select>  
+                                </select>                                
                                 Duration (in seconds)
                                 <input name="duration" type="text" placeholder="Duration" required=""/>													                           
 

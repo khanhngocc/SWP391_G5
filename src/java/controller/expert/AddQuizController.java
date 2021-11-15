@@ -63,13 +63,12 @@ public class AddQuizController extends BaseRequiredLoginController {
         int subject_id = Integer.parseInt(m.getParameter("subject"));
         String category = m.getParameter("category");
         String level = m.getParameter("level");
-        String type = m.getParameter("type");
         int duration = Integer.parseInt(m.getParameter("duration"));
         User user = (User) session.getAttribute("user");
 
         UserDAO udao = new UserDAO();
         QuizDAO qdao = new QuizDAO();
-        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, type, udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg, Date.valueOf(LocalDate.now()), false));
+        qdao.addQuiz(new Quizzes(title, description, subject_id, category, level, "Free Test", udao.getUser(user.getEmail()).getId(), 0, duration, 0.6f, "images/thumbnail/" + fileNameImg, Date.valueOf(LocalDate.now()), false));
         response.sendRedirect("QuizList");
     }
 }
