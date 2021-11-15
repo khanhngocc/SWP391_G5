@@ -15,12 +15,12 @@ import model.Question;
  */
 public class QuestionDAO extends MyDAO {
 
-    public int getNewRowCount() {
+    public int getNewRowCount(String date) {
         int no = 0;
-        xSql = "SELECT COUNT(*) FROM question where createdDate = curdate();";
+        xSql = "SELECT COUNT(*) FROM question where createdDate = ?";
         try {
             ps = con.prepareStatement(xSql);
-
+            ps.setString(1, date);
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -33,13 +33,13 @@ public class QuestionDAO extends MyDAO {
         return no;
     }
 
-    public int getAllRowCountInRange(String fromDate, String toDate) {
+    public int getAllRowCountInRange(String date) {
         int no = 0;
-        xSql = "select COUNT(*) from question where createdDate between ? and ?";
+        xSql = "select COUNT(*) from question where createdDate between (select min(createdDate) from question) and ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, fromDate);
-            ps.setString(2, toDate);
+            ps.setString(1, date);
+
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -306,7 +306,7 @@ public class QuestionDAO extends MyDAO {
         }
         return x;
     }
-    
+
     public void changeQuestionStatus(Integer id, String status) {
         xSql = "Update question set status = ? where id= ? ";
         try {
@@ -324,7 +324,7 @@ public class QuestionDAO extends MyDAO {
     }
 
     public boolean isEmptyAnswer(int question_id, int no_ans) {
-       
+
         xSql = "SELECT option? FROM question where id = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -332,8 +332,9 @@ public class QuestionDAO extends MyDAO {
             ps.setInt(2, question_id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                if(rs.getString(1) == null)
-                return true;
+                if (rs.getString(1) == null) {
+                    return true;
+                }
             }
             rs.close();
             ps.close();
@@ -342,23 +343,19 @@ public class QuestionDAO extends MyDAO {
         }
         return false;
     }
-    
-    public int getNumberOfAnswer(int question_id){
-    
+
+    public int getNumberOfAnswer(int question_id) {
+
         int num = 2;
-        
-        for(int i= 3 ; i<= 4 ; i++)
-        {
-            if(isEmptyAnswer(question_id, i) == false)
-                  num++;
+
+        for (int i = 3; i <= 4; i++) {
+            if (isEmptyAnswer(question_id, i) == false) {
+                num++;
+            }
         }
-        
+
         return num;
-        
+
     }
-    
-   
-    
-   
 
 }
