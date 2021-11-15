@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dal;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,12 +15,13 @@ import java.util.logging.Logger;
 import model.Blog;
 import model.Subject;
 import model.User;
+
 /**
  *
  * @author dell
  */
-public class SubjectDAO extends MyDAO{
-    
+public class SubjectDAO extends MyDAO {
+
     public int getRowCount(String statusRestricted) {
         int no = 0;
         xSql = "SELECT COUNT(*) FROM Subject where status like ?";
@@ -37,13 +39,13 @@ public class SubjectDAO extends MyDAO{
         }
         return no;
     }
-    
-    public int getNewRowCount() {
+
+    public int getNewRowCount(String date) {
         int no = 0;
-        xSql = "SELECT COUNT(*) FROM subject where createdDate = curdate();";
+        xSql = "SELECT COUNT(*) FROM subject where createdDate = ?";
         try {
             ps = con.prepareStatement(xSql);
-           
+            ps.setString(1, date);
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -56,13 +58,12 @@ public class SubjectDAO extends MyDAO{
         return no;
     }
 
-    public int getAllRowCountInRange(String fromDate, String toDate) {
+    public int getAllRowCountInRange(String date) {
         int no = 0;
-        xSql = "select COUNT(*) from subject where createdDate between ? and ?";
+        xSql = "select COUNT(*) from subject where createdDate between (select min(createdDate) from subject) and ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, fromDate);
-            ps.setString(2, toDate);
+            ps.setString(1, date);
             rs = ps.executeQuery();
             if (rs.next()) {
                 no = rs.getInt(1);
@@ -77,7 +78,6 @@ public class SubjectDAO extends MyDAO{
 
     public ArrayList<Subject> listAllSubject(String statusRestricted) {
 
-       
         ArrayList<Subject> list = new ArrayList<>();
 
         try {
@@ -85,13 +85,13 @@ public class SubjectDAO extends MyDAO{
                     + "where\n"
                     + "Subject.user_id = User.id\n"
                     + "and Subject.status like ? \n";
-                    
+
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-  
-            statement.setString(1, statusRestricted );
-           
+
+            statement.setString(1, statusRestricted);
+
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -126,11 +126,11 @@ public class SubjectDAO extends MyDAO{
                     + "and Subject.status like ? \n"
                     + "order by Subject.id desc\n"
                     + "LIMIT ?,?";
-                  
+
             PreparedStatement statement;
 
             statement = connection.prepareStatement(sql);
-  
+
             statement.setString(1, "%" + statusRestricted + "%");
             statement.setInt(2, numberOfRecord);
             statement.setInt(3, pageSize);
@@ -202,8 +202,6 @@ public class SubjectDAO extends MyDAO{
         }
         return s;
     }
-
-   
 
     public void createSubject(Subject subject, User user) {
         xSql = "INSERT INTO Subject\n"

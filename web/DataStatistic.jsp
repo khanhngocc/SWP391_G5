@@ -70,28 +70,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Subject</td>
-                                        <td>${newSubjectAmount}</td>
-                                        <td>${allSubjectAmount}</td>
-                                    </tr>
-                                    <c:if test="${sessionScope.user.rollId ne 4}">
+                                    <c:forEach items="${listFreeTest}" var="list">
                                         <tr>
-                                            <td>User Practice</td>
-                                            <td>${newPracticeAmount}</td>
-                                            <td>${allPracticeAmount}</td>
+                                            <td>${list.date}</td>
+                                            <td>${list.newRecords}</td>
+                                            <td>${list.allRecords}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Free Test</td>
-                                            <td>${newFreeTestAmount}</td>
-                                            <td>${allFreeTestAmount}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Question</td>
-                                            <td>${newQuestionAmount}</td>
-                                            <td>${allQuestionAmount}</td>
-                                        </tr>
-                                    </c:if>
+                                    </c:forEach>
+
 
                                 </tbody>
                             </table>
