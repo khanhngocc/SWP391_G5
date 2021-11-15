@@ -29,7 +29,7 @@
 
     <body>
 
-        <jsp:include page="HeaderManager.jsp" /> 
+         <jsp:include page="Header.jsp" />   
 
         <section><!--slider-->
             <div class="container" style="height: auto; margin-bottom: 40px">

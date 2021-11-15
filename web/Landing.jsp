@@ -34,7 +34,7 @@
 
     <body>
 
-        <jsp:include page="HeaderFree.jsp" /> 
+        <jsp:include page="Header.jsp" /> 
         <section ><!--slider-->
             <div class="container alginBodyLanding">
                 <img src="images/home/study.jpg" alt="" class="centerImgLanding">

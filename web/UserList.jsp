@@ -34,7 +34,7 @@
 
     <body>
 
-        <jsp:include page="HeaderAdmin.jsp" /> 
+         <jsp:include page="Header.jsp" />  
 
         <div class="container">
 

@@ -38,7 +38,7 @@
     <!--/head-->
 
     <body>
-        <jsp:include page="HeaderCustomer.jsp" />  
+         <jsp:include page="Header.jsp" />  
         <section>
             <div>
 

@@ -28,12 +28,12 @@
     </head><!--/head-->
 
     <body>
-        <jsp:include page="HeaderManager.jsp" /> 
+        <jsp:include page="Header.jsp" />   
 
         <section id="slider"><!--slider-->
             <div class="container">
 
-                <div class="col-sm-9">
+                <div class="col-sm-4">
 
                     <div class="signup-form">
                         <!--sign up form-->

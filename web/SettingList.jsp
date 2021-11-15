@@ -34,7 +34,7 @@
 
     <body>
 
-        <jsp:include page="HeaderAdmin.jsp" />  
+         <jsp:include page="Header.jsp" />  
 
         <section id="slider"><!--slider-->
             <div class="container">

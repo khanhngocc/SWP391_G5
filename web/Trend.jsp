@@ -38,15 +38,7 @@
 
     <body>
 
-        <c:if test="${sessionScope.user.rollId eq 3}">
-            <jsp:include page="HeaderAdmin.jsp" />  
-        </c:if>
-        <c:if test="${sessionScope.user.rollId eq 4}">
-            <jsp:include page="HeaderExpert.jsp" />  
-        </c:if>
-        <c:if test="${sessionScope.user.rollId eq 5}">
-            <jsp:include page="HeaderManager.jsp" />  
-        </c:if>
+        <jsp:include page="Header.jsp" />  
 
         <section style="margin-top: 30px;margin-bottom: 250px;">
             <div class="container">
