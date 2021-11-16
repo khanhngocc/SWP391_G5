@@ -93,7 +93,7 @@
 
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${i.thumbnail}" alt="" />
+                                                <img src="${i.thumbnail}" style="height: 255px;width: 255px" alt="" />
 
                                                  <h4>${i.title}</h4>
 

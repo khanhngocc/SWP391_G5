@@ -25,10 +25,9 @@
    <h2>Hot Featured</h2>
     <div class="panel-group category-products" class ="container" style="border:none">
         <c:forEach items="${list5}" var="i">
-            <div class="col-md-6" style="margin-bottom: 14px">
+            <div class="col-md-6" style="margin-bottom: 14px;height:155px">
                 <img class="featuresBlog" src="${i.img_url}" alt=""><br>
                 <div style="margin-top: 8px"><a href="DocumentDetailed?id=${i.id}">${i.title}</a></div>
-
             </div>
         </c:forEach>
     </div>   
