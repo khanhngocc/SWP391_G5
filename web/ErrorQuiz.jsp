@@ -41,7 +41,7 @@
 
             </div>
             <br>
-            <center><button onclick="location.href = 'Home'">Back to Home</button></center>
+            <center><button class="btn btn-default" onclick="location.href = 'Home'">Back to Home</button></center>
             <br>
         </div>
 

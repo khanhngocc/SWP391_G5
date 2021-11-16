@@ -23,6 +23,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/decoupled-document/ckeditor.js"></script>
 </head>
 
 <body>
@@ -74,7 +75,7 @@
                 <div class="col-lg-8">
                     <div class="contact-form bg-secondary rounded p-5">
                         <div id="success"></div>
-                        <form action="AddLesson" method="post" >
+                        <form action="AddLesson" method="post" onsubmit="x()">
                             <p class="text-danger">${mess}</p>
                             <input type="hidden" value="${cid}" name="cid">
                            
@@ -87,9 +88,13 @@
                                
                             </div>
                             <br>
-                            <div class="control-group">
-                                Content<textarea class="form-control border-0 py-3 px-4" rows="5" name="content"  required="required" ></textarea>
-                               
+                            <textarea hidden="" name="content" id="contentDetails">
+                            </textarea>
+                             <div id="toolbar-container"></div>
+                            
+                            <!-- This container will become the editable. -->
+                            <div id="editor">
+                                <p>This is the initial editor content.</p>
                             </div>
                             <br>
                             <div class="text-center">
@@ -176,7 +181,29 @@
 
     <!-- Contact Javascript File -->
     
+    <script>
+        let theEditor;
+            DecoupledEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        theEditor = editor;
+                        const toolbarContainer = document.querySelector('#toolbar-container');
 
+                        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            function getDataFromTheEditor() {
+                return theEditor.getData();
+
+            }
+            
+            function x(){                
+                document.getElementById("contentDetails").textContent = getDataFromTheEditor();
+            }
+    </script>
 
     <!-- Template Javascript -->
 

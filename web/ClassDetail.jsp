@@ -165,7 +165,9 @@
                                                 <c:if test="${i.endDate lt now}"> 
 
                                                     <p class="text-danger">It's over! Time Up!</p></c:if>  
-
+                                                    <c:if test="${i.endDate gt now}">
+                                                        <p></p>
+                                                    </c:if>
                                                 </div>
                                             </div>
                                         </div>

@@ -29,14 +29,14 @@ public class ClassManager extends BaseRequiredLoginController {
      
         List<Classes> lc5 = cd.GetTop5RecentClass();
         List<Classes> lc = cd.GetAllClass();
-          int pageSize = lc.size() % 4 == 0 ? lc.size() / 4 : lc.size() / 4 + 1;
+          int pageSize = lc.size() % 6 == 0 ? lc.size() / 6 : lc.size() / 6 + 1;
         int currentPage;
         try {
             currentPage = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
             currentPage = 1;
         }
-        request.setAttribute("lc", lc.subList(4 * (currentPage - 1), 4 * currentPage > lc.size() ? lc.size() : 4 * currentPage));
+        request.setAttribute("lc", lc.subList(6 * (currentPage - 1), 6 * currentPage > lc.size() ? lc.size() : 6 * currentPage));
         request.setAttribute("pagesize", pageSize);
         request.setAttribute("page", currentPage);
           request.setAttribute("lc5", lc5);

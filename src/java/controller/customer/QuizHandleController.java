@@ -34,7 +34,7 @@ public class QuizHandleController extends BaseRequiredLoginController {
         ArrayList<Question> questions = qqdao.getQuestionByQuizId(Integer.parseInt(id));
         if(questions.isEmpty()){
             response.sendRedirect("ErrorQuiz.jsp");
-        }
+        }else{
         int pageSize = questions.size();
         int currentPage;
         try {
@@ -58,7 +58,7 @@ public class QuizHandleController extends BaseRequiredLoginController {
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("page", currentPage);
         request.getRequestDispatcher("DoQuiz.jsp").forward(request, response);
-    }
+    }}
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

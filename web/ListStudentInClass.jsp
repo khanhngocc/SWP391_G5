@@ -95,7 +95,14 @@
                         <div class="team-img position-relative">
                             <img class="img-fluid" src="${i.avatar}" alt="">
                             <div class="team-social">
-                                <button class="btn btn-primary" onclick="deleteStudent(${i.id},${classid})">Remove</button>
+                               <c:choose>
+                            <c:when test="${sessionScope.user.rollId==5}">
+                                <button class="btn btn-primary" onclick="deleteStudent(${i.id},${classid})">Remove</button></c:when>
+                                <c:otherwise>
+                                    
+                                </c:otherwise>
+                </c:choose>
+                                
                             </div>
                         </div>
                         <div class="bg-secondary p-4">

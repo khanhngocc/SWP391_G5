@@ -218,7 +218,7 @@ public class ClassDAO extends MyDAO {
         List<User> list = ud.getUserByRole(1);
         List<User> Outside = new ArrayList<>();
         for (User user : list) {
-            if (!CheckUserIsInClass(user.getId(), cid)) {
+            if (!CheckUserIsInClass(user.getId(), cid)&& user.getStatus().equals("Active")) {
                 Outside.add(user);
             }
         }

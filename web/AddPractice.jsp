@@ -59,7 +59,7 @@
                                     </c:forEach>
                                 </select>
                                 <c:forEach items="${listSubject}" var="list">
-                                    <input type="hidden" id="${list.id}" value="${qdao.getQuestionsBySubject(list.title).size()}"></option>
+                                    <input type="hidden" id="${list.id}" value="${qdao.getActiveQuestionsBySubject(list.title).size()}"></option>
                                     </c:forEach>
                                 Category 
                                 <select name="category" id="subject" style="margin-bottom:10px;height: 40px">
@@ -72,7 +72,7 @@
                                 <input name="duration" type="text" placeholder="Duration" required/>	
                                 
                                 Number of Question
-                                <input id="number" name="number" type="number" value="1" min="1" max="${qdao.getQuestionsBySubject("Math").size()}" required/>	
+                                <input id="number" name="number" type="number" value="1" min="1" max="${qdao.getActiveQuestionsBySubject("Math").size()}" required/>	
 
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;margin-bottom: 30px">Add</button>
                             </form>                            
