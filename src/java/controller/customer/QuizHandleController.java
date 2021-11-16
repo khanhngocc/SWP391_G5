@@ -32,6 +32,9 @@ public class QuizHandleController extends BaseRequiredLoginController {
         Quizzes quiz = qdao.getQuizByID(id);
 
         ArrayList<Question> questions = qqdao.getQuestionByQuizId(Integer.parseInt(id));
+        if(questions.isEmpty()){
+            response.sendRedirect("ErrorQuiz.jsp");
+        }
         int pageSize = questions.size();
         int currentPage;
         try {
