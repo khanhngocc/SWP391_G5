@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -353,4 +354,24 @@ public class UserDAO extends MyDAO {
         }
     }
 
+    List<User> getUserByRole(int id) {
+        ArrayList<User> x = new ArrayList<>();
+        xSql = "SELECT * FROM User WHERE roll_id = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                x.add( new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getDate(8), rs.getString(7), rs.getString(9), rs.getInt(10))
+                );}
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (x);
+    }
+
+    
 }

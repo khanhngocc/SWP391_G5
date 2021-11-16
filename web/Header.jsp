@@ -1,4 +1,7 @@
+<%@page import="model.User"%>
+<%@page import="dal.UserDAO"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header id="header">
     <div class="header_top"><!--header_top-->
         <div class="container">
@@ -32,10 +35,10 @@
                     <div class="logo pull-left">
                         <c:if test="${sessionScope.user ne null}">
                             <a href="Home"><img src="images/home/partner1.png" alt="" /></a>
-                        </c:if>
-                        <c:if test="${sessionScope.user eq null}">
+                            </c:if>
+                            <c:if test="${sessionScope.user eq null}">
                             <a href="LandingPage"><img src="images/home/partner1.png" alt="" /></a>
-                        </c:if>
+                            </c:if>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -47,15 +50,20 @@
                                 <a href="Login" class="btn btn-default">Log in</a>
                             </c:if>
                             <c:if test="${sessionScope.user ne null}">
+                                <%
+                                    HttpSession ses = request.getSession();
+                                    UserDAO ud = new UserDAO();
+                                    User x = ud.getUser(((User) ses.getAttribute("user")).getEmail());
+                                %>
                                 <c:if test="${sessionScope.user.rollId eq 1}">
-                                    <li><a href="">Class</a></li>
-                                </c:if>
+                                    <li><a href="ClassListOfCustomer?id=<%=x.getId()%>">Class</a></li>
+                                    </c:if>
                                 <li><a href="PracticeList">Practice</a></li>
                                 <li><a href="TestControl">Test</a></li>
                                 <li><a href="DocumentList">Document</a></li>
                                 <li><a href="Personal">Account</a></li>
                                 <li><a href="Logout">Log out</a></li>
-                            </c:if>
+                                </c:if>
 
                         </ul>
                     </div>
@@ -79,28 +87,31 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
+
                                     <li><a href="Home" class="active">Home</a></li>
+
 
                                     <c:if test="${sessionScope.user.rollId eq 2}">
                                         <li><a href="SlideList">Slider</a></li>
                                         <li><a href="BlogList">Blog</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user.rollId eq 3}">
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.rollId eq 3}">
                                         <li><a href="DataStatistic">DashBoard</a></li>
                                         <li><a href="SettingList">Setting</a></li>
                                         <li><a href="UserList">User</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user.rollId eq 4}">
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.rollId eq 4}">
                                         <li><a href="DataStatistic">DashBoard</a></li>
                                         <li><a href="QuestionList">Question</a></li>
                                         <li><a href="QuizList">Quiz</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user.rollId eq 5}">
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.rollId eq 5}">
+
                                         <li><a href="DataStatistic">DashBoard</a></li>
                                         <li><a href="SubjectList">Subject</a></li>
-                                        <li><a href="">Class</a></li>
-                                    </c:if>
-                                   
+                                        <li><a href="ClassManager">Class</a></li>
+                                        </c:if>
+
                                 </ul>
                             </div>
                         </div>

@@ -140,9 +140,13 @@ public class DataStatistic extends BaseRequiredLoginController {
         request.setAttribute("dateFrom", dateFrom.format(formatTypeDateSQL));
         request.setAttribute("dateTo", dateTo.format(formatTypeDateSQL));
         request.setAttribute("listFreeTest", listFreeTest);
+        request.setAttribute("listsizeFreeTest", listFreeTest.size());
         request.setAttribute("listSubject", listSubject);
+        request.setAttribute("listsizeSubject", listSubject.size());
         request.setAttribute("listUserPractice", listUserPractice);
+        request.setAttribute("listsizeUserPractice", listUserPractice.size());
         request.setAttribute("listQuestion", listQuestion);
+        request.setAttribute("listsizeQuestion", listQuestion.size());
 
         request.getRequestDispatcher("DataStatistic.jsp").forward(request, response);
 
