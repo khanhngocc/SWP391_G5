@@ -225,22 +225,22 @@
 
                 //valid answer
                 let answer1 = document.forms["myForm"]["answer1"].value;
-                if (answer1.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer1 comes over 2000 characters";
+                if (answer1.length > 200) {
+                    document.getElementById("messCreateQuestion").textContent = "answer1 comes over 200 characters";
                     return false;
                 }
 
                 let answer2 = document.forms["myForm"]["answer2"].value;
-                if (answer2.length > 2000) {
-                    document.getElementById("messCreateQuestion").textContent = "answer2 comes over 2000 characters";
+                if (answer2.length > 200) {
+                    document.getElementById("messCreateQuestion").textContent = "answer2 comes over 200 characters";
                     return false;
                 }
 
                 let answer3 = document.forms["myForm"]["answer3"].value;
 
                 if (answer3) {
-                    if (answer3.length > 2000) {
-                        document.getElementById("messCreateQuestion").textContent = "answer3 comes over 2000 characters";
+                    if (answer3.length > 200) {
+                        document.getElementById("messCreateQuestion").textContent = "answer3 comes over 200 characters";
                         return false;
                     }
                 }
@@ -249,8 +249,8 @@
 
                 if (answer4)
                 {
-                    if (answer4.length > 2000) {
-                        document.getElementById("messCreateQuestion").textContent = "answer4 comes over 2000 characters";
+                    if (answer4.length > 200) {
+                        document.getElementById("messCreateQuestion").textContent = "answer4 comes over 200 characters";
                         return false;
                     }
                 }
